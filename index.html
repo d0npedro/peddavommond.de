@@ -68,7 +68,7 @@
   body.status-anomaly .status-led{background:var(--blood);box-shadow:0 0 10px var(--blood)}
   body.status-lebe .status-led{background:var(--gold);box-shadow:0 0 14px var(--gold)}
   body.status-anomaly .status-text::after{content:"Anomalie erkannt"}
-  body.status-lebe .status-text::after{content:"LEBE"}
+  body.status-lebe .status-text::after{content:"LIVE"}
   .status-text::after{content:"Normalize() active"}
 
   /* Nav rail */
@@ -212,7 +212,7 @@
 
   .lebe{
     position:absolute;top:32%;left:50%;transform:translate(-50%,-50%);
-    font-family:var(--sans);font-weight:700;font-size:96px;letter-spacing:.1em;
+    font-family:var(--sans);font-weight:700;font-size:96px;letter-spacing:.18em;
     color:var(--blood);text-shadow:0 0 24px rgba(255,0,51,.6), 0 0 2px #fff;
     mix-blend-mode:screen;pointer-events:none;
     animation:lebePulse 2.2s ease-in-out infinite;
@@ -454,39 +454,63 @@
           Pedda <span class="glitch" data-text="Vom">Vom</span> Mond
         </h1>
         <p class="sub">
-          Rhythm-Knight · <b>Lunar Glitch Dust</b> · Stories · Spins · Sounds.<br/>
-          Eine Funkstation auf der gesprungenen Mondbasis, wo <span class="red">das System versagt</span> und der Staub sich erinnert. <br/>
-          Drück rein. Bewegt sich alles. Nichts ist <b>Normalize()</b>.
+          Keine reine Musikseite. Eine <b>Künstlerfigur</b> — der Ort, wo Musik, KI, Technik, Streaming, visuelle Experimente und persönliche Entwicklung zusammenlaufen.<br/>
+          Tracks, Videos, Tools, Ideen, ganze kleine Welten — irgendwo zwischen <span class="red">Bass</span>, Mondästhetik, Homelab und ehrlicher Neugier.<br/>
+          Hier ist kein „Artist&#8220;. Hier ist ein <b>kreativer Kosmos</b>, der baut, lernt, ausprobiert.
         </p>
         <div class="cards" id="hero-cards">
-          <a class="card featured" data-nav="story" data-k="01/06" href="/story">
-            <div class="k"><span>// NORMALIZE()</span><span>01</span></div>
-            <div class="big">Enter the Story</div>
-            <div class="desc">Das holografische Novel-Artefakt. Kapitel 13 ist noch nicht repariert. Rote Adern überall.</div>
-            <div class="arrow">→</div>
-          </a>
-          <a class="card" data-nav="slotmachine" data-k="02/06" href="/slotmachine">
-            <div class="k"><span>// RAZOR_SHARK</span><span>02</span></div>
-            <div class="big">Spin the Machine</div>
-            <div class="desc">Forbidden arcade terminal. Aufgebrochen in die Mondwand. Schiefe Quote. Echte Ausgaben in Mondstaub.</div>
-            <div class="arrow">→</div>
-          </a>
-          <a class="card" data-nav="twitch" data-k="03/06" href="/twitch" target="_blank">
-            <div class="k"><span>// TWITCH.LIVE</span><span>03</span></div>
-            <div class="big">Watch Live</div>
-            <div class="desc">twitch.tv/peddavommond — laufender Stream vom Krater 7.</div>
-            <div class="arrow">↗</div>
-          </a>
-          <a class="card" data-nav="sound" data-k="04/06" href="/sound" target="_blank">
-            <div class="k"><span>// SOUNDCLOUD</span><span>04</span></div>
+          <a class="card featured" data-k="01/08" href="/soundcloud">
+            <div class="k"><span>// SOUNDCLOUD · DJ PEET SOUNDS</span><span style="color:#FF7700">296K PLAYS</span></div>
             <div class="big">Hear the Beats</div>
-            <div class="desc">DJ Peet Sounds. Bassdrops aus dem Staub. Korrektur-Rhythmen für die Anomalie.</div>
-            <div class="arrow">↗</div>
+            <div class="desc">Bassdrops, Lunar-Bass, Korrektur-Rhythmen. Insights, Top-Tracks, Embeds — die Musik-Zentrale.</div>
+            <div class="arrow">→</div>
           </a>
-          <a class="card" data-nav="code" data-k="05/06" href="/code" target="_blank" style="grid-column:span 2">
-            <div class="k"><span>// GITHUB // D0NPEDRO</span><span>05</span></div>
-            <div class="big">Code &amp; Projects</div>
-            <div class="desc">Quellcode, Shader-Experimente, Normalize()-Fragmente. Open lunar source.</div>
+          <a class="card" data-k="02/08" href="/twitch">
+            <div class="k"><span>// TWITCH · LIVE</span><span style="color:#9146FF">● ON-AIR</span></div>
+            <div class="big">Watch the Stream</div>
+            <div class="desc">Stream + Chat. Krater 7. Set, Studio, Code, Quatsch.</div>
+            <div class="arrow">→</div>
+          </a>
+          <a class="card" data-k="03/08" href="/spotify">
+            <div class="k"><span>// SPOTIFY</span><span style="color:#1DB954">STREAM</span></div>
+            <div class="big">Spotify</div>
+            <div class="desc">Offizielles Audio-Archiv. Pedda vom Mond auf Spotify.</div>
+            <div class="arrow">→</div>
+          </a>
+          <a class="card" data-k="04/08" href="/youtube">
+            <div class="k"><span>// YOUTUBE</span><span style="color:#FF0033">VIDEO</span></div>
+            <div class="big">YouTube</div>
+            <div class="desc">Sets, Visuals, Loop-Material. Mondstaub in Bewegung.</div>
+            <div class="arrow">→</div>
+          </a>
+          <a class="card" data-k="05/08" href="/facebook">
+            <div class="k"><span>// FACEBOOK</span><span style="color:#1877F2">SOCIAL</span></div>
+            <div class="big">Facebook</div>
+            <div class="desc">Erdbasis-Gateway. Termine, Lebenszeichen.</div>
+            <div class="arrow">→</div>
+          </a>
+          <a class="card" data-k="06/08" href="/linkedin">
+            <div class="k"><span>// LINKEDIN · ERDLING-MODUS</span><span style="color:#00F2FF">PRO</span></div>
+            <div class="big">LinkedIn</div>
+            <div class="desc">Peter Henrichs. Anzug an, Mondstaub aus. Der professionelle Tag-Modus.</div>
+            <div class="arrow">→</div>
+          </a>
+          <a class="card" data-nav="story" data-k="07/08" href="/story">
+            <div class="k"><span>// NORMALIZE()</span><span>STORY</span></div>
+            <div class="big">Enter the Story</div>
+            <div class="desc">Das holografische Novel-Artefakt. Kapitel 13 ist noch nicht repariert.</div>
+            <div class="arrow">→</div>
+          </a>
+          <a class="card" data-nav="slotmachine" data-k="08/08" href="/slotmachine">
+            <div class="k"><span>// RAZOR_SPIN</span><span>ARCADE</span></div>
+            <div class="big">Spin the Machine</div>
+            <div class="desc">Forbidden arcade terminal. Aufgebrochen in die Mondwand.</div>
+            <div class="arrow">→</div>
+          </a>
+          <a class="card" data-k="09/09" href="/cdn-cgi/l/email-protection#77071213131637071213131601181a1a181913591312" style="grid-column:span 2;border-color:rgba(0,242,255,.4)">
+            <div class="k"><span>// CONTACT · BOOKING · KONTAKT</span><span style="color:var(--cyan)">UPLINK</span></div>
+            <div class="big" style="font-size:30px"><span class="__cf_email__" data-cfemail="0d7d6869696c4d7d6869696c7b626060626369236968">[email&#160;protected]</span> · WhatsApp <span style="color:var(--cyan)">+49 1522 9529376</span></div>
+            <div class="desc">Booking, Kollab, Hi sagen. Die direkten Kanäle.</div>
             <div class="arrow">↗</div>
           </a>
         </div>
@@ -494,7 +518,7 @@
 
       <aside class="hero-right">
         <div class="holo-frame" id="holo-frame">
-          <div class="lebe" id="lebe-text">LEBE</div>
+          <div class="lebe" id="lebe-text">LIVE</div>
           <div class="hans" id="hans">
             <svg viewBox="0 0 200 280" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
               <defs>
@@ -533,7 +557,7 @@
         <div class="side-readout">
           <div class="ro"><b id="ro-anom">0.13</b><span>Anomalie</span></div>
           <div class="ro"><b id="ro-dust">2,847</b><span>Mondstaub/s</span></div>
-          <div class="ro"><b id="ro-hz">88.6 Hz</b><span>Puls LEBE</span></div>
+          <div class="ro"><b id="ro-hz">88.6 Hz</b><span>Puls LIVE</span></div>
         </div>
       </aside>
     </div>
@@ -685,11 +709,11 @@
   <div class="group">
     <span class="k">FPS</span><span class="v" id="fps">60</span>
     <span class="k">DUST</span><span class="v" id="dustHud">0</span>
-    <span class="k">PULSE</span><span class="v" style="color:var(--blood)">LEBE</span>
+    <span class="k">PULSE</span><span class="v" style="color:var(--blood)">LIVE</span>
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ============================================================
    ROUTING
 ============================================================ */
@@ -780,7 +804,7 @@ setInterval(tick, 1000); tick();
 const mqLines = [
   '> SIGNAL FROM CRATER 7',
   '> <b>NORMALIZE()</b> PATCH 2.1.3 FAILED AT LINE 13',
-  '> <i>LEBE</i> — HANDFEGER-REBELLEN SEEN NEAR NORTH WALL',
+  '> <i>LIVE</i> — HANDFEGER-REBELLEN SEEN NEAR NORTH WALL',
   '> DUST STREAM <b>STABLE</b>',
   '> <i>ANOMALIE</i> 0.42 AND RISING',
   '> NEW BEAT DROPPED · <b>DJ PEET</b> · LUNAR_DUST_07.wav',

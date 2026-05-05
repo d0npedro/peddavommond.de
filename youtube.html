@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>YouTube — PeddaVomMond</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --yt:#FF0033;--yt-2:#B30000;--gold:#FFB300;--cyan:#00F2FF;
+    --ink:#E9E9F5;--ink-dim:#8A8CA8;--dust:#B0B0B0;
+    --mono:"JetBrains Mono",monospace;--sans:"Space Grotesk",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#000;color:var(--ink);font-family:var(--sans)}
+  body{min-height:100vh;background:
+    radial-gradient(70% 50% at 50% 0%, rgba(255,0,51,.18), transparent 60%),
+    radial-gradient(50% 40% at 100% 100%, rgba(179,0,0,.12), transparent 60%),
+    #0a0203;overflow-x:hidden}
+  .scanlines{position:fixed;inset:0;z-index:2;pointer-events:none;mix-blend-mode:overlay;opacity:.25;
+    background:repeating-linear-gradient(to bottom, rgba(255,255,255,.04) 0 1px, transparent 1px 3px)}
+  .vignette{position:fixed;inset:0;z-index:3;pointer-events:none;
+    background:radial-gradient(120% 90% at 50% 40%, transparent 50%, rgba(0,0,0,.5) 80%, rgba(0,0,0,.95) 100%)}
+
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;
+    padding:14px 22px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);
+    backdrop-filter:blur(8px);background:linear-gradient(to bottom, rgba(10,2,3,.78), transparent);
+    border-bottom:1px solid rgba(255,0,51,.2)}
+  .topbar .left{display:flex;gap:18px;align-items:center}
+  .topbar .right{display:flex;gap:16px;align-items:center}
+  .brand-mark{display:flex;align-items:center;gap:10px}
+  .brand-mark .dot{width:0;height:0;border-left:8px solid var(--yt);border-top:5px solid transparent;border-bottom:5px solid transparent;filter:drop-shadow(0 0 6px var(--yt))}
+  .brand-mark b{color:var(--ink);letter-spacing:.22em}
+  .pill{display:flex;gap:8px;align-items:center;padding:4px 10px;border:1px solid rgba(255,0,51,.4);border-radius:100px;background:rgba(255,0,51,.06)}
+  .back{color:var(--ink-dim);text-decoration:none;display:flex;gap:6px;align-items:center}
+  .back:hover{color:var(--yt)}
+
+  main{position:relative;z-index:5;padding:90px 6vw 80px;max-width:1400px;margin:0 auto}
+
+  .hero{margin-bottom:50px;text-align:center}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--yt);
+    display:inline-flex;gap:10px;align-items:center;margin-bottom:14px}
+  .eyebrow::before,.eyebrow::after{content:"";width:24px;height:1px;background:var(--yt);box-shadow:0 0 8px var(--yt)}
+  h1{font-family:var(--sans);font-weight:700;font-size:clamp(56px,8vw,128px);line-height:.9;letter-spacing:-.03em;margin:0 auto 14px;max-width:14ch;color:#fff;
+    text-shadow:0 0 80px rgba(255,0,51,.4)}
+  h1 span{color:var(--yt)}
+  .lead{font-family:var(--mono);font-size:14px;color:var(--dust);line-height:1.7;letter-spacing:.04em;max-width:580px;margin:0 auto 24px}
+  .cta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .cta{padding:14px 22px;font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    border:1px solid var(--yt);background:var(--yt);color:#fff;cursor:pointer;font-weight:600;
+    transition:all .15s;text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+  .cta:hover{box-shadow:0 0 24px rgba(255,0,51,.55);transform:translateY(-1px)}
+  .cta.ghost{background:transparent;color:var(--yt)}
+
+  .player-wrap{position:relative;border:1px solid rgba(255,0,51,.3);background:#000;padding:0;border-radius:3px;
+    overflow:hidden;box-shadow:0 0 60px rgba(255,0,51,.18);max-width:1100px;margin:0 auto}
+  .player-wrap iframe{width:100%;aspect-ratio:16/9;border:0;display:block}
+  .player-wrap .corners{position:absolute;inset:0;pointer-events:none;z-index:6}
+  .player-wrap .corners::before,.player-wrap .corners::after{content:"";position:absolute;width:18px;height:18px;border:1px solid var(--yt);box-shadow:0 0 8px var(--yt)}
+  .player-wrap .corners::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+  .player-wrap .corners::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+
+  .section{margin:80px 0 60px}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px;border-bottom:1px solid rgba(255,0,51,.2);padding-bottom:14px}
+  .section-head h2{font-family:var(--sans);font-weight:600;font-size:36px;letter-spacing:-.01em;margin:0;color:#fff}
+  .section-head .meta{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--yt)}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .vid{position:relative;border:1px solid rgba(255,0,51,.22);background:rgba(15,3,5,.6);padding:0;border-radius:3px;
+    overflow:hidden;backdrop-filter:blur(6px);transition:all .18s;text-decoration:none;color:inherit;display:block}
+  .vid:hover{border-color:var(--yt);transform:translateY(-2px);box-shadow:0 0 24px rgba(255,0,51,.18)}
+  .vid .thumb{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg, #1a0508, #2a0810);
+    display:flex;align-items:center;justify-content:center}
+  .vid .thumb::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 70% at 50% 50%, rgba(255,0,51,.18), transparent 60%)}
+  .vid .play{position:absolute;width:60px;height:60px;border-radius:50%;background:var(--yt);display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 24px rgba(255,0,51,.5);z-index:2}
+  .vid .play::after{content:"";width:0;height:0;border-left:18px solid #fff;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:5px}
+  .vid .duration{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.7);padding:2px 6px;font-family:var(--mono);font-size:10px;color:#fff;border-radius:2px;letter-spacing:.06em;z-index:2}
+  .vid .info{padding:14px 16px}
+  .vid .info h3{margin:0 0 4px;font-size:15px;font-weight:600;color:#fff;line-height:1.3}
+  .vid .info p{margin:0;font-family:var(--mono);font-size:10px;color:var(--ink-dim);letter-spacing:.12em;text-transform:uppercase}
+
+  footer{padding:40px 6vw 30px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);text-align:center;border-top:1px solid rgba(255,0,51,.1);margin-top:60px}
+  footer a{color:var(--yt)}
+
+  @media (max-width: 900px){
+    .grid{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="scanlines"></div>
+<div class="vignette"></div>
+
+<div class="topbar">
+  <div class="left">
+    <a class="back" href="/">← BACK TO MOON</a>
+    <span style="color:rgba(255,255,255,.2)">/</span>
+    <div class="brand-mark"><span class="dot"></span><b>YOUTUBE</b><span style="color:var(--ink-dim)">// VIDEO ARCHIVE</span></div>
+  </div>
+  <div class="right">
+    <span class="pill"><span>@peddavommond</span></span>
+  </div>
+</div>
+
+<main>
+
+  <section class="hero">
+    <div class="eyebrow">CHANNEL · 04/09 · VIDEO LAYER</div>
+    <h1>Sets, Visuals, <span>Mondstaub in Bewegung</span>.</h1>
+    <p class="lead">
+      Der Video-Layer von Pedda vom Mond. Live-Sets, Visualizer, Loop-Material, Stream-Highlights. Was sich auf Twitch live entzogen hat, lebt hier weiter.
+    </p>
+    <div class="cta-row">
+      <a class="cta" href="https://www.youtube.com/peddavommond" target="_blank" rel="noopener">
+        Subscribe on YouTube <span>↗</span>
+      </a>
+      <a class="cta ghost" href="https://www.youtube.com/peddavommond/videos" target="_blank" rel="noopener">All Videos</a>
+    </div>
+  </section>
+
+  <div class="player-wrap">
+    <div class="corners"></div>
+    <iframe
+      src="https://www.youtube.com/embed?listType=user_uploads&list=peddavommond"
+      title="YouTube — peddavommond"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen></iframe>
+  </div>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Featured</h2>
+      <div class="meta">// click to open on YouTube</div>
+    </div>
+    <div class="grid">
+      <a class="vid" href="https://www.youtube.com/peddavommond" target="_blank" rel="noopener">
+        <div class="thumb"><div class="play"></div><div class="duration">LIVE SET</div></div>
+        <div class="info"><h3>Krater 7 — Live Set</h3><p>// LUNAR BASS</p></div>
+      </a>
+      <a class="vid" href="https://www.youtube.com/peddavommond" target="_blank" rel="noopener">
+        <div class="thumb"><div class="play"></div><div class="duration">VISUAL</div></div>
+        <div class="info"><h3>Mondstaub Visualizer</h3><p>// SHADER · LOOP</p></div>
+      </a>
+      <a class="vid" href="https://www.youtube.com/peddavommond" target="_blank" rel="noopener">
+        <div class="thumb"><div class="play"></div><div class="duration">STUDIO</div></div>
+        <div class="info"><h3>Track Building Session</h3><p>// STUDIO · BTS</p></div>
+      </a>
+      <a class="vid" href="https://www.youtube.com/peddavommond" target="_blank" rel="noopener">
+        <div class="thumb"><div class="play"></div><div class="duration">SHORT</div></div>
+        <div class="info"><h3>Bass Drop Ritual (Short)</h3><p>// SHORTS</p></div>
+      </a>
+      <a class="vid" href="https://www.youtube.com/peddavommond" target="_blank" rel="noopener">
+        <div class="thumb"><div class="play"></div><div class="duration">MIX</div></div>
+        <div class="info"><h3>Stream Highlights — Vol. I</h3><p>// HIGHLIGHTS</p></div>
+      </a>
+      <a class="vid" href="https://www.youtube.com/peddavommond" target="_blank" rel="noopener">
+        <div class="thumb"><div class="play"></div><div class="duration">VLOG</div></div>
+        <div class="info"><h3>Homelab Update</h3><p>// CODE · TECH</p></div>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>// PEDDAVOMMOND.DE · YOUTUBE CHANNEL</span> · <a href="/">← BACK TO MOON</a>
+</footer>
+
+</body>
+</html>

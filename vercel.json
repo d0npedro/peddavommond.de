@@ -1,51 +1,14 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "redirects": [
-    {
-      "source": "/home",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/twitch",
-      "destination": "https://twitch.tv/peddavommond",
-      "permanent": true
-    },
-    {
-      "source": "/sound",
-      "destination": "https://soundcloud.com/dj-peet-sounds",
-      "permanent": true
-    },
-    {
-      "source": "/code",
-      "destination": "https://github.com/d0npedro",
-      "permanent": true
-    }
-  ],
+  "cleanUrls": true,
+  "trailingSlash": false,
   "rewrites": [
-    {
-      "source": "/slotmachine",
-      "destination": "https://slotmachine-gold.vercel.app"
-    },
-    {
-      "source": "/slotmachine/:path*",
-      "destination": "https://slotmachine-gold.vercel.app/:path*"
-    },
-    {
-      "source": "/symbole/:path*",
-      "destination": "https://slotmachine-gold.vercel.app/symbole/:path*"
-    },
-    {
-      "source": "/assets/:path*",
-      "destination": "https://slotmachine-gold.vercel.app/assets/:path*"
-    },
-    {
-      "source": "/story",
-      "destination": "/story/index.html"
-    },
-    {
-      "source": "/story/:path*",
-      "destination": "/story/index.html"
-    }
+    { "source": "/soundcloud", "destination": "/soundcloud.html" },
+    { "source": "/twitch", "destination": "/twitch.html" },
+    { "source": "/spotify", "destination": "/spotify.html" },
+    { "source": "/youtube", "destination": "/youtube.html" },
+    { "source": "/facebook", "destination": "/facebook.html" },
+    { "source": "/linkedin", "destination": "/linkedin.html" },
+    { "source": "/story", "destination": "/story.html" },
+    { "source": "/slotmachine", "destination": "/slotmachine/index.html" }
   ]
 }
