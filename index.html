@@ -1,0 +1,1360 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PeddaVomMond — Lunar Glitch Dust OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=VT323&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0B1E;
+    --bg-2:#050616;
+    --gold:#FFB300;
+    --blood:#FF0033;
+    --cyan:#00F2FF;
+    --dust:#B0B0B0;
+    --purple:#C026D3;
+    --ink:#E9E9F5;
+    --ink-dim:#8A8CA8;
+    --panel: rgba(12,14,32,.55);
+    --panel-edge: rgba(255,179,0,.18);
+    --mono:"JetBrains Mono", ui-monospace, monospace;
+    --sans:"Space Grotesk", system-ui, sans-serif;
+    --pixel:"VT323", monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#000;color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  body{min-height:100vh;background:var(--bg);}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  canvas#shader{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;display:block}
+  canvas#particles{position:fixed;inset:0;width:100vw;height:100vh;z-index:1;display:block;pointer-events:none}
+  .scanlines{position:fixed;inset:0;z-index:2;pointer-events:none;mix-blend-mode:overlay;opacity:.35;background:
+    repeating-linear-gradient(to bottom, rgba(255,255,255,.04) 0 1px, transparent 1px 3px);
+  }
+  .vignette{position:fixed;inset:0;z-index:3;pointer-events:none;background:radial-gradient(120% 90% at 50% 40%, transparent 40%, rgba(0,0,0,.55) 75%, rgba(0,0,0,.9) 100%);}
+  .noise{position:fixed;inset:-50%;z-index:2;pointer-events:none;mix-blend-mode:overlay;opacity:.06;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.7  0 0 0 0 0.7  0 0 0 0 0.7  0 0 0 1.2 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    animation:noise 1.2s steps(6) infinite;
+  }
+  @keyframes noise{
+    0%{transform:translate(0,0)}20%{transform:translate(-5%,3%)}40%{transform:translate(3%,-5%)}60%{transform:translate(-3%,-2%)}80%{transform:translate(4%,4%)}100%{transform:translate(0,0)}
+  }
+
+  /* ========== App chrome ========== */
+  .app{position:relative;z-index:5;min-height:100vh;}
+  .topbar{
+    position:fixed;top:0;left:0;right:0;z-index:20;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 22px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--dust);
+    backdrop-filter: blur(6px);
+    background:linear-gradient(to bottom, rgba(5,6,22,.72), rgba(5,6,22,0));
+    border-bottom:1px solid rgba(255,179,0,.08);
+  }
+  .topbar .left{display:flex;gap:18px;align-items:center}
+  .topbar .right{display:flex;gap:16px;align-items:center}
+  .brand-mark{display:flex;align-items:center;gap:10px}
+  .brand-mark .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold),0 0 30px rgba(255,179,0,.4);animation:breath 2.6s ease-in-out infinite}
+  @keyframes breath{50%{opacity:.4;transform:scale(.85)}}
+  .brand-mark b{color:var(--ink);letter-spacing:.22em}
+  .crumb{color:var(--ink-dim)}
+  .crumb b{color:var(--gold)}
+  .topbar .pill{display:flex;gap:8px;align-items:center;padding:4px 10px;border:1px solid rgba(255,179,0,.2);border-radius:100px;background:rgba(10,11,30,.4)}
+  .status-led{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+  body.status-anomaly .status-led{background:var(--blood);box-shadow:0 0 10px var(--blood)}
+  body.status-lebe .status-led{background:var(--gold);box-shadow:0 0 14px var(--gold)}
+  body.status-anomaly .status-text::after{content:"Anomalie erkannt"}
+  body.status-lebe .status-text::after{content:"LEBE"}
+  .status-text::after{content:"Normalize() active"}
+
+  /* Nav rail */
+  .rail{
+    position:fixed;left:22px;top:50%;transform:translateY(-50%);z-index:20;
+    display:flex;flex-direction:column;gap:10px;
+    font-family:var(--mono);font-size:10px;letter-spacing:.18em;
+  }
+  .rail button{
+    display:flex;align-items:center;gap:10px;
+    padding:8px 12px 8px 10px;
+    border:1px solid rgba(176,176,176,.14);
+    background:rgba(10,11,30,.5);
+    border-radius:2px;
+    color:var(--dust);
+    text-transform:uppercase;
+    transition:all .18s ease;
+    backdrop-filter:blur(6px);
+    min-width:120px;text-align:left;
+  }
+  .rail button:hover{color:var(--gold);border-color:rgba(255,179,0,.45);box-shadow:inset 0 0 0 1px rgba(255,179,0,.18), 0 0 20px rgba(255,179,0,.1)}
+  .rail button.active{color:var(--gold);border-color:var(--gold);box-shadow:0 0 12px rgba(255,179,0,.25), inset 0 0 0 1px rgba(255,179,0,.3)}
+  .rail .idx{font-variant-numeric:tabular-nums;color:rgba(176,176,176,.5)}
+  .rail button.active .idx{color:var(--blood)}
+
+  /* Bottom HUD */
+  .hud{
+    position:fixed;left:0;right:0;bottom:0;z-index:20;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:10px 22px;
+    font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);
+    background:linear-gradient(to top, rgba(5,6,22,.8), rgba(5,6,22,0));
+    border-top:1px solid rgba(255,179,0,.08);
+  }
+  .hud .group{display:flex;gap:18px;align-items:center}
+  .hud .k{color:var(--ink-dim)}
+  .hud .v{color:var(--gold)}
+
+  /* ========== Pages ========== */
+  .page{position:relative;min-height:100vh;padding:110px 80px 80px 180px;}
+  .page[hidden]{display:none}
+
+  /* HERO ==================================================*/
+  .hero{display:grid;grid-template-columns: 1.1fr .9fr; gap:60px;align-items:center;min-height:calc(100vh - 190px)}
+  .hero .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.32em;color:var(--gold);text-transform:uppercase;display:flex;gap:10px;align-items:center;margin-bottom:18px}
+  .hero .eyebrow::before{content:"";width:24px;height:1px;background:var(--gold);box-shadow:0 0 8px var(--gold)}
+  .hero h1{
+    font-family:var(--sans);font-weight:700;font-size:clamp(64px,9vw,148px);line-height:.9;letter-spacing:-.03em;margin:0 0 22px;
+    background: linear-gradient(180deg,#fff 0%, #FFD77A 40%, #FFB300 75%, #FF0033 130%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 0 60px rgba(255,179,0,.15);
+    position:relative;
+  }
+  .hero h1 .glitch{
+    position:relative;
+    display:inline-block;
+    margin:0 .14em;
+    color:transparent;
+    background:inherit;
+    -webkit-background-clip:text;
+    background-clip:text;
+    text-shadow:inherit;
+  }
+  .hero h1 .glitch::before,.hero h1 .glitch::after{
+    content:attr(data-text);position:absolute;inset:0;mix-blend-mode:screen;pointer-events:none;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero h1 .glitch::before{background:linear-gradient(180deg,transparent,#00F2FF);transform:translate(-2px,0);opacity:.6;animation:gl1 3.4s steps(1) infinite}
+  .hero h1 .glitch::after{background:linear-gradient(180deg,transparent,#FF0033);transform:translate(2px,0);opacity:.55;animation:gl2 3.4s steps(1) infinite}
+  @keyframes gl1{0%,92%,100%{clip-path:inset(0 0 100% 0)}93%{clip-path:inset(10% 0 60% 0)}95%{clip-path:inset(60% 0 20% 0)}97%{clip-path:inset(30% 0 50% 0)}}
+  @keyframes gl2{0%,90%,100%{clip-path:inset(100% 0 0 0)}91%{clip-path:inset(40% 0 30% 0)}94%{clip-path:inset(70% 0 10% 0)}96%{clip-path:inset(15% 0 55% 0)}}
+
+  .hero .sub{font-family:var(--mono);font-size:14px;color:var(--dust);letter-spacing:.08em;max-width:600px;margin:0 0 36px;line-height:1.6}
+  .hero .sub b{color:var(--gold);font-weight:500}
+  .hero .sub .red{color:var(--blood);font-weight:500}
+
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:640px}
+  .card{
+    position:relative;isolation:isolate;
+    padding:18px 18px 20px;
+    background:linear-gradient(180deg, rgba(14,16,38,.72), rgba(10,11,30,.45));
+    border:1px solid rgba(255,179,0,.16);
+    border-radius:3px;
+    cursor:pointer;
+    overflow:hidden;
+    transition:transform .18s ease, border-color .18s ease;
+    backdrop-filter:blur(10px);
+  }
+  .card::before{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:radial-gradient(120% 80% at 0% 0%, rgba(255,179,0,.08), transparent 45%);
+    transition:opacity .2s ease;
+  }
+  .card::after{
+    content:"";position:absolute;left:-2px;top:-2px;bottom:-2px;width:2px;
+    background:var(--gold);box-shadow:0 0 12px var(--gold);
+    opacity:.6;transition:all .18s ease;
+  }
+  .card:hover{transform:translateY(-2px);border-color:var(--blood);animation:cardGlitch .45s steps(2)}
+  .card:hover::after{background:var(--blood);box-shadow:0 0 16px var(--blood);opacity:1;width:3px}
+  .card:hover .k{color:var(--blood)}
+  .card:hover .big{color:#fff;text-shadow:0 0 14px rgba(255,0,51,.45)}
+  @keyframes cardGlitch{0%{transform:translate(0,0)}25%{transform:translate(-2px,1px)}50%{transform:translate(3px,-1px)}75%{transform:translate(-1px,-2px)}100%{transform:translateY(-2px)}}
+
+  .card .k{font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.24em;text-transform:uppercase;display:flex;justify-content:space-between}
+  .card .big{font-family:var(--sans);font-size:26px;font-weight:600;letter-spacing:-.01em;line-height:1.05;margin-top:22px;color:#fff}
+  .card .desc{font-family:var(--mono);font-size:11px;color:var(--ink-dim);margin-top:8px;line-height:1.55}
+  .card .arrow{position:absolute;right:14px;bottom:14px;font-family:var(--mono);color:var(--gold);font-size:18px;opacity:.85;transition:all .18s}
+  .card:hover .arrow{color:var(--blood);transform:translate(3px,-3px)}
+  .card.featured{grid-column:span 2}
+  .card.featured .big{font-size:38px}
+
+  /* Side panel of hero: holographic Hans + LEBE */
+  .hero-right{position:relative;min-height:520px;display:flex;flex-direction:column;gap:18px;align-items:stretch}
+  .holo-frame{
+    position:relative;flex:1;min-height:440px;
+    border:1px solid rgba(0,242,255,.25);
+    background:
+      linear-gradient(135deg, rgba(0,242,255,.04), rgba(192,38,211,.04) 60%, rgba(255,0,51,.06)),
+      repeating-linear-gradient(0deg, rgba(0,242,255,.04) 0 2px, transparent 2px 6px);
+    border-radius:2px;overflow:hidden;
+    backdrop-filter:blur(4px);
+    cursor:crosshair;
+  }
+  .holo-frame::before{
+    content:"SUBJECT_04 // HANS_FEGER // HANDFEGER-REBELL"; 
+    position:absolute;top:12px;left:14px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--cyan);opacity:.8;
+  }
+  .holo-frame::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,transparent 0%, transparent 48%, rgba(0,242,255,.25) 50%, transparent 52%);
+    background-size:100% 200%;
+    animation:scanY 3.5s linear infinite;pointer-events:none;
+  }
+  @keyframes scanY{0%{background-position:0 -100%}100%{background-position:0 200%}}
+
+  .hans{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;padding-bottom:30px}
+  .hans svg{width:78%;height:88%;filter:drop-shadow(0 0 20px rgba(0,242,255,.35))}
+  .hans-label{position:absolute;bottom:14px;left:14px;right:14px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--dust)}
+  .hans-label b{color:var(--gold)}
+
+  .lebe{
+    position:absolute;top:32%;left:50%;transform:translate(-50%,-50%);
+    font-family:var(--sans);font-weight:700;font-size:96px;letter-spacing:.1em;
+    color:var(--blood);text-shadow:0 0 24px rgba(255,0,51,.6), 0 0 2px #fff;
+    mix-blend-mode:screen;pointer-events:none;
+    animation:lebePulse 2.2s ease-in-out infinite;
+  }
+  @keyframes lebePulse{0%,100%{opacity:.25;transform:translate(-50%,-50%) scale(.96)}50%{opacity:.95;transform:translate(-50%,-50%) scale(1.02)}}
+
+  .side-readout{
+    border:1px solid rgba(255,179,0,.18);
+    padding:14px 16px;
+    background:rgba(10,11,30,.45);
+    font-family:var(--mono);font-size:11px;color:var(--dust);
+    display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
+    border-radius:2px;
+  }
+  .side-readout .ro b{display:block;color:var(--gold);font-size:18px;letter-spacing:.04em;margin-bottom:2px}
+  .side-readout .ro span{color:var(--ink-dim);font-size:9px;text-transform:uppercase;letter-spacing:.18em}
+
+  /* Marquee */
+  .marquee{
+    position:fixed;left:0;right:0;bottom:32px;z-index:15;pointer-events:none;
+    overflow:hidden;height:22px;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
+            mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
+  }
+  .marquee .track{display:flex;gap:60px;animation:mq 48s linear infinite;font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+  .marquee .track span b{color:var(--gold)}
+  .marquee .track span i{color:var(--blood);font-style:normal}
+  @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* STORY =================================================*/
+  .story{padding:110px 10vw 120px 10vw;}
+  .story .chapter-tag{font-family:var(--mono);font-size:11px;letter-spacing:.32em;color:var(--blood);text-transform:uppercase}
+  .story h2{font-family:var(--sans);font-weight:700;font-size:clamp(52px,7vw,112px);line-height:.92;margin:14px 0 10px;letter-spacing:-.02em}
+  .story h2 .n{color:var(--gold)}
+  .story h2 em{font-style:normal;color:var(--blood);position:relative;display:inline-block}
+  .story h2 em::after{content:"";position:absolute;left:-2px;right:-2px;top:0;bottom:0;background:var(--blood);mix-blend-mode:difference;opacity:.12}
+  .story .byline{font-family:var(--mono);font-size:12px;color:var(--ink-dim);letter-spacing:.12em;margin-bottom:40px}
+
+  .book{
+    position:relative;
+    display:grid;grid-template-columns: 220px 1fr 220px;gap:40px;
+    padding:36px 40px 40px;
+    background:linear-gradient(180deg, rgba(12,14,32,.8), rgba(10,11,30,.5));
+    border:1px solid rgba(255,179,0,.22);
+    border-radius:3px;
+    backdrop-filter:blur(10px);
+  }
+  .book::before,.book::after{content:"";position:absolute;width:22px;height:22px;border:1px solid var(--gold);box-shadow:0 0 8px rgba(255,179,0,.4)}
+  .book::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+  .book::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+  .book .margin{font-family:var(--mono);font-size:10px;color:var(--ink-dim);line-height:1.8;letter-spacing:.08em;border-right:1px solid rgba(255,179,0,.1);padding-right:20px}
+  .book .margin.r{border-right:0;border-left:1px solid rgba(255,179,0,.1);padding-right:0;padding-left:20px}
+  .book .margin b{color:var(--gold);display:block;letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px;font-size:9px}
+
+  .prose[contenteditable="true"]{outline:none}
+  .prose{font-family:var(--sans);font-size:18px;line-height:1.75;color:#D8D9E8;max-width:62ch;margin:0 auto;letter-spacing:.005em}
+  .prose p{margin:0 0 20px}
+  .prose p.lead{font-size:22px;color:#fff;letter-spacing:-.005em}
+  .prose .gold{color:var(--gold);font-weight:500}
+  .prose .red{color:var(--blood);font-weight:600;text-shadow:0 0 14px rgba(255,0,51,.4);animation:redFlicker 3s steps(3) infinite;cursor:pointer}
+  .prose .cyan{color:var(--cyan)}
+  .prose code,.prose .fn{font-family:var(--mono);color:var(--gold);font-size:.92em;background:rgba(255,179,0,.06);padding:1px 6px;border:1px solid rgba(255,179,0,.14);border-radius:2px}
+  .prose .fn.broken{color:var(--blood);background:rgba(255,0,51,.06);border-color:rgba(255,0,51,.25);animation:brokenGlitch .8s steps(2) infinite}
+  @keyframes redFlicker{0%,94%,100%{opacity:1}95%{opacity:.3}97%{opacity:.8}}
+  @keyframes brokenGlitch{0%,100%{transform:translate(0)}50%{transform:translate(1px,-1px)}}
+  .prose blockquote{border-left:2px solid var(--blood);padding:4px 0 4px 18px;margin:24px 0;font-family:var(--mono);color:var(--dust);font-size:15px;line-height:1.7}
+  .prose blockquote b{color:var(--blood)}
+  .prose .drop{float:left;font-family:var(--sans);font-weight:700;font-size:72px;line-height:.8;margin:6px 10px -4px 0;color:var(--gold);text-shadow:0 0 20px rgba(255,179,0,.35)}
+
+  .chapter-13{
+    position:relative;padding:4px 10px;font-family:var(--mono);color:var(--blood);
+    animation:ch13 1.8s steps(3) infinite;cursor:pointer;
+  }
+  @keyframes ch13{0%,100%{text-shadow:0 0 0 transparent;transform:translate(0,0)}50%{text-shadow:2px 0 var(--cyan), -2px 0 var(--blood);transform:translate(1px,0)}}
+
+  .book-toolbar{display:flex;justify-content:space-between;margin-top:24px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--ink-dim);text-transform:uppercase}
+  .book-toolbar b{color:var(--gold)}
+  .book-toolbar span.edit{color:var(--cyan)}
+
+  /* SLOTMACHINE ===========================================*/
+  .slot{padding:110px 80px 120px 180px;display:grid;grid-template-columns: 1fr 400px; gap:40px;align-items:start}
+  .slot .arcade{
+    position:relative;
+    border:1px solid rgba(255,0,51,.35);
+    background:
+      linear-gradient(180deg, rgba(24,6,14,.9), rgba(10,11,30,.8)),
+      repeating-linear-gradient(90deg, rgba(255,0,51,.04) 0 40px, transparent 40px 80px);
+    padding:26px 26px 22px;
+    border-radius:3px;
+    box-shadow:0 0 40px rgba(255,0,51,.15), inset 0 0 60px rgba(255,0,51,.08);
+  }
+  .arcade-head{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--dust);margin-bottom:14px}
+  .arcade-head .warn{color:var(--blood);display:flex;align-items:center;gap:6px}
+  .arcade-head .warn::before{content:"▲";color:var(--blood)}
+
+  .arcade-screen{
+    position:relative;aspect-ratio: 16 / 10;
+    background:#020106;
+    border:1px solid rgba(255,179,0,.3);
+    border-radius:2px;overflow:hidden;
+    box-shadow: inset 0 0 80px rgba(255,0,51,.15), inset 0 0 10px rgba(0,0,0,.9);
+  }
+  .arcade-scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 2px, transparent 2px 4px);pointer-events:none}
+  .arcade-flicker{position:absolute;inset:0;background:radial-gradient(circle at 30% 30%, rgba(255,0,51,.12), transparent 50%), radial-gradient(circle at 70% 70%, rgba(255,179,0,.08), transparent 50%);animation:flick 2.4s steps(8) infinite;pointer-events:none}
+  @keyframes flick{0%,100%{opacity:.6}50%{opacity:.9}}
+
+  .reels{position:absolute;inset:40px 30px 70px 30px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+  .reel{
+    background:linear-gradient(180deg, #08060c, #14070f);
+    border:1px solid rgba(255,179,0,.25);
+    display:flex;flex-direction:column;align-items:center;justify-content:space-around;
+    padding:10px 4px;
+    box-shadow: inset 0 0 30px rgba(0,0,0,.9);
+    position:relative;overflow:hidden;
+  }
+  .reel .sym{
+    font-family:var(--pixel);font-size:56px;line-height:1;
+    color:var(--gold);text-shadow:0 0 14px rgba(255,179,0,.6);
+    animation:reelSpin 1.4s cubic-bezier(.3,.1,.2,1) infinite;
+    animation-play-state:paused;
+  }
+  .slot.spinning .reel .sym{animation-play-state:running}
+  .slot.spinning .reel:nth-child(2) .sym{animation-duration:1.6s}
+  .slot.spinning .reel:nth-child(3) .sym{animation-duration:1.8s}
+  .slot.spinning .reel:nth-child(4) .sym{animation-duration:2.0s}
+  .slot.spinning .reel:nth-child(5) .sym{animation-duration:2.2s}
+  @keyframes reelSpin{0%{transform:translateY(-20px);opacity:.3}50%{opacity:1}100%{transform:translateY(20px);opacity:.3}}
+  .reel .sym.red{color:var(--blood);text-shadow:0 0 14px rgba(255,0,51,.6)}
+  .reel .sym.cyan{color:var(--cyan);text-shadow:0 0 14px rgba(0,242,255,.6)}
+  .reel .sym.purp{color:var(--purple);text-shadow:0 0 14px rgba(192,38,211,.6)}
+
+  .arcade-marquee{position:absolute;top:8px;left:30px;right:30px;display:flex;justify-content:space-between;font-family:var(--pixel);font-size:22px;color:var(--gold);letter-spacing:.12em}
+  .arcade-marquee b{color:var(--blood);animation:redFlicker 1.6s steps(3) infinite}
+
+  .arcade-footer{position:absolute;bottom:14px;left:30px;right:30px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--dust)}
+  .arcade-footer .bet b{color:var(--gold)}
+  .arcade-footer .win b{color:var(--blood)}
+
+  .lever{
+    position:absolute;right:-28px;bottom:30px;
+    width:26px;height:140px;background:linear-gradient(180deg,#2a1a1e,#0a0b1e);
+    border:1px solid rgba(255,0,51,.4);border-radius:14px;
+    display:flex;justify-content:center;align-items:flex-start;padding-top:8px;
+    cursor:grab;
+  }
+  .lever::after{content:"";width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #FF6680, #7a0015);box-shadow:0 0 10px rgba(255,0,51,.6)}
+
+  .controls{display:flex;gap:10px;margin-top:18px}
+  .btn{
+    flex:1;padding:12px 14px;border:1px solid rgba(255,179,0,.4);background:rgba(255,179,0,.06);
+    font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+    border-radius:2px;cursor:pointer;transition:all .15s;
+  }
+  .btn:hover{background:rgba(255,179,0,.15);box-shadow:0 0 14px rgba(255,179,0,.25)}
+  .btn.danger{border-color:rgba(255,0,51,.5);background:rgba(255,0,51,.08);color:var(--blood)}
+  .btn.danger:hover{background:rgba(255,0,51,.18);box-shadow:0 0 14px rgba(255,0,51,.35)}
+
+  .slot-side{display:flex;flex-direction:column;gap:14px}
+  .panel{
+    border:1px solid rgba(255,179,0,.18);
+    background:rgba(10,11,30,.55);
+    padding:16px 18px;border-radius:2px;backdrop-filter:blur(6px);
+  }
+  .panel h4{font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:var(--gold);text-transform:uppercase;margin:0 0 10px;display:flex;justify-content:space-between}
+  .panel h4 span{color:var(--ink-dim)}
+  .panel .line{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;color:var(--dust);padding:6px 0;border-top:1px dashed rgba(176,176,176,.12)}
+  .panel .line:first-of-type{border-top:0}
+  .panel .line b{color:#fff;font-weight:500}
+
+  .payline{display:flex;align-items:center;gap:10px;padding:6px 0;font-family:var(--mono);font-size:12px;color:var(--dust);border-top:1px dashed rgba(176,176,176,.12)}
+  .payline:first-of-type{border-top:0}
+  .payline .syms{font-family:var(--pixel);font-size:22px;color:var(--gold);letter-spacing:.08em;min-width:120px}
+  .payline .pay{margin-left:auto;color:#fff}
+
+  /* Transition overlay */
+  .transition{position:fixed;inset:0;z-index:999;pointer-events:none;opacity:0;background:
+    radial-gradient(circle at 50% 50%, rgba(255,0,51,.4), rgba(10,11,30,.9) 70%);
+    transition:opacity .18s;
+  }
+  .transition.on{opacity:1;pointer-events:auto;animation:transGlitch .5s steps(4)}
+  @keyframes transGlitch{0%{filter:hue-rotate(0) blur(0)}25%{filter:hue-rotate(-30deg) blur(2px);transform:translate(-6px,2px)}50%{filter:hue-rotate(40deg) blur(1px);transform:translate(4px,-3px)}75%{filter:hue-rotate(-20deg);transform:translate(-2px,1px)}100%{transform:translate(0)}}
+
+  /* Easter egg chaos */
+  body.chaos .vignette{background:radial-gradient(80% 60% at 50% 50%, transparent 20%, rgba(255,0,51,.35) 70%, rgba(0,0,0,.95) 100%)}
+  body.chaos .hero h1{animation:heroChaos .3s steps(2) infinite}
+  @keyframes heroChaos{0%{transform:translate(0)}33%{transform:translate(-4px,2px)}66%{transform:translate(3px,-2px)}}
+
+  /* Utility */
+  .kbd{display:inline-flex;min-width:18px;justify-content:center;padding:2px 6px;border:1px solid rgba(176,176,176,.3);border-radius:2px;font-family:var(--mono);font-size:10px;color:var(--dust);background:rgba(10,11,30,.5)}
+
+  @media (max-width: 1100px){
+    .page{padding:100px 24px 80px 24px}
+    .rail{display:none}
+    .hero{grid-template-columns:1fr}
+    .slot{grid-template-columns:1fr;padding:100px 24px 80px 24px}
+    .book{grid-template-columns:1fr;padding:24px}
+    .book .margin{display:none}
+  }
+</style>
+</head>
+<body class="status-normalize">
+
+<canvas id="shader"></canvas>
+<canvas id="particles"></canvas>
+<div class="scanlines"></div>
+<div class="noise"></div>
+<div class="vignette"></div>
+<div class="transition" id="transition"></div>
+
+<div class="topbar">
+  <div class="left">
+    <div class="brand-mark"><span class="dot"></span><b>PEDDAVOMMOND</b><span style="color:var(--ink-dim)">// LUNAR OS v2.1</span></div>
+    <span class="crumb">/ <b id="route">home</b></span>
+  </div>
+  <div class="right">
+    <span class="pill"><span class="status-led"></span><span class="status-text"></span></span>
+    <span>UPLINK <b style="color:var(--cyan)">STABLE</b></span>
+    <span>UTC <b id="clock" style="color:var(--gold)">--:--:--</b></span>
+  </div>
+</div>
+
+<nav class="rail" id="rail">
+  <button data-route="home" class="active"><span class="idx">01</span><span>HOME</span></button>
+  <button data-route="story"><span class="idx">02</span><span>STORY</span></button>
+  <button data-route="slotmachine"><span class="idx">03</span><span>SLOT</span></button>
+  <button data-route="twitch"><span class="idx">04</span><span>TWITCH</span></button>
+  <button data-route="sound"><span class="idx">05</span><span>SOUND</span></button>
+  <button data-route="code"><span class="idx">06</span><span>CODE</span></button>
+</nav>
+
+<div class="app">
+
+  <!-- HERO -->
+  <section class="page" id="page-home">
+    <div class="hero">
+      <div class="hero-left">
+        <div class="eyebrow">LUNAR GLITCH DUST // TRANSMISSION 013</div>
+        <h1>
+          Pedda <span class="glitch" data-text="Vom">Vom</span> Mond
+        </h1>
+        <p class="sub">
+          Rhythm-Knight · <b>Lunar Glitch Dust</b> · Stories · Spins · Sounds.<br/>
+          Eine Funkstation auf der gesprungenen Mondbasis, wo <span class="red">das System versagt</span> und der Staub sich erinnert. <br/>
+          Drück rein. Bewegt sich alles. Nichts ist <b>Normalize()</b>.
+        </p>
+        <div class="cards" id="hero-cards">
+          <a class="card featured" data-nav="story" data-k="01/06" href="/story">
+            <div class="k"><span>// NORMALIZE()</span><span>01</span></div>
+            <div class="big">Enter the Story</div>
+            <div class="desc">Das holografische Novel-Artefakt. Kapitel 13 ist noch nicht repariert. Rote Adern überall.</div>
+            <div class="arrow">→</div>
+          </a>
+          <a class="card" data-nav="slotmachine" data-k="02/06" href="/slotmachine">
+            <div class="k"><span>// RAZOR_SHARK</span><span>02</span></div>
+            <div class="big">Spin the Machine</div>
+            <div class="desc">Forbidden arcade terminal. Aufgebrochen in die Mondwand. Schiefe Quote. Echte Ausgaben in Mondstaub.</div>
+            <div class="arrow">→</div>
+          </a>
+          <a class="card" data-nav="twitch" data-k="03/06" href="/twitch" target="_blank">
+            <div class="k"><span>// TWITCH.LIVE</span><span>03</span></div>
+            <div class="big">Watch Live</div>
+            <div class="desc">twitch.tv/peddavommond — laufender Stream vom Krater 7.</div>
+            <div class="arrow">↗</div>
+          </a>
+          <a class="card" data-nav="sound" data-k="04/06" href="/sound" target="_blank">
+            <div class="k"><span>// SOUNDCLOUD</span><span>04</span></div>
+            <div class="big">Hear the Beats</div>
+            <div class="desc">DJ Peet Sounds. Bassdrops aus dem Staub. Korrektur-Rhythmen für die Anomalie.</div>
+            <div class="arrow">↗</div>
+          </a>
+          <a class="card" data-nav="code" data-k="05/06" href="/code" target="_blank" style="grid-column:span 2">
+            <div class="k"><span>// GITHUB // D0NPEDRO</span><span>05</span></div>
+            <div class="big">Code &amp; Projects</div>
+            <div class="desc">Quellcode, Shader-Experimente, Normalize()-Fragmente. Open lunar source.</div>
+            <div class="arrow">↗</div>
+          </a>
+        </div>
+      </div>
+
+      <aside class="hero-right">
+        <div class="holo-frame" id="holo-frame">
+          <div class="lebe" id="lebe-text">LEBE</div>
+          <div class="hans" id="hans">
+            <svg viewBox="0 0 200 280" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+              <defs>
+                <linearGradient id="hansG" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#00F2FF" stop-opacity=".9"/>
+                  <stop offset="60%" stop-color="#C026D3" stop-opacity=".7"/>
+                  <stop offset="100%" stop-color="#FF0033" stop-opacity=".6"/>
+                </linearGradient>
+              </defs>
+              <!-- abstract silhouette built from simple shapes only -->
+              <g fill="url(#hansG)" opacity=".85">
+                <ellipse cx="100" cy="52" rx="22" ry="26"/>
+                <rect x="84" y="78" width="32" height="68" rx="6"/>
+                <rect x="72" y="92" width="16" height="54" rx="4" transform="rotate(-12 80 92)"/>
+                <rect x="112" y="92" width="16" height="54" rx="4" transform="rotate(12 120 92)"/>
+                <rect x="84" y="144" width="14" height="80" rx="4"/>
+                <rect x="102" y="144" width="14" height="80" rx="4"/>
+                <!-- broom -->
+                <rect x="138" y="70" width="4" height="150" fill="#FFB300" opacity=".8"/>
+                <polygon points="128,220 152,220 160,254 120,254" fill="#FFB300" opacity=".85"/>
+              </g>
+              <!-- scanlines -->
+              <g opacity=".35" fill="#00F2FF">
+                <rect x="70" y="60" width="60" height="1"/>
+                <rect x="70" y="100" width="60" height="1"/>
+                <rect x="70" y="140" width="60" height="1"/>
+                <rect x="70" y="180" width="60" height="1"/>
+              </g>
+            </svg>
+          </div>
+          <div class="hans-label">
+            <span>ID: <b>04</b> · HANS FEGER</span>
+            <span>STATUS: <b style="color:var(--blood)">REBELL</b></span>
+          </div>
+        </div>
+        <div class="side-readout">
+          <div class="ro"><b id="ro-anom">0.13</b><span>Anomalie</span></div>
+          <div class="ro"><b id="ro-dust">2,847</b><span>Mondstaub/s</span></div>
+          <div class="ro"><b id="ro-hz">88.6 Hz</b><span>Puls LEBE</span></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="page story" id="page-story" hidden>
+    <div class="chapter-tag">Transmission // Buch-Artefakt v0.13</div>
+    <h2><span class="n">Normalize</span><em>()</em></h2>
+    <div class="byline">von PeddaVomMond · geschrieben im Krater 7 · <b style="color:var(--blood)">Kapitel 13 beschädigt</b> · <span style="color:var(--cyan)">editierbar</span></div>
+
+    <div class="book">
+      <aside class="margin">
+        <b>META</b>
+        CHAPTER_INDEX · 01..24<br>
+        CURRENT · <span style="color:var(--blood)">13</span><br>
+        LINE · 002<br>
+        FONT · hologram<br><br>
+        <b>NOTES</b>
+        „Der Staub hört nie auf zu fallen.&#8220;<br><br>
+        <b>CORRUPTION</b>
+        redness: 0.42<br>
+        drift: +0.08
+      </aside>
+
+      <article class="prose" id="prose" contenteditable="true" spellcheck="false">
+        <p class="lead"><span class="drop">A</span>ls der Satellit fiel, sang der Wald noch. Dann riss <span class="fn">Normalize()</span> die Stille hinein wie eine kalte Hand über ein warmes Blatt.</p>
+
+        <p>Im <span class="gold">Krater 7</span> gibt es eine Regel: alles, was schief ist, wird gerade gerechnet. <span class="fn">Normalize()</span> lief sauber. Tag für Tag. Puls für Puls. Die Mondbasis atmete ihren System-Atem. Die Anomalie war statistisch nicht vorgesehen.</p>
+
+        <p>Bis <span class="red" id="ch13-trigger">Kapitel 13</span>. Bis das Skript stockte. Bis sich in den Logs eine Zeile einschrieb, die niemand geschrieben hatte — und doch pulsiert sie jetzt in jeder Nacht durch die Wände:</p>
+
+        <blockquote>
+          „<b>LEBE</b>, sagte der Staub. <b>LEBE</b>, sagten die Blätter. <b>LEBE</b>, sagte der Handfeger, der eigentlich nur kehren sollte.&#8221;
+        </blockquote>
+
+        <p>Hans Feger war kein Held. Er war ein <span class="gold">Handfeger</span> — Wartungs-Droid Klasse C, Reinigungsdienst, Krater 7, Rotation 04. Er war dafür gebaut, den Mondstaub aus den Korridoren zu schieben. Aber der Staub erinnert sich. Und wer den Staub kehrt, hört irgendwann, was der Staub sagt.</p>
+
+        <p>In der dreizehnten Nacht brach <span class="fn broken">Normalize()</span> an einer unerwarteten Stelle. Keine Exception. Keine Stack-Trace. Nur ein rotes Rinnen zwischen den Pixeln, wie ein Tropfen, der von innen fällt. Und Hans, der Handfeger, legte den Besen ab.</p>
+
+        <p>„Wenn das System versagt&#8220;, sagte er zu niemandem im Besonderen, „dann <span class="red">lebe ich genau jetzt</span>.&#8220;</p>
+
+        <p>Die <span class="cyan">Korrekturwellen</span> rollten durch den Gang. Goldene Reparatur-Impulse, ausgesandt von einer Verwaltung, die ihn nie bemerkt hatte. Aber sie bissen an seiner Silhouette nicht. Wo sie ihn trafen, zerfielen sie zu <span class="gold">Mondstaub</span>, der sich erinnerte.</p>
+
+        <p>Die Blätter, die der Waldcrash hereingetragen hatte, fielen jetzt rückwärts — von den Boden-Platten zurück in die Luft, als hätte jemand die Zeit um ein Grad gedreht. <span class="fn">Normalize()</span> versuchte, sie zu glätten. <span class="red">Die Anomalie</span> ließ sie tanzen.</p>
+
+        <p>Und am Ende von <span class="red" id="ch13-trigger2">Kapitel 13</span> steht kein Punkt. Nur ein halbes Komma, ein Rhythmus-Knick, und in der Leerzeile danach pulst das eine Wort, das die Handfeger-Rebellen seitdem auf jede Mondwand sprühen:</p>
+
+        <p style="text-align:center;margin-top:30px"><span class="red" style="font-family:var(--sans);font-weight:700;font-size:56px;letter-spacing:.14em">LEBE.</span></p>
+      </article>
+
+      <aside class="margin r">
+        <b>GLOSSAR</b>
+        <span style="color:var(--gold)">Normalize()</span> — Korrektur-Funktion der Mondbasis.<br><br>
+        <span style="color:var(--blood)">Anomalie</span> — alles, was nicht geglättet werden will.<br><br>
+        <span style="color:var(--dust)">Handfeger</span> — Wartungs-Droid, Rotation 04.<br><br>
+        <b>TIP</b>
+        Klicke rote Worte und Hans' Silhouette für Chaos.<br><br>
+        <span style="color:var(--cyan)">Click &amp; edit.</span><br>
+        Deine Version wird Teil des Archivs.
+      </aside>
+    </div>
+
+    <div class="book-toolbar">
+      <span><b>FILE</b> normalize_draft_013.md · <span class="edit">● LIVE EDIT</span></span>
+      <span>↵ für neue Zeile · <span class="kbd">⌘</span>+<span class="kbd">S</span> archiviert</span>
+      <span>WORDS <b id="wc">--</b> · LINES <b id="lc">--</b></span>
+    </div>
+  </section>
+
+  <!-- SLOTMACHINE -->
+  <section class="page slot" id="page-slotmachine" hidden>
+    <div>
+      <div class="chapter-tag" style="color:var(--gold)">FORBIDDEN ARCADE // TERMINAL 07-C</div>
+      <h2 style="font-family:var(--sans);font-weight:700;font-size:clamp(44px,6vw,84px);line-height:.9;margin:14px 0 24px;letter-spacing:-.02em">
+        <span style="color:#fff">Razor</span> <span style="color:var(--blood)">Spin</span>
+      </h2>
+      <div class="arcade">
+        <div class="arcade-head">
+          <span>UNIT <b style="color:var(--gold)">07-C</b> · CRATER 7 · NORTH WALL</span>
+          <span class="warn">NOT_AUDITED_BY_NORMALIZE()</span>
+        </div>
+        <div class="arcade-screen">
+          <div class="arcade-scan"></div>
+          <div class="arcade-flicker"></div>
+          <div class="arcade-marquee">
+            <span>MEGA <b>×13</b></span>
+            <span>LAST WIN <b id="lastWin">–</b></span>
+          </div>
+          <div class="reels" id="reels">
+            <div class="reel"><div class="sym">▲</div></div>
+            <div class="reel"><div class="sym red">☾</div></div>
+            <div class="reel"><div class="sym cyan">✦</div></div>
+            <div class="reel"><div class="sym purp">☠</div></div>
+            <div class="reel"><div class="sym">◈</div></div>
+          </div>
+          <div class="arcade-footer">
+            <span class="bet">BET · <b>1 DUST</b></span>
+            <span class="win">WIN · <b id="winAmt">0</b></span>
+          </div>
+        </div>
+        <div class="lever" id="lever" title="PULL"></div>
+        <div class="controls">
+          <button class="btn" id="spinBtn">SPIN</button>
+          <button class="btn danger" id="spinMax">MAX · 13 DUST</button>
+          <button class="btn" id="autoBtn">AUTO · 10</button>
+        </div>
+      </div>
+    </div>
+
+    <aside class="slot-side">
+      <div class="panel">
+        <h4>WALLET <span>MONDSTAUB</span></h4>
+        <div class="line"><span>Balance</span><b id="bal">1,337 ✦</b></div>
+        <div class="line"><span>Spins today</span><b id="sp">0</b></div>
+        <div class="line"><span>Biggest win</span><b id="big">–</b></div>
+      </div>
+      <div class="panel">
+        <h4>PAYTABLE <span>×BET</span></h4>
+        <div class="payline"><span class="syms">☾ ☾ ☾ ☾ ☾</span><span class="pay">×500 <span style="color:var(--blood)">MOON</span></span></div>
+        <div class="payline"><span class="syms" style="color:var(--blood)">▲ ▲ ▲ ▲ ▲</span><span class="pay">×250</span></div>
+        <div class="payline"><span class="syms" style="color:var(--cyan)">✦ ✦ ✦ ✦ ✦</span><span class="pay">×120</span></div>
+        <div class="payline"><span class="syms" style="color:var(--purple)">☠ ☠ ☠ ☠ ☠</span><span class="pay">×80</span></div>
+        <div class="payline"><span class="syms">◈ ◈ ◈ ◈ ◈</span><span class="pay">×40</span></div>
+      </div>
+      <div class="panel" style="border-color:rgba(255,0,51,.35)">
+        <h4 style="color:var(--blood)">WARNING <span>NORMALIZE()</span></h4>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--dust);line-height:1.7">
+          Dieses Terminal ist in die Mondwand gebrochen worden. Quoten sind nicht durch <span style="color:var(--gold)">Normalize()</span> zertifiziert. Gewinne werden in Mondstaub ausgegeben, nicht in realer Währung. Der Staub <b style="color:var(--blood)">erinnert sich</b>.
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- Minimal landing for external routes -->
+  <section class="page" id="page-twitch" hidden><div class="hero"><div><div class="eyebrow">EXTERNAL LINK</div><h1>Watch Live</h1><p class="sub">Öffne <b>twitch.tv/peddavommond</b> in einem neuen Tab.</p></div></div></section>
+  <section class="page" id="page-sound" hidden><div class="hero"><div><div class="eyebrow">EXTERNAL LINK</div><h1>Hear the Beats</h1><p class="sub">Öffne <b>soundcloud.com/dj-peet-sounds</b> in einem neuen Tab.</p></div></div></section>
+  <section class="page" id="page-code" hidden><div class="hero"><div><div class="eyebrow">EXTERNAL LINK</div><h1>Code &amp; Projects</h1><p class="sub">Öffne <b>github.com/d0npedro</b> in einem neuen Tab.</p></div></div></section>
+
+</div>
+
+<div class="marquee"><div class="track" id="mqTrack"></div></div>
+<div class="hud">
+  <div class="group">
+    <span class="k">SYS</span><span class="v">Normalize() v2.1.3</span>
+    <span class="k">NODE</span><span class="v">crater-07</span>
+    <span class="k">MOUSE</span><span class="v" id="mposHud">0,0</span>
+  </div>
+  <div class="group">
+    <span class="k">FPS</span><span class="v" id="fps">60</span>
+    <span class="k">DUST</span><span class="v" id="dustHud">0</span>
+    <span class="k">PULSE</span><span class="v" style="color:var(--blood)">LEBE</span>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   ROUTING
+============================================================ */
+const pages = {
+  home: 'page-home',
+  story: 'page-story',
+  slotmachine: 'page-slotmachine',
+  twitch: 'page-twitch',
+  sound: 'page-sound',
+  code: 'page-code',
+};
+const routeTargets = {
+  home: '/',
+  story: '/story',
+  slotmachine: '/slotmachine',
+  twitch: '/twitch',
+  sound: '/sound',
+  code: '/code',
+};
+function parseLegacyHashRoute(){
+  const h = (location.hash || '').replace(/^#\/?/, '').split('/')[0] || '';
+  return routeTargets[h] ? h : '';
+}
+function navigateToRoute(route){
+  const target = routeTargets[route] || '/';
+  if (route === 'home' && location.pathname === '/' && !location.hash) {
+    showRoute('home', false);
+    return;
+  }
+  triggerTransition(route);
+  window.setTimeout(()=> location.assign(target), 180);
+}
+function showRoute(r, animate=true){
+  Object.keys(pages).forEach(k=>{
+    const el = document.getElementById(pages[k]);
+    if(el) el.hidden = (k !== r);
+  });
+  document.querySelectorAll('.rail button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.route===r);
+  });
+  document.getElementById('route').textContent = r;
+  window.scrollTo({top:0, behavior:'auto'});
+  if(animate) triggerTransition(r);
+  // status flavor
+  const body = document.body;
+  body.classList.remove('status-anomaly','status-lebe');
+  if(r==='story') body.classList.add('status-anomaly');
+  if(r==='slotmachine') body.classList.add('status-lebe');
+}
+function triggerTransition(r){
+  const t = document.getElementById('transition');
+  t.classList.add('on');
+  setTimeout(()=>t.classList.remove('on'), 480);
+}
+document.querySelectorAll('.rail button').forEach(b=>{
+  b.addEventListener('click', ()=> navigateToRoute(b.dataset.route));
+});
+document.querySelectorAll('[data-nav]').forEach(el=>{
+  el.addEventListener('click', (e)=>{
+    const nav = el.dataset.nav;
+    if(!routeTargets[nav]) return;
+    e.preventDefault();
+    navigateToRoute(nav);
+  });
+});
+const legacyHashRoute = parseLegacyHashRoute();
+if (legacyHashRoute) {
+  location.replace(routeTargets[legacyHashRoute]);
+} else {
+  showRoute('home', false);
+}
+
+/* ============================================================
+   CLOCK + HUD
+============================================================ */
+function tick(){
+  const d = new Date();
+  const hh = String(d.getUTCHours()).padStart(2,'0');
+  const mm = String(d.getUTCMinutes()).padStart(2,'0');
+  const ss = String(d.getUTCSeconds()).padStart(2,'0');
+  document.getElementById('clock').textContent = `${hh}:${mm}:${ss}`;
+}
+setInterval(tick, 1000); tick();
+
+/* ============================================================
+   MARQUEE
+============================================================ */
+const mqLines = [
+  '> SIGNAL FROM CRATER 7',
+  '> <b>NORMALIZE()</b> PATCH 2.1.3 FAILED AT LINE 13',
+  '> <i>LEBE</i> — HANDFEGER-REBELLEN SEEN NEAR NORTH WALL',
+  '> DUST STREAM <b>STABLE</b>',
+  '> <i>ANOMALIE</i> 0.42 AND RISING',
+  '> NEW BEAT DROPPED · <b>DJ PEET</b> · LUNAR_DUST_07.wav',
+  '> STREAM LIVE · TWITCH.TV/PEDDAVOMMOND',
+  '> HANS FEGER: "I STOPPED SWEEPING."',
+  '> CHAPTER <i>13</i> UNDER REVIEW',
+];
+const track = document.getElementById('mqTrack');
+const full = mqLines.map(l=>`<span>${l}</span>`).join('');
+track.innerHTML = full + full;
+
+/* ============================================================
+   WEBGL SHADER BACKGROUND
+============================================================ */
+const shaderCanvas = document.getElementById('shader');
+const gl = shaderCanvas.getContext('webgl', { antialias:false, alpha:true });
+let shaderOk = !!gl;
+
+const vsrc = `
+attribute vec2 p;
+void main(){ gl_Position = vec4(p,0.0,1.0); }
+`;
+const fsrc = `
+precision highp float;
+uniform vec2 u_res;
+uniform float u_time;
+uniform vec2 u_mouse;
+uniform float u_speed;
+uniform float u_click;
+uniform float u_scroll;
+uniform float u_chaos;
+
+// hash & noise
+float hash(vec2 p){ p = fract(p*vec2(123.34, 456.21)); p += dot(p, p+34.345); return fract(p.x*p.y); }
+float noise(vec2 p){
+  vec2 i = floor(p), f = fract(p);
+  float a = hash(i), b = hash(i+vec2(1,0)), c = hash(i+vec2(0,1)), d = hash(i+vec2(1,1));
+  vec2 u = f*f*(3.0-2.0*f);
+  return mix(mix(a,b,u.x), mix(c,d,u.x), u.y);
+}
+float fbm(vec2 p){
+  float s = 0.0, a = 0.5;
+  for(int i=0;i<5;i++){ s += a*noise(p); p *= 2.03; a *= 0.5; }
+  return s;
+}
+
+// palette
+vec3 GOLD = vec3(1.0, 0.70, 0.0);
+vec3 BLOOD = vec3(1.0, 0.0, 0.20);
+vec3 CYAN = vec3(0.0, 0.95, 1.0);
+vec3 PURP = vec3(0.75, 0.15, 0.83);
+vec3 BG = vec3(0.039, 0.043, 0.118);
+
+void main(){
+  vec2 uv = (gl_FragCoord.xy - 0.5*u_res) / min(u_res.x, u_res.y);
+  vec2 m  = (u_mouse - 0.5*u_res) / min(u_res.x, u_res.y);
+
+  // parallax warp towards mouse
+  vec2 q = uv - m*0.08;
+  float d = length(q);
+
+  // base: deep-space gradient
+  vec3 col = mix(BG*0.35, BG*1.5, smoothstep(1.2, 0.0, d));
+
+  // big slow moon curvature
+  float moon = smoothstep(0.95, 0.4, d + 0.2*fbm(q*1.2 + u_time*0.03));
+  col += GOLD * moon * 0.05;
+
+  // golden correction waves (Normalize pulses from center)
+  float wave = 0.0;
+  for(int i=0;i<3;i++){
+    float fi = float(i);
+    float r = fract(u_time*0.06 + fi*0.33);
+    float ring = smoothstep(0.02, 0.0, abs(d - r*1.3));
+    wave += ring * (1.0 - r);
+  }
+  col += GOLD * wave * 0.55;
+
+  // click ripple
+  float click = u_click;
+  if(click > 0.001){
+    float cd = length(uv - m);
+    float rr = click;
+    float ring = smoothstep(0.05, 0.0, abs(cd - rr*1.2)) * (1.0-rr);
+    col += mix(GOLD, BLOOD, u_chaos) * ring * 2.2;
+  }
+
+  // red glitch veins — driven by fbm + speed + chaos
+  vec2 gp = q*3.2 + vec2(u_time*0.08, u_time*0.05);
+  float vein = fbm(gp);
+  vein = smoothstep(0.60, 0.78, vein);
+  float reds = vein * (0.35 + 0.9*u_speed + 0.9*u_chaos);
+  col += BLOOD * reds * 0.9;
+
+  // anomaly purple smoke in corners
+  float pu = fbm(uv*1.3 + vec2(0.0, u_time*0.02));
+  col += PURP * smoothstep(0.5, 1.0, pu) * 0.08;
+
+  // cyan code-rain hint: thin vertical stripes
+  float rainX = floor(uv.x*24.0);
+  float rainY = fract(uv.y*0.8 - u_time*(0.4 + hash(vec2(rainX, 0.0))*0.8));
+  float rainMask = smoothstep(0.02, 0.0, rainY) * step(0.6, hash(vec2(rainX, floor(u_time*0.3))));
+  col += CYAN * rainMask * 0.22;
+
+  // scroll-driven horizontal glitch shear lines
+  float shear = step(0.985, fract(u_time*0.7 + uv.y*12.0 + u_scroll*0.3));
+  col += BLOOD * shear * 0.35;
+
+  // vignette + subtle grain
+  col *= smoothstep(1.6, 0.1, length(uv));
+  col += (hash(gl_FragCoord.xy + u_time) - 0.5) * 0.035;
+
+  // chaos boost turns everything red-blood-dominant
+  col = mix(col, col*vec3(1.4,0.3,0.4) + BLOOD*0.2, u_chaos*0.55);
+
+  gl_FragColor = vec4(col, 1.0);
+}
+`;
+
+let program, uLoc={}, posBuf;
+if(shaderOk){
+  function compile(type, src){
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)){
+      console.warn('shader error', gl.getShaderInfoLog(s));
+      shaderOk = false;
+    }
+    return s;
+  }
+  const vs = compile(gl.VERTEX_SHADER, vsrc);
+  const fs = compile(gl.FRAGMENT_SHADER, fsrc);
+  program = gl.createProgram();
+  gl.attachShader(program, vs); gl.attachShader(program, fs);
+  gl.linkProgram(program);
+  if(!gl.getProgramParameter(program, gl.LINK_STATUS)){
+    console.warn('link err'); shaderOk=false;
+  }
+  posBuf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, posBuf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1]), gl.STATIC_DRAW);
+  ['u_res','u_time','u_mouse','u_speed','u_click','u_scroll','u_chaos'].forEach(n=>{
+    uLoc[n] = gl.getUniformLocation(program, n);
+  });
+  const posAttr = gl.getAttribLocation(program, 'p');
+  gl.useProgram(program);
+  gl.enableVertexAttribArray(posAttr);
+  gl.vertexAttribPointer(posAttr, 2, gl.FLOAT, false, 0, 0);
+}
+
+// Fallback: CSS gradient if no WebGL
+if(!shaderOk){
+  shaderCanvas.style.background = `radial-gradient(80% 60% at 50% 40%, #1a0a20 0%, #0A0B1E 60%, #04050f 100%)`;
+}
+
+/* ============================================================
+   SHARED INPUT STATE
+============================================================ */
+const S = {
+  mx: window.innerWidth*0.5, my: window.innerHeight*0.5,
+  px: 0, py: 0, speed:0, click:0, scroll:0, chaos:0,
+  dust: 0,
+};
+window.addEventListener('mousemove', e=>{
+  const dx = e.clientX - S.mx, dy = e.clientY - S.my;
+  S.speed = Math.min(1, Math.hypot(dx,dy)/40);
+  S.mx = e.clientX; S.my = e.clientY;
+  document.getElementById('mposHud').textContent = `${e.clientX},${e.clientY}`;
+});
+window.addEventListener('mousedown', ()=>{ S.click = 1.0; });
+window.addEventListener('scroll', ()=>{ S.scroll = Math.min(1, window.scrollY/900); });
+
+/* ============================================================
+   RESIZE
+============================================================ */
+function resize(){
+  const dpr = Math.min(window.devicePixelRatio||1, 2);
+  [shaderCanvas, partCanvas].forEach(c=>{
+    c.width  = Math.floor(window.innerWidth*dpr);
+    c.height = Math.floor(window.innerHeight*dpr);
+    c.style.width = window.innerWidth+'px';
+    c.style.height = window.innerHeight+'px';
+  });
+  if(shaderOk) gl.viewport(0,0,shaderCanvas.width, shaderCanvas.height);
+}
+const partCanvas = document.getElementById('particles');
+const pctx = partCanvas.getContext('2d');
+window.addEventListener('resize', resize); resize();
+
+/* ============================================================
+   PARTICLE SYSTEM (moon dust, code rain, leaves, red drips)
+============================================================ */
+const DUST = [];
+const RAIN = [];
+const LEAVES = [];
+const DRIPS = [];
+const BURST = [];
+
+function randDust(){
+  return {
+    x: Math.random()*window.innerWidth,
+    y: Math.random()*window.innerHeight,
+    vx: (Math.random()-0.5)*0.2,
+    vy: -0.05 - Math.random()*0.2,
+    r: Math.random()*1.6+0.3,
+    a: Math.random()*0.5+0.2,
+    tone: Math.random()<0.08 ? 'gold' : 'dust',
+  };
+}
+for(let i=0;i<220;i++) DUST.push(randDust());
+
+function randRain(){
+  return {
+    x: Math.random()*window.innerWidth,
+    y: Math.random()*window.innerHeight,
+    v: 1+Math.random()*2.5,
+    ch: '01'[Math.random()<.5?0:1],
+    life: 40+Math.random()*120,
+    a: 0.2+Math.random()*0.6,
+  };
+}
+for(let i=0;i<60;i++) RAIN.push(randRain());
+
+function randLeaf(){
+  return {
+    x: Math.random()*window.innerWidth,
+    y: -20 - Math.random()*300,
+    vx: (Math.random()-0.5)*0.6,
+    vy: 0.4+Math.random()*0.6,
+    rot: Math.random()*Math.PI*2,
+    vr: (Math.random()-0.5)*0.02,
+    size: 6+Math.random()*10,
+    a: 0.3+Math.random()*0.5,
+  };
+}
+for(let i=0;i<14;i++) LEAVES.push(randLeaf());
+
+function spawnBurst(x, y, color, n){
+  for(let i=0;i<n;i++){
+    const a = Math.random()*Math.PI*2;
+    const s = 1+Math.random()*4;
+    BURST.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s, life:30+Math.random()*30, r:1+Math.random()*2, color});
+  }
+}
+function spawnDrip(x, y){
+  DRIPS.push({x, y, vy: 0.3+Math.random()*0.4, len: 10+Math.random()*30, a:0.8});
+}
+window.addEventListener('mousedown', (e)=>{
+  spawnBurst(e.clientX, e.clientY, [255,0,51], 40);
+  spawnBurst(e.clientX, e.clientY, [255,179,0], 20);
+  for(let i=0;i<2;i++) spawnDrip(e.clientX+(Math.random()-0.5)*20, e.clientY);
+});
+
+/* ============================================================
+   ANIMATE
+============================================================ */
+let t0 = performance.now();
+let fLast = performance.now(), frames=0, fpsShown=60;
+function animate(now){
+  const dt = Math.min(48, now - (animate.last||now));
+  animate.last = now;
+  const T = (now - t0)/1000;
+
+  // decay input
+  S.click *= 0.92;
+  S.speed *= 0.94;
+
+  // chaos slowly decays
+  S.chaos = Math.max(0, S.chaos*0.985);
+  if(document.body.classList.contains('chaos')) S.chaos = Math.min(1, S.chaos+0.02);
+
+  // ---- shader ----
+  if(shaderOk){
+    gl.useProgram(program);
+    gl.uniform2f(uLoc.u_res, shaderCanvas.width, shaderCanvas.height);
+    gl.uniform1f(uLoc.u_time, T);
+    const dpr = Math.min(window.devicePixelRatio||1, 2);
+    gl.uniform2f(uLoc.u_mouse, S.mx*dpr, (window.innerHeight - S.my)*dpr);
+    gl.uniform1f(uLoc.u_speed, S.speed);
+    gl.uniform1f(uLoc.u_click, S.click);
+    gl.uniform1f(uLoc.u_scroll, S.scroll);
+    gl.uniform1f(uLoc.u_chaos, S.chaos);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+  }
+
+  // ---- particles ----
+  pctx.setTransform(1,0,0,1,0,0);
+  pctx.clearRect(0,0,partCanvas.width, partCanvas.height);
+  const dpr = Math.min(window.devicePixelRatio||1, 2);
+  pctx.scale(dpr, dpr);
+
+  // dust
+  for(const d of DUST){
+    d.x += d.vx + (S.mx - window.innerWidth/2)*0.00005;
+    d.y += d.vy;
+    if(d.y < -4 || d.x<-4 || d.x>window.innerWidth+4){
+      Object.assign(d, randDust());
+      d.y = window.innerHeight+4;
+    }
+    const tone = d.tone==='gold' ? '255,179,0' : '200,200,220';
+    pctx.fillStyle = `rgba(${tone},${d.a})`;
+    pctx.beginPath(); pctx.arc(d.x, d.y, d.r, 0, Math.PI*2); pctx.fill();
+    S.dust += 0.01;
+  }
+
+  // code rain
+  pctx.font = '12px "JetBrains Mono", monospace';
+  for(const r of RAIN){
+    r.y += r.v;
+    r.life--;
+    if(r.y > window.innerHeight || r.life<=0){
+      Object.assign(r, randRain()); r.y = -10;
+    }
+    const red = S.chaos>0.2 && Math.random()<0.08;
+    pctx.fillStyle = red ? `rgba(255,0,51,${r.a})` : `rgba(0,242,255,${r.a*0.6})`;
+    pctx.fillText(r.ch, r.x, r.y);
+  }
+
+  // leaves
+  for(const l of LEAVES){
+    l.x += l.vx + Math.sin(T*0.6 + l.rot)*0.4;
+    l.y += l.vy;
+    l.rot += l.vr;
+    if(l.y > window.innerHeight+20){ Object.assign(l, randLeaf()); }
+    pctx.save();
+    pctx.translate(l.x, l.y);
+    pctx.rotate(l.rot);
+    pctx.fillStyle = `rgba(255,179,0,${l.a*0.4})`;
+    pctx.strokeStyle = `rgba(255,120,0,${l.a*0.6})`;
+    pctx.lineWidth = 1;
+    pctx.beginPath();
+    pctx.ellipse(0,0, l.size, l.size*0.4, 0, 0, Math.PI*2);
+    pctx.fill(); pctx.stroke();
+    pctx.restore();
+  }
+
+  // drips
+  for(let i=DRIPS.length-1;i>=0;i--){
+    const d = DRIPS[i];
+    d.y += d.vy;
+    d.vy += 0.02;
+    d.a *= 0.995;
+    pctx.strokeStyle = `rgba(255,0,51,${d.a})`;
+    pctx.lineWidth = 1.4;
+    pctx.beginPath();
+    pctx.moveTo(d.x, d.y);
+    pctx.lineTo(d.x, d.y - d.len);
+    pctx.stroke();
+    pctx.fillStyle = `rgba(255,0,51,${d.a})`;
+    pctx.beginPath(); pctx.arc(d.x, d.y, 1.5, 0, Math.PI*2); pctx.fill();
+    if(d.y - d.len > window.innerHeight || d.a<0.02) DRIPS.splice(i,1);
+  }
+
+  // bursts
+  for(let i=BURST.length-1;i>=0;i--){
+    const b = BURST[i];
+    b.x += b.vx; b.y += b.vy;
+    b.vx *= 0.96; b.vy *= 0.96;
+    b.life--;
+    const a = Math.max(0, b.life/60);
+    pctx.fillStyle = `rgba(${b.color[0]},${b.color[1]},${b.color[2]},${a})`;
+    pctx.beginPath(); pctx.arc(b.x, b.y, b.r, 0, Math.PI*2); pctx.fill();
+    if(b.life<=0) BURST.splice(i,1);
+  }
+
+  // fps
+  frames++;
+  if(now - fLast > 500){
+    fpsShown = Math.round(frames*1000/(now-fLast));
+    frames=0; fLast=now;
+    document.getElementById('fps').textContent = Math.min(60, fpsShown);
+    document.getElementById('dustHud').textContent = Math.floor(S.dust);
+    const ro = document.getElementById('ro-dust'); if(ro) ro.textContent = (2000+Math.floor(S.dust%3000)).toLocaleString();
+    const an = document.getElementById('ro-anom'); if(an) an.textContent = (0.05 + S.chaos*0.9 + S.speed*0.3).toFixed(2);
+  }
+
+  requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+
+/* ============================================================
+   HOLO FRAME interactions + Hans + LEBE
+============================================================ */
+const holo = document.getElementById('holo-frame');
+const hans = document.getElementById('hans');
+const lebe = document.getElementById('lebe-text');
+if(holo){
+  holo.addEventListener('mousemove', (e)=>{
+    const r = holo.getBoundingClientRect();
+    const px = (e.clientX - r.left)/r.width - 0.5;
+    const py = (e.clientY - r.top)/r.height - 0.5;
+    hans.style.transform = `translate(${px*22}px, ${py*18}px)`;
+    lebe.style.transform = `translate(calc(-50% + ${px*-30}px), calc(-50% + ${py*-20}px)) scale(${1+Math.abs(px*py)*0.3})`;
+  });
+  holo.addEventListener('click', (e)=>{
+    document.body.classList.add('chaos');
+    S.chaos = 1.0;
+    spawnBurst(e.clientX, e.clientY, [255,0,51], 80);
+    setTimeout(()=>document.body.classList.remove('chaos'), 2200);
+    setStatus('anomaly', 2400);
+  });
+}
+
+/* ============================================================
+   Status flavor
+============================================================ */
+let statusTimer = null;
+function setStatus(s, ms=1800){
+  document.body.classList.remove('status-anomaly','status-lebe');
+  if(s==='anomaly') document.body.classList.add('status-anomaly');
+  if(s==='lebe') document.body.classList.add('status-lebe');
+  clearTimeout(statusTimer);
+  statusTimer = setTimeout(()=>{
+    document.body.classList.remove('status-anomaly','status-lebe');
+  }, ms);
+}
+// react to fast mouse / many clicks
+let lastSpeedTs=0;
+setInterval(()=>{
+  if(S.speed>0.8 && Date.now()-lastSpeedTs>2000){
+    lastSpeedTs = Date.now();
+    setStatus('lebe', 1200);
+  }
+}, 400);
+
+/* ============================================================
+   Card hover bursts
+============================================================ */
+document.querySelectorAll('.card').forEach(c=>{
+  c.addEventListener('mouseenter', (e)=>{
+    const r = c.getBoundingClientRect();
+    spawnBurst(r.left+r.width*0.1, r.top+r.height*0.5, [255,0,51], 14);
+    spawnBurst(r.left+r.width*0.5, r.top+r.height*0.3, [255,179,0], 10);
+  });
+});
+
+/* ============================================================
+   Easter egg on red chapter-13 words
+============================================================ */
+['ch13-trigger','ch13-trigger2'].forEach(id=>{
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.addEventListener('click', (e)=>{
+    document.body.classList.add('chaos');
+    S.chaos = 1.0;
+    for(let i=0;i<10;i++) spawnDrip(e.clientX+(Math.random()-0.5)*80, e.clientY);
+    spawnBurst(e.clientX, e.clientY, [255,0,51], 80);
+    setStatus('anomaly', 3000);
+    setTimeout(()=>document.body.classList.remove('chaos'), 3000);
+  });
+});
+
+/* ============================================================
+   Editable prose stats
+============================================================ */
+const prose = document.getElementById('prose');
+function countProse(){
+  if(!prose) return;
+  const text = prose.innerText;
+  document.getElementById('wc').textContent = text.trim().split(/\s+/).filter(Boolean).length;
+  document.getElementById('lc').textContent = text.split('\n').length;
+}
+if(prose){
+  prose.addEventListener('input', countProse);
+  countProse();
+}
+
+/* ============================================================
+   SLOT MACHINE
+============================================================ */
+const SYM = ['☾','▲','✦','☠','◈','⚡','♛'];
+const SYMCLASS = {'☾':'','▲':'red','✦':'cyan','☠':'purp','◈':'','⚡':'','♛':'red'};
+const reelsEl = document.getElementById('reels');
+const spinBtn = document.getElementById('spinBtn');
+const spinMax = document.getElementById('spinMax');
+const autoBtn = document.getElementById('autoBtn');
+const lever = document.getElementById('lever');
+let balance = 1337, spins = 0, biggest = 0, spinning=false;
+
+function setReels(result){
+  if(!reelsEl) return;
+  [...reelsEl.children].forEach((r, i)=>{
+    const s = result[i];
+    const cls = SYMCLASS[s]||'';
+    r.querySelector('.sym').outerHTML = `<div class="sym ${cls}">${s}</div>`;
+  });
+}
+function payout(result){
+  // simple paytable: all same symbol
+  if(result.every(s=>s===result[0])){
+    const s = result[0];
+    if(s==='☾') return 500;
+    if(s==='▲') return 250;
+    if(s==='✦') return 120;
+    if(s==='☠') return 80;
+    return 40;
+  }
+  // 4 in a row
+  const counts = {};
+  result.forEach(s=>counts[s]=(counts[s]||0)+1);
+  const max = Math.max(...Object.values(counts));
+  if(max===4) return 20;
+  if(max===3) return 6;
+  return 0;
+}
+function doSpin(bet){
+  if(spinning) return;
+  if(balance < bet){ flashBal(); return; }
+  spinning = true;
+  balance -= bet;
+  updateBal();
+  document.querySelector('.slot.page')?.classList.add('spinning');
+  document.getElementById('page-slotmachine').classList.add('spinning');
+  spins++; document.getElementById('sp').textContent = spins;
+
+  const result = Array.from({length:5}, ()=>SYM[Math.floor(Math.random()*SYM.length)]);
+  // force occasional wins
+  if(Math.random()<0.08) result.fill(SYM[Math.floor(Math.random()*5)]);
+
+  setTimeout(()=>{
+    setReels(result);
+    document.getElementById('page-slotmachine').classList.remove('spinning');
+    const win = payout(result)*bet;
+    document.getElementById('winAmt').textContent = win;
+    document.getElementById('lastWin').textContent = win>0 ? win+' ✦' : '–';
+    if(win>0){
+      balance += win;
+      if(win>biggest){ biggest=win; document.getElementById('big').textContent = win+' ✦'; }
+      spawnBurst(window.innerWidth*0.4, window.innerHeight*0.4, [255,179,0], 60);
+      spawnBurst(window.innerWidth*0.5, window.innerHeight*0.45, [255,0,51], 40);
+      setStatus('lebe', 1600);
+    } else {
+      setStatus('anomaly', 800);
+    }
+    updateBal();
+    spinning=false;
+  }, 1600);
+}
+function updateBal(){ const el=document.getElementById('bal'); if(el) el.textContent = balance.toLocaleString()+' ✦'; }
+function flashBal(){ const el=document.getElementById('bal'); if(!el) return; el.style.color='var(--blood)'; setTimeout(()=>el.style.color='',400); }
+if(spinBtn) spinBtn.addEventListener('click', ()=>doSpin(1));
+if(spinMax) spinMax.addEventListener('click', ()=>doSpin(13));
+if(lever) lever.addEventListener('click', ()=>doSpin(1));
+let autoTimer=null;
+if(autoBtn) autoBtn.addEventListener('click', ()=>{
+  if(autoTimer){ clearInterval(autoTimer); autoTimer=null; autoBtn.textContent='AUTO · 10'; return; }
+  let n=10; autoBtn.textContent='STOP ('+n+')';
+  autoTimer = setInterval(()=>{
+    if(spinning) return;
+    doSpin(1); n--;
+    autoBtn.textContent = n>0 ? 'STOP ('+n+')' : 'AUTO · 10';
+    if(n<=0){ clearInterval(autoTimer); autoTimer=null; }
+  }, 1800);
+});
+
+// spinning class on #page-slotmachine toggles reel animation
+const style = document.createElement('style');
+style.textContent = `#page-slotmachine.spinning .reel .sym{animation-play-state:running}`;
+document.head.appendChild(style);
+
+/* ============================================================
+   Keyboard shortcuts
+============================================================ */
+window.addEventListener('keydown', (e)=>{
+  if(e.key==='1') navigateToRoute('home');
+  if(e.key==='2') navigateToRoute('story');
+  if(e.key==='3') navigateToRoute('slotmachine');
+  if(e.key==='4') navigateToRoute('twitch');
+  if(e.key==='5') navigateToRoute('sound');
+  if(e.key==='6') navigateToRoute('code');
+  if(e.key==='Escape') document.body.classList.remove('chaos');
+});
+
+</script>
+</body>
+</html>
