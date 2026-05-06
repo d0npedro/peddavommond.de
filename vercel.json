@@ -1,6 +1,12 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/sound", "destination": "/soundcloud", "permanent": false },
+    { "source": "/code", "destination": "https://github.com/d0npedro", "permanent": false },
+    { "source": "/slotmachine", "destination": "https://slotmachine-gold.vercel.app", "permanent": false },
+    { "source": "/slotmachine/:path*", "destination": "https://slotmachine-gold.vercel.app/:path*", "permanent": false }
+  ],
   "rewrites": [
     { "source": "/soundcloud", "destination": "/soundcloud.html" },
     { "source": "/twitch", "destination": "/twitch.html" },
@@ -8,7 +14,6 @@
     { "source": "/youtube", "destination": "/youtube.html" },
     { "source": "/facebook", "destination": "/facebook.html" },
     { "source": "/linkedin", "destination": "/linkedin.html" },
-    { "source": "/story", "destination": "/story.html" },
-    { "source": "/slotmachine", "destination": "/slotmachine/index.html" }
+    { "source": "/story", "destination": "/story.html" }
   ]
 }
