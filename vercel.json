@@ -2,18 +2,82 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/sound", "destination": "/soundcloud", "permanent": false },
-    { "source": "/code", "destination": "https://github.com/d0npedro", "permanent": false },
-    { "source": "/slotmachine", "destination": "https://slotmachine-gold.vercel.app", "permanent": false },
-    { "source": "/slotmachine/:path*", "destination": "https://slotmachine-gold.vercel.app/:path*", "permanent": false }
+    {
+      "source": "/sound",
+      "destination": "/soundcloud",
+      "permanent": false
+    },
+    {
+      "source": "/code",
+      "destination": "https://github.com/d0npedro",
+      "permanent": false
+    },
+    {
+      "source": "/slotmachine",
+      "destination": "https://slotmachine-gold.vercel.app",
+      "permanent": false
+    },
+    {
+      "source": "/slotmachine/:path*",
+      "destination": "https://slotmachine-gold.vercel.app/:path*",
+      "permanent": false
+    }
   ],
   "rewrites": [
-    { "source": "/soundcloud", "destination": "/soundcloud.html" },
-    { "source": "/twitch", "destination": "/twitch.html" },
-    { "source": "/spotify", "destination": "/spotify.html" },
-    { "source": "/youtube", "destination": "/youtube.html" },
-    { "source": "/facebook", "destination": "/facebook.html" },
-    { "source": "/linkedin", "destination": "/linkedin.html" },
-    { "source": "/story", "destination": "/story.html" }
+    {
+      "source": "/soundcloud",
+      "destination": "/soundcloud.html"
+    },
+    {
+      "source": "/twitch",
+      "destination": "/twitch.html"
+    },
+    {
+      "source": "/spotify",
+      "destination": "/spotify.html"
+    },
+    {
+      "source": "/youtube",
+      "destination": "/youtube.html"
+    },
+    {
+      "source": "/facebook",
+      "destination": "/facebook.html"
+    },
+    {
+      "source": "/linkedin",
+      "destination": "/linkedin.html"
+    },
+    {
+      "source": "/time-to-fly",
+      "destination": "/time-to-fly.html"
+    },
+    {
+      "source": "/story",
+      "destination": "/story.html"
+    },
+    {
+      "source": "/origin",
+      "destination": "/origin.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/.well-known/appspecific/com.tesla.3p.public-key.pem",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/x-pem-file"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    }
   ]
 }
