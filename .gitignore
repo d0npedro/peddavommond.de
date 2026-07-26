@@ -1,1 +1,8 @@
 .vercel
+node_modules
+.next
+.vinext
+dist
+.wrangler
+*.tsbuildinfo
+.dev-server*.log
