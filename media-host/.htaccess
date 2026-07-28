@@ -1,0 +1,37 @@
+# All-Inkl / Apache — Lunar Media Host
+# Upload this file to the media document root (e.g. medienvommond.de/).
+# Requires mod_headers (on All-Inkl typically available).
+
+# --- MIME types ---
+AddType audio/mpeg .mp3
+AddType audio/mp3 .mp3
+AddType audio/wav .wav
+AddType audio/wave .wav
+AddType audio/x-wav .wav
+AddType application/json .json
+
+# --- CORS (tighten origins in production) ---
+# Replace * with your app origins once tested, e.g.:
+#   https://www.peddavommond.de
+#   https://peddavommond.de
+#   https://browser-win-11.vercel.app
+<IfModule mod_headers.c>
+  Header set Access-Control-Allow-Origin "*"
+  Header set Access-Control-Allow-Methods "GET, HEAD, OPTIONS"
+  Header set Access-Control-Allow-Headers "Range, Content-Type"
+  Header set Access-Control-Expose-Headers "Content-Length, Content-Range, Accept-Ranges, Content-Type"
+  Header set Accept-Ranges bytes
+
+  # Cache catalog short, audio long
+  <FilesMatch "\.(json)$">
+    Header set Cache-Control "public, max-age=300"
+  </FilesMatch>
+  <FilesMatch "\.(mp3|wav)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+# Preflight
+RewriteEngine On
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^(.*)$ $1 [R=204,L]

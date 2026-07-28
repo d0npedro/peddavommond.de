@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
+import { loadMediaCatalog } from "../../lib/media-catalog";
+import { ListenPlayer } from "./ListenPlayer";
 
 export const metadata: Metadata = {
   title: "Private Transmission — Pedda vom Mond",
@@ -13,57 +16,33 @@ export const metadata: Metadata = {
   },
 };
 
-const tracks = [
-  {
-    number: "01",
-    title: "Uschi hat morgen ein Date",
-    mood: "Nachtfahrt / Puls",
-    url: "https://soundcloud.com/dj-peet-sounds/uschi-hat-morgen-ein-date",
-  },
-  {
-    number: "02",
-    title: "Bridges Not Walls",
-    mood: "Weite / Verbindung",
-    url: "https://soundcloud.com/dj-peet-sounds/bridges-not-walls",
-  },
-  {
-    number: "03",
-    title: "Das Richtige fühlt sich richtig an",
-    mood: "Gefühl / Bewegung",
-    url: "https://soundcloud.com/dj-peet-sounds/das-richtige-fuhlt-sich-richtig-an",
-  },
-  {
-    number: "04",
-    title: "Tor zur vierten Dimension",
-    mood: "Psychosis / Ritual",
-    url: "https://soundcloud.com/dj-peet-sounds/tor-zur-vierten-dimension-merged-psychosis-ii",
-  },
-];
-
-function playerUrl(trackUrl: string) {
-  const params = new URLSearchParams({
-    url: trackUrl,
-    color: "#d8ff32",
-    auto_play: "false",
-    hide_related: "true",
-    show_comments: "false",
-    show_user: "false",
-    show_reposts: "false",
-    show_teaser: "false",
-    visual: "false",
-  });
-
-  return `https://w.soundcloud.com/player/?${params.toString()}`;
-}
-
 type ListenPageProps = {
   searchParams: Promise<{ for?: string | string[] }>;
 };
+
+async function resolveOrigin(): Promise<string | undefined> {
+  try {
+    const h = await headers();
+    const host = h.get("x-forwarded-host") ?? h.get("host");
+    const proto = h.get("x-forwarded-proto") ?? "https";
+    if (host) return `${proto}://${host}`;
+  } catch {
+    /* build-time */
+  }
+  return process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : process.env.NEXT_PUBLIC_SITE_URL;
+}
 
 export default async function ListenPage({ searchParams }: ListenPageProps) {
   const query = await searchParams;
   const rawRecipient = Array.isArray(query.for) ? query.for[0] : query.for;
   const recipient = rawRecipient?.trim().slice(0, 42);
+
+  const origin = await resolveOrigin();
+  const { catalog, source, catalogUrl } = await loadMediaCatalog(origin);
+  const count = catalog.tracks.length;
+  const nativeCount = catalog.tracks.filter((t) => t.src).length;
 
   return (
     <main className="listen-page">
@@ -72,7 +51,10 @@ export default async function ListenPage({ searchParams }: ListenPageProps) {
         <a className="wordmark" href="/" aria-label="Zur Hauptseite">
           PEDDA<span>/</span>VOM<span>/</span>MOND
         </a>
-        <p>PRIVATE TRANSMISSION / 04 TRACKS</p>
+        <p>
+          PRIVATE TRANSMISSION / {String(count).padStart(2, "0")} TRACKS
+          {nativeCount > 0 ? ` · ${nativeCount} HOST` : ""}
+        </p>
       </header>
 
       <section className="listen-intro">
@@ -85,8 +67,11 @@ export default async function ListenPage({ searchParams }: ListenPageProps) {
           <span>AUF.</span> WELT AUS.
         </h1>
         <p>
-          Vier Stücke, vier Umlaufbahnen. Kein Algorithmus, keine Ablenkung –
+          {count} Stücke, {count} Umlaufbahnen. Kein Algorithmus, keine Ablenkung –
           nur eine kleine Auswahl, die ich dir zeigen wollte.
+          {nativeCount > 0
+            ? " Host-Audio streamt direkt vom Media-Server."
+            : " Aktuell über SoundCloud — Host-MP3s folgen über den Media-Katalog."}
         </p>
         <a className="listen-jump" href="#tracks">
           Wiedergabe öffnen <span aria-hidden="true">↓</span>
@@ -97,34 +82,14 @@ export default async function ListenPage({ searchParams }: ListenPageProps) {
         <div className="track-room-head">
           <p className="section-number">AUSWAHL / 001</p>
           <p>
-            Die Player laden direkt von SoundCloud. Du kannst jeden Track hier
-            starten, pausieren und vorspulen.
+            Playlist kommt aus dem Media-Katalog
+            {catalogUrl ? " (geladen)" : " (Fallback)"}. Tracks mit Datei auf dem
+            Webspace laufen nativ; sonst greift SoundCloud. Downloads nur wenn
+            freigeschaltet.
           </p>
         </div>
 
-        <div className="track-stack">
-          {tracks.map((track) => (
-            <article className="track" key={track.url}>
-              <div className="track-meta">
-                <span>{track.number}</span>
-                <div>
-                  <h2>{track.title}</h2>
-                  <p>{track.mood}</p>
-                </div>
-              </div>
-              <iframe
-                title={`${track.title} – Webplayer`}
-                width="100%"
-                height="166"
-                scrolling="no"
-                frameBorder="no"
-                allow="autoplay"
-                loading="lazy"
-                src={playerUrl(track.url)}
-              />
-            </article>
-          ))}
-        </div>
+        <ListenPlayer catalog={catalog} source={source} catalogUrl={catalogUrl} />
       </section>
 
       <section className="listen-outro">

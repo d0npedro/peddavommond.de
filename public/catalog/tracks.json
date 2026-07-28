@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "updatedAt": "2026-07-28",
+  "artist": "Pedda vom Mond / DJ Peet",
+  "tracks": [
+    {
+      "id": "uschi",
+      "title": "Uschi hat morgen ein Date",
+      "artist": "DJ Peet",
+      "mood": "Nachtfahrt / Puls",
+      "format": "mp3",
+      "download": false,
+      "soundcloud": "https://soundcloud.com/dj-peet-sounds/uschi-hat-morgen-ein-date"
+    },
+    {
+      "id": "bridges",
+      "title": "Bridges Not Walls",
+      "artist": "DJ Peet",
+      "mood": "Weite / Verbindung",
+      "format": "mp3",
+      "download": false,
+      "soundcloud": "https://soundcloud.com/dj-peet-sounds/bridges-not-walls"
+    },
+    {
+      "id": "das-richtige",
+      "title": "Das Richtige fühlt sich richtig an",
+      "artist": "DJ Peet",
+      "mood": "Gefühl / Bewegung",
+      "format": "mp3",
+      "download": false,
+      "soundcloud": "https://soundcloud.com/dj-peet-sounds/das-richtige-fuhlt-sich-richtig-an"
+    },
+    {
+      "id": "tor",
+      "title": "Tor zur vierten Dimension",
+      "artist": "DJ Peet",
+      "mood": "Psychosis / Ritual",
+      "format": "mp3",
+      "download": false,
+      "soundcloud": "https://soundcloud.com/dj-peet-sounds/tor-zur-vierten-dimension-merged-psychosis-ii"
+    }
+  ]
+}

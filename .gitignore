@@ -1,8 +1,37 @@
-.vercel
-node_modules
-.next
-.vinext
-dist
-.wrangler
+# dependencies / build
+node_modules/
+.vercel/
+.next/
+.vinext/
+dist/
+.wrangler/
 *.tsbuildinfo
 .dev-server*.log
+work/
+
+# local agent / tool caches
+.claude/
+.grok/
+.openai/
+.wrangler/
+
+# secrets — never commit
+.env
+.env.*
+!.env.example
+# private keys only; public fleet key under .well-known is tracked
+*.pem
+!.well-known/**/*.pem
+
+# python
+scripts/__pycache__/
+**/__pycache__/
+*.pyc
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/*
+!.vscode/extensions.json

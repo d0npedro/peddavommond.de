@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "updatedAt": "2026-07-28",
+  "artist": "Pedda vom Mond / DJ Peet",
+  "tracks": [
+    {
+      "id": "uschi",
+      "title": "Uschi hat morgen ein Date",
+      "artist": "DJ Peet",
+      "mood": "Nachtfahrt / Puls",
+      "src": "https://medienvommond.de/audio/uschi-hat-morgen-ein-date.mp3",
+      "format": "mp3",
+      "download": true,
+      "soundcloud": "https://soundcloud.com/dj-peet-sounds/uschi-hat-morgen-ein-date"
+    },
+    {
+      "id": "bridges",
+      "title": "Bridges Not Walls",
+      "artist": "DJ Peet",
+      "mood": "Weite / Verbindung",
+      "src": "https://medienvommond.de/audio/bridges-not-walls.mp3",
+      "format": "mp3",
+      "download": true,
+      "soundcloud": "https://soundcloud.com/dj-peet-sounds/bridges-not-walls"
+    },
+    {
+      "id": "das-richtige",
+      "title": "Das Richtige fühlt sich richtig an",
+      "artist": "DJ Peet",
+      "mood": "Gefühl / Bewegung",
+      "src": "https://medienvommond.de/audio/das-richtige-fuehlt-sich-richtig-an.mp3",
+      "format": "mp3",
+      "download": true,
+      "soundcloud": "https://soundcloud.com/dj-peet-sounds/das-richtige-fuhlt-sich-richtig-an"
+    },
+    {
+      "id": "tor",
+      "title": "Tor zur vierten Dimension",
+      "artist": "DJ Peet",
+      "mood": "Psychosis / Ritual",
+      "src": "https://medienvommond.de/audio/tor-zur-vierten-dimension.mp3",
+      "format": "mp3",
+      "download": false,
+      "soundcloud": "https://soundcloud.com/dj-peet-sounds/tor-zur-vierten-dimension-merged-psychosis-ii"
+    }
+  ]
+}

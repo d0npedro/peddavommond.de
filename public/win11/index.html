@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pedda vom Mond — Windows-11-Desktop: Apps und Projekte" />
+  <title>Windows 11 — Pedda vom Mond</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230078d4' width='48' height='48' x='2' y='2' rx='4'/><rect fill='%230078d4' width='48' height='48' x='50' y='2' rx='4'/><rect fill='%230078d4' width='48' height='48' x='2' y='50' rx='4'/><rect fill='%230078d4' width='48' height='48' x='50' y='50' rx='4'/></svg>" />
+  <base href="/win11/" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/desktop.css" />
+  <link rel="stylesheet" href="css/windows.css" />
+  <link rel="stylesheet" href="css/taskbar.css" />
+  <link rel="stylesheet" href="css/apps.css" />
+</head>
+<body>
+  <div id="boot-screen" class="boot-screen" aria-hidden="false">
+    <div class="boot-logo" aria-hidden="true">
+      <svg viewBox="0 0 88 88" width="72" height="72">
+        <rect x="0" y="0" width="40" height="40" fill="#fff" rx="2"/>
+        <rect x="48" y="0" width="40" height="40" fill="#fff" rx="2"/>
+        <rect x="0" y="48" width="40" height="40" fill="#fff" rx="2"/>
+        <rect x="48" y="48" width="40" height="40" fill="#fff" rx="2"/>
+      </svg>
+    </div>
+    <div class="boot-spinner" role="status" aria-label="Lädt"></div>
+  </div>
+
+  <div id="app-root" class="app-root" hidden>
+    <div id="desktop" class="desktop" role="main" aria-label="Desktop"></div>
+    <div id="windows-layer" class="windows-layer" aria-live="polite"></div>
+    <div id="taskbar" class="taskbar" role="navigation" aria-label="Taskleiste"></div>
+    <div id="start-menu" class="start-menu" hidden aria-label="Startmenü"></div>
+    <div id="context-menu" class="context-menu" hidden role="menu"></div>
+    <div id="notification-host" class="notification-host" aria-live="assertive"></div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

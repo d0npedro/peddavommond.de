@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#09091d">
+<title>Time to Fly — A Cosmic Logic Puzzle</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap');
+  :root{--ink:#f6f1ff;--muted:#aaa2c8;--violet:#9c72ff;--cyan:#76efff;--gold:#ffc878;--panel:rgba(13,11,36,.68)}
+  *{box-sizing:border-box}
+  html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050510;color:var(--ink);font-family:Manrope,system-ui,sans-serif;touch-action:none}
+  button{font:inherit;color:inherit}
+  #game{display:block;width:100%;height:100%;cursor:crosshair}
+  .shell{position:fixed;inset:0;pointer-events:none}
+  header{position:absolute;left:clamp(18px,3vw,48px);right:clamp(18px,3vw,48px);top:clamp(18px,3vw,36px);display:flex;justify-content:space-between;align-items:flex-start}
+  .brand{display:flex;align-items:center;gap:14px}
+  .mark{width:34px;height:34px;border:1px solid rgba(255,255,255,.22);border-radius:50%;position:relative;box-shadow:inset 0 0 18px rgba(156,114,255,.18)}
+  .mark:before{content:"";position:absolute;width:5px;height:5px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold);left:14px;top:14px}
+  .mark:after{content:"";position:absolute;inset:7px;border:1px solid rgba(118,239,255,.55);border-radius:50%;transform:rotate(-28deg) scaleX(1.8)}
+  h1{font-size:clamp(18px,2.2vw,30px);line-height:1;margin:0;font-weight:600;letter-spacing:-.035em}
+  .brand p{font:10px DM Mono,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:6px 0 0}
+  .levels{display:flex;gap:7px;pointer-events:auto}
+  .level-dot{width:35px;height:35px;border-radius:50%;border:1px solid rgba(255,255,255,.14);background:rgba(10,9,29,.55);color:#81799d;font:11px DM Mono,monospace;cursor:pointer;transition:.25s;backdrop-filter:blur(12px)}
+  .level-dot.current{color:#fff;border-color:rgba(156,114,255,.8);background:rgba(92,55,177,.45);box-shadow:0 0 22px rgba(156,114,255,.25)}
+  .level-dot.done{color:#07111c;background:var(--cyan);border-color:var(--cyan);box-shadow:0 0 16px rgba(118,239,255,.35)}
+  .level-dot:disabled{cursor:not-allowed;opacity:.38}
+  .mission{position:absolute;left:clamp(18px,3vw,48px);top:50%;transform:translateY(-50%);width:min(250px,25vw)}
+  .eyebrow{font:10px DM Mono,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);margin-bottom:10px}
+  .mission h2{font-size:clamp(24px,3vw,44px);letter-spacing:-.045em;line-height:1.04;margin:0 0 12px;font-weight:500}
+  .mission p{font-size:12px;line-height:1.65;color:var(--muted);margin:0;max-width:220px}
+  .mission .hint{margin-top:18px;padding-top:15px;border-top:1px solid rgba(255,255,255,.1);font:10px/1.6 DM Mono,monospace;color:#827b9e}
+  .bottom{position:absolute;left:clamp(18px,3vw,48px);right:clamp(18px,3vw,48px);bottom:clamp(18px,3vw,35px);display:flex;align-items:flex-end;justify-content:space-between}
+  .angle{display:flex;align-items:center;gap:14px}
+  .angle-ring{width:50px;height:50px;border:1px solid rgba(255,255,255,.16);border-radius:50%;position:relative;background:rgba(11,10,30,.38)}
+  .angle-ring i{position:absolute;width:20px;height:1px;background:var(--gold);left:25px;top:24px;transform-origin:left;box-shadow:0 0 7px var(--gold)}
+  .angle-copy span{display:block;font:9px DM Mono,monospace;letter-spacing:.18em;color:#78718f;text-transform:uppercase}
+  .angle-copy strong{font:500 16px DM Mono,monospace;color:var(--gold)}
+  .actions{display:flex;align-items:center;gap:9px;pointer-events:auto}
+  .btn{height:46px;border:1px solid rgba(255,255,255,.15);background:rgba(11,9,31,.72);border-radius:99px;padding:0 20px;cursor:pointer;backdrop-filter:blur(14px);font:600 11px DM Mono,monospace;letter-spacing:.12em;text-transform:uppercase;transition:.2s}
+  .btn:hover{border-color:rgba(255,255,255,.4);transform:translateY(-2px)}
+  .btn.primary{min-width:142px;color:#101020;border-color:#d8c7ff;background:linear-gradient(110deg,#e8deff,#a9ebff);box-shadow:0 8px 34px rgba(126,183,255,.2)}
+  .btn.primary:disabled{filter:grayscale(1);opacity:.45;transform:none;cursor:default}
+  .status{position:absolute;left:50%;bottom:clamp(86px,10vh,115px);transform:translateX(-50%);text-align:center;opacity:0;transition:.35s}
+  .status.show{opacity:1}
+  .status b{display:block;font-size:clamp(22px,3vw,42px);font-weight:500;letter-spacing:-.04em;text-shadow:0 0 30px rgba(156,114,255,.6)}
+  .status span{font:10px DM Mono,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .intro{position:fixed;inset:0;z-index:5;display:grid;place-items:center;background:radial-gradient(circle at 70% 30%,rgba(90,43,180,.24),transparent 38%),rgba(4,4,15,.88);backdrop-filter:blur(12px);pointer-events:auto;transition:opacity .7s,visibility .7s}
+  .intro.hide{opacity:0;visibility:hidden}
+  .intro-card{text-align:center;width:min(620px,88vw)}
+  .intro .tiny{font:10px DM Mono,monospace;letter-spacing:.25em;text-transform:uppercase;color:var(--cyan)}
+  .intro h3{font-size:clamp(58px,9vw,118px);line-height:.85;letter-spacing:-.075em;margin:24px 0 28px;font-weight:500;background:linear-gradient(#fff 20%,#bca9ff 85%);background-clip:text;color:transparent}
+  .intro p{max-width:490px;margin:0 auto 32px;color:#b5aecb;font-size:14px;line-height:1.7}
+  .intro button{border:0;border-radius:99px;padding:16px 30px;background:#f2edff;color:#121020;font:600 11px DM Mono,monospace;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;box-shadow:0 0 50px rgba(169,139,255,.25)}
+  .sound{position:fixed;right:clamp(18px,3vw,48px);bottom:94px;pointer-events:auto;width:32px;height:32px;border:1px solid rgba(255,255,255,.12);border-radius:50%;background:rgba(10,9,29,.6);font-size:12px;cursor:pointer;color:#9992b1}
+  @media(max-width:760px){header{align-items:center}.brand p{display:none}.levels{gap:4px}.level-dot{width:29px;height:29px}.mission{top:96px;left:18px;transform:none;width:220px}.mission h2{font-size:26px}.mission p{display:none}.mission .hint{margin-top:8px;padding-top:8px}.bottom{bottom:18px}.angle{display:none}.btn{height:43px;padding:0 15px}.btn.primary{min-width:120px}.sound{display:none}}
+</style>
+</head>
+<body>
+<canvas id="game" aria-label="Time to Fly gravitational puzzle playfield"></canvas>
+<div class="shell">
+  <header><div class="brand"><div class="mark"></div><div><h1>Time to Fly</h1><p>A gravitational odyssey</p></div></div><nav class="levels" id="levels" aria-label="Levels"></nav></header>
+  <section class="mission"><div class="eyebrow" id="chapter">Mission 01 · First light</div><h2 id="missionTitle">Bend the impossible.</h2><p id="missionText">Position the planet on its orbit. Then set your launch angle and let gravity do the rest.</p><div class="hint">DRAG PLANETS · DRAG ROCKET TO AIM<br>SPACE TO LAUNCH</div></section>
+  <div class="bottom"><div class="angle"><div class="angle-ring"><i id="needle"></i></div><div class="angle-copy"><span>Launch vector</span><strong id="angleValue">−18°</strong></div></div><div class="actions"><button class="btn" id="reset">New system</button><button class="btn primary" id="launch">Launch <span>↗</span></button></div></div>
+  <div class="status" id="status"><b id="statusTitle">Lost to the void</b><span id="statusSub">Recalibrate and try again</span></div>
+  <button class="sound" id="sound" aria-label="Toggle sound">♪</button>
+</div>
+<div class="intro" id="intro"><div class="intro-card"><div class="tiny">A miniature cosmic logic puzzle</div><h3>Time<br>to Fly.</h3><p>Arrange the planets. Aim your rocket. Let gravity draw a path through the stars — but every world must shape your journey.</p><button id="begin">Begin the voyage&nbsp; ↗</button></div></div>
+<script>
+(() => {
+  'use strict';
+  const canvas=document.getElementById('game'),ctx=canvas.getContext('2d');
+  const $=id=>document.getElementById(id), TAU=Math.PI*2;
+  let W=0,H=0,dpr=1,level=0,unlocked=0,state='setup',last=0,time=0,drag=null,muted=false;
+  let rocket,planets=[],stars=[],dust=[],bursts=[],audio=null,statusTimer=0;
+  const palettes=[
+    ['#74eaff','#2353a9'],['#ffb775','#bb416e'],['#c594ff','#5136bb'],['#9dffca','#177c85'],['#ffd56a','#bf6339']
+  ];
+  const levels=[
+    {name:'First light',title:'Bend the impossible.',text:'One world. One elegant curve. Place it between your launch and the distant galaxy.',gal:[.80,.26],anchors:[[.50,.48,.15]],angle:-16},
+    {name:'Slingshot',title:'Find the second turn.',text:'Use both gravitational fields. The order of your encounters matters.',gal:[.80,.72],anchors:[[.42,.34,.13],[.62,.58,.14]],angle:-9},
+    {name:'Constellation',title:'Connect three worlds.',text:'Shape a chain of gravity. Each planet must leave its signature on your flight.',gal:[.82,.22],anchors:[[.37,.66,.11],[.53,.37,.13],[.68,.58,.12]],angle:10},
+    {name:'The long arc',title:'Thread the starlit needle.',text:'Four worlds create a narrow celestial passage. Sequence is everything.',gal:[.83,.66],anchors:[[.34,.37,.10],[.46,.64,.12],[.60,.32,.11],[.70,.55,.10]],angle:-6},
+    {name:'Beyond',title:'Make gravity sing.',text:'The final constellation demands every world — and a near-perfect flight.',gal:[.84,.20],anchors:[[.31,.64,.09],[.41,.34,.10],[.53,.59,.10],[.64,.29,.10],[.72,.53,.09]],angle:8}
+  ];
+  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)), rnd=(a,b)=>a+Math.random()*(b-a);
+  function resize(){dpr=Math.min(2,devicePixelRatio||1);W=innerWidth;H=innerHeight;canvas.width=W*dpr;canvas.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);makeStars(); if(state==='setup') placeScene(false)}
+  function makeStars(){stars=Array.from({length:Math.floor(W*H/6500)},()=>({x:Math.random()*W,y:Math.random()*H,r:rnd(.25,1.25),a:rnd(.15,.7),s:rnd(.4,1.5)}));dust=Array.from({length:18},()=>({x:Math.random()*W,y:Math.random()*H,r:rnd(60,210),c:Math.random()>.5?'91,53,180':'30,135,180',a:rnd(.012,.035)}))}
+  function orbitPoint(p){return{x:p.cx+Math.cos(p.a)*p.orbit,y:p.cy+Math.sin(p.a)*p.orbit}}
+  function placeScene(randomize=true){
+    const L=levels[level],scale=Math.min(W,H); state='setup';bursts=[];
+    rocket={x:W*(W<760?.16:.24),y:H*.55,vx:0,vy:0,angle:(L.angle*Math.PI/180),trail:[],used:new Set(),life:0};
+    planets=L.anchors.map((a,i)=>{const p={cx:W*a[0],cy:H*a[1],orbit:scale*a[2],a:randomize?rnd(0,TAU):(planets[i]?.a??rnd(0,TAU)),r:12+i*2.35,mass:780+i*190,field:66+i*9,palette:palettes[i],pulse:rnd(0,TAU),used:false};Object.assign(p,orbitPoint(p));return p});
+    hideStatus(); updateHUD();
+  }
+  function updateHUD(){const L=levels[level];$('chapter').textContent=`Mission ${String(level+1).padStart(2,'0')} · ${L.name}`;$('missionTitle').textContent=L.title;$('missionText').textContent=L.text;$('launch').disabled=state==='flying'||state==='success';$('launch').innerHTML=state==='flying'?'In flight…':'Launch <span>↗</span>';$('needle').style.transform=`rotate(${rocket.angle}rad)`;$('angleValue').textContent=`${rocket.angle*180/Math.PI>=0?'+':'−'}${Math.abs(Math.round(rocket.angle*180/Math.PI))}°`;renderLevelNav()}
+  function renderLevelNav(){const nav=$('levels');nav.innerHTML='';levels.forEach((_,i)=>{const b=document.createElement('button');b.className='level-dot'+(i===level?' current':'')+(i<unlocked?' done':'');b.textContent=i+1;b.disabled=i>unlocked;b.onclick=()=>{if(i<=unlocked){level=i;placeScene(true)}};nav.appendChild(b)})}
+  function showStatus(title,sub,kind){clearTimeout(statusTimer);$('statusTitle').textContent=title;$('statusSub').textContent=sub;$('status').classList.add('show');if(kind==='fail')statusTimer=setTimeout(()=>{hideStatus();placeScene(false)},1250)}
+  function hideStatus(){$('status').classList.remove('show')}
+  function launch(){if(state!=='setup')return;state='flying';rocket.vx=Math.cos(rocket.angle)*255;rocket.vy=Math.sin(rocket.angle)*255;rocket.life=0;rocket.used.clear();planets.forEach(p=>p.used=false);tone(420,.08,'sine');updateHUD()}
+  function fail(reason='Lost to the void'){if(state!=='flying')return;state='fail';tone(120,.25,'sawtooth');showStatus(reason,'Recalibrate and try again','fail');updateHUD()}
+  function succeed(){state='success';unlocked=Math.max(unlocked,Math.min(4,level+1));burst(levels[level].gal[0]*W,levels[level].gal[1]*H,80,'#bcefff');tone(660,.12,'sine');setTimeout(()=>tone(880,.2,'sine'),100);showStatus(level===4?'The universe is yours.':'Galaxy reached',level===4?'Five constellations aligned · Voyage complete':'New constellation unlocked');updateHUD();if(level<4)setTimeout(()=>{level++;placeScene(true)},2100)}
+  function tone(freq,dur,type){if(muted)return;try{audio=audio||new (AudioContext||webkitAudioContext)();const o=audio.createOscillator(),g=audio.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(.035,audio.currentTime);g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+dur);o.connect(g).connect(audio.destination);o.start();o.stop(audio.currentTime+dur)}catch(e){}}
+  function burst(x,y,n,c){for(let i=0;i<n;i++){const a=rnd(0,TAU),s=rnd(20,150);bursts.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:rnd(.5,1.5),max:1.5,c})}}
+  function update(dt){time+=dt;bursts.forEach(b=>{b.x+=b.vx*dt;b.y+=b.vy*dt;b.vx*=.985;b.vy*=.985;b.life-=dt});bursts=bursts.filter(b=>b.life>0);if(state!=='flying')return;
+    rocket.life+=dt;let ax=0,ay=0;
+    for(const p of planets){const dx=p.x-rocket.x,dy=p.y-rocket.y,d2=dx*dx+dy*dy,d=Math.sqrt(d2);if(d<p.field){if(!p.used){p.used=true;rocket.used.add(p);burst(rocket.x,rocket.y,12,p.palette[0]);tone(260+p.r*14,.06,'sine')}}if(d<p.r+3){fail('A little too close');return}const f=p.mass/Math.max(700,d2);ax+=dx/d*f*210;ay+=dy/d*f*210}
+    rocket.vx+=ax*dt;rocket.vy+=ay*dt;const speed=Math.hypot(rocket.vx,rocket.vy);if(speed>410){rocket.vx*=410/speed;rocket.vy*=410/speed}rocket.x+=rocket.vx*dt;rocket.y+=rocket.vy*dt;rocket.angle=Math.atan2(rocket.vy,rocket.vx);rocket.trail.push({x:rocket.x,y:rocket.y,t:1});if(rocket.trail.length>100)rocket.trail.shift();rocket.trail.forEach(t=>t.t-=dt*.7);
+    const gx=levels[level].gal[0]*W,gy=levels[level].gal[1]*H;if(Math.hypot(rocket.x-gx,rocket.y-gy)<30){if(rocket.used.size===planets.length)succeed();else fail('A world was left behind');return}if(rocket.x<-80||rocket.x>W+80||rocket.y<-80||rocket.y>H+80||rocket.life>12)fail();
+  }
+  function background(){
+    const g=ctx.createRadialGradient(W*.58,H*.45,0,W*.58,H*.45,Math.max(W,H)*.8);g.addColorStop(0,'#151039');g.addColorStop(.45,'#090823');g.addColorStop(1,'#03040e');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    ctx.save();dust.forEach(d=>{const g=ctx.createRadialGradient(d.x,d.y,0,d.x,d.y,d.r);g.addColorStop(0,`rgba(${d.c},${d.a})`);g.addColorStop(1,`rgba(${d.c},0)`);ctx.fillStyle=g;ctx.fillRect(d.x-d.r,d.y-d.r,d.r*2,d.r*2)});stars.forEach(s=>{const a=s.a*(.75+.25*Math.sin(time*s.s));ctx.fillStyle=`rgba(225,223,255,${a})`;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,TAU);ctx.fill()});ctx.restore();
+  }
+  function galaxy(){const x=levels[level].gal[0]*W,y=levels[level].gal[1]*H;ctx.save();ctx.translate(x,y);ctx.rotate(-.35);for(let i=7;i>0;i--){ctx.strokeStyle=`rgba(${170+i*9},${140+i*10},255,${.025+i*.025})`;ctx.lineWidth=2+i*.8;ctx.beginPath();ctx.ellipse(0,0,15+i*5,4+i*2.2,0,0,TAU);ctx.stroke()}const g=ctx.createRadialGradient(0,0,0,0,0,24);g.addColorStop(0,'#fff');g.addColorStop(.1,'#d9f8ff');g.addColorStop(.45,'rgba(154,118,255,.8)');g.addColorStop(1,'rgba(100,50,220,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,24,0,TAU);ctx.fill();ctx.rotate(.35);ctx.fillStyle='rgba(220,214,255,.7)';ctx.font='9px DM Mono';ctx.textAlign='center';ctx.fillText('DESTINATION',0,49);ctx.restore()}
+  function drawPlanet(p,i){
+    ctx.save();ctx.setLineDash([2,6]);ctx.strokeStyle='rgba(205,197,255,.13)';ctx.lineWidth=1;ctx.beginPath();ctx.arc(p.cx,p.cy,p.orbit,0,TAU);ctx.stroke();ctx.setLineDash([]);
+    const pulse=1+Math.sin(time*1.6+p.pulse)*.04,fg=ctx.createRadialGradient(p.x,p.y,2,p.x,p.y,p.field*pulse);fg.addColorStop(0,`${p.palette[0]}33`);fg.addColorStop(.55,`${p.palette[0]}0d`);fg.addColorStop(.88,`${p.palette[0]}05`);fg.addColorStop(1,'transparent');ctx.fillStyle=fg;ctx.beginPath();ctx.arc(p.x,p.y,p.field*pulse,0,TAU);ctx.fill();
+    ctx.strokeStyle=p.used?`${p.palette[0]}88`:`${p.palette[0]}28`;ctx.lineWidth=p.used?1.5:.7;ctx.beginPath();ctx.arc(p.x,p.y,p.field*(.82+.04*Math.sin(time*2+p.pulse)),0,TAU);ctx.stroke();
+    const pg=ctx.createRadialGradient(p.x-p.r*.35,p.y-p.r*.45,1,p.x,p.y,p.r*1.1);pg.addColorStop(0,'#fff');pg.addColorStop(.12,p.palette[0]);pg.addColorStop(.65,p.palette[1]);pg.addColorStop(1,'#100b30');ctx.shadowColor=p.palette[0];ctx.shadowBlur=20;ctx.fillStyle=pg;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,TAU);ctx.fill();ctx.shadowBlur=0;
+    ctx.strokeStyle='rgba(255,255,255,.3)';ctx.lineWidth=.7;ctx.beginPath();ctx.ellipse(p.x,p.y,p.r*1.65,p.r*.38,-.25,0,TAU);ctx.stroke();ctx.fillStyle='rgba(232,228,255,.65)';ctx.font='8px DM Mono';ctx.textAlign='center';ctx.fillText(`0${i+1}`,p.x,p.y+p.field+14);ctx.restore();
+  }
+  function drawRocket(){const r=rocket;ctx.save();if(r.trail.length>1){ctx.lineCap='round';for(let i=1;i<r.trail.length;i++){const a=r.trail[i];ctx.strokeStyle=`rgba(128,232,255,${Math.max(0,a.t)*.35})`;ctx.lineWidth=1+Math.max(0,a.t)*2;ctx.beginPath();ctx.moveTo(r.trail[i-1].x,r.trail[i-1].y);ctx.lineTo(a.x,a.y);ctx.stroke()}}
+    if(state==='setup'){ctx.strokeStyle='rgba(255,200,120,.3)';ctx.setLineDash([3,5]);ctx.beginPath();ctx.arc(r.x,r.y,30,0,TAU);ctx.stroke();ctx.setLineDash([])}ctx.translate(r.x,r.y);ctx.rotate(r.angle);if(state==='flying'){const flame=ctx.createLinearGradient(-23,0,-7,0);flame.addColorStop(0,'transparent');flame.addColorStop(.5,'#ff8b67');flame.addColorStop(1,'#fff');ctx.fillStyle=flame;ctx.beginPath();ctx.moveTo(-8,-4);ctx.lineTo(-rnd(18,27),0);ctx.lineTo(-8,4);ctx.fill()}ctx.shadowColor='#a9eaff';ctx.shadowBlur=14;ctx.fillStyle='#e9f9ff';ctx.beginPath();ctx.moveTo(12,0);ctx.quadraticCurveTo(1,-7,-9,-5);ctx.lineTo(-7,5);ctx.quadraticCurveTo(1,7,12,0);ctx.fill();ctx.shadowBlur=0;ctx.fillStyle='#7556d8';ctx.beginPath();ctx.arc(2,0,2.5,0,TAU);ctx.fill();ctx.fillStyle='#b198ff';ctx.beginPath();ctx.moveTo(-5,-4);ctx.lineTo(-12,-9);ctx.lineTo(-8,1);ctx.moveTo(-5,4);ctx.lineTo(-12,9);ctx.lineTo(-8,-1);ctx.fill();ctx.restore()}
+  function draw(){background();galaxy();planets.forEach(drawPlanet);bursts.forEach(b=>{ctx.fillStyle=b.c;ctx.globalAlpha=clamp(b.life/b.max,0,1);ctx.beginPath();ctx.arc(b.x,b.y,1.2,0,TAU);ctx.fill()});ctx.globalAlpha=1;drawRocket();if(state==='setup'&&drag===null){ctx.fillStyle='rgba(213,207,235,.42)';ctx.font='9px DM Mono';ctx.textAlign='center';planets.forEach(p=>ctx.fillText('DRAG',p.x,p.y-p.field-9))}}
+  function loop(ts){const dt=Math.min(.035,(ts-last)/1000||0);last=ts;update(dt);draw();requestAnimationFrame(loop)}
+  function pointer(e){const r=canvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}}
+  canvas.addEventListener('pointerdown',e=>{if(state!=='setup')return;const m=pointer(e);let best=null,bd=Infinity;planets.forEach(p=>{const d=Math.hypot(m.x-p.x,m.y-p.y);if(d<Math.max(28,p.r+12)&&d<bd){best=p;bd=d}});if(best)drag={type:'planet',p:best};else if(Math.hypot(m.x-rocket.x,m.y-rocket.y)<54)drag={type:'aim'};if(drag)canvas.setPointerCapture(e.pointerId)});
+  canvas.addEventListener('pointermove',e=>{if(!drag||state!=='setup')return;const m=pointer(e);if(drag.type==='planet'){const p=drag.p;p.a=Math.atan2(m.y-p.cy,m.x-p.cx);Object.assign(p,orbitPoint(p))}else{rocket.angle=clamp(Math.atan2(m.y-rocket.y,m.x-rocket.x),-.95,.95);updateHUD()}});
+  canvas.addEventListener('pointerup',()=>drag=null);canvas.addEventListener('pointercancel',()=>drag=null);
+  $('launch').onclick=launch;$('reset').onclick=()=>placeScene(true);$('begin').onclick=()=>{$('intro').classList.add('hide');tone(520,.12,'sine')};$('sound').onclick=()=>{muted=!muted;$('sound').textContent=muted?'×':'♪'};
+  addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault();launch()}if(e.key.toLowerCase()==='r')placeScene(false)});addEventListener('resize',resize);
+  resize();placeScene(true);renderLevelNav();requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

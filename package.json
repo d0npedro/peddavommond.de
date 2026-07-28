@@ -8,7 +8,10 @@
   "scripts": {
     "dev": "vinext dev",
     "build": "vinext build",
-    "start": "vinext start"
+    "start": "vinext start",
+    "vercel-build": "node scripts/prepare-static-deploy.mjs",
+    "ci": "npm run vercel-build && node public/win11/js/utils/formula.test.js",
+    "serve:static": "npx --yes serve public -l 8080"
   },
   "dependencies": {
     "next": "16.2.6",

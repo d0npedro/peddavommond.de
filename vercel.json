@@ -1,7 +1,14 @@
 {
+  "buildCommand": "npm run vercel-build",
+  "outputDirectory": "public",
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
+    {
+      "source": "/",
+      "destination": "/win11/",
+      "permanent": false
+    },
     {
       "source": "/sound",
       "destination": "/soundcloud",
@@ -21,9 +28,23 @@
       "source": "/slotmachine/:path*",
       "destination": "https://slotmachine-gold.vercel.app/:path*",
       "permanent": false
+    },
+    {
+      "source": "/desktop",
+      "destination": "/win11/",
+      "permanent": false
+    },
+    {
+      "source": "/os",
+      "destination": "/win11/",
+      "permanent": false
     }
   ],
   "rewrites": [
+    {
+      "source": "/win11",
+      "destination": "/win11/index.html"
+    },
     {
       "source": "/soundcloud",
       "destination": "/soundcloud.html"
