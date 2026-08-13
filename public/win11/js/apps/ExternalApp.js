@@ -7,6 +7,8 @@ import { bus } from '../core/EventBus.js';
  */
 export function mountExternalApp(host, meta, opts = {}) {
   const url = opts.url || opts.href || 'about:blank';
+  const openUrl = opts.openUrl || url;
+  const repo = opts.repo;
   const title = opts.title || meta?.title || 'App';
   const allow = opts.allow || 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
 
@@ -44,17 +46,27 @@ export function mountExternalApp(host, meta, opts = {}) {
       textOverflow: 'ellipsis',
       fontFamily: 'var(--font-mono)',
     },
-    text: url,
+    text: openUrl,
   });
 
   const openBtn = el('button', {
     className: 'btn btn-primary',
     type: 'button',
     text: 'Im Tab öffnen',
-    onClick: () => window.open(url, '_blank', 'noopener,noreferrer'),
+    onClick: () => window.open(openUrl, '_blank', 'noopener,noreferrer'),
   });
 
-  bar.append(urlLabel, openBtn);
+  if (repo) {
+    const gh = el('button', {
+      className: 'btn',
+      type: 'button',
+      text: 'GitHub',
+      onClick: () => window.open(repo, '_blank', 'noopener,noreferrer'),
+    });
+    bar.append(urlLabel, gh, openBtn);
+  } else {
+    bar.append(urlLabel, openBtn);
+  }
 
   const frameWrap = el('div', {
     style: { flex: 1, minHeight: 0, position: 'relative' },
@@ -94,7 +106,7 @@ export function mountExternalApp(host, meta, opts = {}) {
       className: 'btn btn-primary',
       type: 'button',
       text: 'Trotzdem im neuen Tab öffnen',
-      onClick: () => window.open(url, '_blank', 'noopener,noreferrer'),
+      onClick: () => window.open(openUrl, '_blank', 'noopener,noreferrer'),
     }),
   );
 

@@ -33,6 +33,7 @@ export const APP_CATALOG = [
     category: 'lab',
     launch: 'iframe',
     url: '/moeglichkeitensystem',
+    openUrl: 'https://peddavommond.de/moeglichkeitensystem',
     repo: 'https://github.com/d0npedro/moeglichkeitensystem',
     featured: true,
     defaultWidth: 1020,

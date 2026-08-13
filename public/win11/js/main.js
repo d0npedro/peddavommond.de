@@ -57,6 +57,8 @@ function registerCatalogApps() {
         mountExternalApp(host, meta, {
           url,
           title: app.name,
+          repo: app.repo,
+          openUrl: app.openUrl || app.url,
           openExternal: opts.openExternal,
         });
       },
