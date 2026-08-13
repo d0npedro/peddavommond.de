@@ -26,6 +26,19 @@
  */
 export const APP_CATALOG = [
   {
+    id: 'moeglichkeitensystem',
+    name: 'Möglichkeiten',
+    icon: '◎',
+    description: 'Freiwillige Doktorarbeit — dieselbe Mitte, drei Welten.',
+    category: 'lab',
+    launch: 'iframe',
+    url: '/moeglichkeitensystem',
+    repo: 'https://github.com/d0npedro/moeglichkeitensystem',
+    featured: true,
+    defaultWidth: 1020,
+    defaultHeight: 760,
+  },
+  {
     id: 'slotmachine',
     name: 'Slotmachine',
     icon: '🎰',

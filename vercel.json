@@ -30,6 +30,16 @@
       "permanent": false
     },
     {
+      "source": "/moeglichkeitensystem",
+      "destination": "https://moeglichkeitensystem.vercel.app",
+      "permanent": false
+    },
+    {
+      "source": "/moeglichkeitensystem/:path*",
+      "destination": "https://moeglichkeitensystem.vercel.app/:path*",
+      "permanent": false
+    },
+    {
       "source": "/desktop",
       "destination": "/win11/",
       "permanent": false

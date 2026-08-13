@@ -241,22 +241,21 @@ function ensureProjectAppsInstalled() {
   const desiredDesktop = [
     'explorer',
     'recycle',
+    'moeglichkeitensystem',
     'slotmachine',
     'listen',
     'soundcloud',
     'timetofly',
     'github',
-    'music',
     'settings',
   ];
-  // Only reset desktop if still on old default-ish set (no slotmachine)
-  if (!desktop.includes('slotmachine')) {
+  if (!desktop.includes('slotmachine') || !desktop.includes('moeglichkeitensystem')) {
     State.update('desktopIcons', desiredDesktop);
   }
 
   const pins = State.get().pinnedTaskbar || [];
-  if (!pins.includes('slotmachine')) {
-    const nextPins = ['start', 'explorer', 'slotmachine', 'listen', 'soundcloud', 'music', 'settings'];
+  if (!pins.includes('moeglichkeitensystem')) {
+    const nextPins = ['start', 'explorer', 'moeglichkeitensystem', 'slotmachine', 'listen', 'music', 'settings'];
     State.update('pinnedTaskbar', nextPins);
   }
 

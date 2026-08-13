@@ -21,12 +21,12 @@ const DEFAULT = {
     'paint', 'terminal', 'weather',
     'slotmachine', 'listen', 'soundcloud', 'spotify', 'youtube',
     'twitch', 'facebook', 'linkedin', 'timetofly', 'story',
-    'github', 'peddabot', 'verschenkemusik', 'code',
+    'github', 'peddabot', 'verschenkemusik', 'code', 'moeglichkeitensystem',
   ],
-  pinnedTaskbar: ['start', 'explorer', 'slotmachine', 'listen', 'soundcloud', 'music', 'settings'],
+  pinnedTaskbar: ['start', 'explorer', 'moeglichkeitensystem', 'slotmachine', 'listen', 'music', 'settings'],
   desktopIcons: [
-    'explorer', 'recycle', 'slotmachine', 'listen', 'soundcloud',
-    'timetofly', 'github', 'music', 'settings',
+    'explorer', 'recycle', 'moeglichkeitensystem', 'slotmachine', 'listen',
+    'soundcloud', 'timetofly', 'github', 'settings',
   ],
   userName: 'Pedda',
 };
