@@ -6,7 +6,7 @@ import { ICONS } from '../utils/icons.js';
 
 let open = false;
 
-const RECOMMENDED = ['slotmachine', 'listen', 'soundcloud', 'timetofly', 'github', 'explorer', 'settings'];
+const RECOMMENDED = ['slotmachine', 'musicfestival', 'examples', 'soundcloud', 'timetofly', 'multiagent', 'github', 'settings'];
 
 export function mountStartMenu() {
   const menu = document.getElementById('start-menu');

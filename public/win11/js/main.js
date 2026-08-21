@@ -27,6 +27,7 @@ import { mountPaint } from './apps/Paint.js';
 import { mountTerminal } from './apps/Terminal.js';
 import { mountWeather } from './apps/Weather.js';
 import { mountMusicPlayer } from './apps/MusicPlayer.js';
+import { mountSoundCloud, parseSoundCloudDeepLink } from './apps/SoundCloud.js';
 import { mountExternalApp, mountOpenExternal } from './apps/ExternalApp.js';
 import { APP_CATALOG } from './apps/catalog.js';
 
@@ -187,6 +188,20 @@ function registerApps() {
   });
 
   registerBuiltin({
+    id: 'soundcloud',
+    name: 'SoundCloud',
+    icon: '☁️',
+    category: 'music',
+    description: 'Alle Tracks von Pedda vom Mond — Widget, Suche, Teilen-Links.',
+    installable: false,
+    builtIn: true,
+    defaultWidth: 980,
+    defaultHeight: 720,
+    singleInstance: true,
+    mount: mountSoundCloud,
+  });
+
+  registerBuiltin({
     id: 'paint',
     name: 'Paint',
     icon: '🎨',
@@ -225,7 +240,7 @@ function registerApps() {
 function ensureProjectAppsInstalled() {
   const featured = APP_CATALOG.filter((a) => a.featured).map((a) => a.id);
   const must = [
-    'settings', 'store', 'explorer', 'music', 'calculator',
+    'settings', 'store', 'explorer', 'music', 'soundcloud', 'calculator',
     ...APP_CATALOG.map((a) => a.id),
   ];
   let installed = [...State.get().installedApps];
@@ -236,28 +251,58 @@ function ensureProjectAppsInstalled() {
       changed = true;
     }
   }
+  // Remove retired apps (Transmission /listen — SSR-only, 404 in static prod)
+  const retired = ['listen'];
+  const beforeRetire = installed.length;
+  installed = installed.filter((id) => !retired.includes(id));
+  if (installed.length !== beforeRetire) changed = true;
   if (changed) State.update('installedApps', installed);
 
   // Desktop: featured projects first
-  const desktop = State.get().desktopIcons || [];
+  let desktop = State.get().desktopIcons || [];
   const desiredDesktop = [
     'explorer',
     'recycle',
     'moeglichkeitensystem',
     'slotmachine',
-    'listen',
+    'musicfestival',
+    'examples',
     'soundcloud',
     'timetofly',
+    'multiagent',
     'github',
     'settings',
   ];
   if (!desktop.includes('slotmachine') || !desktop.includes('moeglichkeitensystem')) {
     State.update('desktopIcons', desiredDesktop);
+    desktop = desiredDesktop;
+  }
+  // Migrate: drop retired icons + pin featured games once if missing
+  {
+    let next = desktop.filter((id) => !retired.includes(id));
+    let deskChanged = next.length !== desktop.length;
+    const pinOnce = (id, beforeId) => {
+      if (next.includes('slotmachine') && !next.includes(id)) {
+        const at = beforeId ? next.indexOf(beforeId) : -1;
+        if (at >= 0) next.splice(at, 0, id);
+        else next.push(id);
+        deskChanged = true;
+      }
+    };
+    pinOnce('musicfestival', 'soundcloud');
+    pinOnce('examples', 'soundcloud');
+    pinOnce('multiagent', 'github');
+    if (deskChanged) State.update('desktopIcons', next);
   }
 
-  const pins = State.get().pinnedTaskbar || [];
-  if (!pins.includes('moeglichkeitensystem')) {
-    const nextPins = ['start', 'explorer', 'moeglichkeitensystem', 'slotmachine', 'listen', 'music', 'settings'];
+  let pins = State.get().pinnedTaskbar || [];
+  const pinsClean = pins.filter((id) => !retired.includes(id));
+  if (pinsClean.length !== pins.length) {
+    State.update('pinnedTaskbar', pinsClean);
+    pins = pinsClean;
+  }
+  if (!pins.includes('slotmachine') || !pins.includes('moeglichkeitensystem')) {
+    const nextPins = ['start', 'explorer', 'moeglichkeitensystem', 'slotmachine', 'soundcloud', 'music', 'settings'];
     State.update('pinnedTaskbar', nextPins);
   }
 
@@ -272,6 +317,38 @@ function wireGlobalUi() {
   document.addEventListener('contextmenu', (e) => {
     if (e.target.closest('.word-page, .excel-app, input, textarea, [contenteditable=true]')) return;
   });
+}
+
+function handleDeepLinks() {
+  const sc = parseSoundCloudDeepLink(window.location.search);
+  if (!sc) return;
+
+  // Ensure app is available, open with track preloaded
+  if (!State.isInstalled('soundcloud')) State.installApp('soundcloud');
+  AppRegistry.launch('soundcloud', {
+    track: sc.track,
+    autoplay: sc.autoplay,
+    title: 'SoundCloud',
+  });
+  // singleInstance windows may already be open — push play intent
+  if (sc.track) {
+    setTimeout(() => {
+      bus.emit('soundcloud:play', { track: sc.track, autoplay: sc.autoplay });
+    }, 120);
+  }
+
+  // Clean URL (keep path) without reload
+  try {
+    const u = new URL(window.location.href);
+    u.searchParams.delete('app');
+    u.searchParams.delete('track');
+    u.searchParams.delete('t');
+    u.searchParams.delete('autoplay');
+    const qs = u.searchParams.toString();
+    window.history.replaceState({}, '', u.pathname + (qs ? `?${qs}` : '') + u.hash);
+  } catch {
+    /* ignore */
+  }
 }
 
 export function boot(opts = {}) {
@@ -295,12 +372,14 @@ export function boot(opts = {}) {
       setTimeout(() => bootScreen?.remove(), 500);
       bus.emit('ui:toast', {
         title: 'Willkommen',
-        body: 'Desktop bereit — Apps sind deine Projekte (z. B. Slotmachine).',
+        body: 'Desktop bereit — SoundCloud mit kompletter Bibliothek.',
       });
+      handleDeepLinks();
     }, opts.fast ? 200 : 900);
   } else {
     document.getElementById('app-root').hidden = false;
     document.getElementById('boot-screen')?.remove();
+    handleDeepLinks();
   }
 }
 

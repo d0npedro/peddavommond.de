@@ -40,6 +40,16 @@
       "permanent": false
     },
     {
+      "source": "/examples",
+      "destination": "https://apps.peddavommond.de",
+      "permanent": false
+    },
+    {
+      "source": "/examples/:path*",
+      "destination": "https://apps.peddavommond.de/:path*",
+      "permanent": false
+    },
+    {
       "source": "/desktop",
       "destination": "/win11/",
       "permanent": false
@@ -90,6 +100,30 @@
     {
       "source": "/origin",
       "destination": "/origin.html"
+    },
+    {
+      "source": "/multi-agent",
+      "destination": "/multi-agent/index.html"
+    },
+    {
+      "source": "/multi-agent/",
+      "destination": "/multi-agent/index.html"
+    },
+    {
+      "source": "/multi-agent/:path*",
+      "destination": "/multi-agent/index.html"
+    },
+    {
+      "source": "/musicfestival",
+      "destination": "https://musicfestival-nine.vercel.app/musicfestival"
+    },
+    {
+      "source": "/musicfestival/",
+      "destination": "https://musicfestival-nine.vercel.app/musicfestival/"
+    },
+    {
+      "source": "/musicfestival/:path*",
+      "destination": "https://musicfestival-nine.vercel.app/musicfestival/:path*"
     }
   ],
   "headers": [
