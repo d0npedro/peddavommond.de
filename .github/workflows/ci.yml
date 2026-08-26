@@ -35,9 +35,11 @@ jobs:
           test -f public/index.html
           test -f public/hub/banner.png
           test -f public/hub/spotify.png
+          test -f public/hub/suno.png
           test -f public/hub/windows-11.png
           grep -q '/win11/' public/index.html
           grep -q 'tile--windows11' public/index.html
+          grep -q 'tile--suno' public/index.html
           test -f public/win11/index.html
           test -f public/win11/js/main.js
           test -f public/win11/js/apps/catalog.js

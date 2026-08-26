@@ -42,6 +42,8 @@ async function main() {
     if (!ent.isFile()) continue;
     if (extname(ent.name).toLowerCase() !== ".html") continue;
     if (ent.name === "index.html") continue; // root index handled below
+    // Skip Claude/artifact bundles and local drafts — they are not site pages.
+    if (ent.name.includes(" - ") || ent.name.startsWith("_")) continue;
     await cp(join(root, ent.name), join(pub, ent.name));
     console.log("copied", ent.name);
   }

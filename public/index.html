@@ -4,12 +4,21 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pedda vom Mond</title>
-  <meta name="description" content="Pedda vom Mond — Streaming, Socials und Desktop." />
+  <meta name="description" content="Pedda vom Mond — Streaming, Socials und Windows-Desktop. Spotify, YouTube, Suno und mehr." />
+  <meta name="theme-color" content="#05060a" />
+  <meta name="color-scheme" content="dark" />
   <link rel="canonical" href="https://www.peddavommond.de/" />
+  <meta property="og:site_name" content="Pedda vom Mond" />
   <meta property="og:title" content="Pedda vom Mond" />
   <meta property="og:description" content="Streaming, Socials und Windows-Desktop." />
-  <meta property="og:image" content="/hub/banner.png" />
+  <meta property="og:url" content="https://www.peddavommond.de/" />
+  <meta property="og:image" content="https://www.peddavommond.de/hub/banner.png" />
+  <meta property="og:locale" content="de_DE" />
   <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pedda vom Mond" />
+  <meta name="twitter:description" content="Streaming, Socials und Windows-Desktop." />
+  <meta name="twitter:image" content="https://www.peddavommond.de/hub/banner.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
@@ -69,8 +78,8 @@
       grid-template-areas:
         "spotify spotify ytmusic apple"
         "spotify spotify youtube amazon"
-        "soundcloud windows11 github facebook"
-        "tiktok tiktok linkedin linkedin";
+        "soundcloud suno windows11 github"
+        "facebook tiktok linkedin linkedin";
       grid-template-columns: 1fr 1fr 1fr 1fr;
       grid-template-rows: 1fr 1fr 1fr 1fr;
       gap: 8px;
@@ -119,6 +128,7 @@
     .tile--youtube { --tint: rgba(255, 0, 0, 0.16); grid-area: youtube; }
     .tile--amazon { --tint: rgba(0, 168, 225, 0.16); grid-area: amazon; }
     .tile--soundcloud { --tint: rgba(255, 85, 0, 0.16); grid-area: soundcloud; }
+    .tile--suno { --tint: rgba(200, 200, 210, 0.13); grid-area: suno; }
     .tile--windows11 { --tint: rgba(0, 120, 212, 0.16); grid-area: windows11; }
     .tile--github { --tint: rgba(180, 180, 190, 0.14); grid-area: github; }
     .tile--facebook { --tint: rgba(24, 119, 242, 0.16); grid-area: facebook; }
@@ -165,11 +175,12 @@
           "spotify spotify"
           "ytmusic apple"
           "youtube amazon"
-          "soundcloud windows11"
-          "github facebook"
-          "tiktok linkedin";
+          "soundcloud suno"
+          "windows11 github"
+          "facebook tiktok"
+          "linkedin linkedin";
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: minmax(170px, 1.2fr) repeat(5, minmax(100px, 1fr));
+        grid-template-rows: minmax(170px, 1.2fr) repeat(6, minmax(100px, 1fr));
         overflow-y: auto;
       }
     }
@@ -219,6 +230,11 @@
       <a class="tile tile--soundcloud" href="https://soundcloud.com/dj-peet-sounds" target="_blank" rel="noopener noreferrer">
         <div class="logo"><img src="/hub/soundcloud.png" alt="" width="112" height="112" /></div>
         <div class="label">SoundCloud</div>
+      </a>
+
+      <a class="tile tile--suno" href="https://suno.com/@peddavommond" target="_blank" rel="noopener noreferrer">
+        <div class="logo"><img src="/hub/suno.png" alt="" width="112" height="112" /></div>
+        <div class="label">Suno</div>
       </a>
 
       <a class="tile tile--windows11" href="/win11/">
