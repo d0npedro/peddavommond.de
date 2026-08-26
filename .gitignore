@@ -5,9 +5,18 @@ node_modules/
 .vinext/
 dist/
 .wrangler/
+.cache/
 *.tsbuildinfo
 .dev-server*.log
 work/
+
+# Embedded SPAs — produced by scripts/embed-*.mjs (vercel-build)
+public/multi-agent/
+# musicfestival is Option A proxy (vercel.json) — never ship a local copy
+public/musicfestival/
+
+# Design-canvas extract (source zip lives outside the repo)
+_landing_src/
 
 # local agent / tool caches
 .claude/

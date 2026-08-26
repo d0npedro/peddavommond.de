@@ -12,6 +12,7 @@ export const ICONS = {
   tictactoe: '⭕',
   calculator: '🧮',
   music: '🎵',
+  soundcloud: '☁️',
   notepad: '📝',
   recycle: '🗑️',
   folder: '📂',

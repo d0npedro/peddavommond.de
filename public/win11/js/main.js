@@ -30,6 +30,7 @@ import { mountMusicPlayer } from './apps/MusicPlayer.js';
 import { mountSoundCloud, parseSoundCloudDeepLink } from './apps/SoundCloud.js';
 import { mountExternalApp, mountOpenExternal } from './apps/ExternalApp.js';
 import { APP_CATALOG } from './apps/catalog.js';
+import { EXAMPLE_APP_IDS } from './apps/examples-apps.js';
 
 function registerBuiltin(def) {
   AppRegistry.register(def);
@@ -292,6 +293,17 @@ function ensureProjectAppsInstalled() {
     pinOnce('musicfestival', 'soundcloud');
     pinOnce('examples', 'soundcloud');
     pinOnce('multiagent', 'github');
+    let insertAt = next.indexOf('examples');
+    for (const id of EXAMPLE_APP_IDS) {
+      if (next.includes(id)) continue;
+      if (insertAt >= 0) {
+        insertAt += 1;
+        next.splice(insertAt, 0, id);
+      } else {
+        next.push(id);
+      }
+      deskChanged = true;
+    }
     if (deskChanged) State.update('desktopIcons', next);
   }
 

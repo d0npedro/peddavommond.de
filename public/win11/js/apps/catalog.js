@@ -3,6 +3,8 @@
  * Each entry maps to an internal route or external deployment / repo.
  */
 
+import { EXAMPLE_APPS } from './examples-apps.js';
+
 /** @typedef {'internal' | 'external' | 'iframe' | 'builtin'} LaunchType */
 
 /**
@@ -69,10 +71,10 @@ export const APP_CATALOG = [
     id: 'examples',
     name: 'Examples',
     icon: '🧪',
-    description: 'Katalog aller build_examples_* — live auf examples.peddavommond.de.',
+    description: 'Katalog aller build_examples_* — live auf apps.peddavommond.de.',
     category: 'lab',
     launch: 'iframe',
-    url: '/examples',
+    url: 'https://apps.peddavommond.de/',
     repo: 'https://github.com/d0npedro?tab=repositories&q=build_examples_',
     featured: true,
     defaultWidth: 1100,
@@ -222,4 +224,5 @@ export const APP_CATALOG = [
     url: 'https://github.com/d0npedro',
     openInNewTab: true,
   },
+  ...EXAMPLE_APPS,
 ];

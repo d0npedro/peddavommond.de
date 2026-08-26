@@ -10,8 +10,10 @@
     "build": "vinext build",
     "start": "vinext start",
     "vercel-build": "node scripts/prepare-static-deploy.mjs",
+    "embed:multi-agent": "node scripts/embed-multi-agent.mjs",
     "ci": "npm run vercel-build && node public/win11/js/utils/formula.test.js",
-    "serve:static": "npx --yes serve public -l 8080"
+    "serve:static": "npx --yes serve public -l 8080",
+    "catalog:soundcloud": "node scripts/fetch-soundcloud-catalog.mjs"
   },
   "dependencies": {
     "next": "16.2.6",

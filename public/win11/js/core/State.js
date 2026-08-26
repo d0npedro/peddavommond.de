@@ -1,4 +1,5 @@
 import { bus } from './EventBus.js';
+import { EXAMPLE_APP_IDS } from '../apps/examples-apps.js';
 
 /** Separate key so peddavommond desktop state ≠ lab browser-win-11 */
 const STORAGE_KEY = 'pvm-win11-state-v1';
@@ -26,7 +27,9 @@ const DEFAULT = {
   pinnedTaskbar: ['start', 'explorer', 'moeglichkeitensystem', 'slotmachine', 'soundcloud', 'music', 'settings'],
   desktopIcons: [
     'explorer', 'recycle', 'moeglichkeitensystem', 'slotmachine', 'musicfestival', 'examples',
-    'soundcloud', 'timetofly', 'multiagent', 'github', 'music', 'settings',
+    ...EXAMPLE_APP_IDS,
+    'soundcloud',
+    'timetofly', 'multiagent', 'github', 'music', 'settings',
   ],
   userName: 'Pedda',
 };

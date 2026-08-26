@@ -4,7 +4,7 @@ Follow **`AGENTS.md`** as the primary instruction file.
 
 Quick facts:
 
-- Site = Windows 11 desktop launcher at `public/win11/`
+- Site root = streaming hub at `public/index.html`; Windows 11 launcher at `public/win11/`
 - Apps = `public/win11/js/apps/catalog.js`
 - Prod static build = `npm run vercel-build` → deploy `public/`
 - No PeddaOS

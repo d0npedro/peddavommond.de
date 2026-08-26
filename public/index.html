@@ -1,13 +1,251 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="refresh" content="0;url=/win11/" />
-  <link rel="canonical" href="/win11/" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pedda vom Mond</title>
-  <script>location.replace("/win11/");</script>
+  <meta name="description" content="Pedda vom Mond — Streaming, Socials und Desktop." />
+  <link rel="canonical" href="https://www.peddavommond.de/" />
+  <meta property="og:title" content="Pedda vom Mond" />
+  <meta property="og:description" content="Streaming, Socials und Windows-Desktop." />
+  <meta property="og:image" content="/hub/banner.png" />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background: #05060a;
+    }
+
+    body {
+      font-family: "Space Grotesk", sans-serif;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .stage {
+      position: relative;
+      width: 100%;
+      height: 100dvh;
+      box-sizing: border-box;
+      padding: 8px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #05060c 0%, #0a0a16 40%, #0d0918 72%, #070509 100%);
+    }
+
+    .bg, .scrim, .glow {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg {
+      inset: -12px;
+      background-image: url("/hub/banner.png");
+      background-size: cover;
+      background-position: center 40%;
+      filter: blur(6px) brightness(0.52) saturate(1.15);
+    }
+
+    .scrim { background: rgba(5, 5, 10, 0.22); }
+
+    .glow {
+      background:
+        radial-gradient(circle at 50% 16%, rgba(255, 244, 214, 0.20) 0%, rgba(255, 244, 214, 0.07) 9%, rgba(190, 160, 255, 0.08) 20%, transparent 42%),
+        radial-gradient(circle at 8% 92%, rgba(147, 51, 234, 0.26) 0%, transparent 55%),
+        radial-gradient(circle at 96% 88%, rgba(34, 211, 238, 0.20) 0%, transparent 55%),
+        radial-gradient(circle at 82% 28%, rgba(217, 70, 239, 0.12) 0%, transparent 50%);
+    }
+
+    .grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-areas:
+        "spotify spotify ytmusic apple"
+        "spotify spotify youtube amazon"
+        "soundcloud windows11 github facebook"
+        "tiktok tiktok linkedin linkedin";
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr;
+      gap: 8px;
+      height: 100%;
+      width: 100%;
+    }
+
+    .tile {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(10px, 1.8vw, 16px);
+      padding: clamp(14px, 2.4vw, 26px);
+      border-radius: 22px;
+      background: linear-gradient(160deg, var(--tint), rgba(10, 10, 12, 0.32)), rgba(10, 10, 12, 0.22);
+      backdrop-filter: blur(3px) saturate(1.1);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      color: rgba(255, 255, 255, 0.88);
+      text-decoration: none;
+      box-sizing: border-box;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .tile:hover,
+    .tile:focus-visible {
+      transform: scale(1.045);
+      box-shadow:
+        0 0 0 1px rgba(217, 70, 239, 0.55),
+        0 0 44px 12px rgba(147, 51, 234, 0.45),
+        0 0 90px 28px rgba(34, 211, 238, 0.22);
+      border-color: rgba(217, 70, 239, 0.55);
+      outline: none;
+    }
+
+    .tile--spotify {
+      --tint: rgba(30, 215, 96, 0.18);
+      grid-area: spotify;
+      gap: clamp(12px, 2vw, 20px);
+      padding: clamp(18px, 3vw, 32px);
+    }
+    .tile--ytmusic { --tint: rgba(255, 50, 50, 0.16); grid-area: ytmusic; }
+    .tile--apple { --tint: rgba(250, 60, 90, 0.18); grid-area: apple; }
+    .tile--youtube { --tint: rgba(255, 0, 0, 0.16); grid-area: youtube; }
+    .tile--amazon { --tint: rgba(0, 168, 225, 0.16); grid-area: amazon; }
+    .tile--soundcloud { --tint: rgba(255, 85, 0, 0.16); grid-area: soundcloud; }
+    .tile--windows11 { --tint: rgba(0, 120, 212, 0.16); grid-area: windows11; }
+    .tile--github { --tint: rgba(180, 180, 190, 0.14); grid-area: github; }
+    .tile--facebook { --tint: rgba(24, 119, 242, 0.16); grid-area: facebook; }
+    .tile--tiktok { --tint: rgba(37, 244, 238, 0.14); grid-area: tiktok; }
+    .tile--linkedin { --tint: rgba(10, 102, 194, 0.16); grid-area: linkedin; }
+
+    .logo {
+      width: clamp(64px, 9vw, 112px);
+      height: clamp(64px, 9vw, 112px);
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(127, 127, 127, 0.08);
+    }
+
+    .tile--spotify .logo {
+      width: clamp(84px, 12vw, 150px);
+      height: clamp(84px, 12vw, 150px);
+      border-radius: 18px;
+    }
+
+    .logo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .label {
+      font-weight: 700;
+      font-size: clamp(16px, 2.2vw, 24px);
+      color: rgba(255, 255, 255, 0.94);
+      letter-spacing: 0.01em;
+      text-align: center;
+    }
+
+    .tile--spotify .label {
+      font-size: clamp(22px, 3.2vw, 36px);
+    }
+
+    @media (max-width: 767px) {
+      .stage { overflow: hidden; }
+      .grid {
+        grid-template-areas:
+          "spotify spotify"
+          "ytmusic apple"
+          "youtube amazon"
+          "soundcloud windows11"
+          "github facebook"
+          "tiktok linkedin";
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: minmax(170px, 1.2fr) repeat(5, minmax(100px, 1fr));
+        overflow-y: auto;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tile,
+      .tile:hover,
+      .tile:focus-visible {
+        transition: none;
+        transform: none;
+      }
+    }
+  </style>
 </head>
 <body>
-  <p><a href="/win11/">Desktop öffnen</a></p>
+  <main class="stage">
+    <div class="bg" aria-hidden="true"></div>
+    <div class="scrim" aria-hidden="true"></div>
+    <div class="glow" aria-hidden="true"></div>
+
+    <nav class="grid" aria-label="Plattformen">
+      <a class="tile tile--spotify" href="https://open.spotify.com/intl-de/artist/1sLYfjdUnJH3paNb8L6YMv?si=1-5_s-opRYqFJ2GsapLsEQ" target="_blank" rel="noopener noreferrer">
+        <div class="logo"><img src="/hub/spotify.png" alt="" width="150" height="150" /></div>
+        <div class="label">Spotify</div>
+      </a>
+
+      <a class="tile tile--ytmusic" href="https://music.youtube.com/channel/UClD37mflxsh92vCaoWOY0aA?si=jfEf17APHXO1zVRA" target="_blank" rel="noopener noreferrer">
+        <div class="logo"><img src="/hub/youtube-music.png" alt="" width="112" height="112" /></div>
+        <div class="label">YouTube Music</div>
+      </a>
+
+      <a class="tile tile--apple" href="https://music.apple.com/us/artist/pedda-vom-mond/1892806299" target="_blank" rel="noopener noreferrer">
+        <div class="logo"><img src="/hub/apple-music.png" alt="" width="112" height="112" /></div>
+        <div class="label">Apple Music</div>
+      </a>
+
+      <a class="tile tile--youtube" href="https://www.youtube.com/peddavommond" target="_blank" rel="noopener noreferrer">
+        <div class="logo"><img src="/hub/youtube.png" alt="" width="112" height="112" /></div>
+        <div class="label">YouTube</div>
+      </a>
+
+      <a class="tile tile--amazon" href="https://music.amazon.de/artists/B0GWXJC5CQ/pedda-vom-mond" target="_blank" rel="noopener noreferrer">
+        <div class="logo"><img src="/hub/amazon-music.png" alt="" width="112" height="112" /></div>
+        <div class="label">Amazon Music</div>
+      </a>
+
+      <a class="tile tile--soundcloud" href="https://soundcloud.com/dj-peet-sounds" target="_blank" rel="noopener noreferrer">
+        <div class="logo"><img src="/hub/soundcloud.png" alt="" width="112" height="112" /></div>
+        <div class="label">SoundCloud</div>
+      </a>
+
+      <a class="tile tile--windows11" href="/win11/">
+        <div class="logo"><img src="/hub/windows-11.png" alt="" width="112" height="112" /></div>
+        <div class="label">Windows 11</div>
+      </a>
+
+      <a class="tile tile--github" href="https://github.com/d0npedro" target="_blank" rel="noopener noreferrer">
+        <div class="logo"><img src="/hub/github.png" alt="" width="112" height="112" /></div>
+        <div class="label">GitHub</div>
+      </a>
+
+      <a class="tile tile--facebook" href="https://www.facebook.com/peddavommond" target="_blank" rel="noopener noreferrer">
+        <div class="logo"><img src="/hub/facebook.png" alt="" width="112" height="112" /></div>
+        <div class="label">Facebook</div>
+      </a>
+
+      <a class="tile tile--tiktok" href="https://www.tiktok.com/@peddavommond" target="_blank" rel="noopener noreferrer">
+        <div class="logo"><img src="/hub/tiktok.png" alt="" width="112" height="112" /></div>
+        <div class="label">TikTok</div>
+      </a>
+
+      <a class="tile tile--linkedin" href="https://www.linkedin.com/in/peter-henrichs/" target="_blank" rel="noopener noreferrer">
+        <div class="logo"><img src="/hub/linkedin.png" alt="" width="112" height="112" /></div>
+        <div class="label">LinkedIn</div>
+      </a>
+    </nav>
+  </main>
 </body>
 </html>

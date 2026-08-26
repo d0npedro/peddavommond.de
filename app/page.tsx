@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
 
 /**
- * Root URL = Windows 11 desktop shell (project launcher).
- * Classic marketing landing is no longer the entry; use /origin or static hubs.
+ * vinext-only fallback. Production static root is public/index.html (hub).
+ * Desktop remains at /win11/.
  */
 export default function Home() {
   redirect("/win11/");

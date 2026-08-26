@@ -5,11 +5,6 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/",
-      "destination": "/win11/",
-      "permanent": false
-    },
-    {
       "source": "/sound",
       "destination": "/soundcloud",
       "permanent": false
@@ -100,6 +95,10 @@
     {
       "source": "/origin",
       "destination": "/origin.html"
+    },
+    {
+      "source": "/datenschutz-peet-wa-app",
+      "destination": "/datenschutz-peet-wa-app.html"
     },
     {
       "source": "/multi-agent",

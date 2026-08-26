@@ -80,7 +80,8 @@ export function mountStore(host, meta) {
   }
 
   function isGame(id) {
-    return ['solitaire', 'minesweeper', 'tictactoe'].includes(id);
+    const app = AppRegistry.get(id);
+    return app?.category === 'games' || ['solitaire', 'minesweeper', 'tictactoe'].includes(id);
   }
 
   function allStoreItems() {

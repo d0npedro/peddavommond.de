@@ -33,13 +33,19 @@ jobs:
       - name: Assert shell assets
         run: |
           test -f public/index.html
+          test -f public/hub/banner.png
+          test -f public/hub/spotify.png
+          test -f public/hub/windows-11.png
+          grep -q '/win11/' public/index.html
+          grep -q 'tile--windows11' public/index.html
           test -f public/win11/index.html
           test -f public/win11/js/main.js
           test -f public/win11/js/apps/catalog.js
+          test -f public/win11/js/apps/examples-apps.js
           test -f public/win11/js/apps/ExternalApp.js
+          grep -q EXAMPLE_APPS public/win11/js/apps/catalog.js
           test -f public/win11/css/main.css
           test -f public/soundcloud.html
-          grep -q 'redirect\|win11\|location.replace' public/index.html
           grep -q slotmachine public/win11/js/apps/catalog.js
 
       - name: Formula unit test (optional shell util)

@@ -1,15 +1,16 @@
 # peddavommond.de
 
-**Windows-11 desktop shell** that launches Pedda vom Mond projects (each usually its own git repo + deploy).
+**Streaming hub** at `/` plus a **Windows-11 desktop shell** at `/win11/` that launches Pedda vom Mond projects (each usually its own git repo + deploy).
 
-Live: [https://www.peddavommond.de/](https://www.peddavommond.de/) → `/win11/`
+Live: [https://www.peddavommond.de/](https://www.peddavommond.de/) · Desktop: [/win11/](https://www.peddavommond.de/win11/)
 
 > **PeddaOS is rejected.** Do not invent a custom OS brand. Stay Windows-11-near.
 
 ## Architecture
 
 ```text
-/  ──redirect──►  /win11/     Windows 11 SPA (public/win11)
+/                 Streaming hub (public/index.html + public/hub/)
+/win11/           Windows 11 SPA (public/win11)
                      │
                      ├─ Desktop / Taskbar / Start
                      └─ App click
@@ -22,6 +23,8 @@ Ops docs:    docs/
 
 | Path | Role |
 |------|------|
+| `public/index.html` | Root streaming/social hub |
+| `public/hub/` | Hub banner and platform logos |
 | `public/win11/` | Desktop shell (static SPA, ES modules) |
 | `public/win11/js/apps/catalog.js` | **Project app registry** |
 | `public/win11/js/apps/ExternalApp.js` | iframe + “open in tab” |
@@ -35,7 +38,7 @@ Ops docs:    docs/
 ```bash
 # Static desktop (matches production)
 npx serve public -l 8080
-# open http://localhost:8080/win11/
+# open http://localhost:8080/  (hub) and /win11/ (desktop)
 
 # Full vinext/Next app (listen SSR, etc.)
 npm install
