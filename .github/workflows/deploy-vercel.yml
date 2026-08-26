@@ -3,6 +3,8 @@ name: Deploy Vercel production
 # Optional: runs when Vercel Git integration is not used.
 # Requires repo secrets: VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID
 # Prefer linking the GitHub repo in the Vercel dashboard for automatic deploys.
+#
+# Do not use `if: secrets.*` on jobs — GitHub rejects that as a workflow file error.
 
 on:
   workflow_dispatch:
@@ -14,18 +16,37 @@ on:
       - "package.json"
       - "scripts/prepare-static-deploy.mjs"
       - "*.html"
+      - ".github/workflows/deploy-vercel.yml"
 
 jobs:
+  guard:
+    name: Check deploy secrets
+    runs-on: ubuntu-latest
+    outputs:
+      ready: ${{ steps.token.outputs.ready }}
+    steps:
+      - id: token
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          if [ -n "$VERCEL_TOKEN" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "VERCEL_TOKEN is not set; skipping production deploy."
+          fi
+
   deploy:
     name: vercel --prod
+    needs: guard
+    if: needs.guard.outputs.ready == 'true'
     runs-on: ubuntu-latest
-    if: ${{ secrets.VERCEL_TOKEN != '' }}
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: "24"
           cache: npm
 
       - name: Install
