@@ -5,6 +5,11 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/portfolio",
+      "destination": "/portfolio/de",
+      "permanent": false
+    },
+    {
       "source": "/sound",
       "destination": "/soundcloud",
       "permanent": false
