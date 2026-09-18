@@ -30,7 +30,29 @@ async function check(locale) {
   assert(html.includes("10+"), `${prefix} 10+ years proof missing from SSR`);
   assert(!html.includes(">0<!-- -->+") && !html.includes(">0+</"), `${prefix} still has 0+ SSR metrics`);
   assert(/Köln|Cologne/.test(html) && /Remote/.test(html), `${prefix} missing Köln/Cologne and Remote in hero`);
-  assert(html.includes("ENGINEERING") && html.includes("AGENTIC AI") && html.includes("INTEGRATION") && html.includes("CONSULTING"), `${prefix} missing Variant C proof chips`);
+  if (locale === "de") {
+    assert(html.includes("ENTWICKLUNG") && html.includes("AGENTIC AI") && html.includes("INTEGRATION") && html.includes("BERATUNG"), `${prefix} missing Variant C proof chips`);
+    assert(html.includes("Wo ich Wirkung erzeuge"), `${prefix} missing German value eyebrow`);
+    assert(!html.includes("Where I create value"), `${prefix} English value eyebrow leaked`);
+    assert(html.includes("10+ Jahre Enterprise-Systeme"), `${prefix} missing German proof-chip body`);
+    assert(!html.includes("10+ years enterprise systems"), `${prefix} English proof-chip body leaked`);
+    assert(
+      html.includes("Strategie") && html.includes("Architektur") && html.includes("Agentic Engineering") && html.includes("Umsetzung") && html.includes("Governance"),
+      `${prefix} missing capability groups`,
+    );
+    assert(html.includes("Gesundheitswesen") && html.includes("Loyalty") && html.includes("adesso"), `${prefix} missing compact enterprise contexts`);
+    assert(html.includes("Finanzwesen") && html.includes("Öffentlicher Sektor"), `${prefix} missing Finance / Public Sector context line`);
+  } else {
+    assert(html.includes("ENGINEERING") && html.includes("AGENTIC AI") && html.includes("INTEGRATION") && html.includes("CONSULTING"), `${prefix} missing Variant C proof chips`);
+    assert(html.includes("Where I create value"), `${prefix} missing EN value eyebrow`);
+    assert(html.includes("10+ years enterprise systems"), `${prefix} missing EN proof-chip body`);
+    assert(
+      html.includes("Strategy") && html.includes("Architecture") && html.includes("Agentic Engineering") && html.includes("Delivery") && html.includes("Governance"),
+      `${prefix} missing capability groups`,
+    );
+    assert(html.includes("Healthcare") && html.includes("Loyalty") && html.includes("adesso"), `${prefix} missing compact enterprise contexts`);
+    assert(html.includes("Finance") && html.includes("Public Sector"), `${prefix} missing Finance / Public Sector context line`);
+  }
   assert(html.includes("AI Agents") || html.includes("AI agents"), `${prefix} missing AI Agents in copy/schema`);
   assert(html.includes("Java"), `${prefix} missing Java in capabilities`);
   assert(html.includes("graph-mastermind.vercel.app"), `${prefix} missing Graph-Mastermind demo`);
@@ -59,12 +81,6 @@ async function check(locale) {
     `${prefix} missing How I build AI systems`,
   );
   assert(html.includes("Human-in-the-Loop"), `${prefix} missing HITL`);
-  assert(
-    html.includes("Strategy") && html.includes("Architecture") && html.includes("Agentic Engineering") && html.includes("Delivery") && html.includes("Governance"),
-    `${prefix} missing capability groups`,
-  );
-  assert(html.includes("Healthcare") && html.includes("Loyalty") && html.includes("adesso"), `${prefix} missing compact enterprise contexts`);
-  assert(html.includes("Finance") && html.includes("Public Sector"), `${prefix} missing Finance / Public Sector context line`);
   assert(
     html.includes('id="cases"') &&
       html.includes('id="value"') &&
@@ -113,6 +129,11 @@ assert(de.includes("AI Cases ansehen"), "DE primary CTA missing");
 assert(en.includes("Selected AI &amp; Engineering Cases") || en.includes("Selected AI & Engineering Cases"), "EN primary CTA missing");
 assert(de.includes("Lebenslauf"), "DE secondary CTA should be Lebenslauf");
 assert(en.includes(">CV<") || en.includes("CV</a>"), "EN secondary CTA should be CV");
+assert(de.includes("Wo ich Wirkung erzeuge"), "DE value eyebrow should be German");
+assert(!de.includes("Where I create value"), "DE value eyebrow still English");
+assert(de.includes("10+ Jahre Enterprise-Systeme"), "DE proof chip should be German");
+assert(!de.includes("10+ years enterprise systems"), "DE proof chip still English");
+assert(de.includes("ENTWICKLUNG"), "DE proof chip label should be ENTWICKLUNG");
 assert(de.includes("Ich verbinde über 10 Jahre Enterprise Software Engineering mit Agentic AI"), "DE H1 missing Variant C lead");
 assert(en.includes("I design AI-augmented systems that connect LLMs, agents and automation"), "EN H1 missing Variant C lead");
 assert(de.includes("Jetzt angewandt auf Agentic AI") || de.includes("nicht umgekehrt"), "DE trust line missing");
@@ -159,7 +180,7 @@ async function checkCase(locale, id) {
     assert(html.includes("graph-mastermind.vercel.app"), `${prefix} missing demo`);
     assert(html.includes("raw.githubusercontent.com/d0npedro/graph-mastermind"), `${prefix} missing public screenshot`);
     assert(html.includes("AGENT.md"), `${prefix} missing agent contract`);
-    assert(/Evaluation in progress/.test(html), `${prefix} should mark quantitative eval as in progress`);
+    assert(/Evaluation in progress|Evaluation läuft/.test(html), `${prefix} should mark quantitative eval as in progress`);
   }
   if (id === "agent-collective") {
     assert(html.includes("github.com/d0npedro/multi-agent"), `${prefix} missing repo`);
