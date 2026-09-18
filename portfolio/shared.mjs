@@ -12,6 +12,7 @@ export const SITE = {
   city: "Köln",
   country: { de: "Deutschland", en: "Germany" },
   location: { de: "Köln · Deutschlandweit / Remote", en: "Cologne · Germany-wide / Remote" },
+  updated: "2026-09-18",
 };
 
 export const LOCALES = ["de", "en"];
@@ -52,35 +53,40 @@ export const HOW_I_WORK_KEYS = [
   "observability",
 ];
 
-/** Compressed enterprise milestones — not a full CV. */
+/** Career trajectory: Engineer → Agentic AI → Consulting. Max five milestones. */
 export const TRACK = [
+  {
+    id: "builder",
+    period: "2013 – 2017",
+    company: "ella Verlag",
+    era: "engineer",
+  },
+  {
+    id: "enterprise",
+    period: "2018 – 2022",
+    company: "adesso · NextGen · binaris",
+    caseIds: ["dz-bank-okvp", "bitmarck-bitgo"],
+    era: "engineer",
+  },
   {
     id: "deutschlandcard",
     period: "2023 – 2026",
     company: "direct services Gütersloh GmbH",
-    caseId: "deutschlandcard",
+    caseIds: ["deutschlandcard"],
+    era: "engineer",
   },
   {
-    id: "itzbund",
-    period: "2021 – 2022",
-    company: "The NextGen GmbH · ITZBund",
+    id: "agentic",
+    period: "2026",
+    company: "Independent R&D",
+    caseIds: ["graph-mastermind", "agent-collective"],
+    era: "ai",
   },
   {
-    id: "dz-bank",
-    period: "2020",
-    company: "adesso AG · DZ BANK",
-    caseId: "dz-bank-okvp",
-  },
-  {
-    id: "bitmarck",
-    period: "2019 – 2020",
-    company: "adesso AG · BITMARCK",
-    caseId: "bitmarck-bitgo",
-  },
-  {
-    id: "amp",
-    period: "2020",
-    company: "adesso AG",
+    id: "consulting",
+    period: "2026",
+    company: "KI-Manager · AI Automation",
+    era: "consulting",
   },
 ];
 
@@ -740,14 +746,16 @@ export const LANGUAGES_META = [
 
 export const JSON_LD_KNOWS_ABOUT = [
   "Agentic AI",
+  "Agentic Software Engineering",
   "Large Language Models",
+  "AI Agents",
   "AI Automation",
   "Enterprise Software Architecture",
+  "Enterprise Integration",
+  "AI Transformation",
   "Java",
   "Spring",
   "Cloud Computing",
-  "AI Agents",
-  "Enterprise Integration",
 ];
 
 export function stackCount() {
