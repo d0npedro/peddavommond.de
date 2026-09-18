@@ -13,4 +13,4 @@ npm run portfolio:verify
 
 Do not invent AI experience. Graph-Mastermind is an agent package for coding agents. Agent Collective is a deterministic multi-agent simulator (no LLM).
 
-Keep the credibility split explicit: paid Professional Experience, Independent Lab / public systems, and AI Transformation Perspective (what transfers). Lab work is not client delivery and not a hobby disclaimer.
+Keep the credibility split explicit: paid Professional Experience, Independent Applied AI R&D / public systems, and AI Transformation Perspective (what transfers). Independent R&D is not client delivery and not a hobby disclaimer. Do not invent KPIs or an LLM backend for the deterministic Agent Collective simulator.

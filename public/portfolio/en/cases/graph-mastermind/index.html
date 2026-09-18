@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Graph-Mastermind — agent package for coding agents | Peter Henrichs</title>
-<meta name="description" content="Public agent package: AGENT.md, SPEC.md and CHECKLIST.md as the work contract. React/TypeScript + d3-force, live demo, tests and CI. No prescribed LLM."/>
+<title>Agentic engineering for grown codebases | Peter Henrichs</title>
+<meta name="description" content="Independent R&amp;D: agentic workflow for grown repositories. AGENT.md, SPEC.md and CHECKLIST.md as the work contract. No prescribed LLM, no invented KPIs."/>
 <meta name="application-name" content="Peter Henrichs · Portfolio"/>
 <meta name="author" content="Peter Henrichs"/>
 <meta name="robots" content="index, follow"/>
@@ -12,19 +12,19 @@
 <link rel="alternate" hreflang="de-DE" href="https://peddavommond.de/portfolio/de/cases/graph-mastermind/"/>
 <link rel="alternate" hreflang="en-US" href="https://peddavommond.de/portfolio/en/cases/graph-mastermind/"/>
 <link rel="alternate" hreflang="x-default" href="https://peddavommond.de/portfolio/de/cases/graph-mastermind/"/>
-<meta property="og:title" content="Graph-Mastermind — agent package for coding agents | Peter Henrichs"/>
-<meta property="og:description" content="Public agent package: AGENT.md, SPEC.md and CHECKLIST.md as the work contract. React/TypeScript + d3-force, live demo, tests and CI. No prescribed LLM."/>
+<meta property="og:title" content="Agentic engineering for grown codebases | Peter Henrichs"/>
+<meta property="og:description" content="Independent R&amp;D: agentic workflow for grown repositories. AGENT.md, SPEC.md and CHECKLIST.md as the work contract. No prescribed LLM, no invented KPIs."/>
 <meta property="og:url" content="https://peddavommond.de/portfolio/en/cases/graph-mastermind/"/>
 <meta property="og:site_name" content="Peter Henrichs · Portfolio"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:image" content="https://peddavommond.de/portfolio/en/opengraph-image.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
-<meta property="og:image:alt" content="Graph-Mastermind — agent package for coding agents | Peter Henrichs"/>
+<meta property="og:image:alt" content="Agentic engineering for grown codebases | Peter Henrichs"/>
 <meta property="og:type" content="article"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Graph-Mastermind — agent package for coding agents | Peter Henrichs"/>
-<meta name="twitter:description" content="Public agent package: AGENT.md, SPEC.md and CHECKLIST.md as the work contract. React/TypeScript + d3-force, live demo, tests and CI. No prescribed LLM."/>
+<meta name="twitter:title" content="Agentic engineering for grown codebases | Peter Henrichs"/>
+<meta name="twitter:description" content="Independent R&amp;D: agentic workflow for grown repositories. AGENT.md, SPEC.md and CHECKLIST.md as the work contract. No prescribed LLM, no invented KPIs."/>
 <meta name="twitter:image" content="https://peddavommond.de/portfolio/en/opengraph-image.png"/>
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f7f9"/>
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#080a0e"/>
@@ -38,12 +38,12 @@
 <header class="fixed inset-x-0 top-0 z-50 transition-colors duration-300 border-b border-transparent bg-transparent" data-site-header>
   <nav aria-label="Primary" class="container flex h-16 items-center justify-between gap-4">
     <a href="/portfolio/en" class="group flex items-center gap-2.5 font-mono text-sm tracking-tight text-fg">
-      <span class="grid h-7 w-7 place-items-center rounded-[3px] border border-accent/60 text-accent"><span class="h-2 w-2 animate-pulse-node rounded-[1px] bg-accent"></span></span>
-      <span class="hidden sm:inline"><span class="text-fg">peter</span><span class="text-faint">.henrichs</span></span>
+      <span class="grid h-7 w-7 place-items-center rounded-[3px] border border-line text-accent"><span class="h-2 w-2 rounded-[1px] bg-accent"></span></span>
+      <span class="hidden sm:inline">Peter Henrichs</span>
     </a>
-    <ul class="hidden items-center gap-1 md:flex"><li><a href="/portfolio/en#top" class="relative rounded-card px-3 py-2 text-sm transition-colors duration-200 text-muted hover:text-fg" data-nav="top"><span>Profile</span></a></li><li><a href="/portfolio/en#cases" class="relative rounded-card px-3 py-2 text-sm transition-colors duration-200 text-muted hover:text-fg" data-nav="cases"><span>Cases</span></a></li><li><a href="/portfolio/en#work" class="relative rounded-card px-3 py-2 text-sm transition-colors duration-200 text-muted hover:text-fg" data-nav="work"><span>Experience</span></a></li><li><a href="/portfolio/en#lab" class="relative rounded-card px-3 py-2 text-sm transition-colors duration-200 text-muted hover:text-fg" data-nav="lab"><span>Lab</span></a></li><li><a href="/portfolio/en#approach" class="relative rounded-card px-3 py-2 text-sm transition-colors duration-200 text-muted hover:text-fg" data-nav="approach"><span>Approach</span></a></li><li><a href="/portfolio/cv/" class="relative rounded-card px-3 py-2 text-sm transition-colors duration-200 text-muted hover:text-fg" data-nav="cv"><span>CV</span></a></li><li><a href="/portfolio/en#contact" class="relative rounded-card px-3 py-2 text-sm transition-colors duration-200 text-muted hover:text-fg" data-nav="contact"><span>Contact</span></a></li></ul>
+    <ul class="hidden items-center gap-1 md:flex"><li><a href="/portfolio/en#cases" class="relative rounded-card px-3 py-2 text-sm transition-colors duration-200 text-muted hover:text-fg" data-nav="cases"><span>Cases</span></a></li><li><a href="/portfolio/en#work" class="relative rounded-card px-3 py-2 text-sm transition-colors duration-200 text-muted hover:text-fg" data-nav="work"><span>Experience</span></a></li><li><a href="/portfolio/en#about" class="relative rounded-card px-3 py-2 text-sm transition-colors duration-200 text-muted hover:text-fg" data-nav="about"><span>Profile</span></a></li><li><a href="/portfolio/en#contact" class="relative rounded-card px-3 py-2 text-sm transition-colors duration-200 text-muted hover:text-fg" data-nav="contact"><span>Contact</span></a></li><li><a href="/portfolio/cv/" class="relative rounded-card px-3 py-2 text-sm transition-colors duration-200 text-muted hover:text-fg" data-nav="cv"><span>CV</span></a></li></ul>
     <div class="flex items-center gap-2">
-      <a href="/portfolio/en#contact" class="hidden rounded-card border border-line bg-bg-elevated px-3.5 py-2 font-mono text-xs tracking-wide text-fg transition-colors hover:border-accent hover:text-accent lg:inline-block">Contact</a>
+      <a href="/portfolio/en#contact" class="hidden rounded-card border border-line bg-bg-elevated px-3.5 py-2 font-mono text-xs tracking-wide text-fg transition-colors hover:border-accent hover:text-accent lg:inline-block">Start a conversation</a>
       <div class="inline-flex items-center rounded-card border border-line bg-bg-elevated p-0.5 font-mono text-xs hidden sm:inline-flex" role="group" aria-label="Switch language"><a href="/portfolio/de/cases/graph-mastermind/" hreflang="de" class="rounded-[3px] px-2 py-1 uppercase tracking-wide transition-colors duration-150 text-muted hover:text-fg"><span class="sr-only">German: </span>de</a><a href="/portfolio/en/cases/graph-mastermind/" hreflang="en" aria-current="true" class="rounded-[3px] px-2 py-1 uppercase tracking-wide transition-colors duration-150 bg-accent/15 text-accent"><span class="sr-only">English: </span>en</a></div>
       <button type="button" data-theme-toggle aria-label="Switch to dark mode" class="group relative inline-flex h-9 w-9 items-center justify-center rounded-card border border-line bg-bg-elevated text-muted transition-colors duration-200 hover:border-accent hover:text-accent focus-visible:text-accent"><svg aria-hidden="true" viewBox="0 0 24 24" class="h-[18px] w-[18px] transition-all duration-300 ease-precision dark:-rotate-90 dark:scale-0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg><svg aria-hidden="true" viewBox="0 0 24 24" class="absolute h-[18px] w-[18px] rotate-90 scale-0 transition-all duration-300 ease-precision dark:rotate-0 dark:scale-100" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg></button>
       <button type="button" data-menu-toggle aria-label="Toggle menu" aria-expanded="false" class="grid h-9 w-9 place-items-center rounded-card border border-line bg-bg-elevated text-fg md:hidden">
@@ -57,32 +57,37 @@
   </nav>
   <div data-mobile-menu class="overflow-hidden border-t border-line bg-bg/95 backdrop-blur-md transition-[max-height,opacity] duration-300 md:hidden max-h-0 opacity-0">
     <ul class="container flex flex-col py-3">
-      <li><a href="/portfolio/en#top" class="flex items-center justify-between py-3 text-base text-fg" data-nav="top"><span>Profile</span><span class="font-mono text-xs text-faint">01</span></a></li><li><a href="/portfolio/en#cases" class="flex items-center justify-between py-3 text-base text-fg" data-nav="cases"><span>Cases</span><span class="font-mono text-xs text-faint">02</span></a></li><li><a href="/portfolio/en#work" class="flex items-center justify-between py-3 text-base text-fg" data-nav="work"><span>Experience</span><span class="font-mono text-xs text-faint">03</span></a></li><li><a href="/portfolio/en#lab" class="flex items-center justify-between py-3 text-base text-fg" data-nav="lab"><span>Lab</span><span class="font-mono text-xs text-faint">04</span></a></li><li><a href="/portfolio/en#approach" class="flex items-center justify-between py-3 text-base text-fg" data-nav="approach"><span>Approach</span><span class="font-mono text-xs text-faint">05</span></a></li><li><a href="/portfolio/cv/" class="flex items-center justify-between py-3 text-base text-fg" data-nav="cv"><span>CV</span><span class="font-mono text-xs text-faint">06</span></a></li><li><a href="/portfolio/en#contact" class="flex items-center justify-between py-3 text-base text-fg" data-nav="contact"><span>Contact</span><span class="font-mono text-xs text-faint">07</span></a></li>
-      <li><a href="/portfolio/en#contact" class="mt-2 flex items-center justify-center rounded-card border border-accent/50 py-3 font-mono text-sm text-accent">Contact</a></li>
+      <li><a href="/portfolio/en#cases" class="flex items-center justify-between py-3 text-base text-fg" data-nav="cases"><span>Cases</span><span class="font-mono text-xs text-faint">01</span></a></li><li><a href="/portfolio/en#work" class="flex items-center justify-between py-3 text-base text-fg" data-nav="work"><span>Experience</span><span class="font-mono text-xs text-faint">02</span></a></li><li><a href="/portfolio/en#about" class="flex items-center justify-between py-3 text-base text-fg" data-nav="about"><span>Profile</span><span class="font-mono text-xs text-faint">03</span></a></li><li><a href="/portfolio/en#contact" class="flex items-center justify-between py-3 text-base text-fg" data-nav="contact"><span>Contact</span><span class="font-mono text-xs text-faint">04</span></a></li><li><a href="/portfolio/cv/" class="flex items-center justify-between py-3 text-base text-fg" data-nav="cv"><span>CV</span><span class="font-mono text-xs text-faint">05</span></a></li>
+      <li><a href="/portfolio/en#contact" class="mt-2 flex items-center justify-center rounded-card border border-accent/50 py-3 font-mono text-sm text-accent">Start a conversation</a></li>
       <li class="mt-3 flex justify-center pb-1"><div class="inline-flex items-center rounded-card border border-line bg-bg-elevated p-0.5 font-mono text-xs " role="group" aria-label="Switch language"><a href="/portfolio/de/cases/graph-mastermind/" hreflang="de" class="rounded-[3px] px-2 py-1 uppercase tracking-wide transition-colors duration-150 text-muted hover:text-fg"><span class="sr-only">German: </span>de</a><a href="/portfolio/en/cases/graph-mastermind/" hreflang="en" aria-current="true" class="rounded-[3px] px-2 py-1 uppercase tracking-wide transition-colors duration-150 bg-accent/15 text-accent"><span class="sr-only">English: </span>en</a></div></li>
     </ul>
   </div>
 </header>
 <main id="main" class="pf-case-page">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Graph-Mastermind","headline":"Graph-Mastermind — agent package for coding agents | Peter Henrichs","description":"Public agent package: AGENT.md, SPEC.md and CHECKLIST.md as the work contract. React/TypeScript + d3-force, live demo, tests and CI. No prescribed LLM.","inLanguage":"en","author":{"@type":"Person","name":"Peter Henrichs","email":"peter.henrichs@web.de","url":"https://peddavommond.de/portfolio/en","sameAs":["https://www.linkedin.com/in/peter-henrichs/","https://github.com/d0npedro"]},"url":"https://peddavommond.de/portfolio/en/cases/graph-mastermind/","sameAs":["https://github.com/d0npedro/graph-mastermind","https://graph-mastermind.vercel.app"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Graph-Mastermind","headline":"Agentic engineering for grown codebases | Peter Henrichs","description":"Independent R&D: agentic workflow for grown repositories. AGENT.md, SPEC.md and CHECKLIST.md as the work contract. No prescribed LLM, no invented KPIs.","inLanguage":"en","author":{"@type":"Person","name":"Peter Henrichs","email":"peter.henrichs@web.de","url":"https://peddavommond.de/portfolio/en","sameAs":["https://www.linkedin.com/in/peter-henrichs/","https://github.com/d0npedro"]},"url":"https://peddavommond.de/portfolio/en/cases/graph-mastermind/","sameAs":["https://github.com/d0npedro/graph-mastermind","https://graph-mastermind.vercel.app"]}</script>
 <article class="container pb-20 pt-28 md:pb-28 md:pt-32">
   <p class="eyebrow">Case study</p>
   <p class="mt-4 font-mono text-xs text-faint"><a href="/portfolio/en" class="hover:text-accent">Back to portfolio</a> · 2026 · Agentic Software Engineering · Repository Intelligence</p>
-  <h1 class="mt-4 text-balance text-4xl font-semibold tracking-tight text-fg sm:text-5xl">Graph-Mastermind</h1>
-  <p class="mt-2 text-muted">Public reference · d0npedro</p>
-  <p class="pf-honesty">Agent package for coding agents — no prescribed LLM.</p>
-  <dl class="pf-meta"><span class="pf-meta-chip"><span class="pf-meta-label">Status</span> Independent Lab</span><span class="pf-meta-chip"><span class="pf-meta-label">Timeframe</span> 2026</span><span class="pf-meta-chip"><span class="pf-meta-label">Team</span> Solo</span><span class="pf-meta-chip"><span class="pf-meta-label">Data</span> synthetic / demo</span><span class="pf-meta-chip"><span class="pf-meta-label">Code</span> public</span><span class="pf-meta-chip"><span class="pf-meta-label">Result</span> observed</span></dl>
+  <h1 class="mt-4 text-balance text-4xl font-semibold tracking-tight text-fg sm:text-5xl">Agentic engineering for grown codebases</h1>
+  <p class="mt-2 text-muted">Graph-Mastermind · Public reference · d0npedro</p>
+  <p class="pf-badge">Independent R&amp;D · Agentic AI</p>
+  <p class="pf-honesty">Independent R&amp;D — agent package for coding agents, no prescribed LLM, no client operations.</p>
+  <dl class="pf-meta"><span class="pf-meta-chip"><span class="pf-meta-label">Status</span> Independent R&amp;D</span><span class="pf-meta-chip"><span class="pf-meta-label">Timeframe</span> 2026</span><span class="pf-meta-chip"><span class="pf-meta-label">Team</span> Solo</span><span class="pf-meta-chip"><span class="pf-meta-label">Data</span> synthetic / demo</span><span class="pf-meta-chip"><span class="pf-meta-label">Code</span> public</span><span class="pf-meta-chip"><span class="pf-meta-label">Result</span> observed</span></dl>
   <section class="pf-case-block">
     <h2 class="eyebrow">Context</h2>
-    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">Public reference project, 2026. Coding agents should not only list a target repository — they should deliver an inspectable graph and a usable architecture view.</p>
+    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">Independent Applied AI R&amp;D, 2026. In large, historically grown software systems, substantial engineering time goes into understanding code, locating defects, and safeguarding changes.</p>
   </section>
   <section class="pf-case-block">
     <h2 class="eyebrow">Problem / business context</h2>
-    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">Complex repository structure is spread across file trees, imports, and docs. Unfamiliar or grown codebases are hard to grasp quickly.</p>
+    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">The goal was not “have an LLM write code”, but to design a controllable engineering process for complex work. Repository structure is spread across file trees, imports, and docs.</p>
   </section>
   <section class="pf-case-block">
     <h2 class="eyebrow">Role &amp; ownership</h2>
-    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">Solo — design and delivery of the reusable agent workflow and the reference application. Independent Lab, not a client engagement.</p>
+    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">Solo — design and delivery of the reusable agent workflow and the reference application. Independent R&amp;D, not a client engagement.</p>
+  </section>
+  <section class="pf-case-block">
+    <h2 class="eyebrow">My contribution</h2>
+    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">Workflow architecture, agent roles, tool integration, model/context strategy, evaluation loops, and the technical implementation — solo, conceived and delivered independently.</p>
   </section>
   <section class="pf-case-block">
     <h2 class="eyebrow">Decision / trade-off</h2>
@@ -90,17 +95,21 @@
   </section>
   <section class="pf-case-block">
     <h2 class="eyebrow">Architecture</h2>
-    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">Four separate layers: agent contract (AGENT.md, SPEC.md, CHECKLIST.md), data model (repo graph plus fallback samples), visualization runtime (d3-force on canvas, ticks without React state), and UI (toolbar, search, detail panel). No backend, no prescribed LLM.</p>
-    <ol class="pf-arch-flow"><li><span>AGENT.md / SPEC.md / CHECKLIST.md</span><span class="pf-arch-arrow" aria-hidden="true">→</span></li><li><span>Repo graph / samples</span><span class="pf-arch-arrow" aria-hidden="true">→</span></li><li><span>d3-force runtime</span><span class="pf-arch-arrow" aria-hidden="true">→</span></li><li><span>React canvas UI</span></li></ol>
+    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">Task / issue → planner contract (AGENT.md / SPEC.md / CHECKLIST.md) → repository context and tools → artifact (graph / architecture view) → tests and checklist → human review. No backend, no prescribed LLM, no autonomous writes.</p>
+    <ol class="pf-arch-flow"><li><span>Task / issue</span><span class="pf-arch-arrow" aria-hidden="true">→</span></li><li><span>Planner / contract</span><span class="pf-arch-arrow" aria-hidden="true">→</span></li><li><span>Repo context + tools</span><span class="pf-arch-arrow" aria-hidden="true">→</span></li><li><span>Artifact + checks</span><span class="pf-arch-arrow" aria-hidden="true">→</span></li><li><span>Human review</span></li></ol>
     <div class="mt-5 flex flex-wrap gap-1.5"><span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">Agent Contracts</span><span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">React</span><span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">TypeScript</span><span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">d3-force</span><span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">CI / Typecheck</span></div>
   </section>
   <section class="pf-case-block">
     <h2 class="eyebrow">Evaluation, guardrails, failure handling</h2>
-    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">Acceptance via CHECKLIST.md, typecheck, tests, and CI. The agent delivers an inspectable graph and an architecture view — no autonomous writes to the target repo. A human reviews the result (human-in-the-loop). Fallback sample data if repository analysis stays incomplete. Synthetic / documented demo data in the public app.</p>
+    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">Evaluation in progress. Acceptance today via CHECKLIST.md, typecheck, tests, and CI. The agent delivers an inspectable graph — a human reviews the result (human-in-the-loop). Quantitative numbers will be published only once a reproducible eval harness exists.</p>
   </section>
+  <section class="pf-case-block"><p class="pf-eval-note">Evaluation in progress — The architecture is in place; quantitative results are published only once a reproducible measurement baseline exists.</p><table class="pf-eval-table">
+      <thead><tr><th>Evaluation, guardrails, failure handling</th><th>to measure</th></tr></thead>
+      <tbody><tr><th scope="row">Time-to-reproduce</th><td>time until a defect is reproducible</td></tr><tr><th scope="row">Failing-test-first rate</th><td>share of bugs with a reproducing test</td></tr><tr><th scope="row">Patch acceptance</th><td>share of accepted agent changes</td></tr><tr><th scope="row">Human review time</th><td>human review effort</td></tr><tr><th scope="row">Regression rate</th><td>newly introduced defects</td></tr><tr><th scope="row">Token / cost per accepted change</th><td>economics</td></tr></tbody>
+    </table></section>
   <section class="pf-case-block">
     <h2 class="eyebrow">Outcome</h2>
-    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">Public agent package, live demo, tests, typecheck, CI, and a reproducible production build. Qualitatively observed: inspectable artifacts instead of a black-box analysis. No invented usage KPIs.</p>
+    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">Public agent package, live demo, tests, typecheck, CI, and a reproducible production build. Qualitatively observed: inspectable artifacts instead of a black-box analysis. No invented usage or business KPIs.</p>
   </section>
   <ul class="mt-2 space-y-2"><li class="flex gap-2.5 text-sm text-fg/85"><span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent"></span><span>Agent contract from AGENT.md / SPEC.md / CHECKLIST.md</span></li><li class="flex gap-2.5 text-sm text-fg/85"><span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent"></span><span>Generic application to unfamiliar repositories</span></li><li class="flex gap-2.5 text-sm text-fg/85"><span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent"></span><span>React/TypeScript + d3-force, tests and CI as acceptance</span></li></ul>
   <section class="pf-case-block" id="evidence">
@@ -108,17 +117,18 @@
     <div class="pf-links"><a href="https://github.com/d0npedro/graph-mastermind" target="_blank" rel="noopener noreferrer">Repository</a><a href="https://graph-mastermind.vercel.app" target="_blank" rel="noopener noreferrer">Live demo</a></div>
     <div class="pf-shots"><figure class="pf-shot"><a href="https://raw.githubusercontent.com/d0npedro/graph-mastermind/main/docs/screenshots/overview.png" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/d0npedro/graph-mastermind/main/docs/screenshots/overview.png" alt="Force layout of the reference app: edge labels and toolbar" loading="lazy" width="1200" height="750"/></a><figcaption>Force layout of the reference app: edge labels and toolbar</figcaption></figure><figure class="pf-shot"><a href="https://raw.githubusercontent.com/d0npedro/graph-mastermind/main/docs/screenshots/detail.png" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/d0npedro/graph-mastermind/main/docs/screenshots/detail.png" alt="Detail panel on a selected node" loading="lazy" width="1200" height="750"/></a><figcaption>Detail panel on a selected node</figcaption></figure><figure class="pf-shot"><a href="https://raw.githubusercontent.com/d0npedro/graph-mastermind/main/docs/screenshots/search.png" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/d0npedro/graph-mastermind/main/docs/screenshots/search.png" alt="Search dims non-matches; the runtime layer stays readable" loading="lazy" width="1200" height="750"/></a><figcaption>Search dims non-matches; the runtime layer stays readable</figcaption></figure></div>
   </section>
+  
   <section class="pf-case-block">
     <h2 class="eyebrow">Enterprise transferability</h2>
-    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">Transferable: agents need contracts, separated layers, and inspectable artifacts — not only a model call. Not claimed: production use at a client, or a prescribed LLM.</p>
+    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">The same approach transfers to legacy modernization, incident analysis, test generation, and controlled code migration. Not claimed: production use at a client, or a prescribed LLM.</p>
   </section>
   <p class="mt-10 max-w-prose text-sm text-muted"><span class="eyebrow">Data and decision posture</span> Public demos use synthetic or documented sample data. AI outputs are not automatically trusted decisions. Critical paths need validation and human-in-the-loop.</p>
   <nav class="pf-case-more" aria-label="More cases">
     <p class="eyebrow mb-4">More cases</p>
     <div class="pf-case-more-grid"><a class="panel p-4 pf-case-more-link" href="/portfolio/en/cases/agent-collective/">
-        <p class="font-mono text-[0.7rem] text-faint">AI &amp; Agentic cases</p>
+        <p class="font-mono text-[0.7rem] text-faint">AI cases</p>
         <p class="mt-1 font-semibold text-fg">Agent Collective</p>
-        <p class="mt-1 text-sm text-muted">Testable Multi-Agent Orchestration · Simulator</p>
+        <p class="mt-1 text-sm text-muted">AI Automation · Testable multi-agent orchestration</p>
       </a><a class="panel p-4 pf-case-more-link" href="/portfolio/en/cases/deutschlandcard/">
         <p class="font-mono text-[0.7rem] text-faint">Enterprise cases</p>
         <p class="mt-1 font-semibold text-fg">DeutschlandCard</p>
@@ -139,10 +149,10 @@
     <div aria-hidden="true" class="blueprint-grid grid-mask pointer-events-none absolute inset-0 opacity-60"></div>
     <div class="container relative py-20 md:py-28">
       <p class="eyebrow">Conversation</p>
-      <h2 class="mt-4 max-w-2xl text-balance text-3xl font-semibold tracking-tight text-fg sm:text-4xl">For conversations about Agentic AI, Enterprise Engineering, and the next transformation.</h2>
-      <p class="mt-4 max-w-prose text-muted">Senior roles that combine technical depth with architecture and consulting responsibility. No freelancer retainer, no free slots, no agency pitch.</p>
+      <h2 class="mt-4 max-w-2xl text-balance text-3xl font-semibold tracking-tight text-fg sm:text-4xl">Talk about AI &amp; agents.</h2>
+      <p class="mt-4 max-w-prose text-muted">Looking for someone who understands enterprise software and can not only assess current agentic-AI technology, but implement it in practice? Let’s talk. No freelancer retainer, no free slots, no agency pitch.</p>
       <div class="mt-10 pf-contact-row">
-        <a class="primary" href="mailto:peter.henrichs@web.de">Email · peter.henrichs@web.de</a>
+        <a class="primary" href="mailto:peter.henrichs@web.de">Talk about AI &amp; agents · peter.henrichs@web.de</a>
         <a class="secondary" href="https://www.linkedin.com/in/peter-henrichs/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a class="secondary" href="https://github.com/d0npedro" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a class="secondary" href="/portfolio/cv/">CV (HTML)</a>
@@ -152,7 +162,7 @@
       <div class="hairline my-12"></div>
       <div class="flex flex-col items-start justify-between gap-4 font-mono text-xs text-faint sm:flex-row sm:items-center">
         <span>© 2026 Peter Henrichs</span>
-        <span class="hidden sm:inline">Senior AI Consultant · Agentic Software Engineer</span>
+        <span class="hidden sm:inline">Senior AI Consultant · Agentic AI · Enterprise Systems</span>
         <span>DE · EN · ES</span>
       </div>
     </div>

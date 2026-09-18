@@ -1,14 +1,14 @@
 export const en = {
   meta: {
-    title: "Peter Henrichs | Senior AI Consultant & Agentic Software Engineer",
+    title: "Peter Henrichs | Senior AI Consultant – Agentic AI & Enterprise Systems",
     description:
-      "Peter Henrichs, Cologne. Senior AI Consultant & Agentic Software Engineer: 10+ years of enterprise software engineering, LLMs and AI Agents, Java/Spring, Cloud, and AI Transformation — integrated into real IT, data, and process landscapes.",
-    ogAlt: "Peter Henrichs | Senior AI Consultant & Agentic Software Engineer · Cologne",
+      "Senior AI Consultant with 10+ years of enterprise software engineering. Focus on LLMs, AI Agents, automation, enterprise integration, and AI transformation.",
+    ogAlt: "Peter Henrichs | Senior AI Consultant – Agentic AI & Enterprise Systems · Cologne",
     keywords:
-      "Peter Henrichs,Cologne,Senior AI Consultant,Agentic Software Engineer,LLMs,AI Agents,AI Transformation,Java,Spring,Cloud,Enterprise Engineering",
-    jobTitle: "Senior AI Consultant & Agentic Software Engineer",
+      "Peter Henrichs,Cologne,Senior AI Consultant,Agentic AI,Enterprise Systems,LLMs,AI Agents,AI Automation,Java,Spring,Cloud,Enterprise Engineering",
+    jobTitle: "Senior AI Consultant",
     personDescription:
-      "Peter Henrichs is a Senior AI Consultant and Agentic Software Engineer based in Cologne. Seniority comes from 10+ years of enterprise software engineering; LLMs, AI Agents, and Automation are the current specialization on top of that foundation — not instead of it.",
+      "Peter Henrichs is a Senior AI Consultant based in Cologne. Focus: Agentic AI, enterprise systems, and automation. Seniority comes from 10+ years of enterprise software engineering — not the other way around.",
   },
   common: {
     skipToContent: "Skip to content",
@@ -21,26 +21,41 @@ export const en = {
     profile: "Profile",
     cases: "Cases",
     experience: "Experience",
-    lab: "Lab",
-    approach: "Approach",
     cv: "CV",
     contact: "Contact",
+    talk: "Start a conversation",
   },
   theme: {
     toLight: "Switch to light mode",
     toDark: "Switch to dark mode",
   },
   hero: {
-    eyebrow: "Enterprise Engineering × LLMs / AI Agents × Transformation",
-    role: "Senior AI Consultant & Agentic Software Engineer",
-    location: "Cologne / Germany",
+    eyebrow: "SENIOR AI CONSULTANT · AGENTIC AI · ENTERPRISE SYSTEMS",
+    role: "Senior AI Consultant · Agentic AI · Enterprise Systems",
+    h1: "I bring AI agents into real enterprise systems.",
+    location: "Cologne · Germany-wide / Remote",
     tagline:
-      "10+ years of enterprise software engineering — plus LLMs, AI Agents, and Automation integrated into real IT, data, and process landscapes. Architecture, integration, governance, and traceable transformation; not tool demos beside the actual system.",
+      "More than 10 years of enterprise software engineering — now focused on LLMs, agentic workflows, and AI automation. Architecture, integration, and consulting, so AI demos become solutions that hold up.",
     proof:
-      "10+ years Enterprise Engineering · LLMs & Agentic Systems · Java/Spring · Cloud · APIs · AI Strategy & Automation",
-    ctaPrimary: "AI & Agentic Cases",
-    ctaSecondary: "CV / Enterprise experience",
-    ctaTertiary: "Contact",
+      "10+ years Enterprise Engineering · Java · Spring · Cloud · Integration · LLMs · AI Agents · Automation",
+    trust:
+      "10+ years of enterprise software engineering. Currently specialized in Agentic AI — not the other way around.",
+    ctaPrimary: "View AI cases",
+    ctaSecondary: "Open profile / CV",
+    ctaTertiary: "Talk about AI & agents",
+    diagramTitle: "Agentic system — goal, orchestration, evaluation, action",
+    diagramAlt:
+      "System diagram: a goal reaches an orchestrator that talks to a model, context/RAG, and tools. Evaluation decides between an automatic action and human review.",
+    diagramLabels: {
+      goal: "Goal",
+      orchestrator: "Orchestrator",
+      model: "Model",
+      rag: "Context / RAG",
+      tools: "Tools / APIs",
+      eval: "Evaluation",
+      action: "Action",
+      human: "Human",
+    },
     metricLabels: [
       "Years in software development",
       "Regulated industries delivered in",
@@ -48,6 +63,63 @@ export const en = {
       "Live web portals owned",
     ],
     languagesLabel: "Languages",
+  },
+  impact: {
+    index: "01",
+    eyebrow: "Where I create impact",
+    title: "Three fields — agents, processes, existing software.",
+    description:
+      "Not tool demos beside the system. Integration into identity, APIs, data, and operations — where enterprise software already runs.",
+    items: [
+      {
+        title: "Integrate agents",
+        body: "Embed AI agents into existing IT, data, and process landscapes: tools, permissions, APIs, and controlled actions instead of isolated chatbots.",
+      },
+      {
+        title: "Automate processes",
+        body: "Turn manual work into inspectable workflows — with quality gates, escalation, and human-in-the-loop, not unsupervised autonomy.",
+      },
+      {
+        title: "Modernize software",
+        body: "Shape identity, interfaces, cloud, and CI/CD so later AI layers can land on them. The enterprise foundation is the moat.",
+      },
+    ],
+  },
+  about: {
+    index: "07",
+    eyebrow: "About",
+    title: "Short, so the cases carry the work.",
+    body: "I come from software engineering and have spent years making complex systems easier to understand, maintain, and automate. LLMs and agentic systems are therefore not an isolated technology trend for me, but the next evolution of software engineering and process automation. I work from Cologne — Germany-wide and remote.",
+  },
+  track: {
+    index: "03",
+    eyebrow: "Enterprise Track Record",
+    title: "Four to five milestones — not the full CV.",
+    description:
+      "Paid enterprise delivery in banking, public sector, healthcare, and loyalty. Details and NDA limits live on the case pages and in the CV.",
+    more: "All stations in the CV",
+    items: {
+      deutschlandcard: {
+        title: "DeutschlandCard — cloud, identity, Terraform",
+        body: "Cloudification of the nationwide loyalty program: Azure AD B2C, reproducible infrastructure, partner APIs that stay usable.",
+      },
+      itzbund: {
+        title: "ITZBund — APIs, OAuth2, delivery",
+        body: "Interfaces between mobile clients and government specialist procedures; shared libraries and authentication workflows.",
+      },
+      "dz-bank": {
+        title: "DZ BANK OKVP — lead-dev, migration, observability",
+        body: "Sales platforms onto a microservice platform: decoupled features, OpenShift pipelines, operational visibility.",
+      },
+      bitmarck: {
+        title: "BITMARCK bitGo_Web — statutory health, security, 2FA",
+        body: "Online Geschäftsstelle for statutory health insurers: legacy decoupling, REST, two-factor for especially protected data.",
+      },
+      amp: {
+        title: "adesso Microservice Platform",
+        body: "Reusable infrastructure samples and delivery know-how for microservice architectures.",
+      },
+    },
   },
   arc: {
     index: "00",
@@ -75,21 +147,25 @@ export const en = {
     ],
   },
   selectedCases: {
-    index: "01",
-    eyebrow: "Selected AI & Engineering Cases",
-    title: "Three flagships first — lab and enterprise labeled separately.",
+    index: "02",
+    eyebrow: "Selected Cases",
+    title: "Three examples — AI, automation, and enterprise integration.",
     description:
-      "Graph-Mastermind and Agent Collective are independent, publicly inspectable systems. DeutschlandCard, DZ BANK, and BITMARCK are paid enterprise delivery. No lab project is presented as client delivery.",
+      "Three examples of how I connect AI, software engineering, and enterprise integration. Technical results and project status are deliberately kept separate from productive client work.",
+    rndNote:
+      "Independent R&D — conceived and delivered independently. Technical results and project status are deliberately kept separate from productive client work.",
+    clientNote:
+      "Client work — customer and system details are partly abstracted under NDA. Only my own role and releasable technical content are described.",
     secondaryEyebrow: "Further mandates",
     secondaryNote:
-      "Healthcare interoperability, defense-adjacent licensing, automotive, and publishing — available, but not equal homepage weight.",
+      "Healthcare interoperability, defense-adjacent licensing, automotive, and publishing — in the track record and CV, not equal homepage weight.",
   },
   lab: {
     index: "03",
-    eyebrow: "Agentic AI Lab · Independent Engineering",
-    title: "Public systems I build independently — not client delivery, not a hobby disclaimer.",
+    eyebrow: "Independent Applied AI R&D",
+    title: "Public systems conceived independently — not client delivery, not a hobby disclaimer.",
     description:
-      "Graph-Mastermind and Agent Collective show how I construct agent contracts, evaluation, failure handling, and observability. They are independent engineering: inspectable, versioned, tested — and explicitly not client delivery.",
+      "Graph-Mastermind and Agent Collective show how I construct agent contracts, evaluation, failure handling, and observability. Independent R&D: inspectable, versioned, tested — and explicitly not client delivery.",
     perspectiveEyebrow: "AI Transformation Perspective",
     perspectiveTitle: "What transfers into the enterprise — and what is not claimed here.",
     perspective:
@@ -97,54 +173,38 @@ export const en = {
     items: [
       {
         id: "graph-mastermind",
-        label: "Independent Lab",
+        label: "Independent R&D · Agentic AI",
         body: "Agent package for coding agents. Contract, graph, and UI stay separate; no specific model is required.",
       },
       {
         id: "agent-collective",
-        label: "Independent Lab · deterministic",
+        label: "Independent R&D · AI Automation",
         body: "Multi-agent simulator with no LLM backend. Orchestration, failure injection, and recovery stay testable.",
       },
     ],
   },
   howIWork: {
-    index: "05",
-    eyebrow: "How I Work",
-    title: "Working principles that follow from delivery and the lab — not buzzword bingo.",
+    index: "04",
+    eyebrow: "How I build AI systems",
+    title: "Evaluation, human-in-the-loop, security, observability.",
     description:
-      "Eight principles. Each is observable in public repos or in regulated enterprise delivery. No invented framework names.",
+      "Four principles. Each is observable in public repos or in regulated enterprise delivery. No invented framework names.",
     items: {
       evaluation: {
         title: "Evaluation",
-        body: "Acceptance via tests, CI, checklists, and inspectable state. No model call without a verifiable artifact.",
-      },
-      observability: {
-        title: "Observability",
-        body: "Prometheus, Grafana, Dynatrace in banking delivery; stepwise snapshots in the simulator. Behavior has to be visible before it scales.",
-      },
-      failure: {
-        title: "Failure Handling",
-        body: "Failure injection and recovery in the engine; in production, delivery pipelines and operational visibility. Failure is a design topic, not a footnote.",
+        body: "Acceptance via tests, CI, checklists, and inspectable state. No model call without a verifiable artifact. Quantitative numbers only once a reproducible harness exists.",
       },
       hitl: {
         title: "Human-in-the-Loop",
         body: "Agents produce artifacts for human review. No autonomous writes, no automatically trusted decisions.",
       },
       security: {
-        title: "Security & Privacy",
-        body: "2FA, RBAC, identity, and GDPR from enterprise delivery. Public demos use synthetic or documented sample data.",
+        title: "Security",
+        body: "2FA, RBAC, identity, and GDPR from enterprise delivery. Public demos use synthetic or documented sample data. Responsible deployment before speed.",
       },
-      cost: {
-        title: "Cost Awareness",
-        body: "No LLM where determinism is enough — Agent Collective deliberately has no model. Expensive calls only when the contract requires them.",
-      },
-      boundaries: {
-        title: "Tool Boundaries",
-        body: "Agent contracts (AGENT.md / SPEC / CHECKLIST), separated layers, no implicit system access. Boundaries are part of the architecture.",
-      },
-      maintainability: {
-        title: "Maintainability",
-        body: "Terraform, decoupling, tests, CI. What cannot be maintained will not last in regulated landscapes — agents included.",
+      observability: {
+        title: "Observability",
+        body: "Prometheus, Grafana, Dynatrace in banking delivery; stepwise snapshots in the simulator. Behavior has to be visible before it scales.",
       },
     },
   },
@@ -154,13 +214,17 @@ export const en = {
     body: "Prioritize use cases where systems, identity, and data quality already exist. Operating model: agents with a contract and acceptance, not an autonomous organization. Governance from regulated delivery (permissions, sensitive data, GDPR) plus an EU AI Act frame from the specialization — no invented board mandates, no invented AI KPIs.",
   },
   credentials: {
-    index: "06",
-    eyebrow: "Credentials & Trust",
-    title: "CV, GitHub, education — evidence, not the first job proof.",
+    index: "05",
+    eyebrow: "Credentials",
+    title: "KI-Manager and AI Automation support the specialization — they do not carry it.",
     description:
-      "Professional seniority lives in the enterprise record. 2026 continuing education and public repos evidence the specialization. They do not replace paid AI client delivery.",
+      "2026 continuing education and public repos evidence the focus. Seniority lives in the enterprise record. Credentials do not replace paid AI client delivery.",
     cv: "CV",
     github: "GitHub",
+    highlights: [
+      { title: "KI-Manager", meta: "2026 · Akademie für die Deutsche Wirtschaft" },
+      { title: "AI Automation", meta: "2026 · STARTPLATZ Köln" },
+    ],
     educationNote: "Education and continuing education follow below. They are credentials, not the primary experience proof.",
   },
   privacy: {
@@ -175,6 +239,7 @@ export const en = {
     role: "Role & ownership",
     evidence: "Evidence",
     ownWork: "Own work",
+    contribution: "My contribution",
     transfer: "Enterprise transferability",
     architecture: "Architecture",
     evaluation: "Evaluation, guardrails, failure handling",
@@ -193,7 +258,8 @@ export const en = {
     statusValues: {
       production: "Production",
       prototype: "Prototype",
-      lab: "Independent Lab",
+      lab: "Independent R&D",
+      rnd: "Independent R&D",
       research: "Research",
     },
     teamValues: {
@@ -223,37 +289,58 @@ export const en = {
     screenshots: "Screenshots",
     noPublicShots: "No public screenshots — client NDA; evidence stays qualitative and grounded in the engagement description.",
     next: "More cases",
-    moreAi: "AI & Agentic cases",
+    moreAi: "AI cases",
+    evalInProgress: "Evaluation in progress",
+    evalInProgressNote:
+      "The architecture is in place; quantitative results are published only once a reproducible measurement baseline exists.",
+    evalToMeasure: "to measure",
+    related: "Related engagements",
     moreEnterprise: "Enterprise cases",
   },
   cases: {
     "graph-mastermind": {
       domain: "Agentic Software Engineering · Repository Intelligence",
-      honesty: "Agent package for coding agents — no prescribed LLM.",
-      pageTitle: "Graph-Mastermind — agent package for coding agents | Peter Henrichs",
+      badge: "Independent R&D · Agentic AI",
+      landingTitle: "Agentic engineering for grown codebases",
+      oneLiner:
+        "An agentic engineering workflow inspects existing repositories, plans changes, works with development tools and tests, and keeps critical results under separate evaluation.",
+      honesty: "Independent R&D — agent package for coding agents, no prescribed LLM, no client operations.",
+      pageTitle: "Agentic engineering for grown codebases | Peter Henrichs",
       pageDescription:
-        "Public agent package: AGENT.md, SPEC.md and CHECKLIST.md as the work contract. React/TypeScript + d3-force, live demo, tests and CI. No prescribed LLM.",
+        "Independent R&D: agentic workflow for grown repositories. AGENT.md, SPEC.md and CHECKLIST.md as the work contract. No prescribed LLM, no invented KPIs.",
       context:
-        "Public reference project, 2026. Coding agents should not only list a target repository — they should deliver an inspectable graph and a usable architecture view.",
+        "Independent Applied AI R&D, 2026. In large, historically grown software systems, substantial engineering time goes into understanding code, locating defects, and safeguarding changes.",
       problem:
-        "Complex repository structure is spread across file trees, imports, and docs. Unfamiliar or grown codebases are hard to grasp quickly.",
+        "The goal was not “have an LLM write code”, but to design a controllable engineering process for complex work. Repository structure is spread across file trees, imports, and docs.",
+      contribution:
+        "Workflow architecture, agent roles, tool integration, model/context strategy, evaluation loops, and the technical implementation — solo, conceived and delivered independently.",
       decision:
         "Reusable agent package: a coding agent receives an explicit work and acceptance contract via AGENT.md, SPEC.md, and CHECKLIST.md. It inspects the target repository, derives components and relationships, and produces an interactive architecture view. Contract, data model, visualization runtime, and UI stay separate. No specific LLM is required.",
       architecture:
-        "Four separate layers: agent contract (AGENT.md, SPEC.md, CHECKLIST.md), data model (repo graph plus fallback samples), visualization runtime (d3-force on canvas, ticks without React state), and UI (toolbar, search, detail panel). No backend, no prescribed LLM.",
+        "Task / issue → planner contract (AGENT.md / SPEC.md / CHECKLIST.md) → repository context and tools → artifact (graph / architecture view) → tests and checklist → human review. No backend, no prescribed LLM, no autonomous writes.",
       architectureSteps: [
-        "AGENT.md / SPEC.md / CHECKLIST.md",
-        "Repo graph / samples",
-        "d3-force runtime",
-        "React canvas UI",
+        "Task / issue",
+        "Planner / contract",
+        "Repo context + tools",
+        "Artifact + checks",
+        "Human review",
       ],
       outcome:
-        "Public agent package, live demo, tests, typecheck, CI, and a reproducible production build. Qualitatively observed: inspectable artifacts instead of a black-box analysis. No invented usage KPIs.",
-      role: "Solo — design and delivery of the reusable agent workflow and the reference application. Independent Lab, not a client engagement.",
+        "Public agent package, live demo, tests, typecheck, CI, and a reproducible production build. Qualitatively observed: inspectable artifacts instead of a black-box analysis. No invented usage or business KPIs.",
+      role: "Solo — design and delivery of the reusable agent workflow and the reference application. Independent R&D, not a client engagement.",
       evaluation:
-        "Acceptance via CHECKLIST.md, typecheck, tests, and CI. The agent delivers an inspectable graph and an architecture view — no autonomous writes to the target repo. A human reviews the result (human-in-the-loop). Fallback sample data if repository analysis stays incomplete. Synthetic / documented demo data in the public app.",
+        "Evaluation in progress. Acceptance today via CHECKLIST.md, typecheck, tests, and CI. The agent delivers an inspectable graph — a human reviews the result (human-in-the-loop). Quantitative numbers will be published only once a reproducible eval harness exists.",
+      evalStatus: "in-progress",
+      evalMetrics: [
+        { metric: "Time-to-reproduce", note: "time until a defect is reproducible" },
+        { metric: "Failing-test-first rate", note: "share of bugs with a reproducing test" },
+        { metric: "Patch acceptance", note: "share of accepted agent changes" },
+        { metric: "Human review time", note: "human review effort" },
+        { metric: "Regression rate", note: "newly introduced defects" },
+        { metric: "Token / cost per accepted change", note: "economics" },
+      ],
       transfer:
-        "Transferable: agents need contracts, separated layers, and inspectable artifacts — not only a model call. Not claimed: production use at a client, or a prescribed LLM.",
+        "The same approach transfers to legacy modernization, incident analysis, test generation, and controlled code migration. Not claimed: production use at a client, or a prescribed LLM.",
       highlights: [
         "Agent contract from AGENT.md / SPEC.md / CHECKLIST.md",
         "Generic application to unfamiliar repositories",
@@ -266,33 +353,47 @@ export const en = {
       },
     },
     "agent-collective": {
-      domain: "Testable Multi-Agent Orchestration · Simulator",
+      domain: "AI Automation · Testable multi-agent orchestration",
+      badge: "Independent R&D · AI Automation",
+      landingTitle: "Inspectable multi-agent orchestration for processes",
+      oneLiner:
+        "A deterministic multi-agent simulator makes state, quality gates, and escalations visible — deliberately with no LLM backend, so orchestration and failure modes stay testable.",
       honesty:
-        "Deterministic multi-agent simulator — no LLM backend, no tool-calling stack.",
-      pageTitle: "Agent Collective — deterministic multi-agent simulator | Peter Henrichs",
+        "Deterministic multi-agent simulator — no LLM backend, no tool-calling stack, no client operations.",
+      pageTitle: "Inspectable multi-agent orchestration for processes | Peter Henrichs",
       pageDescription:
-        "Browser simulator with no LLM backend: TypeScript state machine, failure injection, recovery, Vitest. Live demo and embed at /multi-agent/.",
+        "Independent R&D: deterministic multi-agent simulator with no LLM backend. State machine, failure injection, recovery, Vitest. No invented automation KPIs.",
       context:
-        "Public reference project, 2026. Multi-agent behavior should be observable, stepwise, and testable — not hidden behind a chat API.",
+        "Independent Applied AI R&D, 2026. Process automation needs visible state, validation, and a human off-ramp — not a chat UI that hides system behavior.",
       problem:
-        "Multi-agent demos often hide system behavior behind chat UIs. State, failure, resources, and recovery stay invisible.",
+        "Multi-agent demos often hide state, failure, resources, and recovery behind chat UIs. Without inspectable orchestration it stays unclear when a step may run automatically and when a human must intervene.",
+      contribution:
+        "Workflow architecture, role model, failure injection, quality gates in the engine, observability via snapshots, and the technical implementation — solo, conceived and delivered independently.",
       decision:
         "TypeScript state machine with six roles, a workflow graph, failure injection, recovery, and a seeded RNG for reproducible runs. The simulation layer is separated from the UI. Deliberately no real LLM, so orchestration and failure modes stay testable.",
       architecture:
-        "A pure TypeScript engine (src/sim) owns world state. A store publishes snapshots; React Flow and panels only render. Failure injection, recovery, and a seeded RNG live in the engine — no LLM, so tests run without a browser and without a model.",
+        "Input / task → roles in the engine → structured state → validation / failure injection → automatic step or human review → audit / observability. A pure TypeScript engine owns world state; the UI only renders. No LLM, no invented extraction rates.",
       architectureSteps: [
-        "React dashboard",
-        "Store / snapshots",
-        "src/sim engine",
-        "Vitest without a browser",
+        "Input / task",
+        "Roles / engine",
+        "Structured state",
+        "Validation",
+        "Action or human",
       ],
       outcome:
-        "Live dashboard, Vitest/CI, step-wise system states. Qualitatively observed: failure recovery and observability are inspectable, not just claimed. No invented throughput figures.",
-      role: "Solo — design and delivery of the testable engine, workflow graph, and live dashboard. Independent Lab, not a client engagement.",
+        "Live dashboard, Vitest/CI, step-wise system states. Qualitatively observed: failure recovery and observability are inspectable, not just claimed. No invented throughput or document KPIs.",
+      role: "Solo — design and delivery of the testable engine, workflow graph, and live dashboard. Independent R&D, not a client engagement.",
       evaluation:
-        "Evaluation via Vitest and reproducible seeded runs. Failure injection and recovery live in the engine, not the UI. Deliberately no LLM and no tool-calling — failure modes stay inspectable. Control and interpretation stay with the human (HITL). Data is synthetic.",
+        "Evaluation via Vitest and reproducible seeded runs. Failure injection and recovery live in the engine, not the UI. Deliberately no LLM and no tool-calling. Control and interpretation stay with the human (HITL). Data is synthetic. Business metrics are not invented.",
+      evalStatus: "observed-qualitative",
+      evalMetrics: [
+        { metric: "Reproducible runs", note: "seeded RNG, Vitest without a browser — present, not claimed as a client KPI" },
+        { metric: "Failure-recovery visibility", note: "whether an injected failure is observable and treatable" },
+        { metric: "Human-escalation path", note: "when control stays with the human" },
+        { metric: "Automation share", note: "to measure once a productive process is attached" },
+      ],
       transfer:
-        "Transferable: orchestration, reliability, evaluation, and human-understandable agent systems. Not claimed: a production LLM platform or client operations.",
+        "Transferable: orchestration, reliability, validation, human-in-the-loop, and inspectable agent systems. Not claimed: a production LLM platform, document extraction, or client operations.",
       highlights: [
         "Deterministic engine, reproducible seeded runs",
         "Failure injection and recovery",
@@ -306,7 +407,13 @@ export const en = {
     },
     deutschlandcard: {
       domain: "Loyalty · Cloud · Identity",
-      honesty: "No AI/LLM component in the published case.",
+      badge: "Professional Track Record · Enterprise",
+      landingTitle: "Cloud, identity, and integration at DeutschlandCard",
+      oneLiner:
+        "Paid cloudification of the nationwide loyalty program: Azure AD B2C, Terraform, Kubernetes. That identity/API/cloud ground is the moat for later AI integration — the case itself is not an AI project.",
+      honesty: "No AI/LLM component in the published case. No volume or latency figures (NDA).",
+      contribution:
+        "Login journey on Azure AD B2C, Terraform automation, and service cloudification — developer on a team, paid delivery.",
       pageTitle: "DeutschlandCard — cloud, identity, Terraform | Peter Henrichs",
       pageDescription:
         "Enterprise cloudification of the nationwide loyalty program: Azure AD B2C, Terraform, Kubernetes. No AI component, no invented volume metrics.",
@@ -340,6 +447,8 @@ export const en = {
     "dz-bank-okvp": {
       domain: "Banking · Platform Engineering · Observability",
       honesty: "No AI/LLM component in the published case.",
+      contribution:
+        "Lead-dev/DevOps on a team: decoupling into independently shippable features, OpenShift pipelines, observability. Paid delivery.",
       pageTitle: "DZ BANK OKVP — lead-dev, migration, observability | Peter Henrichs",
       pageDescription:
         "Migration of Fiducia & GAD sales platforms onto OKVP: decoupled features, OpenShift pipelines, Prometheus/Grafana/Dynatrace. No AI component.",
@@ -373,6 +482,8 @@ export const en = {
     "bitmarck-bitgo": {
       domain: "Statutory health insurance · Legacy modernization · Security",
       honesty: "No AI/LLM component in the published case.",
+      contribution:
+        "Consultant/developer on a team: backend, REST to existing systems, legacy decoupling, 2FA for especially protected data. Paid delivery.",
       pageTitle: "BITMARCK bitGo_Web — GKV modernization, security, 2FA | Peter Henrichs",
       pageDescription:
         "Regulated statutory-health online Geschäftsstelle: legacy decoupling, REST to existing systems, 2FA for especially protected data. No AI component.",
@@ -461,9 +572,9 @@ export const en = {
   competencies: {
     index: "04",
     eyebrow: "Capabilities",
-    title: "Five capability groups — not 60 equal-weight tags.",
+    title: "Four capability groups — not a skill wall.",
     description:
-      "Strategy, Architecture, Agentic Engineering, Delivery, Governance. The detailed stack follows as evidence, not as identity.",
+      "Strategy, Architecture, Agentic Engineering, Governance. The detailed stack is evidence, not identity — and it does not sit on the landing page.",
     pillars: [
       {
         title: "Strategy",
@@ -476,10 +587,6 @@ export const en = {
       {
         title: "Agentic Engineering",
         body: "Agent contracts, repository intelligence, testable multi-agent orchestration, LLM-assisted engineering. Publicly evidenced, without model or MCP claims.",
-      },
-      {
-        title: "Delivery",
-        body: "CI/CD, Terraform, Kubernetes, OpenShift, lead-dev ownership. Decoupling without a big bang. What survives production.",
       },
       {
         title: "Governance",
@@ -550,7 +657,7 @@ export const en = {
   experience: {
     index: "02",
     eyebrow: "Professional Experience · paid enterprise work",
-    title: "Career stations — the deep dive under the cases.",
+    title: "Career stations — the deep dive lives in the CV; here only the context.",
     description:
       "2013 through 2026 in productive, paid engagements. This is professional experience. Graph-Mastermind and Agent Collective live in the Lab, not in this list. 2026 continuing education lives under Credentials, not as the first job proof.",
     filterAria: "Filter experience by era",
@@ -706,20 +813,20 @@ export const en = {
   },
   footer: {
     eyebrow: "Conversation",
-    title:
-      "For conversations about Agentic AI, Enterprise Engineering, and the next transformation.",
-    body: "Senior roles that combine technical depth with architecture and consulting responsibility. No freelancer retainer, no free slots, no agency pitch.",
+    title: "Talk about AI & agents.",
+    body: "Looking for someone who understands enterprise software and can not only assess current agentic-AI technology, but implement it in practice? Let’s talk. No freelancer retainer, no free slots, no agency pitch.",
     email: "Email",
     linkedin: "LinkedIn",
     github: "GitHub",
     cv: "CV (HTML)",
     cvNote:
       "HTML CV for print or Save as PDF. A separate PDF can later be added under /portfolio/cv/. No invented Drive URLs.",
-    roleLine: "Senior AI Consultant · Agentic Software Engineer",
+    roleLine: "Senior AI Consultant · Agentic AI · Enterprise Systems",
+    personalNote: "",
   },
   cv: {
     title: "CV — Peter Henrichs",
-    subtitle: "Senior AI Consultant & Agentic Software Engineer",
+    subtitle: "Senior AI Consultant · Agentic AI · Enterprise Systems",
     print: "Print / save as PDF",
     back: "Back to portfolio",
     intro:

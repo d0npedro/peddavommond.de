@@ -50,6 +50,8 @@ jobs:
           test -f public/soundcloud.html
           grep -q slotmachine public/win11/js/apps/catalog.js
           grep -q 'Senior AI Consultant' public/portfolio/de/index.html
+          grep -q 'Agentic AI' public/portfolio/de/index.html
+          grep -q 'Enterprise Systems' public/portfolio/de/index.html
           grep -q 'Graph-Mastermind' public/portfolio/de/index.html
           grep -q 'peter.henrichs@web.de' public/portfolio/de/index.html
           test -f public/portfolio/cv/index.html
@@ -58,18 +60,33 @@ jobs:
           test -f public/portfolio/de/cases/agent-collective/index.html
           test -f public/portfolio/en/cases/agent-collective/index.html
           test -f public/portfolio/de/cases/deutschlandcard/index.html
+          test -f public/portfolio/en/cases/deutschlandcard/index.html
           test -f public/portfolio/de/cases/dz-bank-okvp/index.html
           test -f public/portfolio/de/cases/bitmarck-bitgo/index.html
           grep -q '/portfolio/de/cases/graph-mastermind/' public/portfolio/de/index.html
+          grep -q '/portfolio/de/cases/agent-collective/' public/portfolio/de/index.html
+          grep -q '/portfolio/de/cases/deutschlandcard/' public/portfolio/de/index.html
           grep -q 'graph-mastermind' public/portfolio/de/sitemap.xml
+          grep -q 'deutschlandcard' public/portfolio/de/sitemap.xml
+          test ! -d public/portfolio/de/cases/enterprise-integration
+          grep -q 'peter.henrichs@web.de' public/portfolio/de/index.html
+          ! grep -q 'ph@d0npedro.com' public/portfolio/de/index.html
+          ! grep -qi 'Hennrichs' public/portfolio/de/index.html public/portfolio/en/index.html
           grep -q 'kein LLM-Backend' public/portfolio/de/cases/agent-collective/index.html
           grep -q 'peter.henrichs@web.de' public/portfolio/de/cases/graph-mastermind/index.html
-          grep -q 'Köln / Germany' public/portfolio/de/index.html
-          grep -q 'Independent Lab' public/portfolio/de/index.html
-          grep -q 'How I Work' public/portfolio/de/index.html
-          grep -q 'id="lab"' public/portfolio/de/index.html
+          grep -q 'Köln · Deutschlandweit / Remote' public/portfolio/de/index.html
+          grep -q 'Independent R&amp;D' public/portfolio/de/index.html
+          grep -q 'Wie ich AI-Systeme baue' public/portfolio/de/index.html
+          grep -q 'id="impact"' public/portfolio/de/index.html
           grep -q 'id="cases"' public/portfolio/de/index.html
-          grep -q 'Agentic Cases' public/portfolio/de/index.html
+          grep -q 'id="about"' public/portfolio/de/index.html
+          grep -q 'AI Cases ansehen' public/portfolio/de/index.html
+          grep -q 'Ich bringe AI Agents in reale Unternehmenssysteme.' public/portfolio/de/index.html
+          grep -q 'Mein Anteil' public/portfolio/de/cases/graph-mastermind/index.html
+          grep -q 'Evaluation in progress' public/portfolio/de/cases/graph-mastermind/index.html
+          grep -q 'View AI cases' public/portfolio/en/index.html
+          grep -q 'Independent R&amp;D' public/portfolio/en/index.html
+          grep -q 'How I build AI systems' public/portfolio/en/index.html
 
       - name: Formula unit test (optional shell util)
         run: node public/win11/js/utils/formula.test.js
