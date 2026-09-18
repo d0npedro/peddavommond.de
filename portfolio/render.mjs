@@ -13,6 +13,9 @@ import {
   JSON_LD_KNOWS_ABOUT,
   stackCount,
   casesBySection,
+  pagedCases,
+  caseById,
+  caseHref,
 } from "./shared.mjs";
 import { copy } from "./content.mjs";
 
@@ -48,20 +51,20 @@ function iconMoon() {
   return `<svg aria-hidden="true" viewBox="0 0 24 24" class="absolute h-[18px] w-[18px] rotate-90 scale-0 transition-all duration-300 ease-precision dark:rotate-0 dark:scale-100" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>`;
 }
 
-function langSwitch(locale, extraClass = "") {
+function langSwitch(locale, extraClass = "", siblingPath = "") {
   const t = copy(locale);
   const items = LOCALES.map((code) => {
     const current = code === locale;
-    return `<a href="/portfolio/${code}" hreflang="${code}"${current ? ' aria-current="true"' : ""} class="rounded-[3px] px-2 py-1 uppercase tracking-wide transition-colors duration-150 ${current ? "bg-accent/15 text-accent" : "text-muted hover:text-fg"}"><span class="sr-only">${esc(t.common.localeName[code])}: </span>${code}</a>`;
+    return `<a href="/portfolio/${code}${siblingPath}" hreflang="${code}"${current ? ' aria-current="true"' : ""} class="rounded-[3px] px-2 py-1 uppercase tracking-wide transition-colors duration-150 ${current ? "bg-accent/15 text-accent" : "text-muted hover:text-fg"}"><span class="sr-only">${esc(t.common.localeName[code])}: </span>${code}</a>`;
   }).join("");
   return `<div class="inline-flex items-center rounded-card border border-line bg-bg-elevated p-0.5 font-mono text-xs ${extraClass}" role="group" aria-label="${attr(t.common.langSwitchAria)}">${items}</div>`;
 }
 
-function navItems(locale, numbered = false) {
+function navItems(locale, numbered = false, homePrefix = "") {
   const t = copy(locale);
   return NAV.map((item, i) => {
     const label = t.nav[item.key];
-    const href = item.href ?? `#${item.id}`;
+    const href = item.href ?? `${homePrefix}#${item.id}`;
     const extra = numbered
       ? `<span class="font-mono text-xs text-faint">${String(i + 1).padStart(2, "0")}</span>`
       : "";
@@ -72,18 +75,20 @@ function navItems(locale, numbered = false) {
   }).join("");
 }
 
-function renderNav(locale) {
+function renderNav(locale, { siblingPath = "", homePrefix = "" } = {}) {
   const t = copy(locale);
+  const brandHref = homePrefix || "#top";
+  const contactHref = homePrefix ? `${homePrefix}#contact` : "#contact";
   return `<header class="fixed inset-x-0 top-0 z-50 transition-colors duration-300 border-b border-transparent bg-transparent" data-site-header>
   <nav aria-label="${attr(t.nav.ariaPrimary)}" class="container flex h-16 items-center justify-between gap-4">
-    <a href="#top" class="group flex items-center gap-2.5 font-mono text-sm tracking-tight text-fg">
+    <a href="${attr(brandHref)}" class="group flex items-center gap-2.5 font-mono text-sm tracking-tight text-fg">
       <span class="grid h-7 w-7 place-items-center rounded-[3px] border border-accent/60 text-accent"><span class="h-2 w-2 animate-pulse-node rounded-[1px] bg-accent"></span></span>
       <span class="hidden sm:inline"><span class="text-fg">peter</span><span class="text-faint">.henrichs</span></span>
     </a>
-    <ul class="hidden items-center gap-1 md:flex">${navItems(locale)}</ul>
+    <ul class="hidden items-center gap-1 md:flex">${navItems(locale, false, homePrefix)}</ul>
     <div class="flex items-center gap-2">
-      <a href="#contact" class="hidden rounded-card border border-line bg-bg-elevated px-3.5 py-2 font-mono text-xs tracking-wide text-fg transition-colors hover:border-accent hover:text-accent lg:inline-block">${esc(t.nav.contact)}</a>
-      ${langSwitch(locale, "hidden sm:inline-flex")}
+      <a href="${attr(contactHref)}" class="hidden rounded-card border border-line bg-bg-elevated px-3.5 py-2 font-mono text-xs tracking-wide text-fg transition-colors hover:border-accent hover:text-accent lg:inline-block">${esc(t.nav.contact)}</a>
+      ${langSwitch(locale, "hidden sm:inline-flex", siblingPath)}
       <button type="button" data-theme-toggle aria-label="${attr(t.theme.toDark)}" class="group relative inline-flex h-9 w-9 items-center justify-center rounded-card border border-line bg-bg-elevated text-muted transition-colors duration-200 hover:border-accent hover:text-accent focus-visible:text-accent">${iconSun()}${iconMoon()}</button>
       <button type="button" data-menu-toggle aria-label="${attr(t.nav.toggleMenu)}" aria-expanded="false" class="grid h-9 w-9 place-items-center rounded-card border border-line bg-bg-elevated text-fg md:hidden">
         <span class="relative block h-3.5 w-4">
@@ -96,9 +101,9 @@ function renderNav(locale) {
   </nav>
   <div data-mobile-menu class="overflow-hidden border-t border-line bg-bg/95 backdrop-blur-md transition-[max-height,opacity] duration-300 md:hidden max-h-0 opacity-0">
     <ul class="container flex flex-col py-3">
-      ${navItems(locale, true)}
-      <li><a href="#contact" class="mt-2 flex items-center justify-center rounded-card border border-accent/50 py-3 font-mono text-sm text-accent">${esc(t.nav.contact)}</a></li>
-      <li class="mt-3 flex justify-center pb-1">${langSwitch(locale)}</li>
+      ${navItems(locale, true, homePrefix)}
+      <li><a href="${attr(contactHref)}" class="mt-2 flex items-center justify-center rounded-card border border-accent/50 py-3 font-mono text-sm text-accent">${esc(t.nav.contact)}</a></li>
+      <li class="mt-3 flex justify-center pb-1">${langSwitch(locale, "", siblingPath)}</li>
     </ul>
   </div>
 </header>`;
@@ -169,21 +174,23 @@ function renderArc(locale) {
   </section>`;
 }
 
-function caseLinks(item, t) {
-  if (!item.links?.length) return "";
+function caseLinks(item, t, extra = "") {
   const labels = { repo: t.caseFields.repo, demo: t.caseFields.demo, embed: t.caseFields.embed, live: t.caseFields.live };
-  return `<div class="pf-links">${item.links
+  const links = (item.links ?? [])
     .map((link) => {
       const label = link.label ?? labels[link.kind] ?? link.kind;
       const external = link.href.startsWith("http");
       return `<a href="${attr(link.href)}"${external ? ' target="_blank" rel="noopener noreferrer"' : ""}>${esc(label)}</a>`;
     })
-    .join("")}</div>`;
+    .join("");
+  if (!links && !extra) return "";
+  return `<div class="pf-links">${links}${extra}</div>`;
 }
 
 function renderCaseCard(item, locale, wide = false) {
   const t = copy(locale);
   const c = t.cases[item.id];
+  const pageHref = item.hasPage ? caseHref(locale, item.id) : null;
   const fields = [
     ["problem", t.caseFields.problem],
     ["decision", t.caseFields.decision],
@@ -198,13 +205,19 @@ function renderCaseCard(item, locale, wide = false) {
   const highlights = (c.highlights ?? [])
     .map((h) => `<li class="flex gap-2.5 text-sm text-fg/85"><span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent"></span><span>${esc(h)}</span></li>`)
     .join("");
+  const title = pageHref
+    ? `<a href="${attr(pageHref)}" class="pf-case-title-link">${esc(item.name)}</a>`
+    : esc(item.name);
+  const open = pageHref
+    ? `<a class="pf-case-open" href="${attr(pageHref)}">${esc(t.casePage.openCase)}</a>`
+    : "";
   return `<article class="panel tick-corner relative p-6 md:p-8 pf-case-card${wide ? " pf-case-card--wide" : ""}">
     <div class="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs text-faint">
       <span class="text-accent">${esc(item.period)}</span>
       <span class="text-line">|</span>
       <span>${esc(c.domain)}</span>
     </div>
-    <h3 class="mt-3 text-2xl font-semibold tracking-tight text-fg">${esc(item.name)}</h3>
+    <h3 class="mt-3 text-2xl font-semibold tracking-tight text-fg">${title}</h3>
     <p class="mt-1 text-sm text-muted">${esc(item.client)}</p>
     ${c.honesty ? `<p class="pf-honesty">${esc(c.honesty)}</p>` : ""}
     ${fieldHtml}
@@ -212,7 +225,7 @@ function renderCaseCard(item, locale, wide = false) {
     ${c.transfer ? `<div class="pf-field"><p class="eyebrow mb-2">${esc(t.caseFields.transfer)}</p><p class="text-sm leading-relaxed text-muted">${esc(c.transfer)}</p></div>` : ""}
     ${highlights ? `<ul class="mt-4 space-y-2">${highlights}</ul>` : ""}
     <div class="mt-auto pt-4 flex flex-wrap gap-1.5">${item.tech.map((tag) => `<span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">${esc(tag)}</span>`).join("")}</div>
-    ${caseLinks(item, t)}
+    ${caseLinks(item, t, open)}
   </article>`;
 }
 
@@ -455,6 +468,165 @@ function themeBoot() {
   return `<script>!function(){try{var d=document.documentElement,c=d.classList;c.remove('light','dark');var e=localStorage.getItem('theme');if('system'===e||(!e&&false)){var t='(prefers-color-scheme: dark)',m=window.matchMedia(t);if(m.media!==t||m.matches){d.style.colorScheme='dark';c.add('dark')}else{d.style.colorScheme='light';c.add('light')}}else if(e){c.add(e||'')}else{c.add('dark')}if(e==='light'||e==='dark'||!e)d.style.colorScheme=e||'dark'}catch(e){}}()</script>`;
 }
 
+function caseJsonLd(locale, item, copyCase, url) {
+  return JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: item.name,
+    headline: copyCase.pageTitle,
+    description: copyCase.pageDescription,
+    inLanguage: locale,
+    author: {
+      "@type": "Person",
+      name: SITE.name,
+      email: SITE.email,
+      url: `${SITE.origin}/portfolio/${locale}`,
+      sameAs: [SITE.linkedin, SITE.github],
+    },
+    url,
+    sameAs: (item.links ?? []).filter((l) => l.href.startsWith("http")).map((l) => l.href),
+  });
+}
+
+function renderCaseSection(label, body) {
+  if (!body) return "";
+  return `<section class="pf-case-block">
+    <h2 class="eyebrow">${esc(label)}</h2>
+    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">${esc(body)}</p>
+  </section>`;
+}
+
+function renderArchitecture(copyCase, t, tech) {
+  const steps = (copyCase.architectureSteps ?? [])
+    .map((step, i) => {
+      const arrow =
+        i < copyCase.architectureSteps.length - 1
+          ? `<span class="pf-arch-arrow" aria-hidden="true">→</span>`
+          : "";
+      return `<li><span>${esc(step)}</span>${arrow}</li>`;
+    })
+    .join("");
+  return `<section class="pf-case-block">
+    <h2 class="eyebrow">${esc(t.caseFields.architecture)}</h2>
+    ${copyCase.architecture ? `<p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">${esc(copyCase.architecture)}</p>` : ""}
+    ${steps ? `<ol class="pf-arch-flow">${steps}</ol>` : ""}
+    <div class="mt-5 flex flex-wrap gap-1.5">${tech.map((tag) => `<span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">${esc(tag)}</span>`).join("")}</div>
+  </section>`;
+}
+
+function renderEvidence(item, copyCase, t) {
+  const shots = (item.screenshots ?? [])
+    .map((shot) => {
+      const alt = copyCase.screenshotAlts?.[shot.altKey] ?? item.name;
+      return `<figure class="pf-shot"><a href="${attr(shot.src)}" target="_blank" rel="noopener noreferrer"><img src="${attr(shot.src)}" alt="${attr(alt)}" loading="lazy" width="1200" height="750"/></a><figcaption>${esc(alt)}</figcaption></figure>`;
+    })
+    .join("");
+  return `<section class="pf-case-block" id="evidence">
+    <h2 class="eyebrow">${esc(t.caseFields.evidence)}</h2>
+    ${caseLinks(item, t)}
+    ${shots ? `<div class="pf-shots">${shots}</div>` : `<p class="mt-4 max-w-prose text-sm text-muted">${esc(t.casePage.noPublicShots)}</p>`}
+  </section>`;
+}
+
+function renderCaseNav(locale, currentId) {
+  const t = copy(locale);
+  const others = pagedCases()
+    .filter((item) => item.id !== currentId)
+    .map((item) => {
+      const c = t.cases[item.id];
+      return `<a class="panel p-4 pf-case-more-link" href="${attr(caseHref(locale, item.id))}">
+        <p class="font-mono text-[0.7rem] text-faint">${esc(item.section === "ai" ? t.casePage.moreAi : t.casePage.moreEnterprise)}</p>
+        <p class="mt-1 font-semibold text-fg">${esc(item.name)}</p>
+        <p class="mt-1 text-sm text-muted">${esc(c.domain)}</p>
+      </a>`;
+    })
+    .join("");
+  return `<nav class="pf-case-more" aria-label="${attr(t.casePage.next)}">
+    <p class="eyebrow mb-4">${esc(t.casePage.next)}</p>
+    <div class="pf-case-more-grid">${others}</div>
+  </nav>`;
+}
+
+export function renderCasePage(locale, id) {
+  const item = caseById(id);
+  if (!item?.hasPage) {
+    throw new Error(`Unknown case page: ${id}`);
+  }
+  const t = copy(locale);
+  const c = t.cases[id];
+  const url = `${SITE.origin}${caseHref(locale, id)}`;
+  const title = c.pageTitle || `${item.name} — ${t.hero.role}`;
+  const description = c.pageDescription || c.problem;
+  const og = `${SITE.origin}/portfolio/${locale}/opengraph-image.png`;
+  const home = `/portfolio/${locale}`;
+  const siblingPath = `/cases/${id}/`;
+  const highlights = (c.highlights ?? [])
+    .map((h) => `<li class="flex gap-2.5 text-sm text-fg/85"><span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent"></span><span>${esc(h)}</span></li>`)
+    .join("");
+  return `<!DOCTYPE html>
+<html lang="${locale}" class="__variable_3f18cd __variable_f3e80d">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>${esc(title)}</title>
+<meta name="description" content="${attr(description)}"/>
+<meta name="application-name" content="Peter Henrichs · Portfolio"/>
+<meta name="author" content="${attr(SITE.name)}"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="${attr(url)}"/>
+<link rel="alternate" hreflang="de-DE" href="${SITE.origin}${caseHref("de", id)}"/>
+<link rel="alternate" hreflang="en-US" href="${SITE.origin}${caseHref("en", id)}"/>
+<link rel="alternate" hreflang="x-default" href="${SITE.origin}${caseHref("de", id)}"/>
+<meta property="og:title" content="${attr(title)}"/>
+<meta property="og:description" content="${attr(description)}"/>
+<meta property="og:url" content="${attr(url)}"/>
+<meta property="og:site_name" content="Peter Henrichs · Portfolio"/>
+<meta property="og:locale" content="${locale === "de" ? "de_DE" : "en_US"}"/>
+<meta property="og:image" content="${attr(og)}"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="${attr(title)}"/>
+<meta property="og:type" content="article"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="${attr(title)}"/>
+<meta name="twitter:description" content="${attr(description)}"/>
+<meta name="twitter:image" content="${attr(og)}"/>
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f7f9"/>
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#080a0e"/>
+<link rel="icon" href="/portfolio/${locale}/icon.png" type="image/png" sizes="32x32"/>
+<link rel="stylesheet" href="/portfolio/de/_next/static/css/76323045a7107f6a.css"/>
+<link rel="stylesheet" href="/portfolio/portfolio.css"/>
+</head>
+<body class="min-h-screen bg-bg font-sans antialiased">
+${themeBoot()}
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:panel focus:px-4 focus:py-2 focus:text-sm">${esc(t.common.skipToContent)}</a>
+${renderNav(locale, { siblingPath, homePrefix: home })}
+<main id="main" class="pf-case-page">
+<script type="application/ld+json">${caseJsonLd(locale, item, c, url)}</script>
+<article class="container pb-20 pt-28 md:pb-28 md:pt-32">
+  <p class="eyebrow">${esc(t.casePage.caseStudy)}</p>
+  <p class="mt-4 font-mono text-xs text-faint"><a href="${attr(home)}" class="hover:text-accent">${esc(t.casePage.back)}</a> · ${esc(item.period)} · ${esc(c.domain)}</p>
+  <h1 class="mt-4 text-balance text-4xl font-semibold tracking-tight text-fg sm:text-5xl">${esc(item.name)}</h1>
+  <p class="mt-2 text-muted">${esc(item.client)}</p>
+  ${c.honesty ? `<p class="pf-honesty">${esc(c.honesty)}</p>` : ""}
+  ${renderCaseSection(t.caseFields.context, c.context)}
+  ${renderCaseSection(t.caseFields.problem, c.problem)}
+  ${renderCaseSection(t.caseFields.role, c.role)}
+  ${renderCaseSection(t.caseFields.decision, c.decision)}
+  ${renderArchitecture(c, t, item.tech)}
+  ${renderCaseSection(t.caseFields.outcome, c.outcome)}
+  ${highlights ? `<ul class="mt-2 space-y-2">${highlights}</ul>` : ""}
+  ${renderEvidence(item, c, t)}
+  ${renderCaseSection(t.caseFields.transfer, c.transfer)}
+  ${renderCaseNav(locale, id)}
+</article>
+</main>
+${renderFooter(locale)}
+<script src="/portfolio/app.js" defer></script>
+</body>
+</html>`;
+}
+
 export function renderPage(locale) {
   const t = copy(locale);
   const url = `${SITE.origin}/portfolio/${locale}`;
@@ -521,7 +693,8 @@ export function renderCv(locale) {
   const featured = CASES.filter((c) => c.featured)
     .map((item) => {
       const c = t.cases[item.id];
-      return `<article class="panel p-5 mb-3"><h3 class="font-semibold text-fg">${esc(item.name)}</h3><p class="text-sm text-muted">${esc(c.domain)}</p><p class="mt-2 text-sm">${esc(c.outcome)}</p></article>`;
+      const href = item.hasPage ? caseHref(locale, item.id) : `/portfolio/${locale}`;
+      return `<article class="panel p-5 mb-3"><h3 class="font-semibold text-fg"><a href="${attr(href)}" class="pf-case-title-link">${esc(item.name)}</a></h3><p class="text-sm text-muted">${esc(c.domain)}</p><p class="mt-2 text-sm">${esc(c.outcome)}</p></article>`;
     })
     .join("");
   const jobs = EXPERIENCE.map((item) => {
@@ -565,22 +738,37 @@ ${themeBoot()}
 
 export function renderSitemap() {
   const now = new Date().toISOString();
+  const pages = [
+    { de: `${SITE.origin}/portfolio/de`, en: `${SITE.origin}/portfolio/en`, priority: "0.8" },
+    ...pagedCases().map((item) => ({
+      de: `${SITE.origin}${caseHref("de", item.id)}`,
+      en: `${SITE.origin}${caseHref("en", item.id)}`,
+      priority: item.section === "ai" ? "0.7" : "0.65",
+    })),
+  ];
+  const urls = pages
+    .flatMap((page) => [
+      `<url>
+<loc>${page.de}</loc>
+<xhtml:link rel="alternate" hreflang="de" href="${page.de}" />
+<xhtml:link rel="alternate" hreflang="en" href="${page.en}" />
+<lastmod>${now}</lastmod>
+<changefreq>monthly</changefreq>
+<priority>${page.priority}</priority>
+</url>`,
+      `<url>
+<loc>${page.en}</loc>
+<xhtml:link rel="alternate" hreflang="de" href="${page.de}" />
+<xhtml:link rel="alternate" hreflang="en" href="${page.en}" />
+<lastmod>${now}</lastmod>
+<changefreq>monthly</changefreq>
+<priority>${page.priority === "0.8" ? "0.6" : page.priority}</priority>
+</url>`,
+    ])
+    .join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-<url>
-<loc>${SITE.origin}/portfolio/de</loc>
-<xhtml:link rel="alternate" hreflang="de" href="${SITE.origin}/portfolio/de" />
-<xhtml:link rel="alternate" hreflang="en" href="${SITE.origin}/portfolio/en" />
-<lastmod>${now}</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>${SITE.origin}/portfolio/en</loc>
-<lastmod>${now}</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.6</priority>
-</url>
+${urls}
 </urlset>
 `;
 }

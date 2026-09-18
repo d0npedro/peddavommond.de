@@ -92,25 +92,50 @@ export const en = {
   },
   caseFields: {
     problem: "Problem",
+    context: "Context",
     decision: "Decision / trade-off",
     outcome: "Outcome",
-    role: "My role",
+    role: "Role & ownership",
     evidence: "Evidence",
     ownWork: "Own work",
     transfer: "Why this matters for enterprise AI",
+    architecture: "Architecture / tech",
     repo: "Repository",
     demo: "Live demo",
     embed: "On this site",
     live: "Live",
   },
+  casePage: {
+    back: "Back to portfolio",
+    caseStudy: "Case study",
+    openCase: "Open case study",
+    screenshots: "Screenshots",
+    noPublicShots: "No public screenshots — client NDA; evidence stays qualitative and grounded in the engagement description.",
+    next: "More cases",
+    moreAi: "AI & Agentic cases",
+    moreEnterprise: "Enterprise cases",
+  },
   cases: {
     "graph-mastermind": {
       domain: "Agentic Software Engineering · Repository Intelligence",
       honesty: "Agent package for coding agents — no prescribed LLM.",
+      pageTitle: "Graph-Mastermind — agent package for coding agents | Peter Henrichs",
+      pageDescription:
+        "Public agent package: AGENT.md, SPEC.md and CHECKLIST.md as the work contract. React/TypeScript + d3-force, live demo, tests and CI. No prescribed LLM.",
+      context:
+        "Public reference project, 2026. Coding agents should not only list a target repository — they should deliver an inspectable graph and a usable architecture view.",
       problem:
         "Complex repository structure is spread across file trees, imports, and docs. Unfamiliar or grown codebases are hard to grasp quickly.",
       decision:
         "Reusable agent package: a coding agent receives an explicit work and acceptance contract via AGENT.md, SPEC.md, and CHECKLIST.md. It inspects the target repository, derives components and relationships, and produces an interactive architecture view. Contract, data model, visualization runtime, and UI stay separate. No specific LLM is required.",
+      architecture:
+        "Four separate layers: agent contract (AGENT.md, SPEC.md, CHECKLIST.md), data model (repo graph plus fallback samples), visualization runtime (d3-force on canvas, ticks without React state), and UI (toolbar, search, detail panel). No backend, no prescribed LLM.",
+      architectureSteps: [
+        "AGENT.md / SPEC.md / CHECKLIST.md",
+        "Repo graph / samples",
+        "d3-force runtime",
+        "React canvas UI",
+      ],
       outcome:
         "Public agent package, live demo, tests, typecheck, CI, and a reproducible production build. Qualitative: inspectable artifacts instead of a black-box analysis.",
       role: "Design and delivery of the reusable agent workflow and the reference application.",
@@ -121,15 +146,33 @@ export const en = {
         "Generic application to unfamiliar repositories",
         "React/TypeScript + d3-force, tests and CI as acceptance",
       ],
+      screenshotAlts: {
+        overview: "Force layout of the reference app: edge labels and toolbar",
+        detail: "Detail panel on a selected node",
+        search: "Search dims non-matches; the runtime layer stays readable",
+      },
     },
     "agent-collective": {
       domain: "Testable Multi-Agent Orchestration · Simulator",
       honesty:
         "Deterministic multi-agent simulator — no LLM backend, no tool-calling stack.",
+      pageTitle: "Agent Collective — deterministic multi-agent simulator | Peter Henrichs",
+      pageDescription:
+        "Browser simulator with no LLM backend: TypeScript state machine, failure injection, recovery, Vitest. Live demo and embed at /multi-agent/.",
+      context:
+        "Public reference project, 2026. Multi-agent behavior should be observable, stepwise, and testable — not hidden behind a chat API.",
       problem:
         "Multi-agent demos often hide system behavior behind chat UIs. State, failure, resources, and recovery stay invisible.",
       decision:
         "TypeScript state machine with six roles, a workflow graph, failure injection, recovery, and a seeded RNG for reproducible runs. The simulation layer is separated from the UI. Deliberately no real LLM, so orchestration and failure modes stay testable.",
+      architecture:
+        "A pure TypeScript engine (src/sim) owns world state. A store publishes snapshots; React Flow and panels only render. Failure injection, recovery, and a seeded RNG live in the engine — no LLM, so tests run without a browser and without a model.",
+      architectureSteps: [
+        "React dashboard",
+        "Store / snapshots",
+        "src/sim engine",
+        "Vitest without a browser",
+      ],
       outcome:
         "Live dashboard, Vitest/CI, step-wise system states. Qualitative: failure recovery and observability are inspectable, not just claimed.",
       role: "Design and delivery of the testable engine, workflow graph, and live dashboard.",
@@ -140,19 +183,37 @@ export const en = {
         "Failure injection and recovery",
         "Embedded on this site at /multi-agent/",
       ],
+      screenshotAlts: {
+        hero: "Dashboard: live graph, metrics, and task board",
+        graph: "Node graph with idle and working agents",
+        events: "External events: shortage, market shift, targeted agent failure",
+      },
     },
     deutschlandcard: {
       domain: "Loyalty · Cloud · Identity",
       honesty: "No AI/LLM component in the published case.",
+      pageTitle: "DeutschlandCard — cloud, identity, Terraform | Peter Henrichs",
+      pageDescription:
+        "Enterprise cloudification of the nationwide loyalty program: Azure AD B2C, Terraform, Kubernetes. No AI component, no invented volume metrics.",
+      context:
+        "Nationwide loyalty program (direct services Gütersloh, 2023–2026). Partner onboarding, realtime points, and campaigns had to move into a controllable cloud without cutting existing partner APIs.",
       problem:
         "Backend and interface architecture for partner onboarding, realtime point transactions, and personalized campaigns had to move into a scalable cloud environment.",
       decision:
         "Cloudify onto Azure; custom Azure AD B2C login journey; infrastructure via Terraform so identity, delivery, and existing partner APIs stay controllable — not a big-bang cutover.",
+      architecture:
+        "Spring Boot / Cloud services, Azure AD B2C as the identity layer, Terraform for reproducible infrastructure, Kubernetes/Azure as the runtime. Partner APIs stay attachable — cloudification instead of a big-bang cut.",
+      architectureSteps: [
+        "Partner APIs",
+        "Spring Cloud services",
+        "Azure AD B2C",
+        "Terraform / Kubernetes / Azure",
+      ],
       outcome:
         "Services in a scalable Azure environment; existing interfaces remain usable. No public volume or latency figures (NDA).",
       role: "Developer — login journey, Terraform automation, service cloudification.",
       transfer:
-        "This identity, API, cloud, and governance reality is exactly where AI agents later have to be embedded.",
+        "This identity, API, cloud, and governance reality is exactly where AI agents later have to be embedded. The case itself is not an AI project.",
       highlights: [
         "Custom login journey on Azure AD B2C",
         "Terraform-automated cloud infrastructure",
@@ -162,15 +223,28 @@ export const en = {
     "dz-bank-okvp": {
       domain: "Banking · Platform Engineering · Observability",
       honesty: "No AI/LLM component in the published case.",
+      pageTitle: "DZ BANK OKVP — lead-dev, migration, observability | Peter Henrichs",
+      pageDescription:
+        "Migration of Fiducia & GAD sales platforms onto OKVP: decoupled features, OpenShift pipelines, Prometheus/Grafana/Dynatrace. No AI component.",
+      context:
+        "DZ BANK / adesso, 2020. Fiducia & GAD sales platforms were to move onto the new SDK/microservice platform OKVP — with lead-dev ownership for decoupling, delivery, and operational visibility.",
       problem:
         "Grown Fiducia & GAD sales platforms had to move onto a new SDK/microservice platform (OKVP).",
       decision:
         "Decouple into independently shippable “Features”; multi-stage pipelines on OpenShift; observability with Prometheus, Grafana, and Dynatrace. Lead-dev/DevOps ownership rather than feature delivery only.",
+      architecture:
+        "OKVP splits grown sales platforms into independently shippable features. Delivery via multi-stage OpenShift pipelines; service discovery via Consul; observability with Prometheus, Grafana, and Dynatrace.",
+      architectureSteps: [
+        "Fiducia & GAD platforms",
+        "OKVP features",
+        "OpenShift / Consul",
+        "Prometheus / Grafana / Dynatrace",
+      ],
       outcome:
         "Decoupled features, controlled delivery, production-grade observability. No published performance metrics.",
       role: "DevOps / developer / lead-dev.",
       transfer:
-        "A senior AI architect needs to understand deployment, monitoring, and failure modes of production systems — not only prompts.",
+        "A senior AI architect needs to understand deployment, monitoring, and failure modes of production systems — not only prompts. The case itself is not an AI project.",
       highlights: [
         "Independently decoupleable microservices (“Features”)",
         "Multi-stage OpenShift build pipelines",
@@ -180,15 +254,28 @@ export const en = {
     "bitmarck-bitgo": {
       domain: "Statutory health insurance · Legacy modernization · Security",
       honesty: "No AI/LLM component in the published case.",
+      pageTitle: "BITMARCK bitGo_Web — GKV modernization, security, 2FA | Peter Henrichs",
+      pageDescription:
+        "Regulated statutory-health online Geschäftsstelle: legacy decoupling, REST to existing systems, 2FA for especially protected data. No AI component.",
+      context:
+        "BITMARCK Technik, 2019–2020. Digital channels of statutory health insurers (online Geschäftsstelle) interacting with BITMARCK_21c|ng: legacy, especially protected data, high security requirements.",
       problem:
         "Digital channels of statutory health insurers as an online Geschäftsstelle interacting with BITMARCK_21c|ng — legacy, sensitive data, high security requirements.",
       decision:
         "Decouple modules from the legacy landscape; REST interfaces to existing systems; 2FA for especially protected data; configurable frontend for insurer editors instead of a monolithic redesign.",
+      architecture:
+        "bitGo_Web sits in front of BITMARCK_21c|ng and legacy systems. REST interfaces and 2FA connect the online Geschäftsstelle to sensitive data without replacing the monolith in one cut. The frontend is configurable for insurer editors.",
+      architectureSteps: [
+        "Insurer editors",
+        "bitGo_Web + 2FA",
+        "REST to existing systems",
+        "21c|ng / legacy",
+      ],
       outcome:
         "Technical restructuring with 2FA and decoupled interfaces. No public throughput figures.",
       role: "Consultant / developer — backend, REST, legacy decoupling, 2FA.",
       transfer:
-        "Permissions, legacy, and sensitive data are often the real AI-transformation problem — not the model.",
+        "Permissions, legacy, and sensitive data are often the real AI-transformation problem — not the model. The case itself is not an AI project.",
       highlights: [
         "2FA for especially protected data and forms",
         "REST interfaces into a legacy landscape",

@@ -219,6 +219,124 @@ header.pf-scrolled {
   color: rgb(var(--faint));
 }
 
+.pf-case-title-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.pf-case-title-link:hover {
+  color: rgb(var(--accent));
+}
+
+.pf-case-open {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  color: rgb(var(--accent));
+}
+
+.pf-case-page .pf-case-block {
+  margin-top: 2.25rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid rgb(var(--line));
+}
+
+.pf-arch-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.35rem;
+  margin-top: 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+.pf-arch-flow li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.pf-arch-flow li > span:first-child {
+  border: 1px solid rgb(var(--line));
+  background: rgb(var(--bg-elevated));
+  border-radius: 4px;
+  padding: 0.55rem 0.75rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  color: rgb(var(--fg));
+}
+
+.pf-arch-arrow {
+  color: rgb(var(--faint));
+  font-size: 0.85rem;
+  padding: 0 0.15rem;
+}
+
+.pf-shots {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 900px) {
+  .pf-shots {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .pf-shots .pf-shot:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+.pf-shot {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgb(var(--line));
+  border-radius: 6px;
+  background: rgb(var(--bg-elevated));
+}
+
+.pf-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.pf-shot figcaption {
+  padding: 0.65rem 0.8rem 0.8rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  color: rgb(var(--faint));
+}
+
+.pf-case-more {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgb(var(--line));
+}
+
+.pf-case-more-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .pf-case-more-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.pf-case-more-link {
+  display: block;
+  text-decoration: none;
+}
+
+.pf-case-more-link:hover {
+  border-color: rgb(var(--accent) / 0.5);
+}
+
 @media print {
   header,
   .cv-actions,

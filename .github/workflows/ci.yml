@@ -53,6 +53,17 @@ jobs:
           grep -q 'Graph-Mastermind' public/portfolio/de/index.html
           grep -q 'peter.henrichs@web.de' public/portfolio/de/index.html
           test -f public/portfolio/cv/index.html
+          test -f public/portfolio/de/cases/graph-mastermind/index.html
+          test -f public/portfolio/en/cases/graph-mastermind/index.html
+          test -f public/portfolio/de/cases/agent-collective/index.html
+          test -f public/portfolio/en/cases/agent-collective/index.html
+          test -f public/portfolio/de/cases/deutschlandcard/index.html
+          test -f public/portfolio/de/cases/dz-bank-okvp/index.html
+          test -f public/portfolio/de/cases/bitmarck-bitgo/index.html
+          grep -q '/portfolio/de/cases/graph-mastermind/' public/portfolio/de/index.html
+          grep -q 'graph-mastermind' public/portfolio/de/sitemap.xml
+          grep -q 'kein LLM-Backend' public/portfolio/de/cases/agent-collective/index.html
+          grep -q 'peter.henrichs@web.de' public/portfolio/de/cases/graph-mastermind/index.html
 
       - name: Formula unit test (optional shell util)
         run: node public/win11/js/utils/formula.test.js

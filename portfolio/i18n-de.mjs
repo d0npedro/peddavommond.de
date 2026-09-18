@@ -93,25 +93,50 @@ export const de = {
   },
   caseFields: {
     problem: "Problem",
+    context: "Kontext",
     decision: "Entscheidung / Trade-off",
     outcome: "Wirkung",
-    role: "Meine Rolle",
+    role: "Rolle & Ownership",
     evidence: "Evidence",
     ownWork: "Eigener Anteil",
     transfer: "Warum das für Enterprise AI relevant ist",
+    architecture: "Architektur / Technik",
     repo: "Repository",
     demo: "Live-Demo",
     embed: "Auf dieser Site",
     live: "Live",
   },
+  casePage: {
+    back: "Zurück zum Portfolio",
+    caseStudy: "Case Study",
+    openCase: "Case Study öffnen",
+    screenshots: "Screenshots",
+    noPublicShots: "Keine öffentlichen Screenshots — Client-NDA; Evidence bleibt qualitativ und über die Projektbeschreibung belegt.",
+    next: "Weitere Cases",
+    moreAi: "AI & Agentic Cases",
+    moreEnterprise: "Enterprise Cases",
+  },
   cases: {
     "graph-mastermind": {
       domain: "Agentic Software Engineering · Repository Intelligence",
       honesty: "Agent-Paket für Coding Agents — kein festgeschriebenes LLM.",
+      pageTitle: "Graph-Mastermind — Agent-Paket für Coding Agents | Peter Henrichs",
+      pageDescription:
+        "Öffentliches Agent-Paket: AGENT.md, SPEC.md und CHECKLIST.md als Arbeitsvertrag. React/TypeScript + d3-force, Live-Demo, Tests und CI. Kein vorgeschriebenes LLM.",
+      context:
+        "Öffentliches Referenzprojekt, 2026. Coding Agents sollen ein Zielrepository nicht nur auflisten, sondern als prüfbaren Graphen und als bedienbare Architekturansicht liefern.",
       problem:
         "Komplexe Repository-Strukturen liegen über Dateibäume, Imports und Dokumentation verteilt. Fremder oder gewachsener Code ist schwer schnell zu erfassen.",
       decision:
         "Wiederverwendbares Agent-Paket: ein Coding Agent erhält über AGENT.md, SPEC.md und CHECKLIST.md einen expliziten Arbeits- und Abnahmevertrag. Er untersucht das Zielrepository, leitet Komponenten und Beziehungen ab und erzeugt eine interaktive Architekturansicht. Vertrag, Datenmodell, Visualisierungsruntime und UI bleiben getrennt. Ein bestimmtes LLM wird bewusst nicht vorausgesetzt.",
+      architecture:
+        "Vier getrennte Schichten: Agent-Vertrag (AGENT.md, SPEC.md, CHECKLIST.md), Datenmodell (Repo-Graph plus Fallback-Beispiele), Visualisierungsruntime (d3-force auf Canvas, Ticks ohne React-State) und UI (Toolbar, Suche, Detailpanel). Kein Backend, kein vorgeschriebenes LLM.",
+      architectureSteps: [
+        "AGENT.md / SPEC.md / CHECKLIST.md",
+        "Repo-Graph / Beispiele",
+        "d3-force Runtime",
+        "React Canvas UI",
+      ],
       outcome:
         "Öffentliches Agent-Paket, Live-Demo, Tests, Typecheck, CI und reproduzierbarer Production-Build. Qualitativ: nachvollziehbare Artefakte statt Black-Box-Analyse.",
       role: "Konzeption und Umsetzung des wiederverwendbaren Agent-Workflows und der Referenzanwendung.",
@@ -122,15 +147,33 @@ export const de = {
         "Generische Anwendung auf fremde Repositories",
         "React/TypeScript + d3-force, Tests und CI als Abnahme",
       ],
+      screenshotAlts: {
+        overview: "Force-Layout der Referenz-App: Kantenlabels und Toolbar",
+        detail: "Detailpanel an einem ausgewählten Knoten",
+        search: "Suche dimmt Nicht-Treffer, Runtime-Schicht bleibt lesbar",
+      },
     },
     "agent-collective": {
       domain: "Testable Multi-Agent Orchestration · Simulator",
       honesty:
         "Deterministischer Multi-Agent-Simulator — kein LLM-Backend, kein Tool-Calling-Stack.",
+      pageTitle: "Agent Collective — deterministischer Multi-Agent-Simulator | Peter Henrichs",
+      pageDescription:
+        "Browser-Simulator ohne LLM-Backend: TypeScript-State-Machine, Failure Injection, Recovery, Vitest. Live-Demo und Einbettung unter /multi-agent/.",
+      context:
+        "Öffentliches Referenzprojekt, 2026. Multi-Agent-Verhalten soll beobachtbar, schrittweise und testbar sein — nicht hinter einer Chat-API versteckt.",
       problem:
         "Multi-Agent-Demos verstecken Systemverhalten häufig hinter Chatoberflächen. Zustände, Fehler, Ressourcen und Recovery bleiben unsichtbar.",
       decision:
         "TypeScript-State-Machine mit sechs Rollen, Workflow-Graph, Failure Injection, Recovery und seeded RNG für reproduzierbare Runs. Die Simulationsschicht ist von der UI getrennt. Bewusst kein reales LLM, damit Orchestrierung und Fehlermodi testbar bleiben.",
+      architecture:
+        "Reine TypeScript-Engine (src/sim) besitzt den Weltzustand. Ein Store veröffentlicht Snapshots; React Flow und Panels rendern nur. Failure Injection, Recovery und seeded RNG sitzen in der Engine — ohne LLM, damit Tests ohne Browser und ohne Modell laufen.",
+      architectureSteps: [
+        "React-Dashboard",
+        "Store / Snapshots",
+        "src/sim Engine",
+        "Vitest ohne Browser",
+      ],
       outcome:
         "Live-Dashboard, Vitest/CI, schrittweise ausführbare Systemzustände. Qualitativ: Failure Recovery und Observability sind beobachtbar, nicht nur behauptet.",
       role: "Konzeption und Umsetzung der testbaren Engine, des Workflow-Graphen und des Live-Dashboards.",
@@ -141,19 +184,37 @@ export const de = {
         "Failure Injection und Recovery",
         "Auf dieser Site unter /multi-agent/ eingebettet",
       ],
+      screenshotAlts: {
+        hero: "Dashboard: Live-Graph, Metriken und Task Board",
+        graph: "Knotengraph mit idle- und working-Agenten",
+        events: "Externe Events: Shortage, Markt, gezielter Agent-Failure",
+      },
     },
     deutschlandcard: {
       domain: "Loyalty · Cloud · Identity",
       honesty: "Kein AI-/LLM-Bestandteil im veröffentlichten Case.",
+      pageTitle: "DeutschlandCard — Cloud, Identity, Terraform | Peter Henrichs",
+      pageDescription:
+        "Enterprise-Cloudifizierung des bundesweiten Bonusprogramms: Azure AD B2C, Terraform, Kubernetes. Kein AI-Bestandteil, keine erfundenen Volumenkennzahlen.",
+      context:
+        "Bundesweites Loyalty-Programm (direct services Gütersloh, 2023–2026). Partner-Onboarding, Echtzeit-Punkte und Kampagnen mussten in eine kontrollierbare Cloud, ohne bestehende Partner-Schnittstellen abzuschneiden.",
       problem:
         "Backend- und Schnittstellenarchitektur für Partner-Onboarding, Echtzeit-Punktetransaktionen und personalisierte Kampagnen musste in eine skalierbare Cloud-Umgebung.",
       decision:
         "Cloudifizierung nach Azure; individuelle Azure-AD-B2C-Login-Journey; Infrastruktur über Terraform, damit Identity, Delivery und bestehende Partner-Schnittstellen kontrollierbar bleiben — statt eines Big-Bang-Schnitts.",
+      architecture:
+        "Spring-Boot-/Cloud-Services, Azure AD B2C als Identity-Schicht, Terraform für reproduzierbare Infrastruktur, Kubernetes/Azure als Laufzeit. Partner-APIs bleiben anschlussfähig — Cloudifizierung statt Big-Bang-Schnitt.",
+      architectureSteps: [
+        "Partner-APIs",
+        "Spring Cloud Services",
+        "Azure AD B2C",
+        "Terraform / Kubernetes / Azure",
+      ],
       outcome:
         "Services in einer skalierbaren Azure-Umgebung; bestehende Schnittstellen weiter nutzbar. Keine öffentlichen Volumen- oder Latenzzahlen (NDA).",
       role: "Entwickler — Login-Journey, Terraform-Automatisierung, Cloudifizierung von Services.",
       transfer:
-        "Genau diese Identity-, API-, Cloud- und Governance-Realität ist der Boden, in den AI Agents später eingebettet werden müssen.",
+        "Genau diese Identity-, API-, Cloud- und Governance-Realität ist der Boden, in den AI Agents später eingebettet werden müssen. Der Case selbst ist kein AI-Projekt.",
       highlights: [
         "Individuelle Login-Journey auf Azure AD B2C",
         "Terraform-automatisierte Cloud-Infrastruktur",
@@ -163,15 +224,28 @@ export const de = {
     "dz-bank-okvp": {
       domain: "Banking · Platform Engineering · Observability",
       honesty: "Kein AI-/LLM-Bestandteil im veröffentlichten Case.",
+      pageTitle: "DZ BANK OKVP — Lead-Dev, Migration, Observability | Peter Henrichs",
+      pageDescription:
+        "Migration der Fiducia-&-GAD-Vertriebsplattformen auf OKVP: entkoppelte Features, OpenShift-Pipelines, Prometheus/Grafana/Dynatrace. Kein AI-Bestandteil.",
+      context:
+        "DZ BANK / adesso, 2020. Vertriebsplattformen von Fiducia & GAD sollten auf die neue SDK-/Microservice-Plattform OKVP — mit Lead-Dev-Verantwortung für Entkopplung, Delivery und Betriebssichtbarkeit.",
       problem:
         "Gewachsene Vertriebsplattformen von Fiducia & GAD mussten auf eine neue SDK-/Microservice-Plattform (OKVP).",
       decision:
         "Entkopplung in unabhängig auslieferbare „Features“; Multi-Stage-Pipelines auf OpenShift; Observability mit Prometheus, Grafana und Dynatrace. Lead-Dev-/DevOps-Verantwortung statt reiner Feature-Lieferung.",
+      architecture:
+        "OKVP zerlegt gewachsene Vertriebsplattformen in unabhängig auslieferbare Features. Delivery über mehrstufige OpenShift-Pipelines; Service Discovery über Consul; Observability mit Prometheus, Grafana und Dynatrace.",
+      architectureSteps: [
+        "Fiducia & GAD Plattformen",
+        "OKVP Features",
+        "OpenShift / Consul",
+        "Prometheus / Grafana / Dynatrace",
+      ],
       outcome:
         "Entkoppelte Features, kontrollierte Delivery, produktionsnahe Observability. Keine veröffentlichten Performance-Metriken.",
       role: "DevOps / Entwickler / Lead-Dev.",
       transfer:
-        "Ein Senior AI Architect muss Deployment, Monitoring und Fehlermodi produktiver Systeme verstehen — nicht nur Prompts.",
+        "Ein Senior AI Architect muss Deployment, Monitoring und Fehlermodi produktiver Systeme verstehen — nicht nur Prompts. Der Case selbst ist kein AI-Projekt.",
       highlights: [
         "Unabhängig entkoppelbare Microservices („Features“)",
         "Mehrstufige OpenShift-Build-Pipelines",
@@ -181,15 +255,28 @@ export const de = {
     "bitmarck-bitgo": {
       domain: "GKV · Legacy-Modernisierung · Security",
       honesty: "Kein AI-/LLM-Bestandteil im veröffentlichten Case.",
+      pageTitle: "BITMARCK bitGo_Web — GKV-Modernisierung, Security, 2FA | Peter Henrichs",
+      pageDescription:
+        "Regulierte GKV-Online-Geschäftsstelle: Legacy-Entkopplung, REST zu Bestandssystemen, 2FA für besonders geschützte Daten. Kein AI-Bestandteil.",
+      context:
+        "BITMARCK Technik, 2019–2020. Digitale Kanäle gesetzlicher Krankenkassen (Online-Geschäftsstelle) im Zusammenspiel mit BITMARCK_21c|ng: Legacy, besonders geschützte Daten, hohe Sicherheitsanforderungen.",
       problem:
         "Digitale Kanäle gesetzlicher Krankenkassen als Online-Geschäftsstelle im Zusammenspiel mit BITMARCK_21c|ng — Legacy, sensible Daten, hohe Sicherheitsanforderungen.",
       decision:
         "Module aus der Legacy-Landschaft entkoppeln; REST-Schnittstellen zu Bestandssystemen; 2FA für besonders geschützte Daten; konfigurierbares Frontend für Kassen-Redakteure statt eines monolithischen Redesigns.",
+      architecture:
+        "bitGo_Web sitzt vor BITMARCK_21c|ng und Legacy-Bestand. REST-Schnittstellen und 2FA koppeln die Online-Geschäftsstelle an sensible Daten, ohne den Monolithen in einem Wurf zu ersetzen. Das Frontend ist für Kassen-Redakteure konfigurierbar.",
+      architectureSteps: [
+        "Kassen-Redakteure",
+        "bitGo_Web + 2FA",
+        "REST zu Bestand",
+        "21c|ng / Legacy",
+      ],
       outcome:
         "Technische Neustrukturierung mit 2FA und entkoppelten Schnittstellen. Keine öffentlichen Durchsatzzahlen.",
       role: "Berater / Entwickler — Backend, REST, Legacy-Entkopplung, 2FA.",
       transfer:
-        "Berechtigungen, Legacy und sensible Daten sind oft das eigentliche Problem von AI Transformation — nicht das Modell.",
+        "Berechtigungen, Legacy und sensible Daten sind oft das eigentliche Problem von AI Transformation — nicht das Modell. Der Case selbst ist kein AI-Projekt.",
       highlights: [
         "2FA für besonders geschützte Daten und Formulare",
         "REST-Schnittstellen in eine Legacy-Landschaft",

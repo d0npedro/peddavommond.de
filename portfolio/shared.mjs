@@ -53,9 +53,24 @@ export const CASES = [
       "d3-force",
       "CI / Typecheck",
     ],
+    hasPage: true,
     links: [
       { kind: "repo", href: "https://github.com/d0npedro/graph-mastermind" },
       { kind: "demo", href: "https://graph-mastermind.vercel.app" },
+    ],
+    screenshots: [
+      {
+        src: "https://raw.githubusercontent.com/d0npedro/graph-mastermind/main/docs/screenshots/overview.png",
+        altKey: "overview",
+      },
+      {
+        src: "https://raw.githubusercontent.com/d0npedro/graph-mastermind/main/docs/screenshots/detail.png",
+        altKey: "detail",
+      },
+      {
+        src: "https://raw.githubusercontent.com/d0npedro/graph-mastermind/main/docs/screenshots/search.png",
+        altKey: "search",
+      },
     ],
   },
   {
@@ -73,16 +88,32 @@ export const CASES = [
       "Vitest",
       "React 19",
     ],
+    hasPage: true,
     links: [
       { kind: "repo", href: "https://github.com/d0npedro/multi-agent" },
       { kind: "demo", href: "https://multi-agent-six-murex.vercel.app" },
       { kind: "embed", href: "/multi-agent/" },
+    ],
+    screenshots: [
+      {
+        src: "https://raw.githubusercontent.com/d0npedro/multi-agent/main/docs/screenshots/hero.png",
+        altKey: "hero",
+      },
+      {
+        src: "https://raw.githubusercontent.com/d0npedro/multi-agent/main/docs/screenshots/graph-live.png",
+        altKey: "graph",
+      },
+      {
+        src: "https://raw.githubusercontent.com/d0npedro/multi-agent/main/docs/screenshots/events.png",
+        altKey: "events",
+      },
     ],
   },
   {
     id: "deutschlandcard",
     section: "enterprise",
     featured: true,
+    hasPage: true,
     name: "DeutschlandCard",
     client: "direct services Gütersloh GmbH",
     period: "2023 – 2026",
@@ -101,6 +132,7 @@ export const CASES = [
     id: "dz-bank-okvp",
     section: "enterprise",
     featured: true,
+    hasPage: true,
     name: "DZ BANK OKVP",
     client: "DZ BANK AG · adesso AG",
     period: "2020",
@@ -121,6 +153,7 @@ export const CASES = [
     id: "bitmarck-bitgo",
     section: "enterprise",
     featured: true,
+    hasPage: true,
     name: "BITMARCK bitGo_Web",
     client: "BITMARCK Technik GmbH",
     period: "2019 – 2020",
@@ -636,6 +669,18 @@ export function stackCount() {
 
 export function featuredCases() {
   return CASES.filter((c) => c.featured);
+}
+
+export function pagedCases() {
+  return CASES.filter((c) => c.hasPage);
+}
+
+export function caseById(id) {
+  return CASES.find((c) => c.id === id) ?? null;
+}
+
+export function caseHref(locale, id) {
+  return `/portfolio/${locale}/cases/${id}/`;
 }
 
 export function casesBySection(section) {

@@ -6,8 +6,8 @@
 import { mkdir, writeFile, copyFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { LOCALES, DEFAULT_LOCALE } from "../portfolio/shared.mjs";
-import { renderPage, renderCv, renderSitemap } from "../portfolio/render.mjs";
+import { LOCALES, DEFAULT_LOCALE, pagedCases } from "../portfolio/shared.mjs";
+import { renderPage, renderCv, renderSitemap, renderCasePage } from "../portfolio/render.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const pub = join(root, "public", "portfolio");
@@ -21,6 +21,9 @@ async function write(path, contents) {
 async function main() {
   for (const locale of LOCALES) {
     await write(join(pub, locale, "index.html"), renderPage(locale));
+    for (const item of pagedCases()) {
+      await write(join(pub, locale, "cases", item.id, "index.html"), renderCasePage(locale, item.id));
+    }
   }
   await write(join(pub, "cv", "index.html"), renderCv(DEFAULT_LOCALE));
   await write(join(pub, "de", "sitemap.xml"), renderSitemap());

@@ -1,9 +1,11 @@
-import { readFile } from "node:fs/promises";
+import { readFile, access } from "node:fs/promises";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { pagedCases, caseHref, SITE } from "../portfolio/shared.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const failures = [];
+const CASE_IDS = pagedCases().map((c) => c.id);
 
 function assert(cond, message) {
   if (!cond) failures.push(message);
@@ -39,6 +41,9 @@ async function check(locale) {
   assert(html.includes("Agentic AI"), `${prefix} missing Agentic AI in content/schema`);
   assert(html.includes("LLM-assisted Software Engineering") || html.includes("LLM-gestützte"), `${prefix} missing LLM-assisted engineering term`);
   assert(!html.includes("MCP") || /MCP claims|MCP-Claims|ohne Modell/.test(html), `${prefix} should not claim MCP as a skill`);
+  for (const id of CASE_IDS) {
+    assert(html.includes(caseHref(locale, id)), `${prefix} homepage missing deep-link to ${id}`);
+  }
 }
 
 async function checkCv() {
@@ -56,9 +61,68 @@ const [de, en] = await Promise.all([
 assert(de.includes("AI Cases ansehen") || de.includes("AI Cases"), "DE primary CTA missing");
 assert(en.includes("View AI cases") || en.includes("AI cases"), "EN primary CTA missing");
 
+async function exists(path) {
+  try {
+    await access(path);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function checkCase(locale, id) {
+  const rel = join("public/portfolio", locale, "cases", id, "index.html");
+  const path = join(root, rel);
+  assert(await exists(path), `missing case page ${rel}`);
+  const html = await readFile(path, "utf8");
+  const prefix = `[${locale}/${id}]`;
+  assert(html.includes("peter.henrichs@web.de"), `${prefix} missing email`);
+  assert(!html.includes("ph@d0npedro.com"), `${prefix} still has old hiring email`);
+  assert(html.includes("Senior AI Consultant"), `${prefix} missing positioning`);
+  const hasProblem = html.includes(">Problem<") || html.includes("Problem");
+  const hasDecision = html.includes("Entscheidung") || html.includes("Decision");
+  const hasOutcome = html.includes("Wirkung") || html.includes("Outcome");
+  assert(hasProblem && hasDecision && hasOutcome, `${prefix} missing Problem/Decision/Outcome schema`);
+  assert(html.includes("Rolle") || html.includes("Role"), `${prefix} missing role section`);
+  assert(html.includes("Architektur") || html.includes("Architecture"), `${prefix} missing architecture section`);
+  if (id === "graph-mastermind") {
+    assert(html.includes("github.com/d0npedro/graph-mastermind"), `${prefix} missing repo`);
+    assert(html.includes("graph-mastermind.vercel.app"), `${prefix} missing demo`);
+    assert(html.includes("raw.githubusercontent.com/d0npedro/graph-mastermind"), `${prefix} missing public screenshot`);
+    assert(html.includes("AGENT.md"), `${prefix} missing agent contract`);
+  }
+  if (id === "agent-collective") {
+    assert(html.includes("github.com/d0npedro/multi-agent"), `${prefix} missing repo`);
+    assert(html.includes("multi-agent-six-murex.vercel.app"), `${prefix} missing demo`);
+    assert(html.includes("/multi-agent/"), `${prefix} missing on-site embed`);
+    assert(/kein LLM|no LLM|ohne LLM/i.test(html), `${prefix} must state there is no LLM backend`);
+    assert(!/GPT-|OpenAI API|Claude API|LLM-powered|powered by an LLM/i.test(html), `${prefix} must not invent an LLM backend`);
+    assert(html.includes("raw.githubusercontent.com/d0npedro/multi-agent"), `${prefix} missing public screenshot`);
+  }
+  if (id === "deutschlandcard" || id === "dz-bank-okvp" || id === "bitmarck-bitgo") {
+    assert(/Kein AI|No AI/.test(html), `${prefix} must not invent client AI work`);
+  }
+}
+
+async function checkSitemap() {
+  const xml = await readFile(join(root, "public/portfolio/de/sitemap.xml"), "utf8");
+  assert(xml.includes(`${SITE.origin}/portfolio/de`), "sitemap missing DE home");
+  assert(xml.includes(`${SITE.origin}/portfolio/en`), "sitemap missing EN home");
+  for (const id of CASE_IDS) {
+    assert(xml.includes(`${SITE.origin}${caseHref("de", id)}`), `sitemap missing DE ${id}`);
+    assert(xml.includes(`${SITE.origin}${caseHref("en", id)}`), `sitemap missing EN ${id}`);
+  }
+}
+
 await check("de");
 await check("en");
 await checkCv();
+for (const locale of ["de", "en"]) {
+  for (const id of CASE_IDS) {
+    await checkCase(locale, id);
+  }
+}
+await checkSitemap();
 
 if (failures.length) {
   console.error("portfolio verify failed:\n- " + failures.join("\n- "));
