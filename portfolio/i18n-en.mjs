@@ -1,14 +1,14 @@
 export const en = {
   meta: {
-    title: "Peter Henrichs | Senior AI Consultant – Agentic AI & Enterprise Systems",
+    title: "Peter Henrichs | Senior AI Consultant & Agentic Software Engineer",
     description:
-      "Senior AI Consultant with 10+ years of enterprise software engineering. Focus on LLMs, AI Agents, automation, enterprise integration, and AI transformation.",
-    ogAlt: "Peter Henrichs | Senior AI Consultant – Agentic AI & Enterprise Systems · Cologne",
+      "Senior AI Consultant and software engineer with 10+ years of enterprise experience. Focus on LLMs, AI agents, automation, and enterprise integration.",
+    ogAlt: "Peter Henrichs | Senior AI Consultant & Agentic Software Engineer · Cologne",
     keywords:
-      "Peter Henrichs,Cologne,Senior AI Consultant,Agentic AI,Enterprise Systems,LLMs,AI Agents,AI Automation,Java,Spring,Cloud,Enterprise Engineering",
-    jobTitle: "Senior AI Consultant",
+      "Peter Henrichs,Cologne,Senior AI Consultant,Agentic Software Engineer,Agentic AI,LLMs,AI Agents,Automation,Enterprise Engineering,Java,Spring,Cloud",
+    jobTitle: "Senior AI Consultant & Agentic Software Engineer",
     personDescription:
-      "Peter Henrichs is a Senior AI Consultant based in Cologne. Focus: Agentic AI, enterprise systems, and automation. Seniority comes from 10+ years of enterprise software engineering — not the other way around.",
+      "Peter Henrichs is a Senior AI Consultant and Agentic Software Engineer based in Cologne. Seniority comes from 10+ years of enterprise software engineering; Agentic AI, LLMs, and automation are the current specialization on that foundation — not instead of it.",
   },
   common: {
     skipToContent: "Skip to content",
@@ -30,30 +30,35 @@ export const en = {
     toDark: "Switch to dark mode",
   },
   hero: {
-    eyebrow: "SENIOR AI CONSULTANT · AGENTIC AI · ENTERPRISE SYSTEMS",
-    role: "Senior AI Consultant · Agentic AI · Enterprise Systems",
-    h1: "I bring AI agents into real enterprise systems.",
+    eyebrow: "Enterprise Engineering × Agentic AI × Transformation",
+    role: "Senior AI Consultant & Agentic Software Engineer",
+    h1: "I design AI-augmented systems that connect LLMs, agents and automation with real enterprise software.",
     location: "Cologne · Germany-wide / Remote",
     tagline:
-      "More than 10 years of enterprise software engineering — now focused on LLMs, agentic workflows, and AI automation. Architecture, integration, and consulting, so AI demos become solutions that hold up.",
+      "I connect more than ten years of enterprise software engineering with Agentic AI, LLMs, and intelligent automation — architecture, integration, and consulting, not demos beside the system.",
     proof:
-      "10+ years Enterprise Engineering · Java · Spring · Cloud · Integration · LLMs · AI Agents · Automation",
+      "ENGINEERING · 10+ years enterprise systems · AGENTIC AI · LLMs · Agents · Automation · INTEGRATION · APIs · Cloud · Existing IT · CONSULTING · Use Cases · Architecture · Transformation",
+    proofChips: [
+      { label: "ENGINEERING", body: "10+ years enterprise systems" },
+      { label: "AGENTIC AI", body: "LLMs · Agents · Automation" },
+      { label: "INTEGRATION", body: "APIs · Cloud · Existing IT" },
+      { label: "CONSULTING", body: "Use Cases · Architecture · Transformation" },
+    ],
+    contextLine: "adesso · Finance · Public Sector · Healthcare · Loyalty",
     trust:
-      "10+ years of enterprise software engineering. Currently specialized in Agentic AI — not the other way around.",
-    ctaPrimary: "View AI cases",
-    ctaSecondary: "Open profile / CV",
+      "10+ years of enterprise engineering. Now applied to Agentic AI — not the other way around.",
+    ctaPrimary: "Selected AI & Engineering Cases",
+    ctaSecondary: "CV",
     ctaTertiary: "Talk about AI & agents",
-    diagramTitle: "Agentic system — goal, orchestration, evaluation, action",
+    diagramTitle: "Agentic system — goal, orchestration, evaluation, human",
     diagramAlt:
-      "System diagram: a goal reaches an orchestrator that talks to a model, context/RAG, and tools. Evaluation decides between an automatic action and human review.",
+      "System diagram: a goal reaches an orchestrator that talks to tools and a model. Evaluation and human review bound autonomy.",
     diagramLabels: {
       goal: "Goal",
       orchestrator: "Orchestrator",
       model: "Model",
-      rag: "Context / RAG",
-      tools: "Tools / APIs",
-      eval: "Evaluation",
-      action: "Action",
+      tools: "Tools",
+      eval: "Eval",
       human: "Human",
     },
     metricLabels: [
@@ -64,24 +69,32 @@ export const en = {
     ],
     languagesLabel: "Languages",
   },
-  impact: {
-    index: "01",
-    eyebrow: "Where I create impact",
-    title: "Three fields — agents, processes, existing software.",
+  value: {
+    index: "02",
+    eyebrow: "Where I create value",
+    title: "Where I can be put to work — concrete, no marketese.",
     description:
-      "Not tool demos beside the system. Integration into identity, APIs, data, and operations — where enterprise software already runs.",
+      "I understand the system that exists today. I understand what current AI can realistically do. And I can connect the two.",
     items: [
       {
-        title: "Integrate agents",
-        body: "Embed AI agents into existing IT, data, and process landscapes: tools, permissions, APIs, and controlled actions instead of isolated chatbots.",
+        title: "Agentic AI Solution Consulting",
+        body: "Find use cases, design agent architecture, and accompany prototypes and integrations — with a contract, acceptance, and explicit bounds.",
       },
       {
-        title: "Automate processes",
-        body: "Turn manual work into inspectable workflows — with quality gates, escalation, and human-in-the-loop, not unsupervised autonomy.",
+        title: "Enterprise AI Integration",
+        body: "Connect AI to APIs, backends, identity, and existing systems. The ground is running IT, not a greenfield chat.",
       },
       {
-        title: "Modernize software",
-        body: "Shape identity, interfaces, cloud, and CI/CD so later AI layers can land on them. The enterprise foundation is the moat.",
+        title: "AI-Augmented Software Engineering",
+        body: "Coding agents, repository analysis, tests, and refactoring workflows — human review stays part of the architecture.",
+      },
+      {
+        title: "AI Transformation & Use Cases",
+        body: "Join business potential, feasibility, and the landscape that already exists. No board-level fiction, no invented KPIs.",
+      },
+      {
+        title: "AI Platform & Modernization",
+        body: "Shape cloud, microservices, CI/CD, and identity so a later AI layer can land on them.",
       },
     ],
   },
@@ -93,31 +106,31 @@ export const en = {
   },
   track: {
     index: "03",
-    eyebrow: "Enterprise Track Record",
-    title: "Four to five milestones — not the full CV.",
+    eyebrow: "Career trajectory",
+    title: "Engineer → Agentic AI → Consulting. Five stations, not the CV.",
     description:
-      "Paid enterprise delivery in banking, public sector, healthcare, and loyalty. Details and NDA limits live on the case pages and in the CV.",
+      "Seniority does not start in 2026. Agentic AI sits on paid enterprise delivery — banking, public sector, healthcare, loyalty. Details and NDA limits live on the case pages and in the CV.",
     more: "All stations in the CV",
     items: {
+      builder: {
+        title: "Engineer & ownership",
+        body: "Six live portals end to end: build, operations, intranet. The base for later system ownership.",
+      },
+      enterprise: {
+        title: "Enterprise engineering",
+        body: "Regulated landscapes at adesso, NextGen, and binaris: banking migration, statutory-health security, government APIs, healthcare interoperability.",
+      },
       deutschlandcard: {
-        title: "DeutschlandCard — cloud, identity, Terraform",
-        body: "Cloudification of the nationwide loyalty program: Azure AD B2C, reproducible infrastructure, partner APIs that stay usable.",
+        title: "Complex systems in production",
+        body: "Cloud, identity, and integration on the nationwide loyalty program. The enterprise ground agents later have to land on.",
       },
-      itzbund: {
-        title: "ITZBund — APIs, OAuth2, delivery",
-        body: "Interfaces between mobile clients and government specialist procedures; shared libraries and authentication workflows.",
+      agentic: {
+        title: "Agentic AI — Independent R&D",
+        body: "Public systems for grown codebases and inspectable multi-agent orchestration. Not client operations, not an invented LLM backend.",
       },
-      "dz-bank": {
-        title: "DZ BANK OKVP — lead-dev, migration, observability",
-        body: "Sales platforms onto a microservice platform: decoupled features, OpenShift pipelines, operational visibility.",
-      },
-      bitmarck: {
-        title: "BITMARCK bitGo_Web — statutory health, security, 2FA",
-        body: "Online Geschäftsstelle for statutory health insurers: legacy decoupling, REST, two-factor for especially protected data.",
-      },
-      amp: {
-        title: "adesso Microservice Platform",
-        body: "Reusable infrastructure samples and delivery know-how for microservice architectures.",
+      consulting: {
+        title: "Consulting and leadership path",
+        body: "AI Manager and AI Automation support the specialization. They do not replace enterprise seniority or paid AI client delivery.",
       },
     },
   },
@@ -147,11 +160,11 @@ export const en = {
     ],
   },
   selectedCases: {
-    index: "02",
-    eyebrow: "Selected Cases",
-    title: "Three examples — AI, automation, and enterprise integration.",
+    index: "01",
+    eyebrow: "Selected AI & Engineering Cases",
+    title: "Three cases — lab and enterprise labeled separately.",
     description:
-      "Three examples of how I connect AI, software engineering, and enterprise integration. Technical results and project status are deliberately kept separate from productive client work.",
+      "Graph-Mastermind and Agent Collective are independent, publicly inspectable systems. DeutschlandCard is paid enterprise delivery. DZ BANK and BITMARCK live in the track record, not as a fourth and fifth equal card.",
     rndNote:
       "Independent R&D — conceived and delivered independently. Technical results and project status are deliberately kept separate from productive client work.",
     clientNote:
@@ -285,7 +298,7 @@ export const en = {
   casePage: {
     back: "Back to portfolio",
     caseStudy: "Case study",
-    openCase: "Open case study",
+    openCase: "View case",
     screenshots: "Screenshots",
     noPublicShots: "No public screenshots — client NDA; evidence stays qualitative and grounded in the engagement description.",
     next: "More cases",
@@ -302,6 +315,7 @@ export const en = {
       domain: "Agentic Software Engineering · Repository Intelligence",
       badge: "Independent R&D · Agentic AI",
       landingTitle: "Agentic engineering for grown codebases",
+      landingCta: "View the agentic-engineering case",
       oneLiner:
         "An agentic engineering workflow inspects existing repositories, plans changes, works with development tools and tests, and keeps critical results under separate evaluation.",
       honesty: "Independent R&D — agent package for coding agents, no prescribed LLM, no client operations.",
@@ -354,8 +368,9 @@ export const en = {
     },
     "agent-collective": {
       domain: "AI Automation · Testable multi-agent orchestration",
-      badge: "Independent R&D · AI Automation",
-      landingTitle: "Inspectable multi-agent orchestration for processes",
+      badge: "Independent R&D · Deterministic · no LLM backend",
+      landingTitle: "Inspectable multi-agent orchestration",
+      landingCta: "View the orchestration case",
       oneLiner:
         "A deterministic multi-agent simulator makes state, quality gates, and escalations visible — deliberately with no LLM backend, so orchestration and failure modes stay testable.",
       honesty:
@@ -408,7 +423,8 @@ export const en = {
     deutschlandcard: {
       domain: "Loyalty · Cloud · Identity",
       badge: "Professional Track Record · Enterprise",
-      landingTitle: "Cloud, identity, and integration at DeutschlandCard",
+      landingTitle: "Cloud, identity, integration",
+      landingCta: "View the enterprise case",
       oneLiner:
         "Paid cloudification of the nationwide loyalty program: Azure AD B2C, Terraform, Kubernetes. That identity/API/cloud ground is the moat for later AI integration — the case itself is not an AI project.",
       honesty: "No AI/LLM component in the published case. No volume or latency figures (NDA).",
@@ -572,9 +588,9 @@ export const en = {
   competencies: {
     index: "04",
     eyebrow: "Capabilities",
-    title: "Four capability groups — not a skill wall.",
+    title: "Five groups — not a skill wall.",
     description:
-      "Strategy, Architecture, Agentic Engineering, Governance. The detailed stack is evidence, not identity — and it does not sit on the landing page.",
+      "Strategy, Architecture, Agentic Engineering, Delivery, Governance. The detailed stack is evidence, not identity — and it does not sit on the landing page.",
     pillars: [
       {
         title: "Strategy",
@@ -587,6 +603,10 @@ export const en = {
       {
         title: "Agentic Engineering",
         body: "Agent contracts, repository intelligence, testable multi-agent orchestration, LLM-assisted engineering. Publicly evidenced, without model or MCP claims.",
+      },
+      {
+        title: "Delivery",
+        body: "CI/CD, Terraform, Kubernetes, OpenShift, lead-dev ownership. Decoupling without a big bang. What survives production.",
       },
       {
         title: "Governance",
@@ -643,7 +663,7 @@ export const en = {
   industries: {
     eyebrow: "Enterprise domains",
     title: "Regulated and operational landscapes — no logo wallpaper.",
-    line: "Banking · Public Sector · Healthcare · Loyalty · Insurance · Automotive",
+    line: "adesso · Finance · Public Sector · Healthcare · Loyalty",
     names: [
       "Banking",
       "Public Sector",
@@ -813,24 +833,24 @@ export const en = {
   },
   footer: {
     eyebrow: "Conversation",
-    title: "Talk about AI & agents.",
-    body: "Looking for someone who understands enterprise software and can not only assess current agentic-AI technology, but implement it in practice? Let’s talk. No freelancer retainer, no free slots, no agency pitch.",
+    title: "A conversation about AI & agents.",
+    body: "Looking for someone who understands enterprise software and can not only assess Agentic AI, but connect it in practice? CV, LinkedIn, and GitHub are ready. No freelancer retainer, no free slots, no agency pitch.",
     email: "Email",
     linkedin: "LinkedIn",
     github: "GitHub",
     cv: "CV (HTML)",
     cvNote:
       "HTML CV for print or Save as PDF. A separate PDF can later be added under /portfolio/cv/. No invented Drive URLs.",
-    roleLine: "Senior AI Consultant · Agentic AI · Enterprise Systems",
+    roleLine: "Senior AI Consultant & Agentic Software Engineer",
     personalNote: "",
   },
   cv: {
     title: "CV — Peter Henrichs",
-    subtitle: "Senior AI Consultant · Agentic AI · Enterprise Systems",
+    subtitle: "Senior AI Consultant & Agentic Software Engineer",
     print: "Print / save as PDF",
     back: "Back to portfolio",
     intro:
-      "10+ years of enterprise software engineering in Cologne. Current specialization: LLMs, AI Agents, and Automation — on a foundation of Java/Spring, cloud, and regulated integration.",
+      "10+ years of enterprise software engineering in Cologne. Now applied to Agentic AI, LLMs, and automation — on a foundation of Java/Spring, cloud, and regulated integration.",
     todo: "TODO: optionally place a PDF at public/portfolio/cv/Peter-Henrichs-CV.pdf and keep this HTML path as fallback. Do not invent Drive URLs.",
   },
 };

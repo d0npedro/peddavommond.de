@@ -24,6 +24,14 @@
     transform: none;
     transition: none;
   }
+
+  .pf-diagram-edge,
+  .pf-diagram-nodes .pf-diagram-node {
+    animation: none !important;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
 }
 
 .pf-visible {
@@ -41,9 +49,9 @@
 
 .pf-role {
   display: block;
-  margin-top: 1.25rem;
+  margin-top: 0.65rem;
   max-width: 46rem;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 600;
   letter-spacing: -0.02em;
   color: rgb(var(--accent));
@@ -52,6 +60,12 @@
 .pf-hero-grid {
   display: grid;
   gap: 2.5rem;
+}
+
+@media (max-width: 1023px) {
+  .pf-diagram {
+    display: none;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -65,9 +79,142 @@
 .pf-trust {
   margin-top: 1.1rem;
   max-width: 36rem;
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   line-height: 1.55;
+  font-weight: 600;
   color: rgb(var(--fg));
+}
+
+.pf-proof-strip {
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .pf-proof-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .pf-proof-strip {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.pf-proof-chip {
+  border: 1px solid rgb(var(--line));
+  background: rgb(var(--bg-elevated));
+  border-radius: 4px;
+  padding: 0.85rem 0.95rem;
+}
+
+.pf-proof-label {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(var(--accent));
+}
+
+.pf-proof-body {
+  margin-top: 0.35rem;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: rgb(var(--fg));
+}
+
+.pf-value-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .pf-value-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .pf-value-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.pf-value-card {
+  min-height: 100%;
+}
+
+.pf-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.75rem 1.15rem;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.pf-cta--primary {
+  border: 1px solid rgb(var(--accent));
+  background: rgb(var(--accent));
+  color: #fff;
+}
+
+.dark .pf-cta--primary {
+  color: rgb(var(--bg));
+}
+
+.pf-cta--secondary {
+  border: 1px solid rgb(var(--line));
+  background: rgb(var(--bg-elevated));
+  color: rgb(var(--fg));
+}
+
+.pf-cta--secondary:hover {
+  border-color: rgb(var(--accent));
+  color: rgb(var(--accent));
+}
+
+.pf-track-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
+.pf-track-link {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  color: rgb(var(--accent));
+}
+
+.pf-diagram-edge {
+  stroke-dasharray: 80;
+  stroke-dashoffset: 80;
+  animation: pf-draw 700ms ease-out forwards;
+}
+
+.pf-diagram-nodes .pf-diagram-node {
+  animation: pf-node-in 400ms ease-out both;
+}
+
+.pf-diagram-nodes .pf-diagram-node:nth-of-type(1) { animation-delay: 80ms; }
+.pf-diagram-nodes .pf-diagram-node:nth-of-type(2) { animation-delay: 180ms; }
+.pf-diagram-nodes .pf-diagram-node:nth-of-type(3),
+.pf-diagram-nodes .pf-diagram-node:nth-of-type(4),
+.pf-diagram-nodes .pf-diagram-node:nth-of-type(5) { animation-delay: 320ms; }
+.pf-diagram-nodes .pf-diagram-node:nth-of-type(6) { animation-delay: 480ms; }
+
+@keyframes pf-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes pf-node-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .pf-note {
@@ -254,7 +401,7 @@
 
 @media (min-width: 640px) {
   .pf-role {
-    font-size: 1.35rem;
+    font-size: 1.2rem;
   }
 }
 
@@ -280,6 +427,10 @@
   gap: 0.75rem;
 }
 
+.pf-cta-row .pf-cta {
+  min-width: 11rem;
+}
+
 .pf-case-grid {
   display: grid;
   gap: 1rem;
@@ -287,7 +438,7 @@
 
 @media (min-width: 900px) {
   .pf-case-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -364,7 +515,7 @@
 
 @media (min-width: 1200px) {
   .pf-pillars {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
 
@@ -389,6 +540,7 @@
 .pf-contact-row a {
   display: inline-flex;
   align-items: center;
+  min-height: 48px;
   gap: 0.5rem;
   border-radius: 4px;
   padding: 0.75rem 1rem;

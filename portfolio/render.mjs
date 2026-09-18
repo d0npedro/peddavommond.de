@@ -109,39 +109,45 @@ function renderNav(locale, { siblingPath = "", homePrefix = "" } = {}) {
 function renderHeroDiagram(t) {
   const L = t.hero.diagramLabels;
   return `<figure class="pf-diagram reveal" data-reveal>
-    <svg class="pf-diagram-svg" viewBox="0 0 360 280" role="img" aria-labelledby="hero-diagram-title hero-diagram-desc">
+    <svg class="pf-diagram-svg" viewBox="0 0 360 250" role="img" aria-labelledby="hero-diagram-title hero-diagram-desc">
       <title id="hero-diagram-title">${esc(t.hero.diagramTitle)}</title>
       <desc id="hero-diagram-desc">${esc(t.hero.diagramAlt)}</desc>
       <g fill="none" stroke="currentColor" stroke-width="1.2" class="pf-diagram-edges">
-        <path d="M180 42 V68"/>
-        <path d="M180 108 V128"/>
-        <path d="M88 168 H160"/>
-        <path d="M200 168 H272"/>
-        <path d="M180 188 V208"/>
-        <path d="M120 248 H160"/>
-        <path d="M200 248 H240"/>
+        <path class="pf-diagram-edge" d="M180 42 V70"/>
+        <path class="pf-diagram-edge" d="M180 110 V138"/>
+        <path class="pf-diagram-edge" d="M88 158 H160"/>
+        <path class="pf-diagram-edge" d="M200 158 H272"/>
+        <path class="pf-diagram-edge" d="M180 178 V200"/>
       </g>
       <g class="pf-diagram-nodes">
         <rect class="pf-diagram-node" x="110" y="12" width="140" height="30" rx="6"/>
         <text x="180" y="32" text-anchor="middle">${esc(L.goal)}</text>
-        <rect class="pf-diagram-node pf-diagram-node--accent" x="96" y="68" width="168" height="40" rx="6"/>
-        <text x="180" y="93" text-anchor="middle">${esc(L.orchestrator)}</text>
-        <rect class="pf-diagram-node" data-diagram="model" x="16" y="148" width="72" height="40" rx="6"/>
-        <text x="52" y="173" text-anchor="middle">${esc(L.model)}</text>
-        <rect class="pf-diagram-node" data-diagram="rag" x="144" y="128" width="72" height="40" rx="6"/>
-        <text x="180" y="153" text-anchor="middle">${esc(L.rag)}</text>
-        <rect class="pf-diagram-node" data-diagram="tools" x="272" y="148" width="72" height="40" rx="6"/>
-        <text x="308" y="173" text-anchor="middle">${esc(L.tools)}</text>
-        <rect class="pf-diagram-node pf-diagram-node--signal" x="120" y="208" width="120" height="32" rx="6"/>
-        <text x="180" y="229" text-anchor="middle">${esc(L.eval)}</text>
-        <rect class="pf-diagram-node" x="48" y="248" width="72" height="26" rx="6"/>
-        <text x="84" y="266" text-anchor="middle">${esc(L.action)}</text>
-        <rect class="pf-diagram-node" x="240" y="248" width="72" height="26" rx="6"/>
-        <text x="276" y="266" text-anchor="middle">${esc(L.human)}</text>
+        <rect class="pf-diagram-node pf-diagram-node--accent" x="96" y="70" width="168" height="40" rx="6"/>
+        <text x="180" y="95" text-anchor="middle">${esc(L.orchestrator)}</text>
+        <rect class="pf-diagram-node" x="16" y="138" width="72" height="40" rx="6"/>
+        <text x="52" y="163" text-anchor="middle">${esc(L.tools)}</text>
+        <rect class="pf-diagram-node" x="144" y="138" width="72" height="40" rx="6"/>
+        <text x="180" y="163" text-anchor="middle">${esc(L.model)}</text>
+        <rect class="pf-diagram-node" x="272" y="138" width="72" height="40" rx="6"/>
+        <text x="308" y="163" text-anchor="middle">${esc(L.eval)}</text>
+        <rect class="pf-diagram-node pf-diagram-node--signal" x="120" y="200" width="120" height="36" rx="6"/>
+        <text x="180" y="223" text-anchor="middle">${esc(L.human)}</text>
       </g>
     </svg>
     <figcaption class="sr-only">${esc(t.hero.diagramAlt)}</figcaption>
   </figure>`;
+}
+
+function renderProofStrip(t) {
+  const chips = (t.hero.proofChips ?? [])
+    .map(
+      (chip) => `<div class="pf-proof-chip">
+        <p class="pf-proof-label">${esc(chip.label)}</p>
+        <p class="pf-proof-body">${esc(chip.body)}</p>
+      </div>`,
+    )
+    .join("");
+  return `<div class="pf-proof-strip reveal" data-reveal>${chips}</div>`;
 }
 
 function renderHero(locale) {
@@ -153,39 +159,40 @@ function renderHero(locale) {
     <div class="container pf-hero-grid">
       <div>
         <p class="pf-name reveal" data-reveal>${esc(SITE.name)}</p>
-        <div class="mt-4 flex items-center gap-3 text-faint reveal" data-reveal>
-          <span class="eyebrow">${esc(t.hero.eyebrow)}</span>
-        </div>
-        <h1 class="mt-5 text-balance text-[2.15rem] font-semibold leading-[1.08] tracking-tight text-fg sm:text-5xl md:text-[3.15rem] reveal" data-reveal>${esc(t.hero.h1)}</h1>
-        <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted reveal" data-reveal>${esc(t.hero.tagline)}</p>
-        <p class="pf-proof reveal" data-reveal>${esc(t.hero.proof)}</p>
+        <p class="pf-role reveal" data-reveal>${esc(t.hero.role)}</p>
+        <p class="eyebrow mt-3 reveal" data-reveal>${esc(t.hero.eyebrow)}</p>
+        <h1 class="mt-5 text-balance text-[2.05rem] font-semibold leading-[1.1] tracking-tight text-fg sm:text-4xl md:text-[2.65rem] reveal" data-reveal>${esc(t.hero.h1)}</h1>
+        <p class="mt-5 max-w-xl text-lg leading-relaxed text-muted reveal" data-reveal>${esc(t.hero.tagline)}</p>
+        <p class="pf-trust reveal" data-reveal>${esc(t.hero.trust)}</p>
         <div class="mt-8 pf-cta-row reveal" data-reveal>
-          <a href="#cases" class="inline-flex min-h-11 items-center gap-2 rounded-card border border-accent bg-accent px-5 py-3 text-sm font-medium text-white transition-transform duration-150 hover:-translate-y-0.5 dark:text-bg">${esc(t.hero.ctaPrimary)}</a>
-          <a href="${attr(SITE.cvPath)}" class="inline-flex min-h-11 items-center gap-2 rounded-card border border-line bg-bg-elevated px-5 py-3 text-sm font-medium text-fg transition-colors duration-150 hover:border-accent hover:text-accent">${esc(t.hero.ctaSecondary)}</a>
+          <a href="#cases" class="pf-cta pf-cta--primary">${esc(t.hero.ctaPrimary)}</a>
+          <a href="${attr(SITE.cvPath)}" class="pf-cta pf-cta--secondary">${esc(t.hero.ctaSecondary)}</a>
         </div>
         <p class="pf-location reveal" data-reveal>${esc(t.hero.location)}</p>
-        <p class="pf-trust reveal" data-reveal>${esc(t.hero.trust)}</p>
       </div>
       ${renderHeroDiagram(t)}
+    </div>
+    <div class="container mt-12">
+      ${renderProofStrip(t)}
+      <p class="pf-domains mt-6 reveal" data-reveal>${esc(t.hero.contextLine)}</p>
     </div>
   </section>`;
 }
 
-function renderImpact(locale) {
+function renderValue(locale) {
   const t = copy(locale);
-  const cards = t.impact.items
+  const cards = t.value.items
     .map(
-      (item, i) => `<article class="panel p-6 reveal" data-reveal>
+      (item, i) => `<article class="panel p-5 pf-value-card reveal" data-reveal>
         <p class="font-mono text-xs text-accent">${String(i + 1).padStart(2, "0")}</p>
-        <h3 class="mt-3 text-lg font-semibold text-fg">${esc(item.title)}</h3>
-        <p class="mt-3 text-sm leading-relaxed text-muted">${esc(item.body)}</p>
+        <h3 class="mt-3 text-base font-semibold text-fg">${esc(item.title)}</h3>
+        <p class="mt-2 text-sm leading-relaxed text-muted">${esc(item.body)}</p>
       </article>`,
     )
     .join("");
-  return `<section id="impact" class="container scroll-mt-24 py-20 md:py-24">
-    ${heading(t.impact)}
-    <p class="pf-domains reveal" data-reveal aria-label="${attr(t.industries.eyebrow)}">${esc(t.industries.line)}</p>
-    <div class="mt-10 grid gap-4 md:grid-cols-3">${cards}</div>
+  return `<section id="value" class="container scroll-mt-24 py-20 md:py-24">
+    ${heading(t.value)}
+    <div class="pf-value-grid">${cards}</div>
   </section>`;
 }
 
@@ -231,7 +238,7 @@ function renderCaseCard(item, locale) {
     ? `<a href="${attr(pageHref)}" class="pf-case-title-link">${esc(titleText)}</a>`
     : esc(titleText);
   const open = pageHref
-    ? `<a class="pf-case-open" href="${attr(pageHref)}">${esc(t.casePage.openCase)}</a>`
+    ? `<a class="pf-case-open" href="${attr(pageHref)}">${esc(c.landingCta || t.casePage.openCase)}</a>`
     : "";
   return `<article class="panel relative p-6 md:p-7 pf-case-card reveal" data-reveal>
     ${c.badge ? `<p class="pf-badge">${esc(c.badge)}</p>` : ""}
@@ -357,11 +364,18 @@ function renderTrack(locale) {
   const t = copy(locale);
   const items = TRACK.map((item) => {
     const copyItem = t.track.items[item.id];
-    const href = item.caseId ? caseHref(locale, item.caseId) : SITE.cvPath;
+    const related = (item.caseIds ?? [])
+      .map((id) => {
+        const relatedCase = caseById(id);
+        if (!relatedCase) return "";
+        return `<a class="pf-track-link" href="${attr(caseHref(locale, id))}">${esc(relatedCase.name)}</a>`;
+      })
+      .join("");
     return `<article class="panel p-5 reveal" data-reveal>
       <p class="font-mono text-xs text-faint">${esc(item.period)} · ${esc(item.company)}</p>
-      <h3 class="mt-2 text-base font-semibold text-fg"><a class="pf-case-title-link" href="${attr(href)}">${esc(copyItem.title)}</a></h3>
+      <h3 class="mt-2 text-base font-semibold text-fg">${esc(copyItem.title)}</h3>
       <p class="mt-2 text-sm leading-relaxed text-muted">${esc(copyItem.body)}</p>
+      ${related ? `<p class="pf-track-links">${related}</p>` : ""}
     </article>`;
   }).join("");
   return `<section id="work" class="scroll-mt-24 border-y border-line bg-bg-sunken/40 py-20 md:py-24">
@@ -370,7 +384,6 @@ function renderTrack(locale) {
       <div class="pf-track">${items}</div>
       <div class="mt-8 pf-contact-row">
         <a class="secondary" href="${attr(SITE.cvPath)}">${esc(t.track.more)}</a>
-        <a class="secondary" href="${attr(caseHref(locale, "deutschlandcard"))}">${esc(t.cases.deutschlandcard.landingTitle || "DeutschlandCard")}</a>
       </div>
       ${renderFurtherMandates(locale)}
     </div>
@@ -449,23 +462,38 @@ function renderFooter(locale) {
 
 function jsonLd(locale) {
   const t = copy(locale);
+  const pageUrl = `${SITE.origin}/portfolio/${locale}`;
   const data = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: SITE.name,
-    jobTitle: t.meta.jobTitle,
-    description: t.meta.personDescription,
-    email: SITE.email,
-    url: `${SITE.origin}/portfolio/${locale}`,
-    sameAs: [SITE.linkedin, SITE.github],
-    knowsLanguage: ["German", "English", "Spanish"],
-    knowsAbout: JSON_LD_KNOWS_ABOUT,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: locale === "de" ? SITE.city : "Cologne",
-      addressCountry: "DE",
-    },
-    homeLocation: SITE.location[locale],
+    "@graph": [
+      {
+        "@type": "ProfilePage",
+        "@id": `${pageUrl}#profile`,
+        url: pageUrl,
+        name: t.meta.title,
+        dateModified: SITE.updated,
+        inLanguage: locale,
+        mainEntity: { "@id": `${pageUrl}#person` },
+      },
+      {
+        "@type": "Person",
+        "@id": `${pageUrl}#person`,
+        name: SITE.name,
+        jobTitle: t.meta.jobTitle,
+        description: t.meta.personDescription,
+        email: SITE.email,
+        url: pageUrl,
+        sameAs: [SITE.linkedin, SITE.github],
+        knowsLanguage: ["German", "English", "Spanish"],
+        knowsAbout: JSON_LD_KNOWS_ABOUT,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: locale === "de" ? SITE.city : "Cologne",
+          addressCountry: "DE",
+        },
+        homeLocation: SITE.location[locale],
+      },
+    ],
   };
   return JSON.stringify(data);
 }
@@ -727,8 +755,8 @@ ${renderNav(locale)}
 <main id="main">
 <script type="application/ld+json">${jsonLd(locale)}</script>
 ${renderHero(locale)}
-${renderImpact(locale)}
 ${renderSelectedCases(locale)}
+${renderValue(locale)}
 ${renderTrack(locale)}
 ${renderApproach(locale)}
 ${renderCredentials(locale)}
