@@ -1,16 +1,13 @@
 import {
   SITE,
   LOCALES,
-  METRICS,
-  ERAS,
   NAV,
   EXPERIENCE,
   EDUCATION,
-  STACK_GROUPS,
   LANGUAGES_META,
   JSON_LD_KNOWS_ABOUT,
   HOW_I_WORK_KEYS,
-  stackCount,
+  TRACK,
   casesBySection,
   featuredCases,
   pagedCases,
@@ -32,7 +29,7 @@ function attr(value) {
 }
 
 function heading({ index, eyebrow, title, description }) {
-  return `<div class="mb-12 md:mb-16 pf-visible">
+  return `<div class="mb-12 md:mb-16 reveal" data-reveal>
     <div class="flex items-center gap-3 text-faint">
       <span class="font-mono text-xs">${esc(index)}</span>
       <span class="hairline w-10"></span>
@@ -82,12 +79,12 @@ function renderNav(locale, { siblingPath = "", homePrefix = "" } = {}) {
   return `<header class="fixed inset-x-0 top-0 z-50 transition-colors duration-300 border-b border-transparent bg-transparent" data-site-header>
   <nav aria-label="${attr(t.nav.ariaPrimary)}" class="container flex h-16 items-center justify-between gap-4">
     <a href="${attr(brandHref)}" class="group flex items-center gap-2.5 font-mono text-sm tracking-tight text-fg">
-      <span class="grid h-7 w-7 place-items-center rounded-[3px] border border-accent/60 text-accent"><span class="h-2 w-2 animate-pulse-node rounded-[1px] bg-accent"></span></span>
-      <span class="hidden sm:inline"><span class="text-fg">peter</span><span class="text-faint">.henrichs</span></span>
+      <span class="grid h-7 w-7 place-items-center rounded-[3px] border border-line text-accent"><span class="h-2 w-2 rounded-[1px] bg-accent"></span></span>
+      <span class="hidden sm:inline">${esc(SITE.name)}</span>
     </a>
     <ul class="hidden items-center gap-1 md:flex">${navItems(locale, false, homePrefix)}</ul>
     <div class="flex items-center gap-2">
-      <a href="${attr(contactHref)}" class="hidden rounded-card border border-line bg-bg-elevated px-3.5 py-2 font-mono text-xs tracking-wide text-fg transition-colors hover:border-accent hover:text-accent lg:inline-block">${esc(t.nav.contact)}</a>
+      <a href="${attr(contactHref)}" class="hidden rounded-card border border-line bg-bg-elevated px-3.5 py-2 font-mono text-xs tracking-wide text-fg transition-colors hover:border-accent hover:text-accent lg:inline-block">${esc(t.nav.talk)}</a>
       ${langSwitch(locale, "hidden sm:inline-flex", siblingPath)}
       <button type="button" data-theme-toggle aria-label="${attr(t.theme.toDark)}" class="group relative inline-flex h-9 w-9 items-center justify-center rounded-card border border-line bg-bg-elevated text-muted transition-colors duration-200 hover:border-accent hover:text-accent focus-visible:text-accent">${iconSun()}${iconMoon()}</button>
       <button type="button" data-menu-toggle aria-label="${attr(t.nav.toggleMenu)}" aria-expanded="false" class="grid h-9 w-9 place-items-center rounded-card border border-line bg-bg-elevated text-fg md:hidden">
@@ -102,78 +99,93 @@ function renderNav(locale, { siblingPath = "", homePrefix = "" } = {}) {
   <div data-mobile-menu class="overflow-hidden border-t border-line bg-bg/95 backdrop-blur-md transition-[max-height,opacity] duration-300 md:hidden max-h-0 opacity-0">
     <ul class="container flex flex-col py-3">
       ${navItems(locale, true, homePrefix)}
-      <li><a href="${attr(contactHref)}" class="mt-2 flex items-center justify-center rounded-card border border-accent/50 py-3 font-mono text-sm text-accent">${esc(t.nav.contact)}</a></li>
+      <li><a href="${attr(contactHref)}" class="mt-2 flex items-center justify-center rounded-card border border-accent/50 py-3 font-mono text-sm text-accent">${esc(t.nav.talk)}</a></li>
       <li class="mt-3 flex justify-center pb-1">${langSwitch(locale, "", siblingPath)}</li>
     </ul>
   </div>
 </header>`;
 }
 
+function renderHeroDiagram(t) {
+  const L = t.hero.diagramLabels;
+  return `<figure class="pf-diagram reveal" data-reveal>
+    <svg class="pf-diagram-svg" viewBox="0 0 360 280" role="img" aria-labelledby="hero-diagram-title hero-diagram-desc">
+      <title id="hero-diagram-title">${esc(t.hero.diagramTitle)}</title>
+      <desc id="hero-diagram-desc">${esc(t.hero.diagramAlt)}</desc>
+      <g fill="none" stroke="currentColor" stroke-width="1.2" class="pf-diagram-edges">
+        <path d="M180 42 V68"/>
+        <path d="M180 108 V128"/>
+        <path d="M88 168 H160"/>
+        <path d="M200 168 H272"/>
+        <path d="M180 188 V208"/>
+        <path d="M120 248 H160"/>
+        <path d="M200 248 H240"/>
+      </g>
+      <g class="pf-diagram-nodes">
+        <rect class="pf-diagram-node" x="110" y="12" width="140" height="30" rx="6"/>
+        <text x="180" y="32" text-anchor="middle">${esc(L.goal)}</text>
+        <rect class="pf-diagram-node pf-diagram-node--accent" x="96" y="68" width="168" height="40" rx="6"/>
+        <text x="180" y="93" text-anchor="middle">${esc(L.orchestrator)}</text>
+        <rect class="pf-diagram-node" data-diagram="model" x="16" y="148" width="72" height="40" rx="6"/>
+        <text x="52" y="173" text-anchor="middle">${esc(L.model)}</text>
+        <rect class="pf-diagram-node" data-diagram="rag" x="144" y="128" width="72" height="40" rx="6"/>
+        <text x="180" y="153" text-anchor="middle">${esc(L.rag)}</text>
+        <rect class="pf-diagram-node" data-diagram="tools" x="272" y="148" width="72" height="40" rx="6"/>
+        <text x="308" y="173" text-anchor="middle">${esc(L.tools)}</text>
+        <rect class="pf-diagram-node pf-diagram-node--signal" x="120" y="208" width="120" height="32" rx="6"/>
+        <text x="180" y="229" text-anchor="middle">${esc(L.eval)}</text>
+        <rect class="pf-diagram-node" x="48" y="248" width="72" height="26" rx="6"/>
+        <text x="84" y="266" text-anchor="middle">${esc(L.action)}</text>
+        <rect class="pf-diagram-node" x="240" y="248" width="72" height="26" rx="6"/>
+        <text x="276" y="266" text-anchor="middle">${esc(L.human)}</text>
+      </g>
+    </svg>
+    <figcaption class="sr-only">${esc(t.hero.diagramAlt)}</figcaption>
+  </figure>`;
+}
+
 function renderHero(locale) {
   const t = copy(locale);
-  const metrics = METRICS.map((m, i) => {
-    return `<div class="group relative bg-bg-elevated px-4 py-5 transition-colors duration-200 hover:bg-bg-sunken">
-      <span aria-hidden="true" class="absolute left-0 top-0 h-px w-0 bg-accent transition-[width] duration-500 ease-precision group-hover:w-full"></span>
-      <dt class="font-mono text-2xl font-semibold text-fg sm:text-3xl"><span class="pf-metric-value">${esc(m.value)}</span></dt>
-      <dd class="mt-1 text-xs leading-snug text-muted">${esc(t.hero.metricLabels[i])}</dd>
-    </div>`;
-  }).join("");
-  const langs = LANGUAGES_META.map((row) => {
-    const item = row[locale];
-    return `<span class="text-muted">${esc(item.name)}<span class="text-faint"> · ${esc(item.level)}</span></span>`;
-  }).join("");
-  return `<section id="top" class="relative isolate overflow-hidden border-b border-line pb-20 pt-32 sm:pb-24 sm:pt-36 md:pb-32 md:pt-44">
+  return `<section id="top" class="relative isolate overflow-hidden border-b border-line pb-20 pt-32 sm:pb-24 sm:pt-36 md:pb-28 md:pt-40">
     <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
-      <div class="blueprint-grid grid-mask absolute inset-0 animate-fade-grid"></div>
-      <div class="blueprint-grid-fine grid-mask absolute inset-0 opacity-40"></div>
-      <div class="absolute left-1/2 top-0 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-accent/10 blur-[120px] dark:bg-accent/[0.14]"></div>
+      <div class="blueprint-grid grid-mask absolute inset-0"></div>
     </div>
-    <div class="container">
-      <div class="flex items-center gap-3 text-faint pf-visible">
-        <span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-accent"></span></span>
-        <span class="eyebrow">${esc(t.hero.eyebrow)}</span>
+    <div class="container pf-hero-grid">
+      <div>
+        <p class="pf-name reveal" data-reveal>${esc(SITE.name)}</p>
+        <div class="mt-4 flex items-center gap-3 text-faint reveal" data-reveal>
+          <span class="eyebrow">${esc(t.hero.eyebrow)}</span>
+        </div>
+        <h1 class="mt-5 text-balance text-[2.15rem] font-semibold leading-[1.08] tracking-tight text-fg sm:text-5xl md:text-[3.15rem] reveal" data-reveal>${esc(t.hero.h1)}</h1>
+        <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted reveal" data-reveal>${esc(t.hero.tagline)}</p>
+        <p class="pf-proof reveal" data-reveal>${esc(t.hero.proof)}</p>
+        <div class="mt-8 pf-cta-row reveal" data-reveal>
+          <a href="#cases" class="inline-flex min-h-11 items-center gap-2 rounded-card border border-accent bg-accent px-5 py-3 text-sm font-medium text-white transition-transform duration-150 hover:-translate-y-0.5 dark:text-bg">${esc(t.hero.ctaPrimary)}</a>
+          <a href="${attr(SITE.cvPath)}" class="inline-flex min-h-11 items-center gap-2 rounded-card border border-line bg-bg-elevated px-5 py-3 text-sm font-medium text-fg transition-colors duration-150 hover:border-accent hover:text-accent">${esc(t.hero.ctaSecondary)}</a>
+        </div>
+        <p class="pf-location reveal" data-reveal>${esc(t.hero.location)}</p>
+        <p class="pf-trust reveal" data-reveal>${esc(t.hero.trust)}</p>
       </div>
-      <h1 class="mt-6 text-balance text-[2.6rem] font-semibold leading-[1.02] tracking-tight text-fg sm:text-6xl md:text-7xl pf-visible">${esc(SITE.name)}</h1>
-      <p class="pf-role pf-visible">${esc(t.hero.role)}</p>
-      <p class="pf-location pf-visible">${esc(t.hero.location)}</p>
-      <p class="mt-8 max-w-2xl text-lg leading-relaxed text-muted pf-visible">${esc(t.hero.tagline)}</p>
-      <p class="pf-proof pf-visible">${esc(t.hero.proof)}</p>
-      <div class="mt-9 pf-cta-row pf-visible">
-        <a href="#cases" class="scan-sweep group inline-flex items-center gap-2 rounded-card border border-accent bg-accent px-5 py-3 text-sm font-medium text-white transition-transform duration-200 hover:-translate-y-0.5 dark:text-bg">${esc(t.hero.ctaPrimary)}</a>
-        <a href="#work" class="inline-flex items-center gap-2 rounded-card border border-line bg-bg-elevated px-5 py-3 text-sm font-medium text-fg transition-colors duration-200 hover:border-accent hover:text-accent">${esc(t.hero.ctaSecondary)}</a>
-        <a href="${attr(SITE.cvPath)}" class="inline-flex items-center gap-2 rounded-card px-3 py-3 text-sm font-medium text-muted hover:text-accent">${esc(t.nav.cv)}</a>
-        <a href="#contact" class="inline-flex items-center gap-2 rounded-card px-3 py-3 text-sm font-medium text-muted hover:text-accent">${esc(t.hero.ctaTertiary)}</a>
-      </div>
-      <dl class="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-4 pf-visible">${metrics}</dl>
-      <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-xs text-faint pf-visible">
-        <span class="eyebrow">${esc(t.hero.languagesLabel)}</span>${langs}
-      </div>
+      ${renderHeroDiagram(t)}
     </div>
   </section>`;
 }
 
-function renderArc(locale) {
+function renderImpact(locale) {
   const t = copy(locale);
-  const cards = ERAS.map((era, i) => {
-    const copyEra = t.arc.eras[i];
-    const current = era.id === "ai";
-    return `<article class="panel tick-corner relative p-6 transition-colors duration-300 pf-visible${current ? " border-signal/50" : ""}">
-      <div class="flex items-center justify-between">
-        <span class="font-mono text-xs text-accent">${String(i + 1).padStart(2, "0")}</span>
-        ${current ? `<span class="inline-flex items-center gap-1.5 font-mono text-[0.65rem] uppercase tracking-label text-signal"><span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-signal opacity-60"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-signal"></span></span>${esc(t.arc.nowLabel)}</span>` : `<span class="relative z-10 grid h-3 w-3 place-items-center rounded-full border border-accent bg-bg"><span class="h-1.5 w-1.5 rounded-full bg-accent"></span></span>`}
-      </div>
-      <p class="mt-4 font-mono text-xs tracking-wide text-faint">${esc(era.years)}</p>
-      <h3 class="mt-1.5 text-lg font-semibold text-fg">${esc(copyEra.title)}</h3>
-      <p class="mt-3 text-sm leading-relaxed text-muted">${esc(copyEra.blurb)}</p>
-    </article>`;
-  }).join("");
-  return `<section id="proof" class="container scroll-mt-24 py-20 md:py-28">
-    ${heading(t.arc)}
-    <p class="pf-domains pf-visible" aria-label="${attr(t.industries.eyebrow)}">${esc(t.industries.line)}</p>
-    <div class="relative mt-10 grid gap-4 md:grid-cols-3">
-      <div aria-hidden="true" class="absolute left-0 right-0 top-[52px] hidden h-px bg-gradient-to-r from-transparent via-line to-transparent md:block"></div>
-      ${cards}
-    </div>
+  const cards = t.impact.items
+    .map(
+      (item, i) => `<article class="panel p-6 reveal" data-reveal>
+        <p class="font-mono text-xs text-accent">${String(i + 1).padStart(2, "0")}</p>
+        <h3 class="mt-3 text-lg font-semibold text-fg">${esc(item.title)}</h3>
+        <p class="mt-3 text-sm leading-relaxed text-muted">${esc(item.body)}</p>
+      </article>`,
+    )
+    .join("");
+  return `<section id="impact" class="container scroll-mt-24 py-20 md:py-24">
+    ${heading(t.impact)}
+    <p class="pf-domains reveal" data-reveal aria-label="${attr(t.industries.eyebrow)}">${esc(t.industries.line)}</p>
+    <div class="mt-10 grid gap-4 md:grid-cols-3">${cards}</div>
   </section>`;
 }
 
@@ -210,46 +222,30 @@ function caseLinks(item, t, extra = "") {
   return `<div class="pf-links">${links}${extra}</div>`;
 }
 
-function renderCaseCard(item, locale, wide = false) {
+function renderCaseCard(item, locale) {
   const t = copy(locale);
   const c = t.cases[item.id];
   const pageHref = item.hasPage ? caseHref(locale, item.id) : null;
-  const fields = [
-    ["problem", t.caseFields.problem],
-    ["decision", t.caseFields.decision],
-    ["evaluation", t.caseFields.evaluation],
-    ["outcome", t.caseFields.outcome],
-  ];
-  const fieldHtml = fields
-    .filter(([key]) => c[key])
-    .map(
-      ([key, label]) => `<div class="pf-field"><p class="eyebrow mb-2">${esc(label)}</p><p class="text-sm leading-relaxed text-fg/85">${esc(c[key])}</p></div>`,
-    )
-    .join("");
-  const highlights = (c.highlights ?? [])
-    .map((h) => `<li class="flex gap-2.5 text-sm text-fg/85"><span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent"></span><span>${esc(h)}</span></li>`)
-    .join("");
+  const titleText = c.landingTitle || item.name;
   const title = pageHref
-    ? `<a href="${attr(pageHref)}" class="pf-case-title-link">${esc(item.name)}</a>`
-    : esc(item.name);
+    ? `<a href="${attr(pageHref)}" class="pf-case-title-link">${esc(titleText)}</a>`
+    : esc(titleText);
   const open = pageHref
     ? `<a class="pf-case-open" href="${attr(pageHref)}">${esc(t.casePage.openCase)}</a>`
     : "";
-  return `<article class="panel tick-corner relative p-6 md:p-8 pf-case-card${wide ? " pf-case-card--wide" : ""}">
-    <div class="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs text-faint">
-      <span class="text-accent">${esc(item.period)}</span>
+  return `<article class="panel relative p-6 md:p-7 pf-case-card reveal" data-reveal>
+    ${c.badge ? `<p class="pf-badge">${esc(c.badge)}</p>` : ""}
+    <div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs text-faint">
+      <span>${esc(item.period)}</span>
       <span class="text-line">|</span>
-      <span>${esc(c.domain)}</span>
+      <span>${esc(item.name)}</span>
     </div>
-    <h3 class="mt-3 text-2xl font-semibold tracking-tight text-fg">${title}</h3>
-    <p class="mt-1 text-sm text-muted">${esc(item.client)}</p>
+    <h3 class="mt-3 text-xl font-semibold tracking-tight text-fg">${title}</h3>
+    ${c.oneLiner ? `<p class="mt-3 text-sm leading-relaxed text-muted">${esc(c.oneLiner)}</p>` : ""}
     ${c.honesty ? `<p class="pf-honesty">${esc(c.honesty)}</p>` : ""}
     ${ownershipMeta(item, t)}
-    ${fieldHtml}
-    ${c.role ? `<div class="pf-field"><p class="eyebrow mb-2">${esc(t.caseFields.role)}</p><p class="text-sm leading-relaxed text-fg/85">${esc(c.role)}</p></div>` : ""}
-    ${c.transfer ? `<div class="pf-field"><p class="eyebrow mb-2">${esc(t.caseFields.transfer)}</p><p class="text-sm leading-relaxed text-muted">${esc(c.transfer)}</p></div>` : ""}
-    ${highlights ? `<ul class="mt-4 space-y-2">${highlights}</ul>` : ""}
-    <div class="mt-auto pt-4 flex flex-wrap gap-1.5">${item.tech.map((tag) => `<span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">${esc(tag)}</span>`).join("")}</div>
+    ${c.contribution ? `<div class="pf-field"><p class="eyebrow mb-2">${esc(t.caseFields.contribution)}</p><p class="text-sm leading-relaxed text-fg/85">${esc(c.contribution)}</p></div>` : ""}
+    ${c.evalStatus === "in-progress" ? `<p class="pf-eval-note">${esc(t.casePage.evalInProgress)} — ${esc(t.casePage.evalInProgressNote)}</p>` : ""}
     ${caseLinks(item, t, open)}
   </article>`;
 }
@@ -267,44 +263,14 @@ function renderSecondaryCase(item, locale) {
 
 function renderSelectedCases(locale) {
   const t = copy(locale);
-  const flagships = featuredCases();
-  const lead = flagships.slice(0, 3);
-  const more = flagships.slice(3);
-  const leadHtml = lead
-    .map((item, i) => renderCaseCard(item, locale, i === 2))
+  const leadHtml = featuredCases()
+    .map((item) => renderCaseCard(item, locale))
     .join("");
-  const moreHtml = more.map((item) => renderCaseCard(item, locale)).join("");
-  return `<section id="cases" class="container scroll-mt-24 py-20 md:py-28">
+  return `<section id="cases" class="container scroll-mt-24 py-20 md:py-24">
     ${heading(t.selectedCases)}
-    <div class="pf-case-grid">${leadHtml}</div>
-    ${moreHtml ? `<div class="pf-case-grid mt-4">${moreHtml}</div>` : ""}
-  </section>`;
-}
-
-function renderLab(locale) {
-  const t = copy(locale);
-  const items = (t.lab.items ?? [])
-    .map((item) => {
-      const href = caseHref(locale, item.id);
-      return `<article class="panel p-5">
-        <p class="eyebrow">${esc(item.label)}</p>
-        <h3 class="mt-2 text-lg font-semibold text-fg"><a class="pf-case-title-link" href="${attr(href)}">${esc(caseById(item.id)?.name ?? item.id)}</a></h3>
-        <p class="mt-2 text-sm leading-relaxed text-muted">${esc(item.body)}</p>
-        <a class="pf-case-open mt-4" href="${attr(href)}">${esc(t.casePage.openCase)}</a>
-      </article>`;
-    })
-    .join("");
-  return `<section id="lab" class="scroll-mt-24 border-y border-line bg-bg-sunken/40 py-20 md:py-28">
-    <div class="container">
-      ${heading(t.lab)}
-      <div class="pf-case-grid">${items}</div>
-      <aside class="pf-perspective panel p-6 md:p-8 mt-8">
-        <p class="eyebrow">${esc(t.lab.perspectiveEyebrow)}</p>
-        <h3 class="mt-3 text-xl font-semibold text-fg">${esc(t.lab.perspectiveTitle)}</h3>
-        <p class="mt-3 max-w-prose text-sm leading-relaxed text-muted">${esc(t.lab.perspective)}</p>
-        <p class="mt-4 max-w-prose text-sm leading-relaxed text-muted"><span class="eyebrow">${esc(t.privacy.label)}</span> ${esc(t.privacy.body)}</p>
-      </aside>
-    </div>
+    <p class="pf-note reveal" data-reveal>${esc(t.selectedCases.rndNote)}</p>
+    <p class="pf-note reveal" data-reveal>${esc(t.selectedCases.clientNote)}</p>
+    <div class="pf-case-grid mt-8">${leadHtml}</div>
   </section>`;
 }
 
@@ -312,7 +278,7 @@ function renderHowIWork(locale) {
   const t = copy(locale);
   const items = HOW_I_WORK_KEYS.map((key) => {
     const item = t.howIWork.items[key];
-    return `<article class="panel p-5">
+    return `<article class="panel p-5 reveal" data-reveal>
       <h3 class="text-sm font-semibold text-fg">${esc(item.title)}</h3>
       <p class="mt-2 text-sm leading-relaxed text-muted">${esc(item.body)}</p>
     </article>`;
@@ -336,8 +302,17 @@ function renderConsulting(locale) {
 
 function renderCredentials(locale) {
   const t = copy(locale);
-  return `<section id="credentials" class="container scroll-mt-24 pt-20 md:pt-28">
+  const highlights = (t.credentials.highlights ?? [])
+    .map(
+      (item) => `<article class="panel p-5 reveal" data-reveal>
+        <h3 class="text-base font-semibold text-fg">${esc(item.title)}</h3>
+        <p class="mt-1 font-mono text-xs text-faint">${esc(item.meta)}</p>
+      </article>`,
+    )
+    .join("");
+  return `<section id="credentials" class="container scroll-mt-24 pt-20 md:pt-24">
     ${heading(t.credentials)}
+    <div class="grid gap-4 sm:grid-cols-2 mb-8">${highlights}</div>
     <div class="pf-contact-row">
       <a class="primary" href="${attr(SITE.cvPath)}">${esc(t.credentials.cv)}</a>
       <a class="secondary" href="${attr(SITE.github)}" target="_blank" rel="noopener noreferrer">${esc(t.credentials.github)}</a>
@@ -351,7 +326,7 @@ function renderCompetencies(locale) {
   const t = copy(locale);
   const pillars = t.competencies.pillars
     .map(
-      (p) => `<article class="panel p-5 pf-pillar"><h3 class="text-sm font-semibold text-fg">${esc(p.title)}</h3><p class="mt-2 text-sm leading-relaxed text-muted">${esc(p.body)}</p></article>`,
+      (p) => `<article class="panel p-5 pf-pillar reveal" data-reveal><h3 class="text-sm font-semibold text-fg">${esc(p.title)}</h3><p class="mt-2 text-sm leading-relaxed text-muted">${esc(p.body)}</p></article>`,
     )
     .join("");
   return `<div class="container scroll-mt-24 pt-20 md:pt-28">
@@ -360,43 +335,11 @@ function renderCompetencies(locale) {
   </div>`;
 }
 
-function renderStack(locale) {
-  const t = copy(locale);
-  const filters = Object.entries(t.stack.filters)
-    .map(([id, label], i) => {
-      const on = i === 0;
-      return `<button type="button" data-stack-filter="${attr(id)}" aria-pressed="${on}" class="rounded-card border px-3.5 py-2 font-mono text-xs tracking-wide transition-colors duration-200 ${on ? "border-accent bg-accent/10 text-accent" : "border-line bg-bg-elevated text-muted hover:border-accent/50 hover:text-fg"}">${esc(label)}</button>`;
-    })
-    .join("");
-  const featured = STACK_GROUPS.filter((g) => g.featured);
-  const more = STACK_GROUPS.filter((g) => !g.featured);
-  const groupHtml = (group) => {
-    const label = t.stack.groups[group.id];
-    const items = group.items
-      .map((item) => `<span data-eras="${attr(item.eras.join(" "))}" class="group inline-flex items-center gap-1.5 rounded-[3px] border border-line bg-bg px-2 py-1 font-mono text-[0.72rem] text-muted transition-colors duration-150 hover:border-accent/60 hover:text-fg">${esc(item.name)}</span>`)
-      .join("");
-    return `<div class="panel flex flex-col p-5${group.featured ? " pf-stack-featured" : ""}" data-stack-group>
-      <div class="flex items-baseline justify-between"><h3 class="text-sm font-semibold text-fg">${esc(label.label)}</h3><span class="font-mono text-[0.7rem] text-faint">${String(group.items.length).padStart(2, "0")}</span></div>
-      <p class="mt-1 text-xs text-faint">${esc(label.hint)}</p>
-      <div class="mt-4 flex flex-wrap gap-1.5">${items}</div>
-    </div>`;
-  };
-  return `<section id="approach" class="scroll-mt-24 pb-20 md:pb-28">
-    ${renderCompetencies(locale)}
+function renderApproach(locale) {
+  return `<section id="approach" class="scroll-mt-24 pb-16 md:pb-20">
     ${renderHowIWork(locale)}
+    ${renderCompetencies(locale)}
     ${renderConsulting(locale)}
-    <div class="container pt-16 md:pt-20">
-      ${heading(t.stack)}
-      <div class="mb-10 flex flex-wrap gap-2" role="group" aria-label="${attr(t.stack.filterAria)}">
-        ${filters}
-        <span class="ml-auto self-center font-mono text-xs text-faint" data-stack-count>${esc(t.stack.countTemplate.replace("{n}", String(stackCount())))}</span>
-      </div>
-      <div class="grid gap-4 md:grid-cols-2">${featured.map(groupHtml).join("")}</div>
-      <div class="pf-stack-more">
-        <p class="eyebrow mb-4">${esc(t.stack.moreLabel)}</p>
-        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">${more.map(groupHtml).join("")}</div>
-      </div>
-    </div>
   </section>`;
 }
 
@@ -410,58 +353,42 @@ function renderFurtherMandates(locale) {
   </div>`;
 }
 
-function renderExperience(locale) {
+function renderTrack(locale) {
   const t = copy(locale);
-  const filters = Object.entries(t.experience.filters)
-    .map(([id, label], i) => {
-      const on = i === 0;
-      return `<button type="button" data-exp-filter="${attr(id)}" aria-pressed="${on}" class="rounded-card border px-3.5 py-2 font-mono text-xs tracking-wide transition-colors duration-200 ${on ? "border-accent bg-accent/10 text-accent" : "border-line bg-bg-elevated text-muted hover:border-accent/50 hover:text-fg"}">${esc(label)}</button>`;
-    })
-    .join("");
-  const items = EXPERIENCE.map((item, i) => {
-    const entry = t.experience.entries[item.id];
-    const open = i === 0;
-    const tasks = (entry.tasks ?? [])
-      .map((task) => `<li class="flex gap-2.5 text-sm text-fg/85"><span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent"></span><span>${esc(task)}</span></li>`)
-      .join("");
-    const tags = item.tech
-      .map((tag) => `<span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">${esc(tag)}</span>`)
-      .join("");
-    return `<li class="relative pl-8 md:grid md:grid-cols-[8.5rem_1fr] md:gap-0 md:pl-0" data-exp-item data-era="${attr(item.era)}">
-      <div class="hidden pt-4 pr-6 text-right md:block"><span class="font-mono text-xs leading-tight text-faint">${esc(item.period)}</span></div>
-      <span class="absolute left-0 top-[1.4rem] z-10 grid h-3.5 w-3.5 place-items-center rounded-full border border-line bg-bg md:left-[8.5rem]${open ? " border-accent" : ""}"><span class="h-1.5 w-1.5 rounded-full ${open ? "bg-accent" : "bg-accent"}"></span></span>
-      <div class="md:pl-8">
-        <button type="button" aria-expanded="${open}" data-exp-toggle class="panel scan-sweep group w-full px-5 py-4 text-left transition-colors duration-200 ${open ? "border-accent/60" : "hover:border-accent/40"}">
-          <span class="font-mono text-[0.7rem] tracking-wide text-faint md:hidden">${esc(item.period)}</span>
-          <div class="flex items-start justify-between gap-4">
-            <div>
-              <h3 class="text-base font-semibold text-fg">${esc(entry.role)}</h3>
-              <p class="mt-0.5 text-sm text-muted">${esc(item.company)}</p>
-            </div>
-            <span class="mt-1 shrink-0 text-faint${open ? " rotate-45" : ""}" aria-hidden="true"><svg viewBox="0 0 16 16" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M8 3v10M3 8h10"></path></svg></span>
-          </div>
-          ${entry.project ? `<p class="mt-2 text-sm text-fg/90"><span class="text-accent">▸ </span>${esc(entry.project)}</p>` : ""}
-          <div class="exp-body pt-4"${open ? "" : " hidden"}>
-            <p class="max-w-prose text-sm leading-relaxed text-muted">${esc(entry.mission)}</p>
-            ${item.compact ? `<p class="mt-3 text-xs text-faint">${esc(t.experience.compactNote)}</p>` : ""}
-            ${tasks ? `<ul class="mt-4 space-y-1.5">${tasks}</ul>` : ""}
-            ${tags ? `<div class="mt-4 flex flex-wrap gap-1.5">${tags}</div>` : ""}
-          </div>
-        </button>
-      </div>
-    </li>`;
+  const items = TRACK.map((item) => {
+    const copyItem = t.track.items[item.id];
+    const href = item.caseId ? caseHref(locale, item.caseId) : SITE.cvPath;
+    return `<article class="panel p-5 reveal" data-reveal>
+      <p class="font-mono text-xs text-faint">${esc(item.period)} · ${esc(item.company)}</p>
+      <h3 class="mt-2 text-base font-semibold text-fg"><a class="pf-case-title-link" href="${attr(href)}">${esc(copyItem.title)}</a></h3>
+      <p class="mt-2 text-sm leading-relaxed text-muted">${esc(copyItem.body)}</p>
+    </article>`;
   }).join("");
-  return `<section id="work" class="scroll-mt-24 border-y border-line bg-bg-sunken/40 py-20 md:py-28">
+  return `<section id="work" class="scroll-mt-24 border-y border-line bg-bg-sunken/40 py-20 md:py-24">
     <div class="container">
-      ${heading(t.experience)}
-      <div class="mb-10 flex flex-wrap gap-2" role="group" aria-label="${attr(t.experience.filterAria)}">${filters}</div>
-      <div class="relative">
-        <div aria-hidden="true" class="absolute left-[7px] top-2 bottom-2 w-px bg-line md:left-[calc(8.5rem+7px)]"></div>
-        <ul class="space-y-3">${items}</ul>
+      ${heading(t.track)}
+      <div class="pf-track">${items}</div>
+      <div class="mt-8 pf-contact-row">
+        <a class="secondary" href="${attr(SITE.cvPath)}">${esc(t.track.more)}</a>
+        <a class="secondary" href="${attr(caseHref(locale, "enterprise-integration"))}">${esc(t.cases["enterprise-integration"].landingTitle)}</a>
       </div>
-      <div class="mt-8 font-mono text-xs text-faint" data-exp-count>${esc(t.experience.countTemplate.replace("{shown}", String(EXPERIENCE.length)).replace("{total}", String(EXPERIENCE.length)).replace("{era}", t.experience.eraNames.all))}</div>
       ${renderFurtherMandates(locale)}
     </div>
+  </section>`;
+}
+
+function renderAbout(locale) {
+  const t = copy(locale);
+  const langs = LANGUAGES_META.map((row) => {
+    const item = row[locale];
+    return `<span>${esc(item.name)}<span class="text-faint"> · ${esc(item.level)}</span></span>`;
+  }).join("");
+  return `<section id="about" class="container scroll-mt-24 py-20 md:py-24">
+    ${heading(t.about)}
+    <p class="max-w-prose text-base leading-relaxed text-muted reveal" data-reveal>${esc(t.about.body)}</p>
+    <p class="mt-6 flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs text-faint reveal" data-reveal>
+      <span class="eyebrow">${esc(t.hero.languagesLabel)}</span>${langs}
+    </p>
   </section>`;
 }
 
@@ -503,7 +430,7 @@ function renderFooter(locale) {
       <h2 class="mt-4 max-w-2xl text-balance text-3xl font-semibold tracking-tight text-fg sm:text-4xl">${esc(t.footer.title)}</h2>
       <p class="mt-4 max-w-prose text-muted">${esc(t.footer.body)}</p>
       <div class="mt-10 pf-contact-row">
-        <a class="primary" href="mailto:${attr(SITE.email)}">${esc(t.footer.email)} · ${esc(SITE.email)}</a>
+        <a class="primary" href="mailto:${attr(SITE.email)}">${esc(t.hero.ctaTertiary)} · ${esc(SITE.email)}</a>
         <a class="secondary" href="${attr(SITE.linkedin)}" target="_blank" rel="noopener noreferrer">${esc(t.footer.linkedin)}</a>
         <a class="secondary" href="${attr(SITE.github)}" target="_blank" rel="noopener noreferrer">${esc(t.footer.github)}</a>
         <a class="secondary" href="${attr(SITE.cvPath)}">${esc(t.footer.cv)}</a>
@@ -572,6 +499,46 @@ function renderCaseSection(label, body) {
   return `<section class="pf-case-block">
     <h2 class="eyebrow">${esc(label)}</h2>
     <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">${esc(body)}</p>
+  </section>`;
+}
+
+function renderEvalMetrics(copyCase, t) {
+  const rows = copyCase.evalMetrics ?? [];
+  if (!rows.length && copyCase.evalStatus !== "in-progress") return "";
+  const table = rows.length
+    ? `<table class="pf-eval-table">
+      <thead><tr><th>${esc(t.caseFields.evaluation)}</th><th>${esc(t.casePage.evalToMeasure)}</th></tr></thead>
+      <tbody>${rows
+        .map((row) => `<tr><th scope="row">${esc(row.metric)}</th><td>${esc(row.note)}</td></tr>`)
+        .join("")}</tbody>
+    </table>`
+    : "";
+  const note =
+    copyCase.evalStatus === "in-progress"
+      ? `<p class="pf-eval-note">${esc(t.casePage.evalInProgress)} — ${esc(t.casePage.evalInProgressNote)}</p>`
+      : "";
+  return `<section class="pf-case-block">${note}${table}</section>`;
+}
+
+function renderRelatedCases(locale, item) {
+  const t = copy(locale);
+  const ids = item.relatedIds ?? [];
+  if (!ids.length) return "";
+  const links = ids
+    .map((id) => {
+      const related = caseById(id);
+      const c = t.cases[id];
+      if (!related || !c) return "";
+      return `<a class="panel p-4 pf-case-more-link" href="${attr(caseHref(locale, id))}">
+        <p class="font-mono text-[0.7rem] text-faint">${esc(related.period)}</p>
+        <p class="mt-1 font-semibold text-fg">${esc(related.name)}</p>
+        <p class="mt-1 text-sm text-muted">${esc(c.domain)}</p>
+      </a>`;
+    })
+    .join("");
+  return `<section class="pf-case-block">
+    <h2 class="eyebrow">${esc(t.casePage.related)}</h2>
+    <div class="pf-case-more-grid mt-4">${links}</div>
   </section>`;
 }
 
@@ -685,19 +652,23 @@ ${renderNav(locale, { siblingPath, homePrefix: home })}
 <article class="container pb-20 pt-28 md:pb-28 md:pt-32">
   <p class="eyebrow">${esc(t.casePage.caseStudy)}</p>
   <p class="mt-4 font-mono text-xs text-faint"><a href="${attr(home)}" class="hover:text-accent">${esc(t.casePage.back)}</a> · ${esc(item.period)} · ${esc(c.domain)}</p>
-  <h1 class="mt-4 text-balance text-4xl font-semibold tracking-tight text-fg sm:text-5xl">${esc(item.name)}</h1>
-  <p class="mt-2 text-muted">${esc(item.client)}</p>
+  <h1 class="mt-4 text-balance text-4xl font-semibold tracking-tight text-fg sm:text-5xl">${esc(c.landingTitle || item.name)}</h1>
+  <p class="mt-2 text-muted">${esc(item.name)}${item.client ? ` · ${esc(item.client)}` : ""}</p>
+  ${c.badge ? `<p class="pf-badge">${esc(c.badge)}</p>` : ""}
   ${c.honesty ? `<p class="pf-honesty">${esc(c.honesty)}</p>` : ""}
   ${ownershipMeta(item, t)}
   ${renderCaseSection(t.caseFields.context, c.context)}
   ${renderCaseSection(t.caseFields.problem, c.problem)}
   ${renderCaseSection(t.caseFields.role, c.role)}
+  ${renderCaseSection(t.caseFields.contribution, c.contribution)}
   ${renderCaseSection(t.caseFields.decision, c.decision)}
   ${renderArchitecture(c, t, item.tech)}
   ${renderCaseSection(t.caseFields.evaluation, c.evaluation)}
+  ${renderEvalMetrics(c, t)}
   ${renderCaseSection(t.caseFields.outcome, c.outcome)}
   ${highlights ? `<ul class="mt-2 space-y-2">${highlights}</ul>` : ""}
   ${renderEvidence(item, c, t)}
+  ${renderRelatedCases(locale, item)}
   ${renderCaseSection(t.caseFields.transfer, c.transfer)}
   <p class="mt-10 max-w-prose text-sm text-muted"><span class="eyebrow">${esc(t.privacy.label)}</span> ${esc(t.privacy.body)}</p>
   ${renderCaseNav(locale, id)}
@@ -756,13 +727,13 @@ ${renderNav(locale)}
 <main id="main">
 <script type="application/ld+json">${jsonLd(locale)}</script>
 ${renderHero(locale)}
-${renderArc(locale)}
+${renderImpact(locale)}
 ${renderSelectedCases(locale)}
-${renderExperience(locale)}
-${renderLab(locale)}
-${renderStack(locale)}
+${renderTrack(locale)}
+${renderApproach(locale)}
 ${renderCredentials(locale)}
 ${renderEducation(locale)}
+${renderAbout(locale)}
 </main>
 ${renderFooter(locale)}
 <script src="/portfolio/app.js" defer></script>

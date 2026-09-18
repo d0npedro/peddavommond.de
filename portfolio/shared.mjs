@@ -11,7 +11,7 @@ export const SITE = {
   year: 2026,
   city: "Köln",
   country: { de: "Deutschland", en: "Germany" },
-  location: { de: "Köln / Germany", en: "Cologne / Germany" },
+  location: { de: "Köln · Deutschlandweit / Remote", en: "Cologne · Germany-wide / Remote" },
 };
 
 export const LOCALES = ["de", "en"];
@@ -31,33 +31,57 @@ export const ERAS = [
 ];
 
 export const NAV = [
-  { id: "top", key: "profile" },
   { id: "cases", key: "cases" },
   { id: "work", key: "experience" },
-  { id: "lab", key: "lab" },
-  { id: "approach", key: "approach" },
-  { href: "/portfolio/cv/", key: "cv" },
+  { id: "about", key: "profile" },
   { id: "contact", key: "contact" },
+  { href: "/portfolio/cv/", key: "cv" },
 ];
 
-/** Homepage flagships, in display order. Lab first, then strongest enterprise. */
+/** Exactly three lead cases on the landing page. */
 export const FLAGSHIP_IDS = [
   "graph-mastermind",
   "agent-collective",
-  "deutschlandcard",
-  "dz-bank-okvp",
-  "bitmarck-bitgo",
+  "enterprise-integration",
 ];
 
 export const HOW_I_WORK_KEYS = [
   "evaluation",
-  "observability",
-  "failure",
   "hitl",
   "security",
-  "cost",
-  "boundaries",
-  "maintainability",
+  "observability",
+];
+
+/** Compressed enterprise milestones — not a full CV. */
+export const TRACK = [
+  {
+    id: "deutschlandcard",
+    period: "2023 – 2026",
+    company: "direct services Gütersloh GmbH",
+    caseId: "deutschlandcard",
+  },
+  {
+    id: "itzbund",
+    period: "2021 – 2022",
+    company: "The NextGen GmbH · ITZBund",
+  },
+  {
+    id: "dz-bank",
+    period: "2020",
+    company: "adesso AG · DZ BANK",
+    caseId: "dz-bank-okvp",
+  },
+  {
+    id: "bitmarck",
+    period: "2019 – 2020",
+    company: "adesso AG · BITMARCK",
+    caseId: "bitmarck-bitgo",
+  },
+  {
+    id: "amp",
+    period: "2020",
+    company: "adesso AG",
+  },
 ];
 
 export const TRUST_DOMAIN_KEYS = ["banking", "public", "health", "loyalty", "insurance", "automotive"];
@@ -151,10 +175,41 @@ export const CASES = [
     ],
   },
   {
-    id: "deutschlandcard",
+    id: "enterprise-integration",
     section: "enterprise",
     featured: true,
     flagship: true,
+    hasPage: true,
+    name: "Enterprise Integration",
+    client: "Paid enterprise delivery · NDA",
+    period: "2018 – 2026",
+    era: "enterprise",
+    ownership: {
+      status: "production",
+      team: "team",
+      data: "real",
+      code: "private",
+      result: "observed",
+    },
+    relatedIds: ["deutschlandcard", "dz-bank-okvp", "bitmarck-bitgo"],
+    tech: [
+      "Java",
+      "Spring",
+      "Azure AD B2C",
+      "OAuth2",
+      "REST / APIs",
+      "Kubernetes",
+      "OpenShift",
+      "Terraform",
+      "CI/CD",
+      "IAM",
+    ],
+  },
+  {
+    id: "deutschlandcard",
+    section: "enterprise",
+    featured: false,
+    flagship: false,
     hasPage: true,
     name: "DeutschlandCard",
     client: "direct services Gütersloh GmbH",
@@ -180,8 +235,8 @@ export const CASES = [
   {
     id: "dz-bank-okvp",
     section: "enterprise",
-    featured: true,
-    flagship: true,
+    featured: false,
+    flagship: false,
     hasPage: true,
     name: "DZ BANK OKVP",
     client: "DZ BANK AG · adesso AG",
@@ -209,8 +264,8 @@ export const CASES = [
   {
     id: "bitmarck-bitgo",
     section: "enterprise",
-    featured: true,
-    flagship: true,
+    featured: false,
+    flagship: false,
     hasPage: true,
     name: "BITMARCK bitGo_Web",
     client: "BITMARCK Technik GmbH",
@@ -715,18 +770,14 @@ export const LANGUAGES_META = [
 
 export const JSON_LD_KNOWS_ABOUT = [
   "Agentic AI",
-  "AI Agents",
-  "LLM-assisted Software Engineering",
+  "Large Language Models",
   "AI Automation",
-  "Enterprise Integration",
+  "Enterprise Software Architecture",
   "Java",
-  "Spring Boot",
-  "Kubernetes",
-  "Terraform",
-  "AI Transformation",
-  "AI Governance",
-  "Azure",
-  "HL7 FHIR",
+  "Spring",
+  "Cloud Computing",
+  "AI Agents",
+  "Enterprise Integration",
 ];
 
 export function stackCount() {
