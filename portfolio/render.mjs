@@ -4,15 +4,15 @@ import {
   METRICS,
   ERAS,
   NAV,
-  CASES,
   EXPERIENCE,
   EDUCATION,
   STACK_GROUPS,
-  INDUSTRIES,
   LANGUAGES_META,
   JSON_LD_KNOWS_ABOUT,
+  HOW_I_WORK_KEYS,
   stackCount,
   casesBySection,
+  featuredCases,
   pagedCases,
   caseById,
   caseHref,
@@ -135,11 +135,13 @@ function renderHero(locale) {
       </div>
       <h1 class="mt-6 text-balance text-[2.6rem] font-semibold leading-[1.02] tracking-tight text-fg sm:text-6xl md:text-7xl pf-visible">${esc(SITE.name)}</h1>
       <p class="pf-role pf-visible">${esc(t.hero.role)}</p>
+      <p class="pf-location pf-visible">${esc(t.hero.location)}</p>
       <p class="mt-8 max-w-2xl text-lg leading-relaxed text-muted pf-visible">${esc(t.hero.tagline)}</p>
       <p class="pf-proof pf-visible">${esc(t.hero.proof)}</p>
       <div class="mt-9 pf-cta-row pf-visible">
-        <a href="#ai-cases" class="scan-sweep group inline-flex items-center gap-2 rounded-card border border-accent bg-accent px-5 py-3 text-sm font-medium text-white transition-transform duration-200 hover:-translate-y-0.5 dark:text-bg">${esc(t.hero.ctaPrimary)}</a>
-        <a href="${attr(SITE.cvPath)}" class="inline-flex items-center gap-2 rounded-card border border-line bg-bg-elevated px-5 py-3 text-sm font-medium text-fg transition-colors duration-200 hover:border-accent hover:text-accent">${esc(t.hero.ctaSecondary)}</a>
+        <a href="#cases" class="scan-sweep group inline-flex items-center gap-2 rounded-card border border-accent bg-accent px-5 py-3 text-sm font-medium text-white transition-transform duration-200 hover:-translate-y-0.5 dark:text-bg">${esc(t.hero.ctaPrimary)}</a>
+        <a href="#work" class="inline-flex items-center gap-2 rounded-card border border-line bg-bg-elevated px-5 py-3 text-sm font-medium text-fg transition-colors duration-200 hover:border-accent hover:text-accent">${esc(t.hero.ctaSecondary)}</a>
+        <a href="${attr(SITE.cvPath)}" class="inline-flex items-center gap-2 rounded-card px-3 py-3 text-sm font-medium text-muted hover:text-accent">${esc(t.nav.cv)}</a>
         <a href="#contact" class="inline-flex items-center gap-2 rounded-card px-3 py-3 text-sm font-medium text-muted hover:text-accent">${esc(t.hero.ctaTertiary)}</a>
       </div>
       <dl class="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-4 pf-visible">${metrics}</dl>
@@ -165,13 +167,34 @@ function renderArc(locale) {
       <p class="mt-3 text-sm leading-relaxed text-muted">${esc(copyEra.blurb)}</p>
     </article>`;
   }).join("");
-  return `<section id="arc" class="container scroll-mt-24 py-20 md:py-28">
+  return `<section id="proof" class="container scroll-mt-24 py-20 md:py-28">
     ${heading(t.arc)}
-    <div class="relative grid gap-4 md:grid-cols-3">
+    <p class="pf-domains pf-visible" aria-label="${attr(t.industries.eyebrow)}">${esc(t.industries.line)}</p>
+    <div class="relative mt-10 grid gap-4 md:grid-cols-3">
       <div aria-hidden="true" class="absolute left-0 right-0 top-[52px] hidden h-px bg-gradient-to-r from-transparent via-line to-transparent md:block"></div>
       ${cards}
     </div>
   </section>`;
+}
+
+function ownershipMeta(item, t) {
+  const meta = item.ownership;
+  if (!meta) return "";
+  const chips = [
+    [t.caseMeta.status, t.caseMeta.statusValues[meta.status]],
+    [t.caseMeta.timeframe, item.period],
+    [t.caseMeta.team, t.caseMeta.teamValues[meta.team]],
+    [t.caseMeta.data, t.caseMeta.dataValues[meta.data]],
+    [t.caseMeta.code, t.caseMeta.codeValues[meta.code]],
+    [t.caseMeta.result, t.caseMeta.resultValues[meta.result]],
+  ]
+    .filter(([, value]) => value)
+    .map(
+      ([label, value]) =>
+        `<span class="pf-meta-chip"><span class="pf-meta-label">${esc(label)}</span> ${esc(value)}</span>`,
+    )
+    .join("");
+  return `<dl class="pf-meta">${chips}</dl>`;
 }
 
 function caseLinks(item, t, extra = "") {
@@ -194,6 +217,7 @@ function renderCaseCard(item, locale, wide = false) {
   const fields = [
     ["problem", t.caseFields.problem],
     ["decision", t.caseFields.decision],
+    ["evaluation", t.caseFields.evaluation],
     ["outcome", t.caseFields.outcome],
   ];
   const fieldHtml = fields
@@ -220,6 +244,7 @@ function renderCaseCard(item, locale, wide = false) {
     <h3 class="mt-3 text-2xl font-semibold tracking-tight text-fg">${title}</h3>
     <p class="mt-1 text-sm text-muted">${esc(item.client)}</p>
     ${c.honesty ? `<p class="pf-honesty">${esc(c.honesty)}</p>` : ""}
+    ${ownershipMeta(item, t)}
     ${fieldHtml}
     ${c.role ? `<div class="pf-field"><p class="eyebrow mb-2">${esc(t.caseFields.role)}</p><p class="text-sm leading-relaxed text-fg/85">${esc(c.role)}</p></div>` : ""}
     ${c.transfer ? `<div class="pf-field"><p class="eyebrow mb-2">${esc(t.caseFields.transfer)}</p><p class="text-sm leading-relaxed text-muted">${esc(c.transfer)}</p></div>` : ""}
@@ -240,29 +265,85 @@ function renderSecondaryCase(item, locale) {
   </article>`;
 }
 
-function renderAiCases(locale) {
+function renderSelectedCases(locale) {
   const t = copy(locale);
-  const cards = casesBySection("ai").map((item) => renderCaseCard(item, locale)).join("");
-  return `<section id="ai-cases" class="container scroll-mt-24 py-20 md:py-28">
-    ${heading(t.aiCases)}
-    <div class="pf-case-grid">${cards}</div>
+  const flagships = featuredCases();
+  const lead = flagships.slice(0, 3);
+  const more = flagships.slice(3);
+  const leadHtml = lead
+    .map((item, i) => renderCaseCard(item, locale, i === 2))
+    .join("");
+  const moreHtml = more.map((item) => renderCaseCard(item, locale)).join("");
+  return `<section id="cases" class="container scroll-mt-24 py-20 md:py-28">
+    ${heading(t.selectedCases)}
+    <div class="pf-case-grid">${leadHtml}</div>
+    ${moreHtml ? `<div class="pf-case-grid mt-4">${moreHtml}</div>` : ""}
   </section>`;
 }
 
-function renderEnterprise(locale) {
+function renderLab(locale) {
   const t = copy(locale);
-  const featured = casesBySection("enterprise").map((item) => renderCaseCard(item, locale, true)).join("");
-  const secondary = casesBySection("secondary").map((item) => renderSecondaryCase(item, locale)).join("");
-  return `<section id="enterprise" class="scroll-mt-24 border-y border-line bg-bg-sunken/40 py-20 md:py-28">
+  const items = (t.lab.items ?? [])
+    .map((item) => {
+      const href = caseHref(locale, item.id);
+      return `<article class="panel p-5">
+        <p class="eyebrow">${esc(item.label)}</p>
+        <h3 class="mt-2 text-lg font-semibold text-fg"><a class="pf-case-title-link" href="${attr(href)}">${esc(caseById(item.id)?.name ?? item.id)}</a></h3>
+        <p class="mt-2 text-sm leading-relaxed text-muted">${esc(item.body)}</p>
+        <a class="pf-case-open mt-4" href="${attr(href)}">${esc(t.casePage.openCase)}</a>
+      </article>`;
+    })
+    .join("");
+  return `<section id="lab" class="scroll-mt-24 border-y border-line bg-bg-sunken/40 py-20 md:py-28">
     <div class="container">
-      ${heading(t.enterpriseCases)}
-      <div class="grid gap-4">${featured}</div>
-      <div class="mt-12">
-        <p class="eyebrow mb-3">${esc(t.enterpriseCases.secondaryEyebrow)}</p>
-        <p class="mb-6 max-w-prose text-sm text-muted">${esc(t.enterpriseCases.secondaryNote)}</p>
-        <div class="pf-secondary">${secondary}</div>
-      </div>
+      ${heading(t.lab)}
+      <div class="pf-case-grid">${items}</div>
+      <aside class="pf-perspective panel p-6 md:p-8 mt-8">
+        <p class="eyebrow">${esc(t.lab.perspectiveEyebrow)}</p>
+        <h3 class="mt-3 text-xl font-semibold text-fg">${esc(t.lab.perspectiveTitle)}</h3>
+        <p class="mt-3 max-w-prose text-sm leading-relaxed text-muted">${esc(t.lab.perspective)}</p>
+        <p class="mt-4 max-w-prose text-sm leading-relaxed text-muted"><span class="eyebrow">${esc(t.privacy.label)}</span> ${esc(t.privacy.body)}</p>
+      </aside>
     </div>
+  </section>`;
+}
+
+function renderHowIWork(locale) {
+  const t = copy(locale);
+  const items = HOW_I_WORK_KEYS.map((key) => {
+    const item = t.howIWork.items[key];
+    return `<article class="panel p-5">
+      <h3 class="text-sm font-semibold text-fg">${esc(item.title)}</h3>
+      <p class="mt-2 text-sm leading-relaxed text-muted">${esc(item.body)}</p>
+    </article>`;
+  }).join("");
+  return `<div class="container pt-16 md:pt-20">
+    ${heading(t.howIWork)}
+    <div class="pf-how">${items}</div>
+  </div>`;
+}
+
+function renderConsulting(locale) {
+  const t = copy(locale);
+  return `<aside class="container pt-12 md:pt-16">
+    <article class="panel p-6 md:p-8">
+      <p class="eyebrow">${esc(t.consulting.eyebrow)}</p>
+      <h3 class="mt-3 text-xl font-semibold text-fg">${esc(t.consulting.title)}</h3>
+      <p class="mt-3 max-w-prose text-sm leading-relaxed text-muted">${esc(t.consulting.body)}</p>
+    </article>
+  </aside>`;
+}
+
+function renderCredentials(locale) {
+  const t = copy(locale);
+  return `<section id="credentials" class="container scroll-mt-24 pt-20 md:pt-28">
+    ${heading(t.credentials)}
+    <div class="pf-contact-row">
+      <a class="primary" href="${attr(SITE.cvPath)}">${esc(t.credentials.cv)}</a>
+      <a class="secondary" href="${attr(SITE.github)}" target="_blank" rel="noopener noreferrer">${esc(t.credentials.github)}</a>
+      <a class="secondary" href="${attr(SITE.linkedin)}" target="_blank" rel="noopener noreferrer">${esc(t.footer.linkedin)}</a>
+    </div>
+    <p class="mt-6 max-w-prose text-sm text-muted">${esc(t.credentials.educationNote)}</p>
   </section>`;
 }
 
@@ -300,8 +381,10 @@ function renderStack(locale) {
       <div class="mt-4 flex flex-wrap gap-1.5">${items}</div>
     </div>`;
   };
-  return `<section id="stack" class="scroll-mt-24 pb-20 md:pb-28">
+  return `<section id="approach" class="scroll-mt-24 pb-20 md:pb-28">
     ${renderCompetencies(locale)}
+    ${renderHowIWork(locale)}
+    ${renderConsulting(locale)}
     <div class="container pt-16 md:pt-20">
       ${heading(t.stack)}
       <div class="mb-10 flex flex-wrap gap-2" role="group" aria-label="${attr(t.stack.filterAria)}">
@@ -317,26 +400,14 @@ function renderStack(locale) {
   </section>`;
 }
 
-function renderIndustries(locale) {
+function renderFurtherMandates(locale) {
   const t = copy(locale);
-  const chips = t.industries.names
-    .map((name) => `<span class="scan-sweep rounded-card border border-line bg-bg-elevated px-4 py-2.5 text-sm text-fg transition-colors duration-200 hover:border-accent hover:text-accent">${esc(name)}</span>`)
-    .join("");
-  const health = INDUSTRIES.healthTags
-    .map((tag) => `<span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.72rem] text-muted">${esc(tag)}</span>`)
-    .join("");
-  return `<section id="industries" class="container scroll-mt-24 pb-20 md:pb-28">
-    <div class="mb-8">
-      <p class="eyebrow">${esc(t.industries.eyebrow)}</p>
-      <h2 class="mt-3 max-w-prose text-2xl font-semibold tracking-tight text-fg">${esc(t.industries.title)}</h2>
-    </div>
-    <div class="flex flex-wrap gap-2.5">${chips}</div>
-    <div class="mt-10">
-      <div class="hairline mb-6"></div>
-      <p class="eyebrow mb-4">${esc(t.industries.healthLabel)}</p>
-      <div class="flex flex-wrap gap-1.5">${health}</div>
-    </div>
-  </section>`;
+  const secondary = casesBySection("secondary").map((item) => renderSecondaryCase(item, locale)).join("");
+  return `<div class="container pt-12 md:pt-16">
+    <p class="eyebrow mb-3">${esc(t.selectedCases.secondaryEyebrow)}</p>
+    <p class="mb-6 max-w-prose text-sm text-muted">${esc(t.selectedCases.secondaryNote)}</p>
+    <div class="pf-secondary">${secondary}</div>
+  </div>`;
 }
 
 function renderExperience(locale) {
@@ -389,6 +460,7 @@ function renderExperience(locale) {
         <ul class="space-y-3">${items}</ul>
       </div>
       <div class="mt-8 font-mono text-xs text-faint" data-exp-count>${esc(t.experience.countTemplate.replace("{shown}", String(EXPERIENCE.length)).replace("{total}", String(EXPERIENCE.length)).replace("{era}", t.experience.eraNames.all))}</div>
+      ${renderFurtherMandates(locale)}
     </div>
   </section>`;
 }
@@ -437,6 +509,7 @@ function renderFooter(locale) {
         <a class="secondary" href="${attr(SITE.cvPath)}">${esc(t.footer.cv)}</a>
       </div>
       <p class="mt-4 max-w-prose text-xs text-faint">${esc(t.footer.cvNote)}</p>
+      <p class="mt-6 max-w-prose text-xs text-muted"><span class="eyebrow">${esc(t.privacy.label)}</span> ${esc(t.privacy.body)}</p>
       <div class="hairline my-12"></div>
       <div class="flex flex-col items-start justify-between gap-4 font-mono text-xs text-faint sm:flex-row sm:items-center">
         <span>© ${SITE.year} ${esc(SITE.name)}</span>
@@ -460,6 +533,12 @@ function jsonLd(locale) {
     sameAs: [SITE.linkedin, SITE.github],
     knowsLanguage: ["German", "English", "Spanish"],
     knowsAbout: JSON_LD_KNOWS_ABOUT,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: locale === "de" ? SITE.city : "Cologne",
+      addressCountry: "DE",
+    },
+    homeLocation: SITE.location[locale],
   };
   return JSON.stringify(data);
 }
@@ -535,7 +614,7 @@ function renderCaseNav(locale, currentId) {
     .map((item) => {
       const c = t.cases[item.id];
       return `<a class="panel p-4 pf-case-more-link" href="${attr(caseHref(locale, item.id))}">
-        <p class="font-mono text-[0.7rem] text-faint">${esc(item.section === "ai" ? t.casePage.moreAi : t.casePage.moreEnterprise)}</p>
+        <p class="font-mono text-[0.7rem] text-faint">${esc(item.section === "lab" ? t.casePage.moreAi : t.casePage.moreEnterprise)}</p>
         <p class="mt-1 font-semibold text-fg">${esc(item.name)}</p>
         <p class="mt-1 text-sm text-muted">${esc(c.domain)}</p>
       </a>`;
@@ -609,15 +688,18 @@ ${renderNav(locale, { siblingPath, homePrefix: home })}
   <h1 class="mt-4 text-balance text-4xl font-semibold tracking-tight text-fg sm:text-5xl">${esc(item.name)}</h1>
   <p class="mt-2 text-muted">${esc(item.client)}</p>
   ${c.honesty ? `<p class="pf-honesty">${esc(c.honesty)}</p>` : ""}
+  ${ownershipMeta(item, t)}
   ${renderCaseSection(t.caseFields.context, c.context)}
   ${renderCaseSection(t.caseFields.problem, c.problem)}
   ${renderCaseSection(t.caseFields.role, c.role)}
   ${renderCaseSection(t.caseFields.decision, c.decision)}
   ${renderArchitecture(c, t, item.tech)}
+  ${renderCaseSection(t.caseFields.evaluation, c.evaluation)}
   ${renderCaseSection(t.caseFields.outcome, c.outcome)}
   ${highlights ? `<ul class="mt-2 space-y-2">${highlights}</ul>` : ""}
   ${renderEvidence(item, c, t)}
   ${renderCaseSection(t.caseFields.transfer, c.transfer)}
+  <p class="mt-10 max-w-prose text-sm text-muted"><span class="eyebrow">${esc(t.privacy.label)}</span> ${esc(t.privacy.body)}</p>
   ${renderCaseNav(locale, id)}
 </article>
 </main>
@@ -675,11 +757,11 @@ ${renderNav(locale)}
 <script type="application/ld+json">${jsonLd(locale)}</script>
 ${renderHero(locale)}
 ${renderArc(locale)}
-${renderAiCases(locale)}
-${renderEnterprise(locale)}
-${renderStack(locale)}
-${renderIndustries(locale)}
+${renderSelectedCases(locale)}
 ${renderExperience(locale)}
+${renderLab(locale)}
+${renderStack(locale)}
+${renderCredentials(locale)}
 ${renderEducation(locale)}
 </main>
 ${renderFooter(locale)}
@@ -690,7 +772,7 @@ ${renderFooter(locale)}
 
 export function renderCv(locale) {
   const t = copy(locale);
-  const featured = CASES.filter((c) => c.featured)
+  const featured = featuredCases()
     .map((item) => {
       const c = t.cases[item.id];
       const href = item.hasPage ? caseHref(locale, item.id) : `/portfolio/${locale}`;
@@ -726,7 +808,8 @@ ${themeBoot()}
     <a href="${attr(SITE.linkedin)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center rounded-card border border-line px-5 py-3 text-sm">LinkedIn</a>
     <a href="${attr(SITE.github)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center rounded-card border border-line px-5 py-3 text-sm">GitHub</a>
   </div>
-  <h2 class="mt-8 text-xl font-semibold">${esc(t.aiCases.eyebrow)} / ${esc(t.enterpriseCases.eyebrow)}</h2>
+  <p class="mt-2 text-sm text-muted">${esc(t.hero.location)}</p>
+  <h2 class="mt-8 text-xl font-semibold">${esc(t.selectedCases.eyebrow)}</h2>
   <div class="mt-4">${featured}</div>
   <h2 class="mt-10 text-xl font-semibold">${esc(t.experience.eyebrow)}</h2>
   <div class="mt-4">${jobs}</div>

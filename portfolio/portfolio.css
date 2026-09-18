@@ -15,6 +15,85 @@
   color: rgb(var(--accent));
 }
 
+.pf-location {
+  margin-top: 0.45rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgb(var(--muted));
+}
+
+.pf-domains {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgb(var(--muted));
+}
+
+.pf-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+}
+
+.pf-meta-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  border: 1px solid rgb(var(--line));
+  background: rgb(var(--bg-sunken));
+  border-radius: 3px;
+  padding: 0.28rem 0.5rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.65rem;
+  color: rgb(var(--fg));
+}
+
+.pf-meta-label {
+  color: rgb(var(--faint));
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.pf-how {
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .pf-how {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .pf-how {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.pf-perspective {
+  border-color: rgb(var(--accent) / 0.4);
+}
+
+.pf-case-title-link:focus-visible,
+.pf-case-open:focus-visible,
+.pf-case-more-link:focus-visible,
+.pf-cta-row a:focus-visible,
+.pf-links a:focus-visible,
+.pf-contact-row a:focus-visible {
+  outline: 2px solid rgb(var(--accent));
+  outline-offset: 3px;
+}
+
+.pf-case-card:focus-within,
+.pf-case-more-link:focus-within {
+  border-color: rgb(var(--accent) / 0.65);
+}
+
 @media (min-width: 640px) {
   .pf-role {
     font-size: 1.35rem;
