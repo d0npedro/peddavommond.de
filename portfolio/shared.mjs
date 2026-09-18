@@ -42,7 +42,7 @@ export const NAV = [
 export const FLAGSHIP_IDS = [
   "graph-mastermind",
   "agent-collective",
-  "enterprise-integration",
+  "deutschlandcard",
 ];
 
 export const HOW_I_WORK_KEYS = [
@@ -175,42 +175,12 @@ export const CASES = [
     ],
   },
   {
-    id: "enterprise-integration",
+    id: "deutschlandcard",
     section: "enterprise",
     featured: true,
     flagship: true,
     hasPage: true,
-    name: "Enterprise Integration",
-    client: "Paid enterprise delivery · NDA",
-    period: "2018 – 2026",
-    era: "enterprise",
-    ownership: {
-      status: "production",
-      team: "team",
-      data: "real",
-      code: "private",
-      result: "observed",
-    },
-    relatedIds: ["deutschlandcard", "dz-bank-okvp", "bitmarck-bitgo"],
-    tech: [
-      "Java",
-      "Spring",
-      "Azure AD B2C",
-      "OAuth2",
-      "REST / APIs",
-      "Kubernetes",
-      "OpenShift",
-      "Terraform",
-      "CI/CD",
-      "IAM",
-    ],
-  },
-  {
-    id: "deutschlandcard",
-    section: "enterprise",
-    featured: false,
-    flagship: false,
-    hasPage: true,
+    relatedIds: ["dz-bank-okvp", "bitmarck-bitgo"],
     name: "DeutschlandCard",
     client: "direct services Gütersloh GmbH",
     period: "2023 – 2026",

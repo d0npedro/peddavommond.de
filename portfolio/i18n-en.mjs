@@ -405,50 +405,13 @@ export const en = {
         events: "External events: shortage, market shift, targeted agent failure",
       },
     },
-    "enterprise-integration": {
-      domain: "Enterprise Integration · Cloud · Identity",
-      badge: "Professional Track Record · Enterprise",
-      landingTitle: "Cloud, identity, and integration modernization",
-      oneLiner:
-        "Build and modernize productive backend and integration systems — from IAM and APIs to cloud infrastructure and CI/CD. The ground AI agents later have to land on.",
-      honesty: "No AI/LLM component in the underlying engagements. Customer and system details partly abstracted (NDA).",
-      pageTitle: "Enterprise integration & modernization | Peter Henrichs",
-      pageDescription:
-        "Paid enterprise delivery: cloud, identity, APIs, CI/CD in loyalty, banking, and statutory health. No AI component, no invented volume metrics.",
-      context:
-        "2018–2026 in productive, regulated landscapes: loyalty (DeutschlandCard), banking (DZ BANK / OKVP), statutory health insurance (BITMARCK), and public sector. AI agents in enterprises rarely fail on the prompt — they have to land in identity, permissions, APIs, deployment, and operations.",
-      problem:
-        "Grown system landscapes need controllable cloud, identity, and interfaces before an AI layer can attach. Big-bang cutovers and undocumented monoliths make integration — including later agents — impossible.",
-      contribution:
-        "Across the engagements, by role: login journey and Terraform automation (DeutschlandCard); lead-dev/DevOps for decoupling, pipelines, and observability (DZ BANK); backend, REST, legacy decoupling, and 2FA (BITMARCK). Always on a team, always paid delivery.",
-      decision:
-        "Cloudification instead of a big bang; identity and permissions as their own layer; independently shippable services; observability and CI/CD as part of the architecture — not a footnote. Details under NDA; only the own role is described.",
-      architecture:
-        "Recurring pattern: specialist procedures and partner APIs → service/integration layer (Java/Spring) → identity (Azure AD B2C, OAuth2, 2FA) → cloud/runtime (Azure, Kubernetes, OpenShift) → delivery and operations (Terraform, Jenkins, Prometheus/Grafana/Dynatrace).",
-      architectureSteps: [
-        "Procedures / APIs",
-        "Spring services",
-        "IAM / 2FA",
-        "Cloud / CI/CD",
-        "Observability",
-      ],
-      outcome:
-        "Productive backend and integration systems in loyalty, banking, and statutory health. Observed in delivery. No published volume, latency, or AI figures.",
-      role: "Developer, consultant, and at times lead-dev on a team — paid enterprise delivery, not an independent R&D project.",
-      evaluation:
-        "No public AI evaluation metrics — the engagements have no AI/LLM component. Assessment via identity, reproducible infrastructure, decoupled features, observability, and existing interfaces that stay usable.",
-      evalStatus: "observed-delivery",
-      transfer:
-        "That is why the enterprise background is not ballast before the AI work — it is the moat. Agents have to be embedded in IAM, APIs, data sources, deployment, monitoring, and existing processes.",
-      highlights: [
-        "Identity and permissions as a prerequisite for integration",
-        "Cloud and CI/CD without a big-bang cut",
-        "Observability and legacy decoupling in regulated domains",
-      ],
-    },
     deutschlandcard: {
       domain: "Loyalty · Cloud · Identity",
-      honesty: "No AI/LLM component in the published case.",
+      badge: "Professional Track Record · Enterprise",
+      landingTitle: "Cloud, identity, and integration at DeutschlandCard",
+      oneLiner:
+        "Paid cloudification of the nationwide loyalty program: Azure AD B2C, Terraform, Kubernetes. That identity/API/cloud ground is the moat for later AI integration — the case itself is not an AI project.",
+      honesty: "No AI/LLM component in the published case. No volume or latency figures (NDA).",
       contribution:
         "Login journey on Azure AD B2C, Terraform automation, and service cloudification — developer on a team, paid delivery.",
       pageTitle: "DeutschlandCard — cloud, identity, Terraform | Peter Henrichs",

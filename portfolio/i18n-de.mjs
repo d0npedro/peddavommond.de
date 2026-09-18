@@ -406,50 +406,13 @@ export const de = {
         events: "Externe Events: Shortage, Markt, gezielter Agent-Failure",
       },
     },
-    "enterprise-integration": {
-      domain: "Enterprise Integration · Cloud · Identity",
-      badge: "Professional Track Record · Enterprise",
-      landingTitle: "Cloud-, Identity- und Integrationsmodernisierung",
-      oneLiner:
-        "Entwicklung und Modernisierung produktiver Backend- und Integrationslösungen — von IAM und APIs bis Cloud Infrastructure und CI/CD. Der Boden, auf dem AI Agents später landen müssen.",
-      honesty: "Kein AI-/LLM-Bestandteil in den zugrunde liegenden Mandaten. Kunden- und Systemdetails teilweise abstrahiert (NDA).",
-      pageTitle: "Enterprise Integration & Modernisierung | Peter Henrichs",
-      pageDescription:
-        "Bezahlte Enterprise-Lieferung: Cloud, Identity, APIs, CI/CD in Loyalty, Banking und GKV. Kein AI-Bestandteil, keine erfundenen Volumenkennzahlen.",
-      context:
-        "2018–2026 in produktiven, regulierten Landschaften: Loyalty (DeutschlandCard), Banking (DZ BANK / OKVP), gesetzliche Krankenversicherung (BITMARCK) und Public Sector. AI Agents scheitern in Unternehmen selten am Prompt — sie müssen in Identität, Berechtigungen, APIs, Deployment und Betrieb.",
-      problem:
-        "Gewachsene Systemlandschaften brauchen kontrollierbare Cloud, Identity und Schnittstellen, bevor eine AI-Schicht daran andocken kann. Big-Bang-Schnitte und undokumentierte Monolithen machen Integration — inklusive späterer Agents — unmöglich.",
-      contribution:
-        "In den Mandaten je nach Rolle: Login-Journey und Terraform-Automatisierung (DeutschlandCard); Lead-Dev/DevOps für Entkopplung, Pipelines und Observability (DZ BANK); Backend, REST, Legacy-Entkopplung und 2FA (BITMARCK). Immer im Team, immer bezahlte Lieferung.",
-      decision:
-        "Cloudifizierung statt Big Bang; Identity und Berechtigungen als eigene Schicht; unabhängig auslieferbare Services; Observability und CI/CD als Teil der Architektur — nicht als Nachsatz. Details unter NDA, beschrieben wird nur die eigene Rolle.",
-      architecture:
-        "Wiederkehrendes Muster: Fachverfahren und Partner-APIs → Service-/Integrationsschicht (Java/Spring) → Identity (Azure AD B2C, OAuth2, 2FA) → Cloud/Runtime (Azure, Kubernetes, OpenShift) → Delivery und Betrieb (Terraform, Jenkins, Prometheus/Grafana/Dynatrace).",
-      architectureSteps: [
-        "Fachverfahren / APIs",
-        "Spring Services",
-        "IAM / 2FA",
-        "Cloud / CI/CD",
-        "Observability",
-      ],
-      outcome:
-        "Produktive Backend- und Integrationslösungen in Loyalty, Banking und GKV. Beobachtet in der Delivery. Keine veröffentlichten Volumen-, Latenz- oder AI-Kennzahlen.",
-      role: "Entwickler, Berater und zeitweise Lead-Dev im Team — bezahlte Enterprise-Lieferung, kein unabhängiges R&D-Projekt.",
-      evaluation:
-        "Keine öffentlichen AI-Evaluationsmetriken — die Mandate haben keinen AI-/LLM-Bestandteil. Bewertung über Identity, reproduzierbare Infrastruktur, entkoppelte Features, Observability und weiter nutzbare Bestandsschnittstellen.",
-      evalStatus: "observed-delivery",
-      transfer:
-        "Genau deshalb ist der Enterprise-Hintergrund kein Ballast vor der KI-Arbeit — er ist der Burggraben. Agents müssen in IAM, APIs, Datenquellen, Deployment, Monitoring und bestehende Prozesse eingebettet werden.",
-      highlights: [
-        "Identity und Berechtigungen als Integrationsvoraussetzung",
-        "Cloud und CI/CD ohne Big-Bang-Schnitt",
-        "Observability und Legacy-Entkopplung in regulierten Domänen",
-      ],
-    },
     deutschlandcard: {
       domain: "Loyalty · Cloud · Identity",
-      honesty: "Kein AI-/LLM-Bestandteil im veröffentlichten Case.",
+      badge: "Professional Track Record · Enterprise",
+      landingTitle: "Cloud, Identity und Integration bei DeutschlandCard",
+      oneLiner:
+        "Bezahlte Cloudifizierung des bundesweiten Loyalty-Programms: Azure AD B2C, Terraform, Kubernetes. Genau dieser Identity-/API-/Cloud-Boden ist der Burggraben für spätere AI-Integration — der Case selbst ist kein AI-Projekt.",
+      honesty: "Kein AI-/LLM-Bestandteil im veröffentlichten Case. Keine Volumen- oder Latenzzahlen (NDA).",
       contribution:
         "Login-Journey auf Azure AD B2C, Terraform-Automatisierung und Cloudifizierung von Services — Entwickler im Team, bezahlte Lieferung.",
       pageTitle: "DeutschlandCard — Cloud, Identity, Terraform | Peter Henrichs",

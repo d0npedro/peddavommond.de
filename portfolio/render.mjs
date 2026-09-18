@@ -370,7 +370,7 @@ function renderTrack(locale) {
       <div class="pf-track">${items}</div>
       <div class="mt-8 pf-contact-row">
         <a class="secondary" href="${attr(SITE.cvPath)}">${esc(t.track.more)}</a>
-        <a class="secondary" href="${attr(caseHref(locale, "enterprise-integration"))}">${esc(t.cases["enterprise-integration"].landingTitle)}</a>
+        <a class="secondary" href="${attr(caseHref(locale, "deutschlandcard"))}">${esc(t.cases.deutschlandcard.landingTitle || "DeutschlandCard")}</a>
       </div>
       ${renderFurtherMandates(locale)}
     </div>

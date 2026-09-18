@@ -36,6 +36,11 @@ async function check(locale) {
   assert(html.includes("multi-agent-six-murex.vercel.app") || html.includes("/multi-agent/"), `${prefix} missing Agent Collective demo`);
   assert(html.includes("peter.henrichs@web.de"), `${prefix} missing email`);
   assert(!html.includes("ph@d0npedro.com"), `${prefix} still has old hiring email`);
+  assert(!/Hennrichs/.test(html), `${prefix} misspelled personal name`);
+  const emails = html.match(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g) ?? [];
+  for (const email of emails) {
+    assert(email === "peter.henrichs@web.de", `${prefix} unexpected email ${email}`);
+  }
   assert(html.includes("linkedin.com/in/peter-henrichs"), `${prefix} missing LinkedIn`);
   assert(html.includes("github.com/d0npedro"), `${prefix} missing GitHub`);
   assert(html.includes("/portfolio/cv/"), `${prefix} missing CV path`);
@@ -104,7 +109,9 @@ assert(en.includes("Open profile / CV"), "EN secondary CTA should open profile/C
 assert(de.includes("Ich bringe AI Agents in reale Unternehmenssysteme."), "DE H1 missing");
 assert(en.includes("I bring AI agents into real enterprise systems."), "EN H1 missing");
 assert(de.includes("Über AI &amp; Agents sprechen") || de.includes("Über AI & Agents sprechen"), "DE talk CTA missing");
-assert(!de.includes("Hennrichs") && !en.includes("Hennrichs"), "audit misspelling leaked");
+  assert(!de.includes("Hennrichs") && !en.includes("Hennrichs"), "audit misspelling leaked");
+  assert(JSON.stringify(FLAGSHIP_IDS) === JSON.stringify(["graph-mastermind", "agent-collective", "deutschlandcard"]), "lead cases must map to existing real projects");
+  assert(!de.includes("enterprise-integration") && !en.includes("enterprise-integration"), "fabricated enterprise-integration product still on landing");
 
 async function exists(path) {
   try {
@@ -149,9 +156,10 @@ async function checkCase(locale, id) {
     assert(!/GPT-|OpenAI API|Claude API|LLM-powered|powered by an LLM/i.test(html), `${prefix} must not invent an LLM backend`);
     assert(html.includes("raw.githubusercontent.com/d0npedro/multi-agent"), `${prefix} missing public screenshot`);
   }
-  if (id === "deutschlandcard" || id === "dz-bank-okvp" || id === "bitmarck-bitgo" || id === "enterprise-integration") {
+  if (id === "deutschlandcard" || id === "dz-bank-okvp" || id === "bitmarck-bitgo") {
     assert(/Kein AI|No AI/.test(html), `${prefix} must not invent client AI work`);
   }
+  assert(!html.includes("enterprise-integration"), `${prefix} fabricated enterprise-integration product leaked`);
 }
 
 async function checkSitemap() {
