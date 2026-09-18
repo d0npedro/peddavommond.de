@@ -62,6 +62,18 @@
   ],
   "rewrites": [
     {
+      "source": "/portfolio/cv",
+      "destination": "/portfolio/cv/index.html"
+    },
+    {
+      "source": "/portfolio/:locale/cases/:id",
+      "destination": "/portfolio/:locale/cases/:id/index.html"
+    },
+    {
+      "source": "/portfolio/:locale/cases/:id/",
+      "destination": "/portfolio/:locale/cases/:id/index.html"
+    },
+    {
       "source": "/win11",
       "destination": "/win11/index.html"
     },
