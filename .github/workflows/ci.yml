@@ -51,7 +51,7 @@ jobs:
           grep -q slotmachine public/win11/js/apps/catalog.js
           grep -q 'Senior AI Consultant' public/portfolio/de/index.html
           grep -q 'Graph-Mastermind' public/portfolio/de/index.html
-          grep -q 'ph@d0npedro.com' public/portfolio/de/index.html
+          grep -q 'peter.henrichs@web.de' public/portfolio/de/index.html
           test -f public/portfolio/cv/index.html
 
       - name: Formula unit test (optional shell util)

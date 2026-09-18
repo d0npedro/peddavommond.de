@@ -23,7 +23,8 @@ async function check(locale) {
   assert(html.includes("github.com/d0npedro/graph-mastermind"), `${prefix} missing Graph-Mastermind repo`);
   assert(html.includes("github.com/d0npedro/multi-agent"), `${prefix} missing Agent Collective repo`);
   assert(html.includes("multi-agent-six-murex.vercel.app") || html.includes("/multi-agent/"), `${prefix} missing Agent Collective demo`);
-  assert(html.includes("ph@d0npedro.com"), `${prefix} missing email`);
+  assert(html.includes("peter.henrichs@web.de"), `${prefix} missing email`);
+  assert(!html.includes("ph@d0npedro.com"), `${prefix} still has old hiring email`);
   assert(html.includes("linkedin.com/in/peter-henrichs"), `${prefix} missing LinkedIn`);
   assert(html.includes("github.com/d0npedro"), `${prefix} missing GitHub`);
   assert(html.includes("/portfolio/cv/"), `${prefix} missing CV path`);
@@ -43,7 +44,8 @@ async function check(locale) {
 async function checkCv() {
   const html = await readFile(join(root, "public/portfolio/cv/index.html"), "utf8");
   assert(html.includes("Senior AI Consultant"), "CV missing role");
-  assert(html.includes("ph@d0npedro.com"), "CV missing email");
+  assert(html.includes("peter.henrichs@web.de"), "CV missing email");
+  assert(!html.includes("ph@d0npedro.com"), "CV still has old hiring email");
   assert(html.includes("Graph-Mastermind"), "CV missing Graph-Mastermind");
 }
 

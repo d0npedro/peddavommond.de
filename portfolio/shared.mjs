@@ -3,7 +3,7 @@
 export const SITE = {
   name: "Peter Henrichs",
   handle: "peter.henrichs",
-  email: "ph@d0npedro.com",
+  email: "peter.henrichs@web.de",
   linkedin: "https://www.linkedin.com/in/peter-henrichs/",
   github: "https://github.com/d0npedro",
   cvPath: "/portfolio/cv/",
