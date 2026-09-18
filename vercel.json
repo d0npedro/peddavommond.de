@@ -62,6 +62,10 @@
   ],
   "rewrites": [
     {
+      "source": "/portfolio/cv",
+      "destination": "/portfolio/cv/index.html"
+    },
+    {
       "source": "/win11",
       "destination": "/win11/index.html"
     },

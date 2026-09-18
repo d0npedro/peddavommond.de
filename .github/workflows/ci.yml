@@ -49,6 +49,10 @@ jobs:
           test -f public/win11/css/main.css
           test -f public/soundcloud.html
           grep -q slotmachine public/win11/js/apps/catalog.js
+          grep -q 'Senior AI Consultant' public/portfolio/de/index.html
+          grep -q 'Graph-Mastermind' public/portfolio/de/index.html
+          grep -q 'ph@d0npedro.com' public/portfolio/de/index.html
+          test -f public/portfolio/cv/index.html
 
       - name: Formula unit test (optional shell util)
         run: node public/win11/js/utils/formula.test.js

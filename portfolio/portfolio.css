@@ -1,0 +1,232 @@
+/* Portfolio extras on top of the existing Tailwind export. */
+
+.pf-visible {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.pf-role {
+  display: block;
+  margin-top: 1.25rem;
+  max-width: 46rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: rgb(var(--accent));
+}
+
+@media (min-width: 640px) {
+  .pf-role {
+    font-size: 1.35rem;
+  }
+}
+
+.pf-proof {
+  margin-top: 1.25rem;
+  max-width: 46rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgb(var(--faint));
+}
+
+.pf-metric-value {
+  font-variant-numeric: tabular-nums;
+}
+
+.pf-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pf-case-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 900px) {
+  .pf-case-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.pf-case-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.pf-case-card--wide {
+  grid-column: 1 / -1;
+}
+
+.pf-honesty {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: rgb(var(--signal));
+}
+
+.pf-field + .pf-field {
+  margin-top: 1rem;
+}
+
+.pf-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.pf-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid rgb(var(--accent) / 0.45);
+  border-radius: 4px;
+  padding: 0.45rem 0.75rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  color: rgb(var(--accent));
+}
+
+.pf-links a:hover {
+  border-color: rgb(var(--accent));
+  background: rgb(var(--accent) / 0.08);
+}
+
+.pf-secondary {
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .pf-secondary {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.pf-pillars {
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .pf-pillars {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .pf-pillars {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.pf-pillar {
+  min-height: 100%;
+}
+
+.pf-stack-featured {
+  border-color: rgb(var(--accent) / 0.45);
+}
+
+.pf-stack-more {
+  margin-top: 2rem;
+}
+
+.pf-contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.pf-contact-row a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.85rem;
+}
+
+.pf-contact-row a.primary {
+  border: 1px solid rgb(var(--accent));
+  background: rgb(var(--accent));
+  color: #fff;
+}
+
+.dark .pf-contact-row a.primary {
+  color: rgb(var(--bg));
+}
+
+.pf-contact-row a.secondary {
+  border: 1px solid rgb(var(--line));
+  background: rgb(var(--bg-elevated));
+  color: rgb(var(--fg));
+}
+
+.pf-contact-row a.secondary:hover {
+  border-color: rgb(var(--accent));
+  color: rgb(var(--accent));
+}
+
+.pf-nav-cv {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+}
+
+.is-hidden {
+  display: none !important;
+}
+
+.exp-body[hidden] {
+  display: none;
+}
+
+header.pf-scrolled {
+  border-bottom-color: rgb(var(--line));
+  background: rgb(var(--bg) / 0.8);
+  backdrop-filter: blur(12px);
+}
+
+.cv-page {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+
+.cv-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.cv-todo {
+  margin-top: 2rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  color: rgb(var(--faint));
+}
+
+@media print {
+  header,
+  .cv-actions,
+  .cv-todo {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #111 !important;
+  }
+}
