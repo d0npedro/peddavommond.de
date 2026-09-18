@@ -37,14 +37,14 @@ export const de = {
     tagline:
       "Ich entwerfe Systeme, die LLMs, Agents und Automation an reale Unternehmenssoftware anbinden — Architektur, Integration und Beratung, nicht Demos neben dem System.",
     proof:
-      "ENGINEERING · 10+ years enterprise systems · AGENTIC AI · LLMs · Agents · Automation · INTEGRATION · APIs · Cloud · Existing IT · CONSULTING · Use Cases · Architecture · Transformation",
+      "ENTWICKLUNG · 10+ Jahre Enterprise-Systeme · AGENTIC AI · LLMs · Agents · Automatisierung · INTEGRATION · APIs · Cloud · bestehende IT · BERATUNG · Use Cases · Architektur · Transformation",
     proofChips: [
-      { label: "ENGINEERING", body: "10+ years enterprise systems" },
-      { label: "AGENTIC AI", body: "LLMs · Agents · Automation" },
-      { label: "INTEGRATION", body: "APIs · Cloud · Existing IT" },
-      { label: "CONSULTING", body: "Use Cases · Architecture · Transformation" },
+      { label: "ENTWICKLUNG", body: "10+ Jahre Enterprise-Systeme" },
+      { label: "AGENTIC AI", body: "LLMs · Agents · Automatisierung" },
+      { label: "INTEGRATION", body: "APIs · Cloud · bestehende IT" },
+      { label: "BERATUNG", body: "Use Cases · Architektur · Transformation" },
     ],
-    contextLine: "adesso · Finance · Public Sector · Healthcare · Loyalty",
+    contextLine: "adesso · Finanzwesen · Öffentlicher Sektor · Gesundheitswesen · Loyalty",
     trust:
       "10+ Jahre Enterprise Engineering. Jetzt angewandt auf Agentic AI — nicht umgekehrt.",
     ctaPrimary: "AI Cases ansehen",
@@ -54,12 +54,12 @@ export const de = {
     diagramAlt:
       "Systemdiagramm: ein Ziel geht an einen Orchestrator, der Tools und Modell anspricht. Evaluation und menschliche Prüfung begrenzen Autonomie.",
     diagramLabels: {
-      goal: "Goal",
-      orchestrator: "Orchestrator",
-      model: "Model",
+      goal: "Ziel",
+      orchestrator: "Orchestrierung",
+      model: "Modell",
       tools: "Tools",
-      eval: "Eval",
-      human: "Human",
+      eval: "Bewertung",
+      human: "Mensch",
     },
     metricLabels: [
       "Jahre Softwareentwicklung",
@@ -71,8 +71,8 @@ export const de = {
   },
   value: {
     index: "02",
-    eyebrow: "Where I create value",
-    title: "Einsatzfelder — konkret, ohne Marketese.",
+    eyebrow: "Wo ich Wirkung erzeuge",
+    title: "Einsatzfelder — konkret, ohne Marketingsprache.",
     description:
       "Ich verstehe das System, das heute existiert. Ich verstehe, was aktuelle AI realistisch leisten kann. Und ich kann beides verbinden.",
     items: [
@@ -86,7 +86,7 @@ export const de = {
       },
       {
         title: "AI-Augmented Software Engineering",
-        body: "Coding Agents, Repository-Analyse, Tests und Refactoring-Workflows — Human Review bleibt Teil der Architektur.",
+        body: "Coding Agents, Repository-Analyse, Tests und Refactoring-Workflows — menschliche Prüfung bleibt Teil der Architektur.",
       },
       {
         title: "AI Transformation & Use Cases",
@@ -107,13 +107,13 @@ export const de = {
   track: {
     index: "03",
     eyebrow: "Karrierebogen",
-    title: "Engineer → Agentic AI → Consulting. Fünf Stationen, nicht der Lebenslauf.",
+    title: "Engineer → Agentic AI → Beratung. Fünf Stationen, nicht der Lebenslauf.",
     description:
-      "Die Seniorität beginnt nicht 2026. Agentic AI sitzt auf bezahlter Enterprise-Lieferung — Banking, Public Sector, Healthcare, Loyalty. Details und NDA-Grenzen stehen in den Cases und im CV.",
+      "Die Seniorität beginnt nicht 2026. Agentic AI sitzt auf bezahlter Enterprise-Lieferung — Banking, öffentlicher Sektor, Gesundheitswesen, Loyalty. Details und NDA-Grenzen stehen in den Cases und im CV.",
     more: "Alle Stationen im Lebenslauf",
     items: {
       builder: {
-        title: "Engineer & Ownership",
+        title: "Entwicklung & Verantwortung",
         body: "Sechs Live-Portale end-to-end: Aufbau, Betrieb, Intranet. Die Grundlage für spätere Systemverantwortung.",
       },
       enterprise: {
@@ -136,7 +136,7 @@ export const de = {
   },
   arc: {
     index: "00",
-    eyebrow: "Proof · der rote Faden",
+    eyebrow: "Beweis · der rote Faden",
     title:
       "Ein Bogen, drei Ären — die AI-Schicht liegt auf den Backend-Jahren, nicht an ihrer Stelle.",
     description:
@@ -162,25 +162,25 @@ export const de = {
   },
   selectedCases: {
     index: "01",
-    eyebrow: "Selected AI & Engineering Cases",
+    eyebrow: "Ausgewählte AI- & Engineering-Cases",
     title: "Drei Cases — Lab und Enterprise getrennt gekennzeichnet.",
     description:
       "Graph-Mastermind und Agent Collective sind unabhängige, öffentlich prüfbare Systeme. DeutschlandCard ist bezahlte Enterprise-Lieferung. DZ BANK und BITMARCK stehen im Track Record, nicht als vierte und fünfte gleichwertige Karte.",
     rndNote:
       "Independent R&D — eigenständig konzipiert und umgesetzt. Technische Ergebnisse und Projektstatus werden bewusst von produktiven Kundenprojekten getrennt dargestellt.",
     clientNote:
-      "Client work — aufgrund von Vertraulichkeitsvereinbarungen sind Kunden- und Systemdetails teilweise abstrahiert. Beschrieben werden ausschließlich meine eigene Rolle und freigabefähige technische Inhalte.",
+      "Kundenarbeit — aufgrund von Vertraulichkeitsvereinbarungen sind Kunden- und Systemdetails teilweise abstrahiert. Beschrieben werden ausschließlich meine eigene Rolle und freigabefähige technische Inhalte.",
     secondaryEyebrow: "Weitere Mandate",
     secondaryNote:
-      "Healthcare-Interoperabilität, wehrnahe Lizenzierung, Automotive und Verlagswesen — im Track Record und CV, nicht mit gleichem Startseiten-Gewicht.",
+      "Gesundheitswesen-Interoperabilität, wehrnahe Lizenzierung, Automotive und Verlagswesen — im Track Record und CV, nicht mit gleichem Startseiten-Gewicht.",
   },
   lab: {
     index: "03",
     eyebrow: "Independent Applied AI R&D",
     title: "Öffentliche Systeme, eigenständig konzipiert — kein Kundeneinsatz, kein Hobby-Disclaimer.",
     description:
-      "Graph-Mastermind und Agent Collective belegen, wie ich Agentenverträge, Evaluation, Failure Handling und Observability konstruiere. Independent R&D: prüfbar, versioniert, mit Tests — und ausdrücklich keine Client Delivery.",
-    perspectiveEyebrow: "AI Transformation Perspective",
+      "Graph-Mastermind und Agent Collective belegen, wie ich Agentenverträge, Evaluation, Failure Handling und Observability konstruiere. Independent R&D: prüfbar, versioniert, mit Tests — und ausdrücklich keine Kundenlieferung.",
+    perspectiveEyebrow: "Perspektive AI Transformation",
     perspectiveTitle: "Was sich ins Unternehmen übertragen lässt — und was hier nicht behauptet wird.",
     perspective:
       "Übertragbar: Governance, Security, Human-in-the-Loop, Kostengrenzen, Evaluation und klare Tool-Grenzen. Nicht behauptet: ein produktives LLM-Backend, ein Kunden-Agenten-Betrieb oder gemessene Board-KPIs, die öffentlich nicht existieren.",
@@ -213,8 +213,8 @@ export const de = {
         body: "Agents liefern Artefakte zur menschlichen Bewertung. Keine autonomen Schreibzugriffe, keine automatisch vertrauenswürdigen Entscheidungen.",
       },
       security: {
-        title: "Security",
-        body: "2FA, RBAC, Identity und DSGVO aus Enterprise-Delivery. Öffentliche Demos nutzen synthetische oder dokumentierte Beispieldaten. Responsible Deployment vor Geschwindigkeit.",
+        title: "Sicherheit",
+        body: "2FA, RBAC, Identity und DSGVO aus Enterprise-Delivery. Öffentliche Demos nutzen synthetische oder dokumentierte Beispieldaten. Verantwortliche Auslieferung vor Geschwindigkeit.",
       },
       observability: {
         title: "Observability",
@@ -223,23 +223,23 @@ export const de = {
     },
   },
   consulting: {
-    eyebrow: "Consulting & Governance",
+    eyebrow: "Beratung & Governance",
     title: "Was sich aus echter Delivery übertragen lässt — ohne Board-Fiction.",
-    body: "Use Cases dort priorisieren, wo Systeme, Identität und Datenqualität schon tragen. Operating Model: Agents mit Vertrag und Abnahme, nicht als autonome Organisation. Governance aus regulierter Delivery (Berechtigungen, sensible Daten, DSGVO) plus EU-AI-Act-Rahmen aus der Spezialisierung — keine erfundenen Vorstandsmandate, keine erfundenen AI-KPIs.",
+    body: "Use Cases dort priorisieren, wo Systeme, Identität und Datenqualität schon tragen. Betriebsmodell: Agents mit Vertrag und Abnahme, nicht als autonome Organisation. Governance aus regulierter Delivery (Berechtigungen, sensible Daten, DSGVO) plus EU-AI-Act-Rahmen aus der Spezialisierung — keine erfundenen Vorstandsmandate, keine erfundenen AI-KPIs.",
   },
   credentials: {
     index: "05",
-    eyebrow: "Credentials",
+    eyebrow: "Nachweise",
     title: "KI-Manager und AI Automation stützen die Spezialisierung — sie tragen sie nicht.",
     description:
-      "Weiterbildung 2026 und öffentliche Repos belegen den Fokus. Die Seniorität steht in der Enterprise-Erfahrung. Credentials ersetzen keine bezahlte AI-Kundenlieferung.",
+      "Weiterbildung 2026 und öffentliche Repos belegen den Fokus. Die Seniorität steht in der Enterprise-Erfahrung. Nachweise ersetzen keine bezahlte AI-Kundenlieferung.",
     cv: "Lebenslauf",
     github: "GitHub",
     highlights: [
       { title: "KI-Manager", meta: "2026 · Akademie für die Deutsche Wirtschaft" },
       { title: "AI Automation", meta: "2026 · STARTPLATZ Köln" },
     ],
-    educationNote: "Ausbildung und Weiterbildung folgen darunter. Sie sind Credentials, nicht der primäre Erfahrungsbeweis.",
+    educationNote: "Ausbildung und Weiterbildung folgen darunter. Sie sind Nachweise, nicht der primäre Erfahrungsbeweis.",
   },
   privacy: {
     label: "Daten- und Entscheidungshaltung",
@@ -250,8 +250,8 @@ export const de = {
     context: "Kontext",
     decision: "Entscheidung / Trade-off",
     outcome: "Wirkung",
-    role: "Rolle & Ownership",
-    evidence: "Evidence",
+    role: "Rolle & Verantwortung",
+    evidence: "Belege",
     ownWork: "Eigener Anteil",
     contribution: "Mein Anteil",
     transfer: "Enterprise-Übertragbarkeit",
@@ -298,13 +298,13 @@ export const de = {
   },
   casePage: {
     back: "Zurück zum Portfolio",
-    caseStudy: "Case Study",
+    caseStudy: "Fallstudie",
     openCase: "Case ansehen",
     screenshots: "Screenshots",
     noPublicShots: "Keine öffentlichen Screenshots — Client-NDA; Evidence bleibt qualitativ und über die Projektbeschreibung belegt.",
     next: "Weitere Cases",
     moreAi: "AI Cases",
-    evalInProgress: "Evaluation in progress",
+    evalInProgress: "Evaluation läuft",
     evalInProgressNote:
       "Die Architektur steht; quantitative Ergebnisse werden erst veröffentlicht, sobald eine reproduzierbare Messbasis vorliegt.",
     evalToMeasure: "künftig messen",
@@ -338,13 +338,13 @@ export const de = {
         "Planner / Vertrag",
         "Repo-Kontext + Tools",
         "Artefakt + Checks",
-        "Human Review",
+        "Menschliche Prüfung",
       ],
       outcome:
         "Öffentliches Agent-Paket, Live-Demo, Tests, Typecheck, CI und reproduzierbarer Production-Build. Qualitativ beobachtet: nachvollziehbare Artefakte statt Black-Box-Analyse. Keine erfundenen Nutzungs- oder Business-KPIs.",
       role: "Solo — Konzeption und Umsetzung des wiederverwendbaren Agent-Workflows und der Referenzanwendung. Independent R&D, kein Kundeneinsatz.",
       evaluation:
-        "Evaluation in progress. Abnahme heute über CHECKLIST.md, Typecheck, Tests und CI. Der Agent liefert einen prüfbaren Graphen — ein Mensch bewertet das Ergebnis (Human-in-the-loop). Quantitative Kennzahlen werden erst veröffentlicht, sobald ein reproduzierbarer Eval-Harness steht.",
+        "Evaluation läuft. Abnahme heute über CHECKLIST.md, Typecheck, Tests und CI. Der Agent liefert einen prüfbaren Graphen — ein Mensch bewertet das Ergebnis (Human-in-the-Loop). Quantitative Kennzahlen werden erst veröffentlicht, sobald ein reproduzierbarer Eval-Harness steht.",
       evalStatus: "in-progress",
       evalMetrics: [
         { metric: "Time-to-reproduce", note: "Zeit, bis ein Fehler reproduzierbar ist" },
@@ -369,7 +369,7 @@ export const de = {
     },
     "agent-collective": {
       domain: "AI Automation · Testbare Multi-Agent-Orchestrierung",
-      badge: "Independent R&D · Deterministic · kein LLM-Backend",
+      badge: "Independent R&D · deterministisch · kein LLM-Backend",
       landingTitle: "Nachvollziehbare Multi-Agent-Orchestrierung",
       landingCta: "Orchestrierungs-Case ansehen",
       oneLiner:
@@ -423,7 +423,7 @@ export const de = {
     },
     deutschlandcard: {
       domain: "Loyalty · Cloud · Identity",
-      badge: "Professional Track Record · Enterprise",
+      badge: "Berufliche Nachweise · Enterprise",
       landingTitle: "Cloud, Identität, Integration",
       landingCta: "Enterprise-Case ansehen",
       oneLiner:
@@ -572,11 +572,11 @@ export const de = {
       ],
     },
     "ella-portals": {
-      domain: "Medien / Verlagswesen · Ownership",
+      domain: "Medien / Verlagswesen · Verantwortung",
       problem:
         "Aufbau, Betrieb und Weiterentwicklung mehrerer Verlagsprodukte und interner Prozesse.",
       decision:
-        "End-to-end-Verantwortung über Entwicklung, Design, Betrieb und interne IT — Ownership statt nur Delivery.",
+        "End-to-end-Verantwortung über Entwicklung, Design, Betrieb und interne IT — Verantwortung statt nur Auslieferung.",
       outcome:
         "Sechs langfristig betriebene Webangebote plus individuelle Subscriptions-, Webpaper-, Datenbank- und Intranetlösungen.",
       highlights: [
@@ -588,17 +588,17 @@ export const de = {
   },
   competencies: {
     index: "04",
-    eyebrow: "Capabilities",
+    eyebrow: "Fähigkeiten",
     title: "Fünf Gruppen — nicht eine Skill-Wand.",
     description:
-      "Strategy, Architecture, Agentic Engineering, Delivery, Governance. Der detaillierte Stack ist Nachweis, nicht Identität — und steht nicht auf der Startseite.",
+      "Strategie, Architektur, Agentic Engineering, Umsetzung, Governance. Der detaillierte Stack ist Nachweis, nicht Identität — und steht nicht auf der Startseite.",
     pillars: [
       {
-        title: "Strategy",
+        title: "Strategie",
         body: "Use Cases dort, wo Systeme, Identität und Datenqualität schon tragen. AI als Schicht auf bestehender Landschaft — nicht als Tool-erste Identität.",
       },
       {
-        title: "Architecture",
+        title: "Architektur",
         body: "Java/Spring, REST, Identity, Messaging, Cloud. Systeme, die schon da sind, nicht Greenfield-Demos.",
       },
       {
@@ -606,7 +606,7 @@ export const de = {
         body: "Agent-Verträge, Repository-Intelligence, testbare Multi-Agent-Orchestrierung, LLM-gestützte Entwicklung. Öffentlich belegbar, ohne Modell- oder MCP-Claims.",
       },
       {
-        title: "Delivery",
+        title: "Umsetzung",
         body: "CI/CD, Terraform, Kubernetes, OpenShift, Lead-Dev-Ownership. Entkopplung ohne Big Bang. Was in Produktion überlebt.",
       },
       {
@@ -636,7 +636,7 @@ export const de = {
         hint: "Aktuelle Spezialisierung — öffentlich belegbar",
       },
       enterprise: {
-        label: "Enterprise Architecture & Integration",
+        label: "Enterprise-Architektur & Integration",
         hint: "Services, APIs, Identity, Messaging",
       },
       cloud: {
@@ -656,7 +656,7 @@ export const de = {
         hint: "Messaging, Interoperabilität, reguliertes Gesundheitswesen",
       },
       "frontend-cms": {
-        label: "Frontend, CMS & weitere Delivery",
+        label: "Frontend, CMS & weitere Auslieferung",
         hint: "Oberflächen und ergänzende Plattformen",
       },
     },
@@ -664,23 +664,23 @@ export const de = {
   industries: {
     eyebrow: "Enterprise-Domänen",
     title: "Regulierte und operative Landschaften — ohne Logo-Tapete.",
-    line: "adesso · Finance · Public Sector · Healthcare · Loyalty",
+    line: "adesso · Finanzwesen · Öffentlicher Sektor · Gesundheitswesen · Loyalty",
     names: [
-      "Banking",
-      "Public Sector",
-      "Healthcare / GKV",
+      "Banken",
+      "Öffentlicher Sektor",
+      "Gesundheitswesen / GKV",
       "Loyalty",
-      "Insurance",
+      "Versicherung",
       "Automotive",
     ],
     healthLabel: "Gesundheitswesen (Detail, nachgeordnet)",
   },
   experience: {
     index: "02",
-    eyebrow: "Professional Experience · bezahlte Enterprise-Arbeit",
+    eyebrow: "Berufserfahrung · bezahlte Enterprise-Arbeit",
     title: "Berufliche Stationen — der Deep-Dive im CV, hier nur der Kontext.",
     description:
-      "2013 bis 2026 in produktiven, bezahlten Einsätzen. Das ist Professional Experience. Graph-Mastermind und Agent Collective stehen im Lab, nicht in dieser Liste. Weiterbildungen 2026 stehen unter Credentials, nicht als erster Jobbeweis.",
+      "2013 bis 2026 in produktiven, bezahlten Einsätzen. Das ist Berufserfahrung. Graph-Mastermind und Agent Collective stehen im Lab, nicht in dieser Liste. Weiterbildungen 2026 stehen unter Nachweise, nicht als erster Jobbeweis.",
     filterAria: "Berufserfahrung nach Ära filtern",
     filters: {
       all: "Alle Stationen",
@@ -816,7 +816,7 @@ export const de = {
     index: "06",
     eyebrow: "Ausbildung & Weiterbildung",
     title:
-      "Medien-Wurzeln, Web-Programmier-Handwerk — und 2026 die Spezialisierung. Credentials, nicht der primäre Jobbeweis.",
+      "Medien-Wurzeln, Web-Programmier-Handwerk — und 2026 die Spezialisierung. Nachweise, nicht der primäre Jobbeweis.",
     focus: [
       [
         "Architektur und Implementierung autonomer, KI-gestützter System-Workflows",

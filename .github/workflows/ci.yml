@@ -85,7 +85,12 @@ jobs:
           grep -q 'Agentic-AI-Case ansehen' public/portfolio/de/index.html
           grep -q 'Lebenslauf' public/portfolio/de/index.html
           grep -q 'Mein Anteil' public/portfolio/de/cases/graph-mastermind/index.html
-          grep -q 'Evaluation in progress' public/portfolio/de/cases/graph-mastermind/index.html
+          grep -q 'Wo ich Wirkung erzeuge' public/portfolio/de/index.html
+          ! grep -q 'Where I create value' public/portfolio/de/index.html
+          grep -q '10+ Jahre Enterprise-Systeme' public/portfolio/de/index.html
+          ! grep -q '10+ years enterprise systems' public/portfolio/de/index.html
+          grep -q 'ENTWICKLUNG' public/portfolio/de/index.html
+          grep -q 'Evaluation läuft' public/portfolio/de/cases/graph-mastermind/index.html
           grep -q 'Selected AI &amp; Engineering Cases' public/portfolio/en/index.html
           grep -q 'Independent R&amp;D' public/portfolio/en/index.html
           grep -q 'How I build AI systems' public/portfolio/en/index.html
