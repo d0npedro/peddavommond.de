@@ -12,3 +12,5 @@ npm run portfolio:verify
 `npm run vercel-build` runs both.
 
 Do not invent AI experience. Graph-Mastermind is an agent package for coding agents. Agent Collective is a deterministic multi-agent simulator (no LLM).
+
+Keep the credibility split explicit: paid Professional Experience, Independent Lab / public systems, and AI Transformation Perspective (what transfers). Lab work is not client delivery and not a hobby disclaimer.

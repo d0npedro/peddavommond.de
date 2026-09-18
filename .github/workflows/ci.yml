@@ -64,6 +64,12 @@ jobs:
           grep -q 'graph-mastermind' public/portfolio/de/sitemap.xml
           grep -q 'kein LLM-Backend' public/portfolio/de/cases/agent-collective/index.html
           grep -q 'peter.henrichs@web.de' public/portfolio/de/cases/graph-mastermind/index.html
+          grep -q 'Köln / Germany' public/portfolio/de/index.html
+          grep -q 'Independent Lab' public/portfolio/de/index.html
+          grep -q 'How I Work' public/portfolio/de/index.html
+          grep -q 'id="lab"' public/portfolio/de/index.html
+          grep -q 'id="cases"' public/portfolio/de/index.html
+          grep -q 'Agentic Cases' public/portfolio/de/index.html
 
       - name: Formula unit test (optional shell util)
         run: node public/win11/js/utils/formula.test.js

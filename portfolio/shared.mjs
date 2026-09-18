@@ -9,6 +9,9 @@ export const SITE = {
   cvPath: "/portfolio/cv/",
   origin: "https://peddavommond.de",
   year: 2026,
+  city: "Köln",
+  country: { de: "Deutschland", en: "Germany" },
+  location: { de: "Köln / Germany", en: "Cologne / Germany" },
 };
 
 export const LOCALES = ["de", "en"];
@@ -29,23 +32,53 @@ export const ERAS = [
 
 export const NAV = [
   { id: "top", key: "profile" },
-  { id: "ai-cases", key: "aiCases" },
-  { id: "enterprise", key: "enterprise" },
+  { id: "cases", key: "cases" },
   { id: "work", key: "experience" },
-  { id: "stack", key: "competencies" },
+  { id: "lab", key: "lab" },
+  { id: "approach", key: "approach" },
   { href: "/portfolio/cv/", key: "cv" },
   { id: "contact", key: "contact" },
 ];
 
+/** Homepage flagships, in display order. Lab first, then strongest enterprise. */
+export const FLAGSHIP_IDS = [
+  "graph-mastermind",
+  "agent-collective",
+  "deutschlandcard",
+  "dz-bank-okvp",
+  "bitmarck-bitgo",
+];
+
+export const HOW_I_WORK_KEYS = [
+  "evaluation",
+  "observability",
+  "failure",
+  "hitl",
+  "security",
+  "cost",
+  "boundaries",
+  "maintainability",
+];
+
+export const TRUST_DOMAIN_KEYS = ["banking", "public", "health", "loyalty", "insurance", "automotive"];
+
 export const CASES = [
   {
     id: "graph-mastermind",
-    section: "ai",
+    section: "lab",
     featured: true,
+    flagship: true,
     name: "Graph-Mastermind",
     client: "Public reference · d0npedro",
     period: "2026",
     era: "ai",
+    ownership: {
+      status: "lab",
+      team: "solo",
+      data: "synthetic",
+      code: "public",
+      result: "observed",
+    },
     tech: [
       "Agent Contracts",
       "React",
@@ -75,12 +108,20 @@ export const CASES = [
   },
   {
     id: "agent-collective",
-    section: "ai",
+    section: "lab",
     featured: true,
+    flagship: true,
     name: "Agent Collective",
     client: "Public reference · d0npedro",
     period: "2026",
     era: "ai",
+    ownership: {
+      status: "lab",
+      team: "solo",
+      data: "synthetic",
+      code: "public",
+      result: "observed",
+    },
     tech: [
       "TypeScript",
       "Deterministic State Machine",
@@ -113,11 +154,19 @@ export const CASES = [
     id: "deutschlandcard",
     section: "enterprise",
     featured: true,
+    flagship: true,
     hasPage: true,
     name: "DeutschlandCard",
     client: "direct services Gütersloh GmbH",
     period: "2023 – 2026",
     era: "enterprise",
+    ownership: {
+      status: "production",
+      team: "team",
+      data: "real",
+      code: "private",
+      result: "observed",
+    },
     tech: [
       "Spring Boot",
       "Spring Cloud",
@@ -132,11 +181,19 @@ export const CASES = [
     id: "dz-bank-okvp",
     section: "enterprise",
     featured: true,
+    flagship: true,
     hasPage: true,
     name: "DZ BANK OKVP",
     client: "DZ BANK AG · adesso AG",
     period: "2020",
     era: "enterprise",
+    ownership: {
+      status: "production",
+      team: "team",
+      data: "real",
+      code: "private",
+      result: "observed",
+    },
     tech: [
       "Java",
       "Spring",
@@ -153,11 +210,19 @@ export const CASES = [
     id: "bitmarck-bitgo",
     section: "enterprise",
     featured: true,
+    flagship: true,
     hasPage: true,
     name: "BITMARCK bitGo_Web",
     client: "BITMARCK Technik GmbH",
     period: "2019 – 2020",
     era: "enterprise",
+    ownership: {
+      status: "production",
+      team: "team",
+      data: "real",
+      code: "private",
+      result: "observed",
+    },
     tech: [
       "Spring Boot",
       "Spring Security",
@@ -658,6 +723,7 @@ export const JSON_LD_KNOWS_ABOUT = [
   "Spring Boot",
   "Kubernetes",
   "Terraform",
+  "AI Transformation",
   "AI Governance",
   "Azure",
   "HL7 FHIR",
@@ -668,7 +734,11 @@ export function stackCount() {
 }
 
 export function featuredCases() {
-  return CASES.filter((c) => c.featured);
+  return FLAGSHIP_IDS.map((id) => CASES.find((c) => c.id === id)).filter(Boolean);
+}
+
+export function labCases() {
+  return CASES.filter((c) => c.section === "lab");
 }
 
 export function pagedCases() {

@@ -1,14 +1,14 @@
 export const en = {
   meta: {
-    title: "Peter Henrichs — Senior AI Consultant & Agentic Software Engineer",
+    title: "Peter Henrichs | Senior AI Consultant & Agentic Software Engineer",
     description:
-      "Senior AI Consultant and software engineer with 12+ years of enterprise experience. Focus on Agentic AI, LLM-assisted software engineering, AI Automation, Java/Spring, cloud, and integration in regulated IT landscapes.",
-    ogAlt: "Peter Henrichs — Senior AI Consultant & Agentic Software Engineer",
+      "Peter Henrichs, Cologne. Senior AI Consultant & Agentic Software Engineer: 10+ years of enterprise software engineering, LLMs and AI Agents, Java/Spring, Cloud, and AI Transformation — integrated into real IT, data, and process landscapes.",
+    ogAlt: "Peter Henrichs | Senior AI Consultant & Agentic Software Engineer · Cologne",
     keywords:
-      "Peter Henrichs,Senior AI Consultant,Agentic Software Engineer,Agentic AI,LLM-assisted Software Engineering,AI Automation,Java,Spring Boot,Azure,Kubernetes,Terraform,Enterprise Integration",
+      "Peter Henrichs,Cologne,Senior AI Consultant,Agentic Software Engineer,LLMs,AI Agents,AI Transformation,Java,Spring,Cloud,Enterprise Engineering",
     jobTitle: "Senior AI Consultant & Agentic Software Engineer",
     personDescription:
-      "Peter Henrichs is a Senior AI Consultant and Agentic Software Engineer. Seniority comes from 12+ years of enterprise software engineering; Agentic AI, LLM-assisted engineering and AI Automation are the current specialization on top of that foundation.",
+      "Peter Henrichs is a Senior AI Consultant and Agentic Software Engineer based in Cologne. Seniority comes from 10+ years of enterprise software engineering; LLMs, AI Agents, and Automation are the current specialization on top of that foundation — not instead of it.",
   },
   common: {
     skipToContent: "Skip to content",
@@ -19,10 +19,10 @@ export const en = {
     ariaPrimary: "Primary",
     toggleMenu: "Toggle menu",
     profile: "Profile",
-    aiCases: "AI Cases",
-    enterprise: "Enterprise",
+    cases: "Cases",
     experience: "Experience",
-    competencies: "Competencies",
+    lab: "Lab",
+    approach: "Approach",
     cv: "CV",
     contact: "Contact",
   },
@@ -31,14 +31,15 @@ export const en = {
     toDark: "Switch to dark mode",
   },
   hero: {
-    eyebrow: "Enterprise Engineering × Agentic AI × Transformation",
+    eyebrow: "Enterprise Engineering × LLMs / AI Agents × Transformation",
     role: "Senior AI Consultant & Agentic Software Engineer",
+    location: "Cologne / Germany",
     tagline:
-      "12+ years of enterprise software engineering — now focused on LLM-assisted development, agentic systems, and AI Automation. I connect Java/Spring, cloud, and integration architecture with the question of how AI reaches existing organizations safely, traceably, and in production.",
+      "10+ years of enterprise software engineering — plus LLMs, AI Agents, and Automation integrated into real IT, data, and process landscapes. Architecture, integration, governance, and traceable transformation; not tool demos beside the actual system.",
     proof:
-      "12+ years Enterprise Engineering · Agentic AI & Automation · Java/Spring · Cloud/Kubernetes/Terraform · Banking · Health · Public Sector",
-    ctaPrimary: "View AI cases",
-    ctaSecondary: "Download CV",
+      "10+ years Enterprise Engineering · LLMs & Agentic Systems · Java/Spring · Cloud · APIs · AI Strategy & Automation",
+    ctaPrimary: "AI & Agentic Cases",
+    ctaSecondary: "CV / Enterprise experience",
     ctaTertiary: "Contact",
     metricLabels: [
       "Years in software development",
@@ -50,10 +51,10 @@ export const en = {
   },
   arc: {
     index: "00",
-    eyebrow: "The through-line",
+    eyebrow: "Proof · the through-line",
     title: "One arc, three eras — the AI layer sits on top of the backend years.",
     description:
-      "Seniority is not new. The specialization is: robust Java/Spring enterprise delivery (public sector, banking, health insurance, media, automotive) → cloudification (Azure, Kubernetes, Terraform) → Agentic AI, LLM-assisted engineering, and AI Automation on top of production systems.",
+      "Seniority is not new. The specialization is: robust Java/Spring enterprise delivery (public sector, banking, health insurance, media, automotive) → cloudification (Azure, Kubernetes, Terraform) → LLMs, AI Agents, and Automation on top of production systems.",
     nowLabel: "now",
     eras: [
       {
@@ -73,37 +74,147 @@ export const en = {
       },
     ],
   },
-  aiCases: {
+  selectedCases: {
     index: "01",
-    eyebrow: "Selected AI & Agentic Work",
-    title: "Public, inspectable agent work — precise, not inflated.",
+    eyebrow: "Selected AI & Engineering Cases",
+    title: "Three flagships first — lab and enterprise labeled separately.",
     description:
-      "Two reference projects you can verify. Graph-Mastermind is an agent package for coding agents. Agent Collective is a deterministic multi-agent simulator — deliberately without an LLM backend.",
-  },
-  enterpriseCases: {
-    index: "02",
-    eyebrow: "Enterprise Transformation",
-    title: "Where AI has to land later: identity, cloud, legacy, regulation.",
-    description:
-      "Three engagements with high transfer into enterprise AI: loyalty cloud and identity, banking migration with lead-dev ownership, GKV modernization under data protection. Further mandates stay secondary.",
+      "Graph-Mastermind and Agent Collective are independent, publicly inspectable systems. DeutschlandCard, DZ BANK, and BITMARCK are paid enterprise delivery. No lab project is presented as client delivery.",
     secondaryEyebrow: "Further mandates",
     secondaryNote:
       "Healthcare interoperability, defense-adjacent licensing, automotive, and publishing — available, but not equal homepage weight.",
   },
+  lab: {
+    index: "03",
+    eyebrow: "Agentic AI Lab · Independent Engineering",
+    title: "Public systems I build independently — not client delivery, not a hobby disclaimer.",
+    description:
+      "Graph-Mastermind and Agent Collective show how I construct agent contracts, evaluation, failure handling, and observability. They are independent engineering: inspectable, versioned, tested — and explicitly not client delivery.",
+    perspectiveEyebrow: "AI Transformation Perspective",
+    perspectiveTitle: "What transfers into the enterprise — and what is not claimed here.",
+    perspective:
+      "Transferable: governance, security, human-in-the-loop, cost bounds, evaluation, and explicit tool boundaries. Not claimed: a production LLM backend, a client agent platform, or measured board KPIs that do not exist in public.",
+    items: [
+      {
+        id: "graph-mastermind",
+        label: "Independent Lab",
+        body: "Agent package for coding agents. Contract, graph, and UI stay separate; no specific model is required.",
+      },
+      {
+        id: "agent-collective",
+        label: "Independent Lab · deterministic",
+        body: "Multi-agent simulator with no LLM backend. Orchestration, failure injection, and recovery stay testable.",
+      },
+    ],
+  },
+  howIWork: {
+    index: "05",
+    eyebrow: "How I Work",
+    title: "Working principles that follow from delivery and the lab — not buzzword bingo.",
+    description:
+      "Eight principles. Each is observable in public repos or in regulated enterprise delivery. No invented framework names.",
+    items: {
+      evaluation: {
+        title: "Evaluation",
+        body: "Acceptance via tests, CI, checklists, and inspectable state. No model call without a verifiable artifact.",
+      },
+      observability: {
+        title: "Observability",
+        body: "Prometheus, Grafana, Dynatrace in banking delivery; stepwise snapshots in the simulator. Behavior has to be visible before it scales.",
+      },
+      failure: {
+        title: "Failure Handling",
+        body: "Failure injection and recovery in the engine; in production, delivery pipelines and operational visibility. Failure is a design topic, not a footnote.",
+      },
+      hitl: {
+        title: "Human-in-the-Loop",
+        body: "Agents produce artifacts for human review. No autonomous writes, no automatically trusted decisions.",
+      },
+      security: {
+        title: "Security & Privacy",
+        body: "2FA, RBAC, identity, and GDPR from enterprise delivery. Public demos use synthetic or documented sample data.",
+      },
+      cost: {
+        title: "Cost Awareness",
+        body: "No LLM where determinism is enough — Agent Collective deliberately has no model. Expensive calls only when the contract requires them.",
+      },
+      boundaries: {
+        title: "Tool Boundaries",
+        body: "Agent contracts (AGENT.md / SPEC / CHECKLIST), separated layers, no implicit system access. Boundaries are part of the architecture.",
+      },
+      maintainability: {
+        title: "Maintainability",
+        body: "Terraform, decoupling, tests, CI. What cannot be maintained will not last in regulated landscapes — agents included.",
+      },
+    },
+  },
+  consulting: {
+    eyebrow: "Consulting & Governance",
+    title: "What transfers from real delivery — without board-level fiction.",
+    body: "Prioritize use cases where systems, identity, and data quality already exist. Operating model: agents with a contract and acceptance, not an autonomous organization. Governance from regulated delivery (permissions, sensitive data, GDPR) plus an EU AI Act frame from the specialization — no invented board mandates, no invented AI KPIs.",
+  },
+  credentials: {
+    index: "06",
+    eyebrow: "Credentials & Trust",
+    title: "CV, GitHub, education — evidence, not the first job proof.",
+    description:
+      "Professional seniority lives in the enterprise record. 2026 continuing education and public repos evidence the specialization. They do not replace paid AI client delivery.",
+    cv: "CV",
+    github: "GitHub",
+    educationNote: "Education and continuing education follow below. They are credentials, not the primary experience proof.",
+  },
+  privacy: {
+    label: "Data and decision posture",
+    body: "Public demos use synthetic or documented sample data. AI outputs are not automatically trusted decisions. Critical paths need validation and human-in-the-loop.",
+  },
   caseFields: {
-    problem: "Problem",
+    problem: "Problem / business context",
     context: "Context",
     decision: "Decision / trade-off",
     outcome: "Outcome",
     role: "Role & ownership",
     evidence: "Evidence",
     ownWork: "Own work",
-    transfer: "Why this matters for enterprise AI",
-    architecture: "Architecture / tech",
+    transfer: "Enterprise transferability",
+    architecture: "Architecture",
+    evaluation: "Evaluation, guardrails, failure handling",
     repo: "Repository",
     demo: "Live demo",
     embed: "On this site",
     live: "Live",
+  },
+  caseMeta: {
+    status: "Status",
+    timeframe: "Timeframe",
+    team: "Team",
+    data: "Data",
+    code: "Code",
+    result: "Result",
+    statusValues: {
+      production: "Production",
+      prototype: "Prototype",
+      lab: "Independent Lab",
+      research: "Research",
+    },
+    teamValues: {
+      solo: "Solo",
+      team: "Team",
+    },
+    dataValues: {
+      real: "real data (not public)",
+      anon: "anonymized",
+      synthetic: "synthetic / demo",
+    },
+    codeValues: {
+      public: "public",
+      excerpt: "excerpt",
+      private: "private / NDA",
+    },
+    resultValues: {
+      measured: "measured",
+      observed: "observed",
+      pending: "pending",
+    },
   },
   casePage: {
     back: "Back to portfolio",
@@ -137,10 +248,12 @@ export const en = {
         "React canvas UI",
       ],
       outcome:
-        "Public agent package, live demo, tests, typecheck, CI, and a reproducible production build. Qualitative: inspectable artifacts instead of a black-box analysis.",
-      role: "Design and delivery of the reusable agent workflow and the reference application.",
+        "Public agent package, live demo, tests, typecheck, CI, and a reproducible production build. Qualitatively observed: inspectable artifacts instead of a black-box analysis. No invented usage KPIs.",
+      role: "Solo — design and delivery of the reusable agent workflow and the reference application. Independent Lab, not a client engagement.",
+      evaluation:
+        "Acceptance via CHECKLIST.md, typecheck, tests, and CI. The agent delivers an inspectable graph and an architecture view — no autonomous writes to the target repo. A human reviews the result (human-in-the-loop). Fallback sample data if repository analysis stays incomplete. Synthetic / documented demo data in the public app.",
       transfer:
-        "In large organizations, calling a capable model is rarely the hard part. Agents must understand existing systems, follow explicit rules, produce traceable artifacts, and finish in a verifiable way.",
+        "Transferable: agents need contracts, separated layers, and inspectable artifacts — not only a model call. Not claimed: production use at a client, or a prescribed LLM.",
       highlights: [
         "Agent contract from AGENT.md / SPEC.md / CHECKLIST.md",
         "Generic application to unfamiliar repositories",
@@ -174,10 +287,12 @@ export const en = {
         "Vitest without a browser",
       ],
       outcome:
-        "Live dashboard, Vitest/CI, step-wise system states. Qualitative: failure recovery and observability are inspectable, not just claimed.",
-      role: "Design and delivery of the testable engine, workflow graph, and live dashboard.",
+        "Live dashboard, Vitest/CI, step-wise system states. Qualitatively observed: failure recovery and observability are inspectable, not just claimed. No invented throughput figures.",
+      role: "Solo — design and delivery of the testable engine, workflow graph, and live dashboard. Independent Lab, not a client engagement.",
+      evaluation:
+        "Evaluation via Vitest and reproducible seeded runs. Failure injection and recovery live in the engine, not the UI. Deliberately no LLM and no tool-calling — failure modes stay inspectable. Control and interpretation stay with the human (HITL). Data is synthetic.",
       transfer:
-        "Strong for orchestration, reliability, evaluation, and human-understandable agent systems — as a reference model, not a production LLM platform.",
+        "Transferable: orchestration, reliability, evaluation, and human-understandable agent systems. Not claimed: a production LLM platform or client operations.",
       highlights: [
         "Deterministic engine, reproducible seeded runs",
         "Failure injection and recovery",
@@ -210,10 +325,12 @@ export const en = {
         "Terraform / Kubernetes / Azure",
       ],
       outcome:
-        "Services in a scalable Azure environment; existing interfaces remain usable. No public volume or latency figures (NDA).",
-      role: "Developer — login journey, Terraform automation, service cloudification.",
+        "Services in a scalable Azure environment; existing interfaces remain usable. Observed in delivery, not publicly measured. No volume or latency figures (NDA).",
+      role: "Developer on a team — login journey, Terraform automation, service cloudification. Paid enterprise delivery.",
+      evaluation:
+        "No public AI evaluation metrics — the case has no AI/LLM component. Assessment via identity (Azure AD B2C), reproducible infrastructure (Terraform), and partner APIs that stay usable. Critical access stays in existing permission and operations paths.",
       transfer:
-        "This identity, API, cloud, and governance reality is exactly where AI agents later have to be embedded. The case itself is not an AI project.",
+        "Transferable: identity, APIs, cloud, and governance are the ground agents later have to land on. The case itself is not an AI project and is not presented as one.",
       highlights: [
         "Custom login journey on Azure AD B2C",
         "Terraform-automated cloud infrastructure",
@@ -241,10 +358,12 @@ export const en = {
         "Prometheus / Grafana / Dynatrace",
       ],
       outcome:
-        "Decoupled features, controlled delivery, production-grade observability. No published performance metrics.",
-      role: "DevOps / developer / lead-dev.",
+        "Decoupled features, controlled delivery, production-grade observability. Observed in delivery. No published performance metrics.",
+      role: "DevOps / developer / lead-dev on a team. Paid enterprise delivery.",
+      evaluation:
+        "No public AI metrics — no AI/LLM component. Assessment via independently shippable features, multi-stage pipelines, and observability (Prometheus, Grafana, Dynatrace). Failure modes are an operations view, not a prompt view.",
       transfer:
-        "A senior AI architect needs to understand deployment, monitoring, and failure modes of production systems — not only prompts. The case itself is not an AI project.",
+        "Transferable: anyone who wants agents in production needs to understand deployment, monitoring, and failure modes of existing systems. The case itself is not an AI project.",
       highlights: [
         "Independently decoupleable microservices (“Features”)",
         "Multi-stage OpenShift build pipelines",
@@ -272,10 +391,12 @@ export const en = {
         "21c|ng / legacy",
       ],
       outcome:
-        "Technical restructuring with 2FA and decoupled interfaces. No public throughput figures.",
-      role: "Consultant / developer — backend, REST, legacy decoupling, 2FA.",
+        "Technical restructuring with 2FA and decoupled interfaces. Observed in delivery. No public throughput figures.",
+      role: "Consultant / developer on a team — backend, REST, legacy decoupling, 2FA. Paid enterprise delivery.",
+      evaluation:
+        "No public AI metrics — no AI/LLM component. Assessment via 2FA for especially protected data, REST to existing systems, and a configurable frontend instead of a monolithic cut. Critical paths stay in existing security paths.",
       transfer:
-        "Permissions, legacy, and sensitive data are often the real AI-transformation problem — not the model. The case itself is not an AI project.",
+        "Transferable: permissions, legacy, and sensitive data are often the real AI-transformation problem — not the model. The case itself is not an AI project.",
       highlights: [
         "2FA for especially protected data and forms",
         "REST interfaces into a legacy landscape",
@@ -338,31 +459,31 @@ export const en = {
     },
   },
   competencies: {
-    index: "03",
-    eyebrow: "What I bring to AI transformation",
-    title: "Agentic AI on an enterprise foundation — not the other way around.",
+    index: "04",
+    eyebrow: "Capabilities",
+    title: "Five capability groups — not 60 equal-weight tags.",
     description:
-      "Five priorities up front. The full shipped stack below — weighted, not a flat tag cloud.",
+      "Strategy, Architecture, Agentic Engineering, Delivery, Governance. The detailed stack follows as evidence, not as identity.",
     pillars: [
       {
-        title: "Agentic AI & Automation",
+        title: "Strategy",
+        body: "Use cases where systems, identity, and data quality already exist. AI as a layer on the existing landscape — not a tool-first identity.",
+      },
+      {
+        title: "Architecture",
+        body: "Java/Spring, REST, identity, messaging, cloud. Systems that already exist, not greenfield demos.",
+      },
+      {
+        title: "Agentic Engineering",
         body: "Agent contracts, repository intelligence, testable multi-agent orchestration, LLM-assisted engineering. Publicly evidenced, without model or MCP claims.",
       },
       {
-        title: "Enterprise Integration",
-        body: "Java/Spring, REST, identity, messaging, FHIR — systems that already exist, not greenfield demos.",
+        title: "Delivery",
+        body: "CI/CD, Terraform, Kubernetes, OpenShift, lead-dev ownership. Decoupling without a big bang. What survives production.",
       },
       {
-        title: "Cloud & Platform",
-        body: "Azure, Kubernetes, OpenShift, Terraform, CI/CD, observability. Delivery that survives production.",
-      },
-      {
-        title: "Security & Governance",
-        body: "GDPR, EU AI Act, 2FA, fine-grained authorization, regulated data. Guardrails before speed.",
-      },
-      {
-        title: "Legacy Modernization",
-        body: "Decoupling, migration without a big bang, interfaces that stay usable. This is where many AI programs fail.",
+        title: "Governance",
+        body: "GDPR, EU AI Act, 2FA, fine-grained authorization, HITL, regulated data. Guardrails before speed.",
       },
     ],
   },
@@ -413,27 +534,25 @@ export const en = {
     },
   },
   industries: {
-    eyebrow: "Domains delivered in",
-    title: "Mostly regulated environments — plus automotive and publishing.",
+    eyebrow: "Enterprise domains",
+    title: "Regulated and operational landscapes — no logo wallpaper.",
+    line: "Banking · Public Sector · Healthcare · Loyalty · Insurance · Automotive",
     names: [
       "Banking",
-      "Statutory health insurance (GKV)",
-      "Public administration",
+      "Public Sector",
+      "Healthcare / GKV",
+      "Loyalty",
       "Insurance",
-      "Financial services",
       "Automotive",
-      "Media / publishing",
-      "Landscape architecture",
-      "Dentistry / dental billing",
     ],
-    healthLabel: "Health-domain surface area",
+    healthLabel: "Healthcare detail (secondary)",
   },
   experience: {
-    index: "05",
-    eyebrow: "Experience · newest first",
-    title: "Enterprise stations — the deep dive under the cases.",
+    index: "02",
+    eyebrow: "Professional Experience · paid enterprise work",
+    title: "Career stations — the deep dive under the cases.",
     description:
-      "2013 through 2026 in productive engagements. 2026 continuing education lives under Education, not as the first experience proof.",
+      "2013 through 2026 in productive, paid engagements. This is professional experience. Graph-Mastermind and Agent Collective live in the Lab, not in this list. 2026 continuing education lives under Credentials, not as the first job proof.",
     filterAria: "Filter experience by era",
     filters: {
       all: "All stations",
@@ -568,7 +687,7 @@ export const en = {
     index: "06",
     eyebrow: "Education & continuing education",
     title:
-      "Media roots, web-programming craft — and a 2026 specialization in Agentic AI and AI Automation.",
+      "Media roots, web-programming craft — and a 2026 specialization. Credentials, not the primary job proof.",
     focus: [
       [
         "Architecture and implementation of autonomous, AI-supported system workflows",
@@ -586,10 +705,10 @@ export const en = {
     ],
   },
   footer: {
-    eyebrow: "End of transmission",
+    eyebrow: "Conversation",
     title:
-      "Building something that has to be correct — at scale, under regulation, with AI that has to integrate?",
-    body: "Seniority from 12+ years of enterprise engineering. The specialization is new: agentic systems, LLM-assisted development, and AI Automation — so they work inside real organizations.",
+      "For conversations about Agentic AI, Enterprise Engineering, and the next transformation.",
+    body: "Senior roles that combine technical depth with architecture and consulting responsibility. No freelancer retainer, no free slots, no agency pitch.",
     email: "Email",
     linkedin: "LinkedIn",
     github: "GitHub",
@@ -604,7 +723,7 @@ export const en = {
     print: "Print / save as PDF",
     back: "Back to portfolio",
     intro:
-      "12+ years of enterprise software engineering. Current specialization: Agentic AI, LLM-assisted development, and AI Automation — on a foundation of Java/Spring, cloud, and regulated integration.",
+      "10+ years of enterprise software engineering in Cologne. Current specialization: LLMs, AI Agents, and Automation — on a foundation of Java/Spring, cloud, and regulated integration.",
     todo: "TODO: optionally place a PDF at public/portfolio/cv/Peter-Henrichs-CV.pdf and keep this HTML path as fallback. Do not invent Drive URLs.",
   },
 };
