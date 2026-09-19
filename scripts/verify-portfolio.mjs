@@ -66,6 +66,8 @@ async function check(locale) {
   for (const email of emails) {
     assert(email === "peter.henrichs@web.de", `${prefix} unexpected email ${email}`);
   }
+  assert(html.includes("/portfolio/portfolio.css"), `${prefix} missing token stylesheet (production path)`);
+  assert(html.includes("_next/static/css/"), `${prefix} missing Next layout CSS`);
   assert(html.includes("linkedin.com/in/peter-henrichs"), `${prefix} missing LinkedIn`);
   assert(html.includes("github.com/d0npedro"), `${prefix} missing GitHub`);
   assert(html.includes("/portfolio/cv/"), `${prefix} missing CV path`);
@@ -115,6 +117,7 @@ async function check(locale) {
 
 async function checkCv() {
   const html = await readFile(join(root, "public/portfolio/cv/index.html"), "utf8");
+  assert(html.includes("/portfolio/portfolio.css"), "CV missing token stylesheet (production path)");
   assert(html.includes("Senior AI Consultant"), "CV missing role");
   assert(html.includes("peter.henrichs@web.de"), "CV missing email");
   assert(!html.includes("ph@d0npedro.com"), "CV still has old hiring email");
@@ -144,8 +147,8 @@ assert(en.includes("View the agentic-engineering case"), "EN Graph-Mastermind CT
 assert(!de.includes("Hennrichs") && !en.includes("Hennrichs"), "audit misspelling leaked");
 assert(JSON.stringify(FLAGSHIP_IDS) === JSON.stringify(["graph-mastermind", "agent-collective", "deutschlandcard"]), "lead cases must map to existing real projects");
 assert(!de.includes("enterprise-integration") && !en.includes("enterprise-integration"), "fabricated enterprise-integration product still on landing");
-assert((de.match(/pf-case-card/g) || []).length === 3, "DE landing must show exactly 3 lead case cards");
-assert((en.match(/pf-case-card/g) || []).length === 3, "EN landing must show exactly 3 lead case cards");
+assert((de.match(/class="[^"]*pf-case-card[^"]*"/g) || []).length === 3, "DE landing must show exactly 3 lead case cards");
+assert((en.match(/class="[^"]*pf-case-card[^"]*"/g) || []).length === 3, "EN landing must show exactly 3 lead case cards");
 
 async function exists(path) {
   try {

@@ -16,6 +16,15 @@ import {
 } from "./shared.mjs";
 import { copy } from "./content.mjs";
 
+/** Next export = layout/utilities. Token + component layer is portfolio.css (copied to public/). */
+const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=trust-20260919";
+
+function stylesheets() {
+  return `<link rel="stylesheet" href="${NEXT_LAYOUT_CSS}"/>
+<link rel="stylesheet" href="${PORTFOLIO_CSS}"/>`;
+}
+
 export function esc(value) {
   return String(value ?? "")
     .replace(/&/g, "&amp;")
@@ -35,8 +44,8 @@ function heading({ index, eyebrow, title, description }) {
       <span class="hairline w-10"></span>
       <span class="eyebrow">${esc(eyebrow)}</span>
     </div>
-    <h2 class="mt-4 max-w-prose text-balance text-3xl font-semibold tracking-tight text-fg sm:text-4xl md:text-[2.75rem] md:leading-[1.05]">${esc(title)}</h2>
-    ${description ? `<p class="mt-4 max-w-prose text-base leading-relaxed text-muted">${esc(description)}</p>` : ""}
+    <h2 class="pf-section-title mt-5 text-balance">${esc(title)}</h2>
+    ${description ? `<p class="mt-4 max-w-prose text-[1.05rem] leading-relaxed text-muted">${esc(description)}</p>` : ""}
   </div>`;
 }
 
@@ -54,7 +63,7 @@ function langSwitch(locale, extraClass = "", siblingPath = "") {
     const current = code === locale;
     return `<a href="/portfolio/${code}${siblingPath}" hreflang="${code}"${current ? ' aria-current="true"' : ""} class="rounded-[3px] px-2 py-1 uppercase tracking-wide transition-colors duration-150 ${current ? "bg-accent/15 text-accent" : "text-muted hover:text-fg"}"><span class="sr-only">${esc(t.common.localeName[code])}: </span>${code}</a>`;
   }).join("");
-  return `<div class="inline-flex items-center rounded-card border border-line bg-bg-elevated p-0.5 font-mono text-xs ${extraClass}" role="group" aria-label="${attr(t.common.langSwitchAria)}">${items}</div>`;
+  return `<div class="pf-lang inline-flex items-center rounded-card border border-line bg-bg-elevated p-0.5 font-mono text-xs ${extraClass}" role="group" aria-label="${attr(t.common.langSwitchAria)}">${items}</div>`;
 }
 
 function navItems(locale, numbered = false, homePrefix = "") {
@@ -67,7 +76,7 @@ function navItems(locale, numbered = false, homePrefix = "") {
       : "";
     const cls = numbered
       ? "flex items-center justify-between py-3 text-base text-fg"
-      : "relative rounded-card px-3 py-2 text-sm transition-colors duration-200 text-muted hover:text-fg";
+      : "pf-nav-link";
     return `<li><a href="${attr(href)}" class="${cls}" data-nav="${attr(item.id ?? item.key)}"><span>${esc(label)}</span>${extra}</a></li>`;
   }).join("");
 }
@@ -76,18 +85,18 @@ function renderNav(locale, { siblingPath = "", homePrefix = "" } = {}) {
   const t = copy(locale);
   const brandHref = homePrefix || "#top";
   const contactHref = homePrefix ? `${homePrefix}#contact` : "#contact";
-  return `<header class="fixed inset-x-0 top-0 z-50 transition-colors duration-300 border-b border-transparent bg-transparent" data-site-header>
-  <nav aria-label="${attr(t.nav.ariaPrimary)}" class="container flex h-16 items-center justify-between gap-4">
-    <a href="${attr(brandHref)}" class="group flex items-center gap-2.5 font-mono text-sm tracking-tight text-fg">
-      <span class="grid h-7 w-7 place-items-center rounded-[3px] border border-line text-accent"><span class="h-2 w-2 rounded-[1px] bg-accent"></span></span>
+  return `<header class="pf-header fixed inset-x-0 top-0 z-50" data-site-header>
+  <nav aria-label="${attr(t.nav.ariaPrimary)}" class="container flex items-center justify-between gap-4">
+    <a href="${attr(brandHref)}" class="pf-brand">
+      <span class="pf-brand-mark" aria-hidden="true"><span></span></span>
       <span class="hidden sm:inline">${esc(SITE.name)}</span>
     </a>
-    <ul class="hidden items-center gap-1 md:flex">${navItems(locale, false, homePrefix)}</ul>
+    <ul class="hidden items-center gap-0.5 md:flex">${navItems(locale, false, homePrefix)}</ul>
     <div class="flex items-center gap-2">
-      <a href="${attr(contactHref)}" class="hidden rounded-card border border-line bg-bg-elevated px-3.5 py-2 font-mono text-xs tracking-wide text-fg transition-colors hover:border-accent hover:text-accent lg:inline-block">${esc(t.nav.talk)}</a>
+      <a href="${attr(contactHref)}" class="pf-nav-cta pf-nav-cta--desktop">${esc(t.nav.talk)}</a>
       ${langSwitch(locale, "hidden sm:inline-flex", siblingPath)}
-      <button type="button" data-theme-toggle aria-label="${attr(t.theme.toDark)}" class="group relative inline-flex h-9 w-9 items-center justify-center rounded-card border border-line bg-bg-elevated text-muted transition-colors duration-200 hover:border-accent hover:text-accent focus-visible:text-accent">${iconSun()}${iconMoon()}</button>
-      <button type="button" data-menu-toggle aria-label="${attr(t.nav.toggleMenu)}" aria-expanded="false" class="grid h-9 w-9 place-items-center rounded-card border border-line bg-bg-elevated text-fg md:hidden">
+      <button type="button" data-theme-toggle aria-label="${attr(t.theme.toDark)}" class="pf-icon-btn group relative">${iconSun()}${iconMoon()}</button>
+      <button type="button" data-menu-toggle aria-label="${attr(t.nav.toggleMenu)}" aria-expanded="false" class="pf-icon-btn md:hidden">
         <span class="relative block h-3.5 w-4">
           <span class="absolute left-0 top-0 h-0.5 w-full bg-current transition-transform duration-200" data-burger="top"></span>
           <span class="absolute left-0 top-[7px] h-0.5 w-full bg-current transition-opacity duration-200" data-burger="mid"></span>
@@ -99,7 +108,7 @@ function renderNav(locale, { siblingPath = "", homePrefix = "" } = {}) {
   <div data-mobile-menu class="overflow-hidden border-t border-line bg-bg/95 backdrop-blur-md transition-[max-height,opacity] duration-300 md:hidden max-h-0 opacity-0">
     <ul class="container flex flex-col py-3">
       ${navItems(locale, true, homePrefix)}
-      <li><a href="${attr(contactHref)}" class="mt-2 flex items-center justify-center rounded-card border border-accent/50 py-3 font-mono text-sm text-accent">${esc(t.nav.talk)}</a></li>
+      <li><a href="${attr(contactHref)}" class="pf-nav-cta mt-2 flex w-full items-center justify-center">${esc(t.nav.talk)}</a></li>
       <li class="mt-3 flex justify-center pb-1">${langSwitch(locale, "", siblingPath)}</li>
     </ul>
   </div>
@@ -108,11 +117,15 @@ function renderNav(locale, { siblingPath = "", homePrefix = "" } = {}) {
 
 function renderHeroDiagram(t) {
   const L = t.hero.diagramLabels;
-  return `<figure class="pf-diagram reveal" data-reveal>
+  return `<figure class="pf-diagram pf-system-board reveal" data-reveal>
+    <div class="pf-system-board__bar">
+      <span>${esc(L.goal)} → ${esc(L.orchestrator)}</span>
+      <span>${esc(L.eval)} → ${esc(L.human)}</span>
+    </div>
     <svg class="pf-diagram-svg" viewBox="0 0 360 250" role="img" aria-labelledby="hero-diagram-title hero-diagram-desc">
       <title id="hero-diagram-title">${esc(t.hero.diagramTitle)}</title>
       <desc id="hero-diagram-desc">${esc(t.hero.diagramAlt)}</desc>
-      <g fill="none" stroke="currentColor" stroke-width="1.2" class="pf-diagram-edges">
+      <g fill="none" stroke="currentColor" stroke-width="1.15" class="pf-diagram-edges">
         <path class="pf-diagram-edge" d="M180 42 V70"/>
         <path class="pf-diagram-edge" d="M180 110 V138"/>
         <path class="pf-diagram-edge" d="M88 158 H160"/>
@@ -120,17 +133,17 @@ function renderHeroDiagram(t) {
         <path class="pf-diagram-edge" d="M180 178 V200"/>
       </g>
       <g class="pf-diagram-nodes">
-        <rect class="pf-diagram-node" x="110" y="12" width="140" height="30" rx="6"/>
+        <rect class="pf-diagram-node" x="110" y="12" width="140" height="30" rx="5"/>
         <text x="180" y="32" text-anchor="middle">${esc(L.goal)}</text>
-        <rect class="pf-diagram-node pf-diagram-node--accent" x="96" y="70" width="168" height="40" rx="6"/>
+        <rect class="pf-diagram-node pf-diagram-node--accent" x="96" y="70" width="168" height="40" rx="5"/>
         <text x="180" y="95" text-anchor="middle">${esc(L.orchestrator)}</text>
-        <rect class="pf-diagram-node" x="16" y="138" width="72" height="40" rx="6"/>
+        <rect class="pf-diagram-node" x="16" y="138" width="72" height="40" rx="5"/>
         <text x="52" y="163" text-anchor="middle">${esc(L.tools)}</text>
-        <rect class="pf-diagram-node" x="144" y="138" width="72" height="40" rx="6"/>
+        <rect class="pf-diagram-node" x="144" y="138" width="72" height="40" rx="5"/>
         <text x="180" y="163" text-anchor="middle">${esc(L.model)}</text>
-        <rect class="pf-diagram-node" x="272" y="138" width="72" height="40" rx="6"/>
+        <rect class="pf-diagram-node" x="272" y="138" width="72" height="40" rx="5"/>
         <text x="308" y="163" text-anchor="middle">${esc(L.eval)}</text>
-        <rect class="pf-diagram-node pf-diagram-node--signal" x="120" y="200" width="120" height="36" rx="6"/>
+        <rect class="pf-diagram-node pf-diagram-node--signal" x="120" y="200" width="120" height="36" rx="5"/>
         <text x="180" y="223" text-anchor="middle">${esc(L.human)}</text>
       </g>
     </svg>
@@ -152,7 +165,7 @@ function renderProofStrip(t) {
 
 function renderHero(locale) {
   const t = copy(locale);
-  return `<section id="top" class="relative isolate overflow-hidden border-b border-line pb-20 pt-32 sm:pb-24 sm:pt-36 md:pb-28 md:pt-40">
+  return `<section id="top" class="pf-hero">
     <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
       <div class="blueprint-grid grid-mask absolute inset-0"></div>
     </div>
@@ -161,8 +174,8 @@ function renderHero(locale) {
         <p class="pf-name reveal" data-reveal>${esc(SITE.name)}</p>
         <p class="pf-role reveal" data-reveal>${esc(t.hero.role)}</p>
         <p class="eyebrow mt-3 reveal" data-reveal>${esc(t.hero.eyebrow)}</p>
-        <h1 class="mt-5 text-balance text-[2.05rem] font-semibold leading-[1.1] tracking-tight text-fg sm:text-4xl md:text-[2.65rem] reveal" data-reveal>${esc(t.hero.h1)}</h1>
-        <p class="mt-5 max-w-xl text-lg leading-relaxed text-muted reveal" data-reveal>${esc(t.hero.tagline)}</p>
+        <h1 class="pf-hero-title mt-5 text-balance reveal" data-reveal>${esc(t.hero.h1)}</h1>
+        <p class="pf-hero-lede mt-5 reveal" data-reveal>${esc(t.hero.tagline)}</p>
         <p class="pf-trust reveal" data-reveal>${esc(t.hero.trust)}</p>
         <div class="mt-8 pf-cta-row reveal" data-reveal>
           <a href="#cases" class="pf-cta pf-cta--primary">${esc(t.hero.ctaPrimary)}</a>
@@ -172,7 +185,7 @@ function renderHero(locale) {
       </div>
       ${renderHeroDiagram(t)}
     </div>
-    <div class="container mt-12">
+    <div class="container mt-12 md:mt-14">
       ${renderProofStrip(t)}
       <p class="pf-domains mt-6 reveal" data-reveal>${esc(t.hero.contextLine)}</p>
     </div>
@@ -240,14 +253,15 @@ function renderCaseCard(item, locale) {
   const open = pageHref
     ? `<a class="pf-case-open" href="${attr(pageHref)}">${esc(c.landingCta || t.casePage.openCase)}</a>`
     : "";
-  return `<article class="panel relative p-6 md:p-7 pf-case-card reveal" data-reveal>
-    ${c.badge ? `<p class="pf-badge">${esc(c.badge)}</p>` : ""}
-    <div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs text-faint">
+  const ownershipKind = item.ownership?.status === "production" ? "prod" : "lab";
+  return `<article class="panel relative p-6 md:p-7 pf-case-card pf-case-card--${ownershipKind} reveal" data-reveal>
+    ${c.badge ? `<p class="pf-badge pf-badge--${ownershipKind}">${esc(c.badge)}</p>` : ""}
+    <div class="pf-case-kicker">
       <span>${esc(item.period)}</span>
-      <span class="text-line">|</span>
+      <span aria-hidden="true">·</span>
       <span>${esc(item.name)}</span>
     </div>
-    <h3 class="mt-3 text-xl font-semibold tracking-tight text-fg">${title}</h3>
+    <h3 class="pf-case-title">${title}</h3>
     ${c.oneLiner ? `<p class="mt-3 text-sm leading-relaxed text-muted">${esc(c.oneLiner)}</p>` : ""}
     ${c.honesty ? `<p class="pf-honesty">${esc(c.honesty)}</p>` : ""}
     ${ownershipMeta(item, t)}
@@ -378,7 +392,7 @@ function renderTrack(locale) {
       ${related ? `<p class="pf-track-links">${related}</p>` : ""}
     </article>`;
   }).join("");
-  return `<section id="work" class="scroll-mt-24 border-y border-line bg-bg-sunken/40 py-20 md:py-24">
+  return `<section id="work" class="pf-section-band scroll-mt-24 py-20 md:py-24">
     <div class="container">
       ${heading(t.track)}
       <div class="pf-track">${items}</div>
@@ -426,7 +440,7 @@ function renderEducation(locale) {
       </div>
     </article>`;
   }).join("");
-  return `<section id="education" class="scroll-mt-24 border-t border-line bg-bg-sunken/40 py-20 md:py-28">
+  return `<section id="education" class="pf-section-band scroll-mt-24 py-20 md:py-28">
     <div class="container">
       ${heading({ ...t.education, description: "" })}
       <div class="space-y-3">${items}</div>
@@ -436,13 +450,13 @@ function renderEducation(locale) {
 
 function renderFooter(locale) {
   const t = copy(locale);
-  return `<footer id="contact" class="relative scroll-mt-24 overflow-hidden border-t border-line bg-bg">
-    <div aria-hidden="true" class="blueprint-grid grid-mask pointer-events-none absolute inset-0 opacity-60"></div>
+  return `<footer id="contact" class="pf-footer relative scroll-mt-24">
+    <div aria-hidden="true" class="blueprint-grid grid-mask pointer-events-none absolute inset-0 opacity-50"></div>
     <div class="container relative py-20 md:py-28">
       <p class="eyebrow">${esc(t.footer.eyebrow)}</p>
-      <h2 class="mt-4 max-w-2xl text-balance text-3xl font-semibold tracking-tight text-fg sm:text-4xl">${esc(t.footer.title)}</h2>
+      <h2 class="pf-footer-title mt-4 text-balance">${esc(t.footer.title)}</h2>
       <p class="mt-4 max-w-prose text-muted">${esc(t.footer.body)}</p>
-      <div class="mt-10 pf-contact-row">
+      <div class="mt-10 pf-contact-row pf-contact-row--checkout">
         <a class="primary" href="mailto:${attr(SITE.email)}">${esc(t.hero.ctaTertiary)} · ${esc(SITE.email)}</a>
         <a class="secondary" href="${attr(SITE.linkedin)}" target="_blank" rel="noopener noreferrer">${esc(t.footer.linkedin)}</a>
         <a class="secondary" href="${attr(SITE.github)}" target="_blank" rel="noopener noreferrer">${esc(t.footer.github)}</a>
@@ -665,11 +679,10 @@ export function renderCasePage(locale, id) {
 <meta name="twitter:title" content="${attr(title)}"/>
 <meta name="twitter:description" content="${attr(description)}"/>
 <meta name="twitter:image" content="${attr(og)}"/>
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f7f9"/>
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#080a0e"/>
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F4F0E8"/>
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#10151E"/>
 <link rel="icon" href="/portfolio/${locale}/icon.png" type="image/png" sizes="32x32"/>
-<link rel="stylesheet" href="/portfolio/de/_next/static/css/76323045a7107f6a.css"/>
-<link rel="stylesheet" href="/portfolio/portfolio.css"/>
+${stylesheets()}
 </head>
 <body class="min-h-screen bg-bg font-sans antialiased">
 ${themeBoot()}
@@ -680,9 +693,9 @@ ${renderNav(locale, { siblingPath, homePrefix: home })}
 <article class="container pb-20 pt-28 md:pb-28 md:pt-32">
   <p class="eyebrow">${esc(t.casePage.caseStudy)}</p>
   <p class="mt-4 font-mono text-xs text-faint"><a href="${attr(home)}" class="hover:text-accent">${esc(t.casePage.back)}</a> · ${esc(item.period)} · ${esc(c.domain)}</p>
-  <h1 class="mt-4 text-balance text-4xl font-semibold tracking-tight text-fg sm:text-5xl">${esc(c.landingTitle || item.name)}</h1>
+  <h1 class="pf-case-page-title mt-4 text-balance">${esc(c.landingTitle || item.name)}</h1>
   <p class="mt-2 text-muted">${esc(item.name)}${item.client ? ` · ${esc(item.client)}` : ""}</p>
-  ${c.badge ? `<p class="pf-badge">${esc(c.badge)}</p>` : ""}
+  ${c.badge ? `<p class="pf-badge pf-badge--${item.ownership?.status === "production" ? "prod" : "lab"}">${esc(c.badge)}</p>` : ""}
   ${c.honesty ? `<p class="pf-honesty">${esc(c.honesty)}</p>` : ""}
   ${ownershipMeta(item, t)}
   ${renderCaseSection(t.caseFields.context, c.context)}
@@ -742,11 +755,10 @@ export function renderPage(locale) {
 <meta name="twitter:title" content="${attr(t.meta.title)}"/>
 <meta name="twitter:description" content="${attr(t.meta.description)}"/>
 <meta name="twitter:image" content="${attr(og)}"/>
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f7f9"/>
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#080a0e"/>
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F4F0E8"/>
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#10151E"/>
 <link rel="icon" href="/portfolio/${locale}/icon.png" type="image/png" sizes="32x32"/>
-<link rel="stylesheet" href="/portfolio/de/_next/static/css/76323045a7107f6a.css"/>
-<link rel="stylesheet" href="/portfolio/portfolio.css"/>
+${stylesheets()}
 </head>
 <body class="min-h-screen bg-bg font-sans antialiased">
 ${themeBoot()}
@@ -790,22 +802,35 @@ export function renderCv(locale) {
 <title>${esc(t.cv.title)}</title>
 <meta name="description" content="${attr(t.cv.intro)}"/>
 <meta name="robots" content="noindex"/>
-<link rel="stylesheet" href="/portfolio/de/_next/static/css/76323045a7107f6a.css"/>
-<link rel="stylesheet" href="/portfolio/portfolio.css"/>
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F4F0E8"/>
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#10151E"/>
+${stylesheets()}
 </head>
 <body class="min-h-screen bg-bg font-sans antialiased">
 ${themeBoot()}
+<header class="pf-header fixed inset-x-0 top-0 z-50" data-site-header>
+  <nav aria-label="${attr(t.nav.ariaPrimary)}" class="container flex items-center justify-between gap-4">
+    <a href="/portfolio/${locale}" class="pf-brand">
+      <span class="pf-brand-mark" aria-hidden="true"><span></span></span>
+      <span class="hidden sm:inline">${esc(SITE.name)}</span>
+    </a>
+    <div class="flex items-center gap-2">
+      <a href="/portfolio/${locale}" class="pf-nav-cta pf-nav-cta--always">${esc(t.cv.back)}</a>
+      <button type="button" data-theme-toggle aria-label="${attr(t.theme.toDark)}" class="pf-icon-btn group relative">${iconSun()}${iconMoon()}</button>
+    </div>
+  </nav>
+</header>
 <div class="cv-page">
   <p class="eyebrow">${esc(t.hero.eyebrow)}</p>
-  <h1 class="mt-3 text-4xl font-semibold tracking-tight text-fg">${esc(SITE.name)}</h1>
+  <h1 class="pf-hero-title mt-3">${esc(SITE.name)}</h1>
   <p class="pf-role">${esc(t.cv.subtitle)}</p>
   <p class="mt-4 text-muted">${esc(t.cv.intro)}</p>
   <div class="cv-actions">
-    <button type="button" onclick="window.print()" class="scan-sweep inline-flex items-center rounded-card border border-accent bg-accent px-5 py-3 text-sm font-medium text-white dark:text-bg">${esc(t.cv.print)}</button>
-    <a href="/portfolio/${locale}" class="inline-flex items-center rounded-card border border-line bg-bg-elevated px-5 py-3 text-sm">${esc(t.cv.back)}</a>
-    <a href="mailto:${attr(SITE.email)}" class="inline-flex items-center rounded-card border border-line px-5 py-3 text-sm">${esc(SITE.email)}</a>
-    <a href="${attr(SITE.linkedin)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center rounded-card border border-line px-5 py-3 text-sm">LinkedIn</a>
-    <a href="${attr(SITE.github)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center rounded-card border border-line px-5 py-3 text-sm">GitHub</a>
+    <button type="button" onclick="window.print()" class="pf-cta pf-cta--primary">${esc(t.cv.print)}</button>
+    <a href="/portfolio/${locale}" class="pf-cta pf-cta--secondary">${esc(t.cv.back)}</a>
+    <a href="mailto:${attr(SITE.email)}" class="pf-cta pf-cta--secondary">${esc(SITE.email)}</a>
+    <a href="${attr(SITE.linkedin)}" target="_blank" rel="noopener noreferrer" class="pf-cta pf-cta--secondary">LinkedIn</a>
+    <a href="${attr(SITE.github)}" target="_blank" rel="noopener noreferrer" class="pf-cta pf-cta--secondary">GitHub</a>
   </div>
   <p class="mt-2 text-sm text-muted">${esc(t.hero.location)}</p>
   <h2 class="mt-8 text-xl font-semibold">${esc(t.selectedCases.eyebrow)}</h2>
@@ -814,6 +839,7 @@ ${themeBoot()}
   <div class="mt-4">${jobs}</div>
   <p class="cv-todo">${esc(t.cv.todo)}</p>
 </div>
+<script src="/portfolio/app.js" defer></script>
 </body>
 </html>`;
 }

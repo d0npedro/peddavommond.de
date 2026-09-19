@@ -63,6 +63,31 @@
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
+  const navLinks = [...document.querySelectorAll("[data-nav]")].filter((link) => {
+    const id = link.getAttribute("data-nav");
+    return id && document.getElementById(id);
+  });
+  const watched = navLinks
+    .map((link) => document.getElementById(link.getAttribute("data-nav")))
+    .filter(Boolean);
+  function setActiveNav(id) {
+    navLinks.forEach((link) => {
+      link.classList.toggle("is-active", link.getAttribute("data-nav") === id);
+    });
+  }
+  if (watched.length && "IntersectionObserver" in window) {
+    const spy = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible?.target?.id) setActiveNav(visible.target.id);
+      },
+      { rootMargin: "-28% 0px -58% 0px", threshold: [0.15, 0.35, 0.6] },
+    );
+    watched.forEach((section) => spy.observe(section));
+  }
+
   document.querySelectorAll("[data-exp-toggle]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const body = btn.querySelector(".exp-body");
