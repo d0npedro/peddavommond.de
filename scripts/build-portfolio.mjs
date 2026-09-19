@@ -29,6 +29,7 @@ async function main() {
   await write(join(pub, "de", "sitemap.xml"), renderSitemap());
   await write(join(pub, "en", "sitemap.xml"), renderSitemap());
   await copyFile(join(root, "portfolio", "app.js"), join(pub, "app.js"));
+  // Production token layer. HTML links /portfolio/portfolio.css after the Next export.
   await copyFile(join(root, "portfolio", "portfolio.css"), join(pub, "portfolio.css"));
   console.log("portfolio static pages ready");
 }

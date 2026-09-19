@@ -16,6 +16,15 @@ import {
 } from "./shared.mjs";
 import { copy } from "./content.mjs";
 
+/** Next export = layout/utilities. Token + component layer is portfolio.css (copied to public/). */
+const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=trust-20260919";
+
+function stylesheets() {
+  return `<link rel="stylesheet" href="${NEXT_LAYOUT_CSS}"/>
+<link rel="stylesheet" href="${PORTFOLIO_CSS}"/>`;
+}
+
 export function esc(value) {
   return String(value ?? "")
     .replace(/&/g, "&amp;")
@@ -110,8 +119,8 @@ function renderHeroDiagram(t) {
   const L = t.hero.diagramLabels;
   return `<figure class="pf-diagram pf-system-board reveal" data-reveal>
     <div class="pf-system-board__bar">
-      <span>${esc(t.hero.diagramTitle)}</span>
-      <span>${esc(L.goal)} → ${esc(L.human)}</span>
+      <span>${esc(L.goal)} → ${esc(L.orchestrator)}</span>
+      <span>${esc(L.eval)} → ${esc(L.human)}</span>
     </div>
     <svg class="pf-diagram-svg" viewBox="0 0 360 250" role="img" aria-labelledby="hero-diagram-title hero-diagram-desc">
       <title id="hero-diagram-title">${esc(t.hero.diagramTitle)}</title>
@@ -673,8 +682,7 @@ export function renderCasePage(locale, id) {
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F4F0E8"/>
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#10151E"/>
 <link rel="icon" href="/portfolio/${locale}/icon.png" type="image/png" sizes="32x32"/>
-<link rel="stylesheet" href="/portfolio/de/_next/static/css/76323045a7107f6a.css"/>
-<link rel="stylesheet" href="/portfolio/portfolio.css"/>
+${stylesheets()}
 </head>
 <body class="min-h-screen bg-bg font-sans antialiased">
 ${themeBoot()}
@@ -685,7 +693,7 @@ ${renderNav(locale, { siblingPath, homePrefix: home })}
 <article class="container pb-20 pt-28 md:pb-28 md:pt-32">
   <p class="eyebrow">${esc(t.casePage.caseStudy)}</p>
   <p class="mt-4 font-mono text-xs text-faint"><a href="${attr(home)}" class="hover:text-accent">${esc(t.casePage.back)}</a> · ${esc(item.period)} · ${esc(c.domain)}</p>
-  <h1 class="pf-hero-title mt-4 text-balance">${esc(c.landingTitle || item.name)}</h1>
+  <h1 class="pf-case-page-title mt-4 text-balance">${esc(c.landingTitle || item.name)}</h1>
   <p class="mt-2 text-muted">${esc(item.name)}${item.client ? ` · ${esc(item.client)}` : ""}</p>
   ${c.badge ? `<p class="pf-badge pf-badge--${item.ownership?.status === "production" ? "prod" : "lab"}">${esc(c.badge)}</p>` : ""}
   ${c.honesty ? `<p class="pf-honesty">${esc(c.honesty)}</p>` : ""}
@@ -750,8 +758,7 @@ export function renderPage(locale) {
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F4F0E8"/>
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#10151E"/>
 <link rel="icon" href="/portfolio/${locale}/icon.png" type="image/png" sizes="32x32"/>
-<link rel="stylesheet" href="/portfolio/de/_next/static/css/76323045a7107f6a.css"/>
-<link rel="stylesheet" href="/portfolio/portfolio.css"/>
+${stylesheets()}
 </head>
 <body class="min-h-screen bg-bg font-sans antialiased">
 ${themeBoot()}
@@ -797,8 +804,7 @@ export function renderCv(locale) {
 <meta name="robots" content="noindex"/>
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F4F0E8"/>
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#10151E"/>
-<link rel="stylesheet" href="/portfolio/de/_next/static/css/76323045a7107f6a.css"/>
-<link rel="stylesheet" href="/portfolio/portfolio.css"/>
+${stylesheets()}
 </head>
 <body class="min-h-screen bg-bg font-sans antialiased">
 ${themeBoot()}

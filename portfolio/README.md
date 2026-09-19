@@ -19,7 +19,12 @@ Keep the credibility split explicit: paid Professional Experience, Independent A
 
 ## Visual system — Enterprise AI decision surface
 
-Tokens live in `portfolio.css` and override the inherited Tailwind export (`:root` / `.dark` RGB triples). Every surface, chip, and CTA should consume these — do not add one-off hex in markup.
+Two stylesheets load on every generated page:
+
+1. The frozen Next export (`public/portfolio/de/_next/static/css/76323045a7107f6a.css`) — fonts, Tailwind utilities, leftover layout classes.
+2. `portfolio/portfolio.css` — **token + component source of truth**. `scripts/build-portfolio.mjs` copies it to `public/portfolio/portfolio.css` (this is what production serves). The HTML link is cache-busted (`?v=trust-…`) and loads second.
+
+Tokens are declared on `html` / `html.light` / `html.dark` so they beat the export’s `:root` / `.dark`. Every surface, chip, and CTA should consume these — do not add one-off hex in markup.
 
 Dark is the default. Accent is used sparingly (CTAs, focus, key labels). Bronze (`--signal`) is reserved for honesty / Independent R&D chips.
 

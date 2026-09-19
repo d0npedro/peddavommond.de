@@ -66,6 +66,8 @@ async function check(locale) {
   for (const email of emails) {
     assert(email === "peter.henrichs@web.de", `${prefix} unexpected email ${email}`);
   }
+  assert(html.includes("/portfolio/portfolio.css"), `${prefix} missing token stylesheet (production path)`);
+  assert(html.includes("_next/static/css/"), `${prefix} missing Next layout CSS`);
   assert(html.includes("linkedin.com/in/peter-henrichs"), `${prefix} missing LinkedIn`);
   assert(html.includes("github.com/d0npedro"), `${prefix} missing GitHub`);
   assert(html.includes("/portfolio/cv/"), `${prefix} missing CV path`);
@@ -115,6 +117,7 @@ async function check(locale) {
 
 async function checkCv() {
   const html = await readFile(join(root, "public/portfolio/cv/index.html"), "utf8");
+  assert(html.includes("/portfolio/portfolio.css"), "CV missing token stylesheet (production path)");
   assert(html.includes("Senior AI Consultant"), "CV missing role");
   assert(html.includes("peter.henrichs@web.de"), "CV missing email");
   assert(!html.includes("ph@d0npedro.com"), "CV still has old hiring email");
