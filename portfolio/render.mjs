@@ -84,7 +84,7 @@ function renderNav(locale, { siblingPath = "", homePrefix = "" } = {}) {
     </a>
     <ul class="hidden items-center gap-0.5 md:flex">${navItems(locale, false, homePrefix)}</ul>
     <div class="flex items-center gap-2">
-      <a href="${attr(contactHref)}" class="pf-nav-cta hidden lg:inline-flex">${esc(t.nav.talk)}</a>
+      <a href="${attr(contactHref)}" class="pf-nav-cta pf-nav-cta--desktop">${esc(t.nav.talk)}</a>
       ${langSwitch(locale, "hidden sm:inline-flex", siblingPath)}
       <button type="button" data-theme-toggle aria-label="${attr(t.theme.toDark)}" class="pf-icon-btn group relative">${iconSun()}${iconMoon()}</button>
       <button type="button" data-menu-toggle aria-label="${attr(t.nav.toggleMenu)}" aria-expanded="false" class="pf-icon-btn md:hidden">
@@ -809,7 +809,7 @@ ${themeBoot()}
       <span class="hidden sm:inline">${esc(SITE.name)}</span>
     </a>
     <div class="flex items-center gap-2">
-      <a href="/portfolio/${locale}" class="pf-nav-cta">${esc(t.cv.back)}</a>
+      <a href="/portfolio/${locale}" class="pf-nav-cta pf-nav-cta--always">${esc(t.cv.back)}</a>
       <button type="button" data-theme-toggle aria-label="${attr(t.theme.toDark)}" class="pf-icon-btn group relative">${iconSun()}${iconMoon()}</button>
     </div>
   </nav>
