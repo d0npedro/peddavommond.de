@@ -144,8 +144,8 @@ assert(en.includes("View the agentic-engineering case"), "EN Graph-Mastermind CT
 assert(!de.includes("Hennrichs") && !en.includes("Hennrichs"), "audit misspelling leaked");
 assert(JSON.stringify(FLAGSHIP_IDS) === JSON.stringify(["graph-mastermind", "agent-collective", "deutschlandcard"]), "lead cases must map to existing real projects");
 assert(!de.includes("enterprise-integration") && !en.includes("enterprise-integration"), "fabricated enterprise-integration product still on landing");
-assert((de.match(/pf-case-card/g) || []).length === 3, "DE landing must show exactly 3 lead case cards");
-assert((en.match(/pf-case-card/g) || []).length === 3, "EN landing must show exactly 3 lead case cards");
+assert((de.match(/class="[^"]*pf-case-card[^"]*"/g) || []).length === 3, "DE landing must show exactly 3 lead case cards");
+assert((en.match(/class="[^"]*pf-case-card[^"]*"/g) || []).length === 3, "EN landing must show exactly 3 lead case cards");
 
 async function exists(path) {
   try {
