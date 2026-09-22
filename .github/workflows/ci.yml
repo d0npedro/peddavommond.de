@@ -79,8 +79,10 @@ jobs:
           grep -q 'Peter Henrichs' public/portfolio/de/index.html
           grep -q 'Peter Henrichs' public/portfolio/en/index.html
           grep -q 'peter.henrichs@web.de' public/portfolio/en/index.html
-          grep -q 'Die Schicht zwischen System und Agent.' public/portfolio/de/index.html
-          grep -q 'The layer between the system and the agent.' public/portfolio/en/index.html
+          grep -q 'Ich baue Agenten-Schichten in laufende Enterprise-Systeme — prüfbar, mit Human-in-the-Loop.' public/portfolio/de/index.html
+          grep -q 'I build agent layers into running enterprise systems — reviewable, with human-in-the-loop.' public/portfolio/en/index.html
+          ! grep -q 'Die Schicht zwischen System und Agent.' public/portfolio/de/index.html
+          ! grep -q 'The layer between the system and the agent.' public/portfolio/en/index.html
           grep -q 'Arbeit anfassen' public/portfolio/de/index.html
           grep -q 'Touch the work' public/portfolio/en/index.html
           grep -q 'id="top"' public/portfolio/de/index.html
