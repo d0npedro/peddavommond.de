@@ -19,7 +19,7 @@ import { copy } from "./content.mjs";
 
 /** Next export = layout/utilities. Token + component layer is portfolio.css (copied to public/). */
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=hero-promise-20260922";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=hero-beats4-20260922";
 
 function stylesheets() {
   return `<link rel="stylesheet" href="${NEXT_LAYOUT_CSS}"/>
@@ -32,6 +32,46 @@ export function esc(value) {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
+}
+
+/** Approved H1, broken only for display. Joined beats must equal the i18n string. */
+const PROMISE_LINES = new Map([
+  [
+    "Ich baue Agenten-Schichten in laufende Enterprise-Systeme — prüfbar, mit Human-in-the-Loop.",
+    [
+      { before: "Ich baue ", keep: "Agenten-Schichten" },
+      { before: "in laufende ", keep: "Enterprise-Systeme —" },
+      { before: "prüfbar, mit ", keep: "Human-in-the-Loop." },
+    ],
+  ],
+  [
+    "I build agent layers into running enterprise systems — reviewable, with human-in-the-loop.",
+    [
+      "I build agent layers",
+      "into running enterprise systems —",
+      { before: "reviewable, with ", keep: "human-in-the-loop." },
+    ],
+  ],
+]);
+
+function renderPromise(text) {
+  const lines = PROMISE_LINES.get(text);
+  if (!lines) return esc(text);
+  const visible = lines
+    .map((line) => (typeof line === "string" ? line : `${line.before}${line.keep}`))
+    .join(" ");
+  if (visible !== text) {
+    throw new Error("hero promise lines drifted from the approved sentence");
+  }
+  return lines
+    .map((line) => {
+      const inner =
+        typeof line === "string"
+          ? esc(line)
+          : `${esc(line.before)}<span class="pf-keep">${esc(line.keep)}</span>`;
+      return `<span class="pf-hero-beat">${inner}</span>`;
+    })
+    .join(" ");
 }
 
 function label(value, name) {
@@ -182,7 +222,7 @@ function renderHero(locale) {
   return `<section id="top" class="pf-hero pf-stage pf-stage--hero">
     <div class="container pf-stage-center">
       <p class="pf-hero-chip">${esc(SITE.name)} · ${esc(t.hero.role)}</p>
-      <h1 class="pf-hero-title text-balance">${esc(t.hero.h1)}</h1>
+      <h1 class="pf-hero-title">${renderPromise(t.hero.h1)}</h1>
       <div class="pf-cta-row">
         <a href="#builds" class="pf-cta pf-cta--primary">${esc(t.hero.ctaPrimary)}</a>
       </div>
@@ -431,7 +471,7 @@ function renderFooter(locale) {
     <div class="container relative py-20 md:py-28">
       <p class="eyebrow">${esc(t.footer.eyebrow)}</p>
       <p class="pf-location">${esc(t.hero.location)}</p>
-      <h2 class="pf-footer-title mt-4 text-balance">${esc(t.hero.h1)}</h2>
+      <h2 class="pf-footer-title mt-4">${renderPromise(t.hero.h1)}</h2>
       <p class="mt-4 max-w-prose text-muted">${esc(t.footer.body)}</p>
       <p class="mt-4 max-w-prose text-muted">${esc(t.hero.trust)}</p>
       <p class="pf-domains">${esc(t.industries.line)}</p>

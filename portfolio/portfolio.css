@@ -1348,11 +1348,20 @@ html {
 }
 
 .pf-hero .pf-hero-title {
-  max-width: 22em;
-  font-size: clamp(1.85rem, 3.5vw, 3.15rem);
+  max-width: 18em;
+  font-size: clamp(1.7rem, 3.05vw, 2.75rem);
   font-weight: 560;
-  line-height: 1.12;
-  letter-spacing: -0.034em;
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+}
+
+.pf-keep {
+  white-space: nowrap;
+}
+
+.pf-hero .pf-hero-beat,
+.pf-footer-title .pf-hero-beat {
+  display: block;
 }
 
 .pf-hero .pf-hero-lede {
