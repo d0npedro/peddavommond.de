@@ -738,9 +738,8 @@ function renderCollectiveSample(locale) {
           <h2 class="pf-stage-title">${esc(s.title)}</h2>
         </div>
         <p class="pf-stage-lede">${esc(s.body)}</p>
-        <p class="pf-honesty-chips" aria-label="${attr(t.builds.eyebrow)}">
+        <p class="pf-honesty-chips" aria-label="${attr(t.caseMeta.statusValues.lab)}">
           <span class="pf-chip pf-chip--signal">${esc(t.caseMeta.statusValues.lab)}</span>
-          <span class="pf-chip">${esc(t.caseMeta.statusValues.production)}</span>
         </p>
         <p class="pf-stage-lede">${esc(s.shown)}</p>
         ${caseLinks(item, t)}

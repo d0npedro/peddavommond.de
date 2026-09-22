@@ -115,6 +115,9 @@ async function check(locale) {
   );
   assert(html.indexOf('id="builds"') < html.indexOf('id="sample-collective"'), `${prefix} what he builds should precede the first sample`);
   assert(html.indexOf('id="sample-collective"') < html.indexOf('id="cases"'), `${prefix} collective sample should precede case spotlights`);
+  const collective = html.slice(html.indexOf('id="sample-collective"'), html.indexOf('id="cases"'));
+  assert(collective.includes("Independent R&amp;D") || collective.includes("Independent R&D"), `${prefix} collective sample keeps Independent R&D`);
+  assert(!collective.includes(">Produktion<") && !collective.includes(">Production<"), `${prefix} collective sample must not claim production`);
   assert(html.indexOf('id="cases"') < html.indexOf('id="sample-graph"'), `${prefix} cases should precede the contract sample`);
   assert(html.indexOf('id="sample-graph"') < html.indexOf('id="offer"'), `${prefix} contract sample should precede How to offer me`);
   const offerAt = html.indexOf('id="offer"');
