@@ -29,12 +29,26 @@ async function check(locale) {
   assert(!html.includes("roleWords") && !html.includes("Backend-Spezialist"), `${prefix} still rotates old role words`);
   assert(html.includes("10+"), `${prefix} 10+ years proof missing from SSR`);
   assert(!html.includes(">0<!-- -->+") && !html.includes(">0+</"), `${prefix} still has 0+ SSR metrics`);
-  assert(/Köln|Cologne/.test(html) && /Remote/.test(html), `${prefix} missing Köln/Cologne and Remote in hero`);
+  assert(/Köln|Cologne/.test(html) && /Remote/.test(html), `${prefix} missing Köln/Cologne and Remote`);
+  const heroEnd = html.indexOf('id="builds"');
+  const hero = heroEnd > 0 ? html.slice(html.indexOf('id="top"'), heroEnd) : "";
+  assert(hero.includes("<h1"), `${prefix} hero missing headline`);
+  assert(!hero.includes("pf-proof"), `${prefix} proof chips still in the first viewport`);
+  assert(!hero.includes("pf-diagram"), `${prefix} diagram still in the first viewport`);
+  assert(!hero.includes("pf-case"), `${prefix} case grid still in the first viewport`);
+  assert((hero.match(/pf-cta--primary/g) || []).length === 1, `${prefix} hero must have exactly one primary CTA`);
+  assert(!hero.includes("pf-cta--secondary"), `${prefix} hero must not have a second CTA`);
+  assert(html.includes('id="sample-collective"') && html.includes('id="sample-graph"'), `${prefix} missing touchable samples`);
+  assert(html.includes('id="offer"'), `${prefix} missing How to offer me`);
+  assert(html.includes("Senior AI Consultant") && html.includes("Agentic Engineer") && html.includes("Transformation Lead"), `${prefix} missing agency role packages`);
+  assert(html.includes("data-touch=\"collective\"") && html.includes("data-touch=\"contract\""), `${prefix} samples are not interactive`);
+  assert(!/GPT-|OpenAI API|Claude API|LLM-powered|powered by an LLM/i.test(html), `${prefix} must not invent an LLM backend`);
   if (locale === "de") {
-    assert(html.includes("ENTWICKLUNG") && html.includes("AGENTIC AI") && html.includes("INTEGRATION") && html.includes("BERATUNG"), `${prefix} missing Variant C proof chips`);
-    assert(html.includes("Wo ich Wirkung erzeuge"), `${prefix} missing German value eyebrow`);
+    assert(html.includes("Die Schicht zwischen System und Agent."), `${prefix} missing cinematic headline`);
+    assert(html.includes("Arbeit anfassen"), `${prefix} missing primary CTA`);
+    assert(html.includes("Wie man mich anbietet"), `${prefix} missing How to offer me title`);
+    assert(html.includes("kein LLM-Backend"), `${prefix} Agent Collective sample must state no LLM backend`);
     assert(!html.includes("Where I create value"), `${prefix} English value eyebrow leaked`);
-    assert(html.includes("10+ Jahre Enterprise-Systeme"), `${prefix} missing German proof-chip body`);
     assert(!html.includes("10+ years enterprise systems"), `${prefix} English proof-chip body leaked`);
     assert(
       html.includes("Strategie") && html.includes("Architektur") && html.includes("Agentic Engineering") && html.includes("Umsetzung") && html.includes("Governance"),
@@ -43,9 +57,10 @@ async function check(locale) {
     assert(html.includes("Gesundheitswesen") && html.includes("Loyalty") && html.includes("adesso"), `${prefix} missing compact enterprise contexts`);
     assert(html.includes("Finanzwesen") && html.includes("Öffentlicher Sektor"), `${prefix} missing Finance / Public Sector context line`);
   } else {
-    assert(html.includes("ENGINEERING") && html.includes("AGENTIC AI") && html.includes("INTEGRATION") && html.includes("CONSULTING"), `${prefix} missing Variant C proof chips`);
-    assert(html.includes("Where I create value"), `${prefix} missing EN value eyebrow`);
-    assert(html.includes("10+ years enterprise systems"), `${prefix} missing EN proof-chip body`);
+    assert(html.includes("The layer between the system and the agent."), `${prefix} missing cinematic headline`);
+    assert(html.includes("Touch the work"), `${prefix} missing primary CTA`);
+    assert(html.includes("How to offer me"), `${prefix} missing How to offer me title`);
+    assert(html.includes("no LLM backend"), `${prefix} Agent Collective sample must state no LLM backend`);
     assert(
       html.includes("Strategy") && html.includes("Architecture") && html.includes("Agentic Engineering") && html.includes("Delivery") && html.includes("Governance"),
       `${prefix} missing capability groups`,
@@ -84,24 +99,29 @@ async function check(locale) {
   );
   assert(html.includes("Human-in-the-Loop"), `${prefix} missing HITL`);
   assert(
-    html.includes('id="cases"') &&
-      html.includes('id="value"') &&
-      html.includes('id="work"') &&
+    html.includes('id="builds"') &&
+      html.includes('id="sample-collective"') &&
+      html.includes('id="cases"') &&
+      html.includes('id="sample-graph"') &&
+      html.includes('id="offer"') &&
       html.includes('id="approach"') &&
+      html.includes('id="work"') &&
       html.includes('id="credentials"') &&
       html.includes('id="about"'),
-    `${prefix} missing IA section ids`,
+    `${prefix} missing cinematic section ids`,
   );
-  assert(html.indexOf('id="cases"') < html.indexOf('id="value"'), `${prefix} selected cases should appear before where I create value`);
-  assert(html.indexOf('id="value"') < html.indexOf('id="work"'), `${prefix} value should appear before career trajectory`);
-  assert(html.indexOf('id="work"') < html.indexOf('id="approach"'), `${prefix} trajectory should appear before capabilities`);
-  assert(html.indexOf('id="approach"') < html.indexOf('id="credentials"'), `${prefix} capabilities should appear before credentials`);
+  assert(html.indexOf('id="builds"') < html.indexOf('id="sample-collective"'), `${prefix} what he builds should precede the first sample`);
+  assert(html.indexOf('id="sample-collective"') < html.indexOf('id="cases"'), `${prefix} collective sample should precede case spotlights`);
+  assert(html.indexOf('id="cases"') < html.indexOf('id="sample-graph"'), `${prefix} cases should precede the contract sample`);
+  assert(html.indexOf('id="sample-graph"') < html.indexOf('id="offer"'), `${prefix} contract sample should precede How to offer me`);
+  assert(html.indexOf('id="offer"') < html.indexOf('id="approach"'), `${prefix} packages should precede how he works`);
+  assert(html.indexOf('id="approach"') < html.indexOf('id="work"'), `${prefix} career record should follow the scroll story`);
   assert(html.includes("Agentic AI Solution Consulting") && html.includes("Enterprise AI Integration") && html.includes("AI-Augmented Software Engineering"), `${prefix} missing consulting fields`);
   assert(html.includes("ProfilePage") && html.includes("jobTitle") && html.includes("knowsAbout") && html.includes("sameAs"), `${prefix} missing Person/ProfilePage JSON-LD`);
   assert(html.includes("dateModified"), `${prefix} missing dateModified`);
   assert(html.indexOf("Graph-Mastermind") < html.indexOf("DeutschlandCard"), `${prefix} Graph-Mastermind should lead flagships`);
   assert(html.indexOf("Graph-Mastermind") < html.indexOf('id="work"'), `${prefix} Graph-Mastermind should appear before experience`);
-  const workSlice = html.slice(html.indexOf('id="work"'), html.indexOf('id="approach"'));
+  const workSlice = html.slice(html.indexOf('id="work"'), html.indexOf('id="credentials"'));
   assert(!workSlice.includes("Weiterbildung AI-Automation") && !workSlice.includes("Weiterbildung zum KI-Manager"), `${prefix} Weiterbildung still listed as Berufserfahrung`);
   assert(html.includes("Agentic AI"), `${prefix} missing Agentic AI in content/schema`);
   assert(html.includes("LLM-assisted") || html.includes("LLM-gestützte"), `${prefix} missing LLM-assisted engineering term`);
@@ -128,19 +148,19 @@ const [de, en] = await Promise.all([
   readFile(join(root, "public/portfolio/de/index.html"), "utf8"),
   readFile(join(root, "public/portfolio/en/index.html"), "utf8"),
 ]);
-assert(de.includes("AI Cases ansehen"), "DE primary CTA missing");
-assert(en.includes("Selected AI &amp; Engineering Cases") || en.includes("Selected AI & Engineering Cases"), "EN primary CTA missing");
-assert(de.includes("Lebenslauf"), "DE secondary CTA should be Lebenslauf");
-assert(en.includes(">CV<") || en.includes("CV</a>"), "EN secondary CTA should be CV");
-assert(de.includes("Wo ich Wirkung erzeuge"), "DE value eyebrow should be German");
+assert(de.includes("Arbeit anfassen"), "DE primary CTA missing");
+assert(en.includes("Touch the work"), "EN primary CTA missing");
+assert(de.includes("Lebenslauf"), "DE CV label missing");
+assert(en.includes("/portfolio/cv/"), "EN CV path missing");
 assert(!de.includes("Where I create value"), "DE value eyebrow still English");
-assert(de.includes("10+ Jahre Enterprise-Systeme"), "DE proof chip should be German");
 assert(!de.includes("10+ years enterprise systems"), "DE proof chip still English");
-assert(de.includes("ENTWICKLUNG"), "DE proof chip label should be ENTWICKLUNG");
-assert(de.includes("Ich verbinde über 10 Jahre Enterprise Software Engineering mit Agentic AI"), "DE H1 missing Variant C lead");
-assert(en.includes("I design AI-augmented systems that connect LLMs, agents and automation"), "EN H1 missing Variant C lead");
+assert(de.includes("Die Schicht zwischen System und Agent."), "DE H1 missing cinematic promise");
+assert(en.includes("The layer between the system and the agent."), "EN H1 missing cinematic promise");
 assert(de.includes("Jetzt angewandt auf Agentic AI") || de.includes("nicht umgekehrt"), "DE trust line missing");
 assert(en.includes("Now applied to Agentic AI"), "EN trust line missing");
+assert(de.includes("Wie man mich anbietet") && en.includes("How to offer me"), "How to offer me missing in a locale");
+assert(de.includes("Agentic Engineer") && en.includes("Agentic Engineer"), "Agentic Engineer package missing");
+assert(de.includes("Transformation Lead") && en.includes("Transformation Lead"), "Transformation Lead package missing");
 assert(de.includes("Über AI &amp; Agents sprechen") || de.includes("Über AI & Agents sprechen") || de.includes("Gespräch über AI"), "DE talk CTA missing");
 assert(de.includes("Agentic-AI-Case ansehen"), "DE Graph-Mastermind CTA should be information-rich");
 assert(en.includes("View the agentic-engineering case"), "EN Graph-Mastermind CTA should be information-rich");

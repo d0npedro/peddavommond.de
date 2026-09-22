@@ -18,7 +18,7 @@ import { copy } from "./content.mjs";
 
 /** Next export = layout/utilities. Token + component layer is portfolio.css (copied to public/). */
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=trust-20260919";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=cinematic-20260922";
 
 function stylesheets() {
   return `<link rel="stylesheet" href="${NEXT_LAYOUT_CSS}"/>
@@ -81,19 +81,25 @@ function navItems(locale, numbered = false, homePrefix = "") {
   }).join("");
 }
 
-function renderNav(locale, { siblingPath = "", homePrefix = "" } = {}) {
+function renderNav(locale, { siblingPath = "", homePrefix = "", showTalk = true } = {}) {
   const t = copy(locale);
   const brandHref = homePrefix || "#top";
   const contactHref = homePrefix ? `${homePrefix}#contact` : "#contact";
+  const talkDesktop = showTalk
+    ? `<a href="${attr(contactHref)}" class="pf-nav-cta pf-nav-cta--desktop">${esc(t.nav.talk)}</a>`
+    : "";
+  const talkMobile = showTalk
+    ? `<li><a href="${attr(contactHref)}" class="pf-nav-cta mt-2 flex w-full items-center justify-center">${esc(t.nav.talk)}</a></li>`
+    : "";
   return `<header class="pf-header fixed inset-x-0 top-0 z-50" data-site-header>
   <nav aria-label="${attr(t.nav.ariaPrimary)}" class="container flex items-center justify-between gap-4">
     <a href="${attr(brandHref)}" class="pf-brand">
       <span class="pf-brand-mark" aria-hidden="true"><span></span></span>
-      <span class="hidden sm:inline">${esc(SITE.name)}</span>
+      <span class="pf-brand-name">${esc(SITE.name)}</span>
     </a>
     <ul class="hidden items-center gap-0.5 md:flex">${navItems(locale, false, homePrefix)}</ul>
     <div class="flex items-center gap-2">
-      <a href="${attr(contactHref)}" class="pf-nav-cta pf-nav-cta--desktop">${esc(t.nav.talk)}</a>
+      ${talkDesktop}
       ${langSwitch(locale, "hidden sm:inline-flex", siblingPath)}
       <button type="button" data-theme-toggle aria-label="${attr(t.theme.toDark)}" class="pf-icon-btn group relative">${iconSun()}${iconMoon()}</button>
       <button type="button" data-menu-toggle aria-label="${attr(t.nav.toggleMenu)}" aria-expanded="false" class="pf-icon-btn md:hidden">
@@ -108,7 +114,7 @@ function renderNav(locale, { siblingPath = "", homePrefix = "" } = {}) {
   <div data-mobile-menu class="overflow-hidden border-t border-line bg-bg/95 backdrop-blur-md transition-[max-height,opacity] duration-300 md:hidden max-h-0 opacity-0">
     <ul class="container flex flex-col py-3">
       ${navItems(locale, true, homePrefix)}
-      <li><a href="${attr(contactHref)}" class="pf-nav-cta mt-2 flex w-full items-center justify-center">${esc(t.nav.talk)}</a></li>
+      ${talkMobile}
       <li class="mt-3 flex justify-center pb-1">${langSwitch(locale, "", siblingPath)}</li>
     </ul>
   </div>
@@ -165,29 +171,16 @@ function renderProofStrip(t) {
 
 function renderHero(locale) {
   const t = copy(locale);
-  return `<section id="top" class="pf-hero">
+  return `<section id="top" class="pf-hero pf-stage pf-stage--hero">
     <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
       <div class="blueprint-grid grid-mask absolute inset-0"></div>
     </div>
-    <div class="container pf-hero-grid">
-      <div>
-        <p class="pf-name reveal" data-reveal>${esc(SITE.name)}</p>
-        <p class="pf-role reveal" data-reveal>${esc(t.hero.role)}</p>
-        <p class="eyebrow mt-3 reveal" data-reveal>${esc(t.hero.eyebrow)}</p>
-        <h1 class="pf-hero-title mt-5 text-balance reveal" data-reveal>${esc(t.hero.h1)}</h1>
-        <p class="pf-hero-lede mt-5 reveal" data-reveal>${esc(t.hero.tagline)}</p>
-        <p class="pf-trust reveal" data-reveal>${esc(t.hero.trust)}</p>
-        <div class="mt-8 pf-cta-row reveal" data-reveal>
-          <a href="#cases" class="pf-cta pf-cta--primary">${esc(t.hero.ctaPrimary)}</a>
-          <a href="${attr(SITE.cvPath)}" class="pf-cta pf-cta--secondary">${esc(t.hero.ctaSecondary)}</a>
-        </div>
-        <p class="pf-location reveal" data-reveal>${esc(t.hero.location)}</p>
+    <div class="container pf-stage-center">
+      <h1 class="pf-hero-title text-balance">${esc(t.hero.h1)}</h1>
+      <p class="pf-hero-lede">${esc(t.hero.tagline)}</p>
+      <div class="pf-cta-row">
+        <a href="#sample-collective" class="pf-cta pf-cta--primary">${esc(t.hero.ctaPrimary)}</a>
       </div>
-      ${renderHeroDiagram(t)}
-    </div>
-    <div class="container mt-12 md:mt-14">
-      ${renderProofStrip(t)}
-      <p class="pf-domains mt-6 reveal" data-reveal>${esc(t.hero.contextLine)}</p>
     </div>
   </section>`;
 }
@@ -254,7 +247,7 @@ function renderCaseCard(item, locale) {
     ? `<a class="pf-case-open" href="${attr(pageHref)}">${esc(c.landingCta || t.casePage.openCase)}</a>`
     : "";
   const ownershipKind = item.ownership?.status === "production" ? "prod" : "lab";
-  return `<article class="panel relative p-6 md:p-7 pf-case-card pf-case-card--${ownershipKind} reveal" data-reveal>
+  return `<article class="pf-case-card pf-case-card--${ownershipKind} pf-spot reveal" data-reveal>
     ${c.badge ? `<p class="pf-badge pf-badge--${ownershipKind}">${esc(c.badge)}</p>` : ""}
     <div class="pf-case-kicker">
       <span>${esc(item.period)}</span>
@@ -262,10 +255,8 @@ function renderCaseCard(item, locale) {
       <span>${esc(item.name)}</span>
     </div>
     <h3 class="pf-case-title">${title}</h3>
-    ${c.oneLiner ? `<p class="mt-3 text-sm leading-relaxed text-muted">${esc(c.oneLiner)}</p>` : ""}
+    ${c.oneLiner ? `<p class="pf-spot-line">${esc(c.oneLiner)}</p>` : ""}
     ${c.honesty ? `<p class="pf-honesty">${esc(c.honesty)}</p>` : ""}
-    ${ownershipMeta(item, t)}
-    ${c.contribution ? `<div class="pf-field"><p class="eyebrow mb-2">${esc(t.caseFields.contribution)}</p><p class="text-sm leading-relaxed text-fg/85">${esc(c.contribution)}</p></div>` : ""}
     ${c.evalStatus === "in-progress" ? `<p class="pf-eval-note">${esc(t.casePage.evalInProgress)} — ${esc(t.casePage.evalInProgressNote)}</p>` : ""}
     ${caseLinks(item, t, open)}
   </article>`;
@@ -287,11 +278,14 @@ function renderSelectedCases(locale) {
   const leadHtml = featuredCases()
     .map((item) => renderCaseCard(item, locale))
     .join("");
-  return `<section id="cases" class="container scroll-mt-24 py-20 md:py-24">
-    ${heading(t.selectedCases)}
-    <p class="pf-note reveal" data-reveal>${esc(t.selectedCases.rndNote)}</p>
-    <p class="pf-note reveal" data-reveal>${esc(t.selectedCases.clientNote)}</p>
-    <div class="pf-case-grid mt-8">${leadHtml}</div>
+  return `<section id="cases" class="pf-stage scroll-mt-24">
+    <div class="container">
+      <p class="eyebrow reveal" data-reveal>${esc(t.selectedCases.eyebrow)}</p>
+      <h2 class="pf-stage-title reveal" data-reveal>${esc(t.selectedCases.beatTitle || t.selectedCases.title)}</h2>
+      <p class="pf-stage-lede reveal" data-reveal>${esc(t.selectedCases.rndLine || t.selectedCases.rndNote)}</p>
+      <p class="pf-stage-lede reveal" data-reveal>${esc(t.selectedCases.clientLine || t.selectedCases.clientNote)}</p>
+      <div class="pf-spots">${leadHtml}</div>
+    </div>
   </section>`;
 }
 
@@ -357,10 +351,23 @@ function renderCompetencies(locale) {
 }
 
 function renderApproach(locale) {
-  return `<section id="approach" class="scroll-mt-24 pb-16 md:pb-20">
-    ${renderHowIWork(locale)}
-    ${renderCompetencies(locale)}
-    ${renderConsulting(locale)}
+  const t = copy(locale);
+  const items = HOW_I_WORK_KEYS.map((key) => {
+    const item = t.howIWork.items[key];
+    return `<li class="pf-trust-item reveal" data-reveal>
+      <h3>${esc(item.title)}</h3>
+      <p>${esc(item.line || item.body)}</p>
+    </li>`;
+  }).join("");
+  return `<section id="approach" class="pf-stage scroll-mt-24">
+    <div class="container pf-stage-narrow">
+      <p class="eyebrow reveal" data-reveal>${esc(t.howIWork.eyebrow)}</p>
+      <h2 class="pf-stage-title reveal" data-reveal>${esc(t.howIWork.title)}</h2>
+      <ol class="pf-trust-list">${items}</ol>
+      <p class="pf-trust reveal" data-reveal>${esc(t.hero.trust)}</p>
+      <p class="pf-domains reveal" data-reveal>${esc(t.industries.line)}</p>
+      <p class="pf-stage-lede reveal" data-reveal>${esc(t.competencies.line || t.competencies.description)}</p>
+    </div>
   </section>`;
 }
 
@@ -454,6 +461,7 @@ function renderFooter(locale) {
     <div aria-hidden="true" class="blueprint-grid grid-mask pointer-events-none absolute inset-0 opacity-50"></div>
     <div class="container relative py-20 md:py-28">
       <p class="eyebrow">${esc(t.footer.eyebrow)}</p>
+      <p class="pf-location">${esc(t.hero.location)}</p>
       <h2 class="pf-footer-title mt-4 text-balance">${esc(t.footer.title)}</h2>
       <p class="mt-4 max-w-prose text-muted">${esc(t.footer.body)}</p>
       <div class="mt-10 pf-contact-row pf-contact-row--checkout">
@@ -721,6 +729,168 @@ ${renderFooter(locale)}
 </html>`;
 }
 
+function jsonIsland(id, value) {
+  return `<script type="application/json" id="${attr(id)}">${JSON.stringify(value).replace(/</g, "\\u003c")}</script>`;
+}
+
+function renderAgentList(agents) {
+  return agents
+    .map(
+      (agent) =>
+        `<li class="pf-agent"><span class="pf-agent-role">${esc(agent.role)}</span><span class="pf-agent-status" data-status="${attr(agent.status)}">${esc(agent.status)}</span></li>`,
+    )
+    .join("");
+}
+
+function renderBuilds(locale) {
+  const b = copy(locale).builds;
+  return `<section id="builds" class="pf-stage scroll-mt-24">
+    <div class="container pf-stage-narrow">
+      <p class="eyebrow reveal" data-reveal>${esc(b.eyebrow)}</p>
+      <h2 class="pf-stage-title reveal" data-reveal>${esc(b.title)}</h2>
+      <p class="pf-stage-lede reveal" data-reveal>${esc(b.body)}</p>
+      <p class="pf-split reveal" data-reveal>${esc(b.split)}</p>
+    </div>
+  </section>`;
+}
+
+function renderCollectiveSample(locale) {
+  const t = copy(locale);
+  const s = t.samples.collective;
+  const item = caseById("agent-collective");
+  const first = s.review[0];
+  return `<section id="sample-collective" class="pf-stage scroll-mt-24">
+    <div class="container pf-sample">
+      <div class="pf-sample-copy">
+        <p class="eyebrow reveal" data-reveal>${esc(s.eyebrow)}</p>
+        <h2 class="pf-stage-title reveal" data-reveal>${esc(s.title)}</h2>
+        <p class="pf-stage-lede reveal" data-reveal>${esc(s.body)}</p>
+        <p class="pf-stage-lede reveal" data-reveal>${esc(s.shown)}</p>
+        ${caseLinks(item, t)}
+      </div>
+      <div class="pf-touch reveal" data-reveal data-touch="collective">
+        <div class="pf-touch-bar">
+          <p class="pf-badge pf-badge--lab">${esc(s.badge)}</p>
+          <p class="pf-touch-tick"><span>${esc(s.tickLabel)}</span> <span data-tick>${esc(first.tick)}</span></p>
+        </div>
+        <p class="pf-touch-phase" data-phase>${esc(first.phase)}</p>
+        <ul class="pf-agents" data-agents>${renderAgentList(first.agents)}</ul>
+        <p class="pf-touch-detail" data-detail aria-live="polite">${esc(first.detail)}</p>
+        <div class="pf-touch-actions">
+          <button type="button" class="pf-touch-btn pf-touch-btn--primary" data-action="step">${esc(s.step)}</button>
+          <button type="button" class="pf-touch-btn" data-action="fail" aria-pressed="false">${esc(s.fail)}</button>
+          <button type="button" class="pf-touch-btn" data-action="reset">${esc(s.reset)}</button>
+        </div>
+        <p class="pf-touch-note">${esc(s.note)}</p>
+        ${jsonIsland("pf-collective-frames", { review: s.review, fail: s.fail })}
+      </div>
+    </div>
+  </section>`;
+}
+
+function renderGraphPanels(tabs) {
+  return tabs
+    .map((tab, index) => {
+      const hidden = index === 0 ? "" : " hidden";
+      const body =
+        tab.kind === "checks"
+          ? `<ul class="pf-checks">${tab.items
+              .map(
+                (item) =>
+                  `<li><label><input type="checkbox"/> <span>${esc(item)}</span></label></li>`,
+              )
+              .join("")}</ul>`
+          : `<pre class="pf-snippet">${esc(tab.body)}</pre>`;
+      return `<div role="tabpanel" class="pf-tabpanel" id="panel-${attr(tab.id)}" data-panel="${attr(tab.id)}" aria-labelledby="tab-${attr(tab.id)}"${hidden}>
+        <p class="pf-touch-note">${esc(tab.caption)}</p>
+        ${body}
+      </div>`;
+    })
+    .join("");
+}
+
+function renderGraphSample(locale) {
+  const t = copy(locale);
+  const s = t.samples.graph;
+  const item = caseById("graph-mastermind");
+  const pipeline = s.pipeline.map((step) => `<li>${esc(step)}</li>`).join("");
+  const tabs = s.tabs
+    .map((tab, index) => {
+      const selected = index === 0;
+      return `<button type="button" class="pf-tab" role="tab" id="tab-${attr(tab.id)}" data-tab="${attr(tab.id)}" aria-selected="${selected ? "true" : "false"}" aria-controls="panel-${attr(tab.id)}" tabindex="${selected ? "0" : "-1"}">${esc(tab.label)}</button>`;
+    })
+    .join("");
+  return `<section id="sample-graph" class="pf-stage scroll-mt-24">
+    <div class="container pf-sample">
+      <div class="pf-sample-copy">
+        <p class="eyebrow reveal" data-reveal>${esc(s.eyebrow)}</p>
+        <h2 class="pf-stage-title reveal" data-reveal>${esc(s.title)}</h2>
+        <p class="pf-stage-lede reveal" data-reveal>${esc(s.body)}</p>
+        <p class="pf-stage-lede reveal" data-reveal>${esc(s.llmLine)}</p>
+        <p class="pf-eval-note">${esc(t.casePage.evalInProgress)} — ${esc(t.casePage.evalInProgressNote)}</p>
+        ${caseLinks(item, t)}
+      </div>
+      <div class="pf-touch reveal" data-reveal data-touch="contract">
+        <p class="pf-badge pf-badge--lab">${esc(s.badge)}</p>
+        <ol class="pf-pipeline" aria-label="${attr(s.title)}">${pipeline}</ol>
+        <div class="pf-tabs" role="tablist" aria-label="${attr(s.title)}">${tabs}</div>
+        ${renderGraphPanels(s.tabs)}
+        <p class="pf-touch-note">${esc(s.scratch)}</p>
+      </div>
+    </div>
+  </section>`;
+}
+
+function renderOffer(locale) {
+  const o = copy(locale).offer;
+  const packages = o.packages
+    .map((pkg, index) => {
+      const items = pkg.deliverables.map((line) => `<li>${esc(line)}</li>`).join("");
+      return `<article class="pf-offer reveal" data-reveal>
+        <div class="pf-offer-name">
+          <p class="pf-offer-index">${String(index + 1).padStart(2, "0")}</p>
+          <h3>${esc(pkg.name)}</h3>
+        </div>
+        <div>
+          <p class="pf-offer-scope">${esc(pkg.scope)}</p>
+          <dl class="pf-offer-dl">
+            <div><dt>${esc(o.deliverables)}</dt><dd><ul>${items}</ul></dd></div>
+            <div><dt>${esc(o.ideal)}</dt><dd>${esc(pkg.ideal)}</dd></div>
+            <div><dt>${esc(o.engagement)}</dt><dd>${esc(pkg.engagement)}</dd></div>
+          </dl>
+        </div>
+      </article>`;
+    })
+    .join("");
+  return `<section id="offer" class="pf-stage scroll-mt-24">
+    <div class="container">
+      <p class="eyebrow reveal" data-reveal>${esc(o.eyebrow)}</p>
+      <h2 class="pf-stage-title reveal" data-reveal>${esc(o.title)}</h2>
+      <p class="pf-stage-lede reveal" data-reveal>${esc(o.intro)}</p>
+      <div class="pf-offers">${packages}</div>
+    </div>
+  </section>`;
+}
+
+function renderRecord(locale) {
+  const t = copy(locale);
+  return `<section id="record" class="pf-record scroll-mt-24">
+    <div class="container">
+      <details data-record>
+        <summary>${esc(t.record.summary)}</summary>
+        <p class="pf-stage-lede">${esc(t.record.note)}</p>
+        <p class="pf-contact-row"><a class="secondary" href="${attr(SITE.cvPath)}">${esc(t.hero.ctaSecondary)}</a></p>
+        ${renderTrack(locale)}
+        ${renderCredentials(locale)}
+        ${renderCompetencies(locale)}
+        ${renderConsulting(locale)}
+        ${renderAbout(locale)}
+        ${renderEducation(locale)}
+      </details>
+    </div>
+  </section>`;
+}
+
 export function renderPage(locale) {
   const t = copy(locale);
   const url = `${SITE.origin}/portfolio/${locale}`;
@@ -763,17 +933,17 @@ ${stylesheets()}
 <body class="min-h-screen bg-bg font-sans antialiased">
 ${themeBoot()}
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:panel focus:px-4 focus:py-2 focus:text-sm">${esc(t.common.skipToContent)}</a>
-${renderNav(locale)}
+${renderNav(locale, { showTalk: false })}
 <main id="main">
 <script type="application/ld+json">${jsonLd(locale)}</script>
 ${renderHero(locale)}
+${renderBuilds(locale)}
+${renderCollectiveSample(locale)}
 ${renderSelectedCases(locale)}
-${renderValue(locale)}
-${renderTrack(locale)}
+${renderGraphSample(locale)}
+${renderOffer(locale)}
 ${renderApproach(locale)}
-${renderCredentials(locale)}
-${renderEducation(locale)}
-${renderAbout(locale)}
+${renderRecord(locale)}
 </main>
 ${renderFooter(locale)}
 <script src="/portfolio/app.js" defer></script>

@@ -12,7 +12,7 @@ export const SITE = {
   city: "Köln",
   country: { de: "Deutschland", en: "Germany" },
   location: { de: "Köln · Deutschlandweit / Remote", en: "Cologne · Germany-wide / Remote" },
-  updated: "2026-09-18",
+  updated: "2026-09-22",
 };
 
 export const LOCALES = ["de", "en"];
@@ -33,8 +33,7 @@ export const ERAS = [
 
 export const NAV = [
   { id: "cases", key: "cases" },
-  { id: "work", key: "experience" },
-  { id: "about", key: "profile" },
+  { id: "offer", key: "offer" },
   { id: "contact", key: "contact" },
   { href: "/portfolio/cv/", key: "cv" },
 ];

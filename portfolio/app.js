@@ -175,4 +175,106 @@
     );
     revealNodes.forEach((node) => io.observe(node));
   }
+
+  function paintCollective(root, data, mode, index) {
+    const frame = data[mode][index];
+    const tick = root.querySelector("[data-tick]");
+    const phase = root.querySelector("[data-phase]");
+    const detail = root.querySelector("[data-detail]");
+    const list = root.querySelector("[data-agents]");
+    if (tick) tick.textContent = frame.tick;
+    if (phase) phase.textContent = frame.phase;
+    if (detail) detail.textContent = frame.detail;
+    if (!list) return;
+    list.replaceChildren();
+    for (const agent of frame.agents) {
+      const li = document.createElement("li");
+      li.className = "pf-agent";
+      const role = document.createElement("span");
+      role.className = "pf-agent-role";
+      role.textContent = agent.role;
+      const status = document.createElement("span");
+      status.className = "pf-agent-status";
+      status.dataset.status = agent.status;
+      status.textContent = agent.status;
+      li.append(role, status);
+      list.append(li);
+    }
+  }
+
+  document.querySelectorAll("[data-touch='collective']").forEach((root) => {
+    const island = root.querySelector("#pf-collective-frames");
+    if (!island) return;
+    let data;
+    try {
+      data = JSON.parse(island.textContent || "");
+    } catch {
+      return;
+    }
+    if (!data.review?.length || !data.fail?.length) return;
+    let mode = "review";
+    let index = 0;
+    const failBtn = root.querySelector("[data-action='fail']");
+    root.querySelector("[data-action='step']")?.addEventListener("click", () => {
+      const frames = data[mode];
+      index = (index + 1) % frames.length;
+      paintCollective(root, data, mode, index);
+    });
+    failBtn?.addEventListener("click", () => {
+      mode = "fail";
+      index = 0;
+      failBtn.setAttribute("aria-pressed", "true");
+      paintCollective(root, data, mode, index);
+    });
+    root.querySelector("[data-action='reset']")?.addEventListener("click", () => {
+      mode = "review";
+      index = 0;
+      failBtn?.setAttribute("aria-pressed", "false");
+      paintCollective(root, data, mode, index);
+    });
+  });
+
+  document.querySelectorAll("[data-touch='contract']").forEach((root) => {
+    const tabs = [...root.querySelectorAll("[data-tab]")];
+    const panels = [...root.querySelectorAll("[data-panel]")];
+    function select(id) {
+      tabs.forEach((tab) => {
+        const on = tab.dataset.tab === id;
+        tab.setAttribute("aria-selected", String(on));
+        tab.tabIndex = on ? 0 : -1;
+      });
+      panels.forEach((panel) => {
+        panel.hidden = panel.dataset.panel !== id;
+      });
+    }
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => select(tab.dataset.tab));
+      tab.addEventListener("keydown", (event) => {
+        const current = tabs.indexOf(tab);
+        if (current < 0) return;
+        let next = current;
+        if (event.key === "ArrowRight") next = (current + 1) % tabs.length;
+        else if (event.key === "ArrowLeft") next = (current - 1 + tabs.length) % tabs.length;
+        else if (event.key === "Home") next = 0;
+        else if (event.key === "End") next = tabs.length - 1;
+        else return;
+        event.preventDefault();
+        const target = tabs[next];
+        select(target.dataset.tab);
+        target.focus();
+      });
+    });
+  });
+
+  const record = document.querySelector("[data-record]");
+  function openRecordForHash() {
+    if (!record) return;
+    const id = (location.hash || "").slice(1);
+    if (!id) return;
+    if (record.querySelector("#" + (window.CSS && CSS.escape ? CSS.escape(id) : id))) {
+      record.open = true;
+    }
+  }
+  openRecordForHash();
+  window.addEventListener("hashchange", openRecordForHash);
 })();

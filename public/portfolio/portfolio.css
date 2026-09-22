@@ -1304,6 +1304,513 @@ h3.pf-case-title {
   }
 }
 
+/* -------------------------------------------------------------------------- */
+/* Cinematic scroll — one idea per beat                                       */
+/* -------------------------------------------------------------------------- */
+
+html {
+  scroll-padding-top: 5.25rem;
+}
+
+.pf-brand-name {
+  display: inline;
+  white-space: nowrap;
+}
+
+.pf-stage {
+  position: relative;
+  padding-block: clamp(5.5rem, 12vh, 8.5rem);
+}
+
+.pf-stage--hero {
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+  min-height: 100dvh;
+  padding: 6.5rem 0 4.5rem;
+  border-bottom: none;
+}
+
+.pf-stage-center,
+.pf-stage-narrow {
+  width: min(100%, 46rem);
+}
+
+.pf-stage-center {
+  width: min(100%, 52rem);
+}
+
+.pf-hero .pf-hero-title {
+  max-width: 14ch;
+  font-size: clamp(2.7rem, 6.6vw, 5.6rem);
+  font-weight: 560;
+  line-height: 0.98;
+  letter-spacing: -0.048em;
+}
+
+.pf-hero .pf-hero-lede {
+  max-width: 34rem;
+  margin-top: 1.5rem;
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  line-height: 1.5;
+}
+
+.pf-hero .pf-cta-row {
+  margin-top: 2.25rem;
+}
+
+.pf-hero::before {
+  background: radial-gradient(ellipse 48% 42% at 72% 46%, rgb(var(--accent) / 0.07), transparent 68%);
+}
+
+.pf-stage-title {
+  max-width: 16ch;
+  margin-top: 0.85rem;
+  font-size: clamp(2rem, 4.4vw, 3.5rem);
+  font-weight: 560;
+  line-height: 1.05;
+  letter-spacing: -0.042em;
+  color: rgb(var(--fg));
+}
+
+.pf-stage-lede {
+  max-width: 38rem;
+  margin-top: 1.25rem;
+  color: rgb(var(--muted));
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.pf-split {
+  max-width: 38rem;
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgb(var(--line));
+  color: rgb(var(--fg));
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.pf-sample {
+  display: grid;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.pf-touch {
+  background: rgb(var(--bg-sunken));
+  border: 1px solid rgb(var(--line));
+  border-radius: var(--radius-lg);
+  padding: 1.15rem 1.15rem 1rem;
+  box-shadow: var(--shadow-quiet);
+}
+
+.pf-touch-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.pf-touch-tick,
+.pf-touch-phase,
+.pf-agent,
+.pf-snippet,
+.pf-tab,
+.pf-touch-btn,
+.pf-pipeline {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+.pf-touch-tick {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(var(--faint));
+}
+
+.pf-touch-phase {
+  margin-top: 1rem;
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+  color: rgb(var(--fg));
+}
+
+.pf-agents,
+.pf-checks,
+.pf-pipeline,
+.pf-trust-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pf-agents {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 0.9rem;
+}
+
+.pf-agent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 2.75rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid rgb(var(--line));
+  border-radius: var(--radius-sm);
+  background: rgb(var(--bg-elevated));
+  font-size: 0.82rem;
+}
+
+.pf-agent-role {
+  color: rgb(var(--fg));
+}
+
+.pf-agent-status {
+  color: rgb(var(--faint));
+  letter-spacing: 0.04em;
+}
+
+.pf-agent-status[data-status="working"],
+.pf-agent-status[data-status="communicating"] {
+  color: rgb(var(--accent));
+}
+
+.pf-agent-status[data-status="failed"],
+.pf-agent-status[data-status="recovering"] {
+  color: rgb(var(--signal));
+}
+
+.pf-touch-detail {
+  min-height: 4.5rem;
+  margin-top: 0.9rem;
+  color: rgb(var(--muted));
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.pf-touch-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.pf-touch-btn {
+  min-height: var(--control-h);
+  padding: 0 0.95rem;
+  border: 1px solid rgb(var(--line));
+  border-radius: var(--radius-sm);
+  background: rgb(var(--bg-elevated));
+  color: rgb(var(--fg));
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.pf-touch-btn--primary {
+  border-color: transparent;
+  background: rgb(var(--accent));
+  color: rgb(var(--on-accent));
+}
+
+.pf-touch-btn[aria-pressed="true"] {
+  border-color: rgb(var(--signal) / 0.7);
+  color: rgb(var(--signal));
+}
+
+.pf-touch-note {
+  margin-top: 0.85rem;
+  color: rgb(var(--faint));
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.pf-pipeline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.35rem;
+  margin-top: 1rem;
+}
+
+.pf-pipeline li {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.8rem;
+  color: rgb(var(--muted));
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+
+.pf-pipeline li:not(:last-child)::after {
+  content: "→";
+  margin-left: 0.35rem;
+  color: rgb(var(--faint));
+}
+
+.pf-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.85rem;
+}
+
+.pf-tab {
+  min-height: 2.5rem;
+  padding: 0 0.75rem;
+  border: 1px solid rgb(var(--line));
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: rgb(var(--muted));
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.pf-tab[aria-selected="true"] {
+  border-color: rgb(var(--accent) / 0.55);
+  background: rgb(var(--accent-soft));
+  color: rgb(var(--fg));
+}
+
+.pf-snippet {
+  margin: 0.75rem 0 0;
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+  border-radius: var(--radius-sm);
+  background: rgb(var(--bg-elevated));
+  color: rgb(var(--fg));
+  font-size: 0.78rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
+.pf-checks {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 0.75rem;
+}
+
+.pf-checks label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  min-height: var(--control-h);
+  color: rgb(var(--fg));
+  font-size: 0.92rem;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.pf-checks input {
+  width: 1.05rem;
+  height: 1.05rem;
+  margin-top: 0.15rem;
+  accent-color: rgb(var(--accent));
+}
+
+.pf-spots {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3.5rem, 9vh, 6.5rem);
+  margin-top: clamp(2.5rem, 6vh, 4rem);
+}
+
+.pf-spots .pf-case-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 72vh;
+  padding: 0 0 0.25rem;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.pf-spots .pf-case-card::before {
+  content: "";
+  position: static;
+  display: block;
+  width: 2.5rem;
+  height: 1px;
+  margin-bottom: 1.25rem;
+  background: rgb(var(--line));
+}
+
+.pf-spots .pf-case-card--lab::before {
+  background: rgb(var(--signal));
+}
+
+.pf-spots .pf-case-card:hover,
+.pf-spots .pf-case-card:focus-within {
+  border-color: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.pf-spots .pf-case-title {
+  max-width: 18ch;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.pf-spot-line {
+  max-width: 38rem;
+  margin-top: 1rem;
+  color: rgb(var(--muted));
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.pf-offers {
+  margin-top: 1rem;
+}
+
+.pf-offer {
+  display: grid;
+  gap: 1.25rem;
+  padding-block: clamp(2rem, 5vh, 3.25rem);
+  border-top: 1px solid rgb(var(--line));
+}
+
+.pf-offer-index {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: rgb(var(--faint));
+}
+
+.pf-offer h3 {
+  margin-top: 0.35rem;
+  font-size: clamp(1.7rem, 2.8vw, 2.35rem);
+  font-weight: 560;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  color: rgb(var(--fg));
+}
+
+.pf-offer-scope {
+  max-width: 40rem;
+  color: rgb(var(--fg));
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.pf-offer-dl {
+  display: grid;
+  gap: 1.15rem;
+  margin-top: 1.25rem;
+}
+
+.pf-offer-dl dt {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgb(var(--faint));
+}
+
+.pf-offer-dl dd {
+  max-width: 40rem;
+  margin-top: 0.35rem;
+  color: rgb(var(--muted));
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.pf-offer-dl ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.pf-offer-dl li + li {
+  margin-top: 0.35rem;
+}
+
+.pf-trust-list {
+  display: grid;
+  gap: clamp(1.75rem, 4vh, 2.75rem);
+  margin-top: clamp(2.5rem, 6vh, 4rem);
+}
+
+.pf-trust-item h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgb(var(--fg));
+}
+
+.pf-trust-item p {
+  max-width: 38rem;
+  margin-top: 0.3rem;
+  color: rgb(var(--muted));
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.pf-record {
+  padding-bottom: clamp(3rem, 8vh, 5rem);
+}
+
+.pf-record summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-h);
+  cursor: pointer;
+  color: rgb(var(--muted));
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pf-record summary:hover {
+  color: rgb(var(--fg));
+}
+
+.pf-record .py-20,
+.pf-record .md\:py-24,
+.pf-record .md\:py-28,
+.pf-record .pt-20,
+.pf-record .md\:pt-24,
+.pf-record .md\:pt-28,
+.pf-record .pb-16 {
+  padding-top: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.pf-footer .pf-location {
+  margin-top: 0.85rem;
+}
+
+@media (min-width: 960px) {
+  .pf-sample {
+    grid-template-columns: minmax(0, 0.86fr) minmax(18rem, 1.14fr);
+    gap: 4.5rem;
+    align-items: center;
+  }
+
+  .pf-offer {
+    grid-template-columns: minmax(12rem, 16rem) minmax(0, 1fr);
+    column-gap: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-touch-btn,
+  .pf-tab,
+  .pf-agent,
+  .pf-offer,
+  .pf-spots .pf-case-card {
+    transition: none;
+    animation: none;
+  }
+}
+
 @media print {
   header,
   .cv-actions,
