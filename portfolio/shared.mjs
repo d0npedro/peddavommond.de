@@ -32,10 +32,11 @@ export const ERAS = [
 ];
 
 export const NAV = [
-  { id: "cases", key: "cases" },
   { id: "offer", key: "offer" },
+  { id: "cases", key: "cases" },
+  { id: "sample-collective", key: "sample" },
+  { id: "record", key: "record" },
   { id: "contact", key: "contact" },
-  { href: "/portfolio/cv/", key: "cv" },
 ];
 
 /** Exactly three lead cases on the landing page. */

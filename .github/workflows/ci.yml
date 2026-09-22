@@ -82,14 +82,22 @@ jobs:
           node --input-type=module -e 'import { readFileSync } from "node:fs"; const strip = (p) => readFileSync(p, "utf8").replace(/<[^>]+>/g, " ").replace(/\s+/g, " "); const de = strip("public/portfolio/de/index.html"); const en = strip("public/portfolio/en/index.html"); const deH = "Ich baue Agenten-Schichten in laufende Enterprise-Systeme — prüfbar, mit Human-in-the-Loop."; const enH = "I build agent layers into running enterprise systems — reviewable, with human-in-the-loop."; if (!de.includes(deH) || !en.includes(enH)) process.exit(1);'
           ! grep -q 'Die Schicht zwischen System und Agent.' public/portfolio/de/index.html
           ! grep -q 'The layer between the system and the agent.' public/portfolio/en/index.html
-          grep -q 'Arbeit anfassen' public/portfolio/de/index.html
-          grep -q 'Touch the work' public/portfolio/en/index.html
-          grep -q 'id="top"' public/portfolio/de/index.html
-          grep -q 'id="builds"' public/portfolio/de/index.html
+          grep -q 'id="hero"' public/portfolio/de/index.html
+          grep -q 'href="#offer"' public/portfolio/de/index.html
+          grep -q 'href="#offer"' public/portfolio/en/index.html
+          ! grep -q 'id="top"' public/portfolio/de/index.html
+          ! grep -q 'id="builds"' public/portfolio/de/index.html
           grep -q 'id="sample-collective"' public/portfolio/de/index.html
           grep -q 'id="cases"' public/portfolio/de/index.html
-          grep -q 'id="sample-graph"' public/portfolio/de/index.html
+          ! grep -q 'id="sample-graph"' public/portfolio/de/index.html
+          ! grep -q 'id="sample-graph"' public/portfolio/en/index.html
           grep -q 'id="offer"' public/portfolio/de/index.html
+          grep -q 'id="craft-credit"' public/portfolio/de/index.html
+          grep -q 'id="craft-credit"' public/portfolio/en/index.html
+          grep -q 'portfolio/motion/stage-reveal.js' public/portfolio/de/index.html
+          grep -q 'portfolio/motion/craft-mark.js' public/portfolio/en/index.html
+          grep -q 'Interaktion und Scroll-Story auf dieser Seite' public/portfolio/de/index.html
+          grep -q 'Interaction and scroll story on this page' public/portfolio/en/index.html
           grep -q 'id="record"' public/portfolio/de/index.html
           grep -q 'id="contact"' public/portfolio/de/index.html
           grep -q '<details' public/portfolio/de/index.html
@@ -131,14 +139,15 @@ jobs:
           ! grep -q '>Agent failure<' public/portfolio/en/index.html
           ! grep -q '\[object Object\]' public/portfolio/de/index.html public/portfolio/en/index.html
           grep -q 'no LLM backend' public/portfolio/en/index.html
-          grep -q 'Wie ich AI-Systeme baue' public/portfolio/de/index.html
-          grep -q 'How I build AI systems' public/portfolio/en/index.html
-          grep -q 'Agentic-AI-Case ansehen' public/portfolio/de/index.html
+          grep -q 'Vertrag ansehen' public/portfolio/de/index.html
+          grep -q 'View contract' public/portfolio/en/index.html
+          grep -q 'data-touch="contract"' public/portfolio/de/index.html
           grep -q 'Lebenslauf' public/portfolio/de/index.html
           grep -q 'Mein Anteil' public/portfolio/de/cases/graph-mastermind/index.html
           grep -q 'Evaluation läuft' public/portfolio/de/cases/graph-mastermind/index.html
           grep -q 'Independent R&amp;D' public/portfolio/en/index.html
-          grep -q 'Now applied to Agentic AI' public/portfolio/en/index.html
+          grep -q 'Agent layers into running systems' public/portfolio/en/index.html
+          grep -q 'Agenten-Schichten in laufende Systeme' public/portfolio/de/index.html
           grep -q 'ProfilePage' public/portfolio/de/index.html
           grep -q 'ProfilePage' public/portfolio/en/index.html
           ! grep -q 'id="value"' public/portfolio/de/index.html

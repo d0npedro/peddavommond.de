@@ -15,7 +15,7 @@ Do not invent AI experience. Graph-Mastermind is an agent package for coding age
 
 Public default positioning is Variant C: **Senior AI Consultant & Agentic Software Engineer** (Enterprise Engineering × Agentic AI × Transformation).
 
-Keep the credibility split explicit: paid Professional Experience, Independent Applied AI R&D / public systems, and AI Transformation Perspective (what transfers). Independent R&D is not client delivery and not a hobby disclaimer. Do not invent KPIs or an LLM backend for the deterministic Agent Collective simulator. The landing is a cinematic scroll: one promise, what he builds, a touchable Agent Collective state replay (deterministic, no LLM), three lead cases (Graph-Mastermind, Agent Collective, DeutschlandCard), a touchable Graph-Mastermind contract, then “How to offer me” role packages for agencies. Career, credentials, and education stay in a collapsed record and the CV — they do not compete with the scroll.
+Keep the credibility split explicit: paid Professional Experience, Independent Applied AI R&D / public systems, and AI Transformation Perspective (what transfers). Independent R&D is not client delivery and not a hobby disclaimer. Do not invent KPIs or an LLM backend for the deterministic Agent Collective simulator. The landing spine is Klar/direkt: `#hero` → `#offer` → `#cases` → `#sample-collective` (the only touchable sample) → `#record` → `#contact` → `#craft-credit`. The Graph contract expands inside the Graph case. Motion is custom vanilla JS in `portfolio/motion/` — see `MOTION-SHEET-v1.5.2.md`.
 
 ## Visual system — Enterprise AI decision surface
 

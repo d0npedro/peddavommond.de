@@ -2,7 +2,7 @@ export const de = {
   meta: {
     title: "Peter Henrichs | Senior AI Consultant & Agentic Software Engineer",
     description:
-      "Senior AI Consultant und Software Engineer mit über 10 Jahren Enterprise-Erfahrung. Fokus auf LLMs, AI Agents, Automation und Enterprise Integration.",
+      "Senior AI Consultant und Software Engineer mit 10+ Jahren Enterprise-Erfahrung. Fokus auf LLMs, AI Agents, Automation und Enterprise Integration.",
     ogAlt: "Peter Henrichs | Senior AI Consultant & Agentic Software Engineer · Köln",
     keywords:
       "Peter Henrichs,Köln,Senior AI Consultant,Agentic Software Engineer,Agentic AI,LLMs,AI Agents,Automation,Enterprise Engineering,Java,Spring,Cloud",
@@ -21,6 +21,8 @@ export const de = {
     profile: "Profil",
     cases: "Cases",
     offer: "Anbieten",
+    sample: "Sample",
+    record: "Werdegang",
     experience: "Erfahrung",
     cv: "CV",
     contact: "Kontakt",
@@ -48,7 +50,7 @@ export const de = {
     contextLine: "adesso · Finanzwesen · Öffentlicher Sektor · Gesundheitswesen · Loyalty",
     trust:
       "10+ Jahre Enterprise Engineering. Jetzt angewandt auf Agentic AI — nicht umgekehrt.",
-    ctaPrimary: "Arbeit anfassen",
+    ctaPrimary: "Wie man mich anbietet",
     ctaSecondary: "Lebenslauf",
     ctaTertiary: "Über AI & Agents sprechen",
     diagramTitle: "Agentisches System — Ziel, Orchestrierung, Bewertung, Mensch",
@@ -80,16 +82,15 @@ export const de = {
   samples: {
     collective: {
       eyebrow: "Anfassbar · Independent R&D",
-      title: "Zustand, den man Schritt für Schritt sieht.",
-      body: "Agent Collective ist ein deterministischer Multi-Agent-Simulator ohne LLM-Backend. Dieses Panel spielt den öffentlichen Tick-Vertrag nach: Ereignisse, Aufgabe, Arbeit, Übergabe, Review. Kein Chat, keine Kennzahlen.",
+      title: "Zustand, den man Schritt für Schritt sieht",
+      body: "Spielt den öffentlichen Tick-Vertrag nach. Kein Chat. Keine Kennzahlen.",
       badge: "Independent R&D · deterministisch · kein LLM-Backend",
       step: "Schritt",
       reset: "Zurück",
       failLabel: "Fehler zeigen",
       tickLabel: "Tick",
-      note: "Wiedergabe des öffentlichen Vertrags aus dem Repository. Nicht die Live-Engine. Keine erfundenen Durchsatz- oder Latenzzahlen.",
-      shown:
-        "Gezeigt: Coder, Critic, Monitor. Das Default-Kollektiv hat zusätzlich Researcher, Trader und Creative.",
+      note: "Wiedergabe des öffentlichen Vertrags. Nicht die Live-Engine. Keine erfundenen Durchsatz- oder Latenzzahlen.",
+      shown: "Step / Reset · Coder, Critic, Monitor · Seeded Run, kein Backend",
       review: [
         {
           tick: "0",
@@ -180,6 +181,9 @@ export const de = {
       title: "Ein Vertrag, den man aufklappen kann.",
       body: "Graph-Mastermind ist ein Agent-Paket für Coding Agents. AGENT.md, CHECKLIST.md und der Runtime-Vertrag sind das Artefakt. Ein bestimmtes LLM ist nicht vorgeschrieben.",
       badge: "Independent R&D · Agent-Paket · kein festgeschriebenes LLM",
+      expand: "Vertrag ansehen",
+      status: "Vertrag-Auszug. Kein Demo-Lauf. Evaluation läuft — keine Kennzahlen.",
+      kicker: "Auszug · nicht die Live-Demo",
       llmLine:
         "LLM-gestützte Entwicklung nur, wenn ein Coding Agent den Vertrag ausführt. Ohne Modell- oder MCP-Claims.",
       scratch:
@@ -220,7 +224,7 @@ export const de = {
     eyebrow: "Für Agenturen",
     title: "Wie man mich anbietet",
     intro:
-      "Drei Rollenpakete zum Platzieren, zum Beispiel bei adesso. Scope, Liefergegenstände, passende Lage, Einsatzform. Keine erfundenen Kundenergebnisse, keine Tagessätze.",
+      "Drei klare Pakete — zum Platzieren bei Agenturen (z. B. adesso). Scope und Liefergegenstände. Keine Tagessätze. Keine erfundenen Kundenergebnisse.",
     deliverables: "Liefergegenstände",
     ideal: "Passt zu",
     engagement: "Einsatz",
@@ -228,50 +232,46 @@ export const de = {
       {
         name: "Senior AI Consultant",
         scope:
-          "Use Cases gegen Systeme, Identität und Datenqualität schneiden, bevor gebaut wird. Beratung mit schriftlicher Grenze, nicht ein Tool-Pitch.",
+          "Use Cases gegen bestehende Systeme schneiden, bevor gebaut wird. Schriftliche Grenze — kein Tool-Pitch.",
         deliverables: [
           "Use-Case-Schnitt: wo ein Agent handeln darf und wo das bestehende System den Prozess schon trägt",
           "Architekturskizze mit Abnahme, Human-in-the-Loop und expliziten Grenzen",
           "Schriftliche Liste dessen, was nicht gebaut wird",
         ],
-        ideal:
-          "Organisationen mit laufender IT, die AI einordnen müssen, bevor sie implementieren. Typische Lagen aus der bisherigen Lieferung: Finanzwesen, öffentlicher Sektor, Gesundheitswesen, Loyalty — als Erfahrungsboden, nicht als behauptetes AI-Mandat bei diesen Kunden.",
+        ideal: "Organisationen mit laufender IT, die AI einordnen müssen, bevor sie implementieren.",
         engagement:
-          "Über die Agentur: Architektur-Begleitung auf Zeit oder Vermittlung in ein Kundenteam. Kein eigener Freelancer-Retainer, keine freien Slots.",
+          "Über die Agentur — Architektur-Begleitung auf Zeit oder Vermittlung in ein Kundenteam.",
       },
       {
         name: "Agentic Engineer",
         scope:
-          "Agentische Workflows bauen: Vertrag, Tool-Grenzen, Tests, sichtbarer Zustand. Anbindung an vorhandene APIs und, wo das System schon so liegt, an Java und Spring.",
+          "Agent-Workflows mit Vertrag, Tool-Grenzen, Tests und sichtbarem Zustand. Anbindung an vorhandene APIs.",
         deliverables: [
           "Agent-Vertrag (Aufgabe, Artefakt, Abnahme) in der Form der öffentlichen Pakete",
           "Integrationsschnitt an vorhandene APIs, Identität und Pipelines",
           "Prüfbarer Zustand oder Checkliste — ein Chatprotokoll ist keine Abnahme",
         ],
-        ideal:
-          "Teams, die einen Prototyp in eine wartbare Schicht überführen. Nicht: ein ungebundenes Modellprodukt ohne Systemgrenze.",
+        ideal: "Teams, die einen Prototyp in eine wartbare Schicht überführen.",
         engagement:
-          "Engineering-Einsatz im Team der Agentur oder des Kunden. Graph-Mastermind und Agent Collective sind Independent R&D und Referenz, kein mitgeliefertes Kundenprodukt. Agent Collective hat kein LLM-Backend.",
+          "Engineering-Einsatz im Team der Agentur oder des Kunden. Graph-Mastermind und Agent Collective sind Independent R&D — kein mitgeliefertes Kundenprodukt.",
       },
       {
         name: "Transformation Lead",
         scope:
-          "Zwischen Fach, Delivery und Governance übersetzen. Reihenfolge: Boden (Systeme, Rechte, Daten), dann die Agentenschicht.",
+          "Fach, Delivery und Governance übersetzen. Zuerst Boden (Systeme, Rechte, Daten), dann die Agentenschicht.",
         deliverables: [
-          "Priorisierte Use-Case-Liste, beurteilt gegen die Landschaft, die existiert",
+          "Priorisierte Use-Case-Liste gegen die Landschaft, die existiert",
           "Betriebsmodell: Vertrag, Abnahme, Human-in-the-Loop — keine autonome Organisation",
-          "Governance-Rahmen aus regulierter Delivery (Berechtigungen, DSGVO) plus EU-AI-Act-Einordnung aus der Spezialisierung 2026",
+          "Governance-Rahmen aus regulierter Delivery (Berechtigungen, DSGVO) plus EU-AI-Act-Orientierung",
         ],
-        ideal:
-          "Programme, die Modernisierung und AI zusammen denken. Nicht: Vorstands-KPI-Theater oder ein Mandat, das öffentlich nicht existiert.",
-        engagement:
-          "Programm-Begleitung über die Agentur. Die Seniorität kommt aus Enterprise-Engineering, unter anderem adesso, Banking, GKV und Loyalty — nicht aus einem AI-Vorstand.",
+        ideal: "Programme, die Modernisierung und AI zusammen denken.",
+        engagement: "Programm-Begleitung über die Agentur.",
       },
     ],
   },
   record: {
-    summary: "Werdegang, Nachweise, Profil",
-    note: "Erreichbar, nicht Teil der Scroll-Geschichte. Stationen, Ausbildung und weitere Mandate stehen hier und im Lebenslauf.",
+    summary: "Werdegang",
+    note: "Engineer → Agentic AI → Beratung. Details im Lebenslauf — hier nur die Stationen.",
   },
   value: {
     index: "02",
@@ -367,7 +367,30 @@ export const de = {
   selectedCases: {
     index: "01",
     eyebrow: "Ausgewählte AI- & Engineering-Cases",
-    beatTitle: "Drei Arbeiten.",
+    beatTitle: "Drei Arbeiten",
+    lead:
+      "Independent R&D ist öffentlich prüfbar — kein Kundenbetrieb. Bezahlte Enterprise-Arbeit bleibt bei dem, was geliefert wurde.",
+    spots: {
+      "graph-mastermind": {
+        title: "Graph-Mastermind",
+        chip: "Independent R&D · Agentic AI",
+        idea: "Agent-Paket für Coding Agents — Vertrag aufklappbar.",
+        body: "Analysiert bestehende Repositories, plant Änderungen, arbeitet mit Entwicklungswerkzeugen und Tests. AGENT.md und CHECKLIST.md sind das Artefakt. Kein festgeschriebenes LLM.",
+      },
+      "agent-collective": {
+        title: "Agent Collective",
+        chip: "Independent R&D · deterministisch · kein LLM",
+        idea: "Multi-Agent-Orchestrierung ohne LLM-Backend.",
+        body: "Macht Zustände, Quality Gates und Eskalationen sichtbar — bewusst ohne LLM, damit Orchestrierung und Fehlermodi testbar bleiben. Interaktiver Nachweis weiter unten.",
+        sample: "Zum Sample ↓",
+      },
+      deutschlandcard: {
+        title: "Cloud, Identität, Integration",
+        chip: "Kundenarbeit · kein AI-Bestandteil im veröffentlichten Case",
+        idea: "Enterprise-Boden für spätere AI-Integration.",
+        body: "Bezahlte Cloudifizierung eines bundesweiten Loyalty-Programms: Azure AD B2C, Terraform, Kubernetes. Der Case selbst ist kein AI-Projekt — Identity, API und Cloud sind der Burggraben.",
+      },
+    },
     title: "Drei Cases — Lab und Enterprise getrennt gekennzeichnet.",
     rndLine: "Independent R&D — öffentlich prüfbar, kein Kundenbetrieb.",
     clientLine: "Kundenarbeit unter NDA: nur die eigene Rolle und freigabefähige Technik.",
@@ -413,7 +436,7 @@ export const de = {
     items: {
       evaluation: {
         title: "Evaluation",
-        line: "Abnahme über Tests, CI und prüfbaren Zustand. Zahlen erst mit einem reproduzierbaren Harness.",
+        line: "Abnahme über Tests, CI und prüfbaren Zustand. Zahlen erst mit reproduzierbarem Harness.",
         body: "Abnahme über Tests, CI, Checklisten und beobachtbare Zustände. Kein Modellaufruf ohne prüfbares Artefakt. Quantitative Kennzahlen erst, wenn ein reproduzierbarer Harness steht.",
       },
       hitl: {
@@ -423,7 +446,7 @@ export const de = {
       },
       security: {
         title: "Sicherheit",
-        line: "Identity, Berechtigungen, synthetische Demos. Auslieferung vor Geschwindigkeit.",
+        line: "Identity, Berechtigungen, synthetische Demos. Verantwortung vor Tempo.",
         body: "2FA, RBAC, Identity und DSGVO aus Enterprise-Delivery. Öffentliche Demos nutzen synthetische oder dokumentierte Beispieldaten. Verantwortliche Auslieferung vor Geschwindigkeit.",
       },
       observability: {
@@ -1047,16 +1070,24 @@ export const de = {
   },
   footer: {
     eyebrow: "Gespräch",
-    title: "Ein Gespräch über AI & Agents.",
+    title: "Gespräch",
+    lead: "Köln · deutschlandweit / Remote",
+    echo: "Agenten-Schichten in laufende Systeme — prüfbar, mit Human-in-the-Loop.",
     body: "Lebenslauf, LinkedIn und GitHub liegen bereit. Agenturen platzieren über die drei Rollenpakete. Kein Freelancer-Retainer, keine freien Slots.",
     email: "E-Mail",
     linkedin: "LinkedIn",
     github: "GitHub",
-    cv: "Lebenslauf (HTML)",
+    cv: "Lebenslauf",
     cvNote:
       "HTML-Lebenslauf zum Drucken oder als PDF speichern. Eine separate PDF-Datei kann später unter /portfolio/cv/ ergänzt werden.",
     roleLine: "Senior AI Consultant & Agentic Software Engineer",
     personalNote: "",
+  },
+  craft: {
+    body: "Interaktion und Scroll-Story auf dieser Seite: eigene Skripte (Vanilla JS/CSS). Kein Three.js, kein zugekauftes Animation-Framework.",
+    chip: "Custom-built · not a library demo",
+    technique: "SVG stroke-dashoffset · einmal gezeichnet",
+    modules: ["portfolio/motion/stage-reveal.js", "portfolio/motion/craft-mark.js"],
   },
   cv: {
     title: "Lebenslauf — Peter Henrichs",

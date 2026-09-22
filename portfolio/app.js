@@ -158,24 +158,6 @@
     btn.addEventListener("click", () => applyStackFilter(btn.dataset.stackFilter));
   });
 
-  const revealNodes = [...document.querySelectorAll("[data-reveal]")];
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduceMotion || !("IntersectionObserver" in window)) {
-    revealNodes.forEach((node) => node.classList.add("is-visible"));
-  } else {
-    const io = new IntersectionObserver(
-      (entries, observer) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.18, rootMargin: "0px 0px -8% 0px" },
-    );
-    revealNodes.forEach((node) => io.observe(node));
-  }
-
   function asText(value) {
     return typeof value === "string" || typeof value === "number" ? String(value) : "";
   }
