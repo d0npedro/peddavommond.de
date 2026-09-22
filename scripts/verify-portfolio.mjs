@@ -121,6 +121,16 @@ async function check(locale) {
   assert(html.indexOf('id="sample-graph"') < html.indexOf('id="offer"'), `${prefix} contract sample should precede How to offer me`);
   assert(html.indexOf('id="offer"') < html.indexOf('id="approach"'), `${prefix} packages should precede how he works`);
   assert(html.indexOf('id="approach"') < html.indexOf('id="work"'), `${prefix} career record should follow the scroll story`);
+  const recordAt = html.indexOf('id="record"');
+  const contactAt = html.indexOf('id="contact"');
+  const recordSlice = html.slice(recordAt, contactAt);
+  assert(recordSlice.includes("<details"), `${prefix} #record must be one collapsed details block`);
+  assert(!recordSlice.includes("<details open"), `${prefix} #record must start collapsed`);
+  for (const id of ["approach", "work", "credentials", "about", "education"]) {
+    assert(recordSlice.includes(`id="${id}"`), `${prefix} ${id} must live inside #record`);
+  }
+  assert(!recordSlice.includes("pf-section-band"), `${prefix} record must not use full-bleed stage bands`);
+  assert(html.indexOf('id="offer"') < recordAt, `${prefix} offer packages stay before the record`);
   assert(html.includes("Agentic AI Solution Consulting") && html.includes("Enterprise AI Integration") && html.includes("AI-Augmented Software Engineering"), `${prefix} missing consulting fields`);
   assert(html.includes("ProfilePage") && html.includes("jobTitle") && html.includes("knowsAbout") && html.includes("sameAs"), `${prefix} missing Person/ProfilePage JSON-LD`);
   assert(html.includes("dateModified"), `${prefix} missing dateModified`);

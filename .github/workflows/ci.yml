@@ -91,7 +91,20 @@ jobs:
           grep -q 'id="offer"' public/portfolio/de/index.html
           grep -q 'id="record"' public/portfolio/de/index.html
           grep -q 'id="contact"' public/portfolio/de/index.html
+          grep -q '<details' public/portfolio/de/index.html
+          grep -q '<details' public/portfolio/en/index.html
+          ! grep -q '<details open' public/portfolio/de/index.html
+          ! grep -q '<details open' public/portfolio/en/index.html
+          grep -q 'id="approach"' public/portfolio/de/index.html
+          grep -q 'id="approach"' public/portfolio/en/index.html
+          grep -q 'id="education"' public/portfolio/de/index.html
+          grep -q 'id="education"' public/portfolio/en/index.html
+          grep -q 'id="work"' public/portfolio/de/index.html
+          grep -q 'id="work"' public/portfolio/en/index.html
+          grep -q 'id="credentials"' public/portfolio/de/index.html
+          grep -q 'id="credentials"' public/portfolio/en/index.html
           grep -q 'id="about"' public/portfolio/de/index.html
+          grep -q 'id="about"' public/portfolio/en/index.html
           grep -q 'data-touch="collective"' public/portfolio/de/index.html
           grep -q 'data-touch="contract"' public/portfolio/en/index.html
           grep -q 'Wie man mich anbietet' public/portfolio/de/index.html
