@@ -1577,12 +1577,6 @@ html {
   margin-top: 0.85rem;
 }
 
-.pf-touch-btn:active,
-.pf-tab:active {
-  transform: scale(0.98);
-  transition-duration: var(--dur-press);
-}
-
 .pf-tab {
   min-height: 44px;
   padding: 0 0.75rem;
@@ -1939,18 +1933,26 @@ html.dark,
 .pf-hero .pf-cta--primary {
   min-width: 0;
   min-height: 44px;
-  padding: 0.35rem 0;
+  padding: 0.45rem 0.95rem;
   border: none;
-  background: transparent;
-  color: rgb(var(--muted));
-  font-weight: 450;
-  font-size: 1rem;
+  background: rgb(var(--accent));
+  color: rgb(var(--on-accent));
+  font-weight: 500;
+  font-size: 0.95rem;
   letter-spacing: -0.015em;
 }
 
 .pf-hero .pf-cta--primary::after {
-  content: "\00a0\2192";
-  color: rgb(var(--accent));
+  content: none;
+}
+
+.pf-spots .pf-links a,
+.pf-sample .pf-links a,
+.pf-spots .pf-case-open,
+.pf-sample .pf-case-open {
+  border-color: rgb(var(--line));
+  color: rgb(var(--fg));
+  background: transparent;
 }
 
 .pf-hero .pf-cta--primary:hover {
@@ -2070,28 +2072,6 @@ html.dark,
   font-size: 0.98rem;
   line-height: 1.45;
 }
-
-.pf-stagger .pf-principle {
-  opacity: 0;
-  transform: translateY(12px);
-  transition:
-    opacity var(--dur-enter) var(--ease-enter),
-    transform var(--dur-enter) var(--ease-enter);
-}
-
-.pf-stagger.is-visible .pf-principle {
-  opacity: 1;
-  transform: none;
-}
-
-.pf-stagger .pf-principle:nth-child(2) { transition-delay: 50ms; }
-.pf-stagger .pf-principle:nth-child(3) { transition-delay: 100ms; }
-.pf-stagger .pf-principle:nth-child(4) { transition-delay: 150ms; }
-
-.pf-spots .pf-case-card:nth-child(2) .pf-enter .pf-case-title,
-.pf-spots .pf-case-card:nth-child(2) .pf-enter .pf-hairline { transition-delay: 50ms; }
-.pf-spots .pf-case-card:nth-child(3) .pf-enter .pf-case-title,
-.pf-spots .pf-case-card:nth-child(3) .pf-enter .pf-hairline { transition-delay: 100ms; }
 
 .pf-spots {
   display: flex;
@@ -2308,15 +2288,8 @@ html.dark,
 @media (max-width: 767px) {
   .pf-enter .pf-stage-title,
   .pf-enter .pf-case-title,
-  .pf-shell,
-  .pf-stagger .pf-principle {
+  .pf-shell {
     transform: translateY(10px);
-  }
-
-  .pf-stagger .pf-principle,
-  .pf-spots .pf-case-card .pf-enter .pf-case-title,
-  .pf-spots .pf-case-card .pf-enter .pf-hairline {
-    transition-delay: 0ms;
   }
 
   .pf-enter.is-visible .pf-stage-title,

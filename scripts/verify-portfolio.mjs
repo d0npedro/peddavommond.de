@@ -61,10 +61,7 @@ async function check(locale) {
     assert(html.includes("kein LLM-Backend"), `${prefix} Agent Collective sample must state no LLM backend`);
     assert(!html.includes("Where I create value"), `${prefix} English value eyebrow leaked`);
     assert(!html.includes("10+ years enterprise systems"), `${prefix} English proof-chip body leaked`);
-    assert(
-      html.includes("Strategie") && html.includes("Architektur") && html.includes("Agentic Engineering") && html.includes("Umsetzung") && html.includes("Governance"),
-      `${prefix} missing capability groups`,
-    );
+    assert(!html.includes("Weitere Mandate"), `${prefix} further-mandate wall must stay off the landing`);
     assert(html.includes("Gesundheitswesen") && html.includes("Loyalty") && html.includes("adesso"), `${prefix} missing compact enterprise contexts`);
     assert(html.includes("Finanzwesen") && html.includes("Öffentlicher Sektor"), `${prefix} missing Finance / Public Sector context line`);
   } else {
@@ -72,10 +69,7 @@ async function check(locale) {
     assert(html.includes("Touch the work"), `${prefix} missing primary CTA`);
     assert(html.includes("How to offer me"), `${prefix} missing How to offer me title`);
     assert(html.includes("no LLM backend"), `${prefix} Agent Collective sample must state no LLM backend`);
-    assert(
-      html.includes("Strategy") && html.includes("Architecture") && html.includes("Agentic Engineering") && html.includes("Delivery") && html.includes("Governance"),
-      `${prefix} missing capability groups`,
-    );
+    assert(!html.includes("Further mandates"), `${prefix} further-mandate wall must stay off the landing`);
     assert(html.includes("Healthcare") && html.includes("Loyalty") && html.includes("adesso"), `${prefix} missing compact enterprise contexts`);
     assert(html.includes("Finance") && html.includes("Public Sector"), `${prefix} missing Finance / Public Sector context line`);
   }
@@ -116,43 +110,41 @@ async function check(locale) {
       html.includes('id="sample-graph"') &&
       html.includes('id="offer"') &&
       html.includes('id="approach"') &&
-      html.includes('id="work"') &&
-      html.includes('id="credentials"') &&
-      html.includes('id="about"'),
+      html.includes('id="record"'),
     `${prefix} missing cinematic section ids`,
   );
   assert(html.indexOf('id="builds"') < html.indexOf('id="sample-collective"'), `${prefix} what he builds should precede the first sample`);
   assert(html.indexOf('id="sample-collective"') < html.indexOf('id="cases"'), `${prefix} collective sample should precede case spotlights`);
   assert(html.indexOf('id="cases"') < html.indexOf('id="sample-graph"'), `${prefix} cases should precede the contract sample`);
   assert(html.indexOf('id="sample-graph"') < html.indexOf('id="offer"'), `${prefix} contract sample should precede How to offer me`);
-  assert(html.indexOf('id="offer"') < html.indexOf('id="approach"'), `${prefix} packages should precede principles`);
-  assert(html.indexOf('id="approach"') < html.indexOf('id="record"'), `${prefix} principles stay before the collapsed record`);
+  const offerAt = html.indexOf('id="offer"');
+  const approachAt = html.indexOf('id="approach"');
   const recordAt = html.indexOf('id="record"');
   const contactAt = html.indexOf('id="contact"');
+  assert(offerAt < approachAt && approachAt < recordAt, `${prefix} principles fold inside the offer, before the record`);
+  const offerClose = html.indexOf("</section>", offerAt);
+  assert(offerClose > approachAt && offerClose < recordAt, `${prefix} approach must sit inside #offer, not as its own beat`);
   const recordSlice = html.slice(recordAt, contactAt);
   assert(recordSlice.includes("<details"), `${prefix} #record must be one collapsed details block`);
   assert(!recordSlice.includes("<details open"), `${prefix} #record must start collapsed`);
-  assert(!recordSlice.includes('id="approach"'), `${prefix} principles are their own beat, not inside #record`);
-  for (const id of ["work", "credentials", "about", "education"]) {
-    assert(recordSlice.includes(`id="${id}"`), `${prefix} ${id} must live inside #record`);
-  }
+  assert(!recordSlice.includes('id="approach"'), `${prefix} principles stay out of #record`);
+  assert(!recordSlice.includes("pf-archive-list"), `${prefix} record must not open a career grid`);
+  assert(!recordSlice.includes("Weitere Mandate") && !recordSlice.includes("Further mandates"), `${prefix} record must not open a mandate wall`);
+  assert(recordSlice.includes("/portfolio/cv/"), `${prefix} record keeps the CV path`);
   const builds = html.slice(html.indexOf('id="builds"'), html.indexOf('id="sample-collective"'));
   assert(!builds.includes("pf-honesty-chips") && !builds.includes("pf-stage-lede"), `${prefix} #builds is one claim only`);
   const cases = html.slice(html.indexOf('id="cases"'), html.indexOf('id="sample-graph"'));
   assert((cases.match(/class="pf-case-card /g) || []).length === 3, `${prefix} landing cases are exactly three`);
   assert(!cases.includes("dz-bank-okvp") && !cases.includes("bitmarck-bitgo"), `${prefix} extra cases must stay out of #cases`);
-  assert(cases.includes(locale === "de" ? "Problem / Geschäftskontext" : "Problem / business context") || cases.includes("Architektur") || cases.includes("Architecture"), `${prefix} cases should show problem, system, outcome, role`);
-  const approach = html.slice(html.indexOf('id="approach"'), recordAt);
-  assert((approach.match(/class="pf-principle"/g) || []).length === 4, `${prefix} principles are four one-liners`);
+  assert(!cases.includes("pf-cases-idea") && !cases.includes('class="eyebrow"'), `${prefix} cases intro must not precede the first case`);
+  const approach = html.slice(approachAt, recordAt);
+  assert((approach.match(/class="pf-principle"/g) || []).length === 4, `${prefix} principles are four one-liners under the offer`);
   assert(!recordSlice.includes("pf-section-band"), `${prefix} record must not use full-bleed stage bands`);
   assert(html.indexOf('id="offer"') < recordAt, `${prefix} offer packages stay before the record`);
-  assert(html.includes("Agentic AI Solution Consulting") && html.includes("Enterprise AI Integration") && html.includes("AI-Augmented Software Engineering"), `${prefix} missing consulting fields`);
   assert(html.includes("ProfilePage") && html.includes("jobTitle") && html.includes("knowsAbout") && html.includes("sameAs"), `${prefix} missing Person/ProfilePage JSON-LD`);
   assert(html.includes("dateModified"), `${prefix} missing dateModified`);
   assert(html.indexOf("Graph-Mastermind") < html.indexOf("DeutschlandCard"), `${prefix} Graph-Mastermind should lead flagships`);
-  assert(html.indexOf("Graph-Mastermind") < html.indexOf('id="work"'), `${prefix} Graph-Mastermind should appear before experience`);
-  const workSlice = html.slice(html.indexOf('id="work"'), html.indexOf('id="credentials"'));
-  assert(!workSlice.includes("Weiterbildung AI-Automation") && !workSlice.includes("Weiterbildung zum KI-Manager"), `${prefix} Weiterbildung still listed as Berufserfahrung`);
+  assert(html.indexOf("Graph-Mastermind") < recordAt, `${prefix} Graph-Mastermind should appear before the record`);
   assert(html.includes("Agentic AI"), `${prefix} missing Agentic AI in content/schema`);
   assert(html.includes("LLM-assisted") || html.includes("LLM-gestützte"), `${prefix} missing LLM-assisted engineering term`);
   assert(!html.includes("MCP") || /MCP claims|MCP-Claims|ohne Modell/.test(html), `${prefix} should not claim MCP as a skill`);
@@ -161,7 +153,9 @@ async function check(locale) {
     assert(html.includes(caseHref(locale, id)), `${prefix} homepage missing lead-case deep-link to ${id}`);
   }
   for (const id of CASE_IDS) {
-    assert(html.includes(caseHref(locale, id)), `${prefix} homepage missing deep-link to ${id}`);
+    if (FLAGSHIP_IDS.includes(id)) {
+      assert(html.includes(caseHref(locale, id)), `${prefix} homepage missing lead-case deep-link to ${id}`);
+    }
   }
 }
 
@@ -172,6 +166,9 @@ async function checkCv() {
   assert(html.includes("peter.henrichs@web.de"), "CV missing email");
   assert(!html.includes("ph@d0npedro.com"), "CV still has old hiring email");
   assert(html.includes("Graph-Mastermind"), "CV missing Graph-Mastermind");
+  for (const id of CASE_IDS) {
+    assert(html.includes(`/cases/${id}/`), `CV missing case link ${id}`);
+  }
 }
 
 const [de, en] = await Promise.all([

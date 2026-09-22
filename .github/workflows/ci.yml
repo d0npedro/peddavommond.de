@@ -101,14 +101,12 @@ jobs:
           grep -q 'pf-hero-chip' public/portfolio/en/index.html
           grep -q 'pf-principle' public/portfolio/de/index.html
           grep -q 'pf-principle' public/portfolio/en/index.html
-          grep -q 'id="education"' public/portfolio/de/index.html
-          grep -q 'id="education"' public/portfolio/en/index.html
-          grep -q 'id="work"' public/portfolio/de/index.html
-          grep -q 'id="work"' public/portfolio/en/index.html
-          grep -q 'id="credentials"' public/portfolio/de/index.html
-          grep -q 'id="credentials"' public/portfolio/en/index.html
-          grep -q 'id="about"' public/portfolio/de/index.html
-          grep -q 'id="about"' public/portfolio/en/index.html
+          ! grep -q 'id="education"' public/portfolio/de/index.html
+          ! grep -q 'id="work"' public/portfolio/de/index.html
+          ! grep -q 'id="credentials"' public/portfolio/de/index.html
+          ! grep -q 'id="about"' public/portfolio/de/index.html
+          ! grep -q 'Weitere Mandate' public/portfolio/de/index.html
+          ! grep -q 'Further mandates' public/portfolio/en/index.html
           grep -q 'data-touch="collective"' public/portfolio/de/index.html
           grep -q 'data-touch="contract"' public/portfolio/en/index.html
           grep -q 'Wie man mich anbietet' public/portfolio/de/index.html

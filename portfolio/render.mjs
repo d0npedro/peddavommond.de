@@ -10,6 +10,7 @@ import {
   TRACK,
   casesBySection,
   featuredCases,
+  FLAGSHIP_IDS,
   pagedCases,
   caseById,
   caseHref,
@@ -18,7 +19,7 @@ import { copy } from "./content.mjs";
 
 /** Next export = layout/utilities. Token + component layer is portfolio.css (copied to public/). */
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=ux-motion-20260922";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=ad-scroll-20260922";
 
 function stylesheets() {
   return `<link rel="stylesheet" href="${NEXT_LAYOUT_CSS}"/>
@@ -251,26 +252,14 @@ function renderCaseCard(item, locale) {
     ? `<a class="pf-case-open" href="${attr(pageHref)}">${esc(c.landingCta || t.casePage.openCase)}</a>`
     : "";
   const ownershipKind = item.ownership?.status === "production" ? "prod" : "lab";
-  const beats = [
-    [t.caseFields.problem, c.problem],
-    [t.caseFields.architecture, c.architecture],
-    [t.caseFields.outcome, c.outcome],
-    [t.caseFields.role, c.role],
-  ]
-    .filter(([, value]) => value)
-    .map(
-      ([label, value]) =>
-        `<div class="pf-case-beat"><p class="pf-archive-meta">${esc(label)}</p><p>${esc(value)}</p></div>`,
-    )
-    .join("");
   return `<article class="pf-case-card pf-case-card--${ownershipKind} pf-spot">
     <div class="pf-enter" data-reveal>
       <span class="pf-hairline" aria-hidden="true"></span>
       <h3 class="pf-case-title">${title}</h3>
     </div>
+    <p class="pf-case-kicker">${esc(item.name)}</p>
     ${c.badge ? `<p class="pf-badge pf-badge--${ownershipKind}">${esc(c.badge)}</p>` : ""}
-    <div class="pf-case-beats">${beats}</div>
-    ${c.evalStatus === "in-progress" ? `<p class="pf-eval-note">${esc(t.casePage.evalInProgress)} — ${esc(t.casePage.evalInProgressNote)}</p>` : ""}
+    ${c.oneLiner ? `<p class="pf-spot-line">${esc(c.oneLiner)}</p>` : ""}
     ${caseLinks(item, t, open)}
   </article>`;
 }
@@ -444,6 +433,8 @@ function renderFooter(locale) {
       <p class="pf-location">${esc(t.hero.location)}</p>
       <h2 class="pf-footer-title mt-4 text-balance">${esc(t.hero.h1)}</h2>
       <p class="mt-4 max-w-prose text-muted">${esc(t.footer.body)}</p>
+      <p class="mt-4 max-w-prose text-muted">${esc(t.hero.trust)}</p>
+      <p class="pf-domains">${esc(t.industries.line)}</p>
       <div class="mt-10 pf-contact-row pf-contact-row--checkout">
         <a class="secondary" href="mailto:${attr(SITE.email)}">${esc(t.hero.ctaTertiary)} · ${esc(SITE.email)}</a>
         <a class="secondary" href="${attr(SITE.linkedin)}" target="_blank" rel="noopener noreferrer">${esc(t.footer.linkedin)}</a>
@@ -859,26 +850,22 @@ function renderOffer(locale) {
       </div>
       <p class="pf-stage-lede">${esc(o.intro)}</p>
       <div class="pf-offers">${packages}</div>
+      ${renderApproachFold(locale)}
       <p class="pf-contact-row"><a class="secondary" href="mailto:${attr(SITE.email)}">${esc(SITE.email)}</a></p>
     </div>
   </section>`;
 }
 
-function renderApproach(locale) {
+function renderApproachFold(locale) {
   const t = copy(locale);
   const items = HOW_I_WORK_KEYS.map((key) => {
     const item = t.howIWork.items[key];
     return `<li class="pf-principle"><h3>${esc(item.title)}</h3><p>${esc(item.line)}</p></li>`;
   }).join("");
-  return `<section id="approach" class="pf-stage pf-approach scroll-mt-24">
-    <div class="container pf-stage-narrow">
-      <div class="pf-enter" data-reveal>
-        <span class="pf-hairline" aria-hidden="true"></span>
-        <h2 class="pf-stage-title">${esc(t.howIWork.eyebrow)}</h2>
-      </div>
-      <ol class="pf-principles pf-stagger" data-reveal>${items}</ol>
-    </div>
-  </section>`;
+  return `<div id="approach" class="pf-method">
+    <h3 class="pf-method-title">${esc(t.howIWork.eyebrow)}</h3>
+    <ol class="pf-principles">${items}</ol>
+  </div>`;
 }
 
 function renderRecord(locale) {
@@ -888,18 +875,7 @@ function renderRecord(locale) {
       <details data-record>
         <summary class="pf-shell" data-reveal>${esc(t.record.summary)}</summary>
         <div class="pf-record-body">
-          <p>${esc(t.record.note)}</p>
           <p class="pf-contact-row"><a class="secondary" href="${attr(SITE.cvPath)}">${esc(t.hero.ctaSecondary)}</a></p>
-          ${renderCompetencies(locale)}
-          <p>${esc(t.builds.body)}</p>
-          <p>${esc(t.builds.split)}</p>
-          <p class="pf-trust">${esc(t.hero.trust)}</p>
-          <p class="pf-domains">${esc(t.industries.line)}</p>
-          ${renderTrack(locale)}
-          ${renderCredentials(locale)}
-          ${renderConsulting(locale)}
-          ${renderAbout(locale)}
-          ${renderEducation(locale)}
         </div>
       </details>
     </div>
@@ -957,7 +933,6 @@ ${renderCollectiveSample(locale)}
 ${renderSelectedCases(locale)}
 ${renderGraphSample(locale)}
 ${renderOffer(locale)}
-${renderApproach(locale)}
 ${renderRecord(locale)}
 </main>
 ${renderFooter(locale)}
@@ -968,6 +943,10 @@ ${renderFooter(locale)}
 
 export function renderCv(locale) {
   const t = copy(locale);
+  const more = pagedCases()
+    .filter((item) => !FLAGSHIP_IDS.includes(item.id))
+    .map((item) => `<li><a href="${attr(caseHref(locale, item.id))}">${esc(item.name)}</a></li>`)
+    .join("");
   const featured = featuredCases()
     .map((item) => {
       const c = t.cases[item.id];
@@ -1020,6 +999,8 @@ ${themeBoot()}
   <p class="mt-2 text-sm text-muted">${esc(t.hero.location)}</p>
   <h2 class="mt-8 text-xl font-semibold">${esc(t.selectedCases.eyebrow)}</h2>
   <div class="mt-4">${featured}</div>
+  <h2 class="mt-10 text-xl font-semibold">${esc(t.selectedCases.secondaryEyebrow)}</h2>
+  <ul class="mt-4">${more}</ul>
   <h2 class="mt-10 text-xl font-semibold">${esc(t.experience.eyebrow)}</h2>
   <div class="mt-4">${jobs}</div>
   <p class="cv-todo">${esc(t.cv.todo)}</p>
