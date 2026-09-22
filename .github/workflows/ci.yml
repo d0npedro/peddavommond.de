@@ -106,6 +106,9 @@ jobs:
           grep -q '/portfolio/en/cases/agent-collective/' public/portfolio/en/index.html
           grep -q '/portfolio/en/cases/deutschlandcard/' public/portfolio/en/index.html
           grep -q 'kein LLM-Backend' public/portfolio/de/index.html
+          grep -q '>Agent-Failure<' public/portfolio/de/index.html
+          grep -q '>Agent failure<' public/portfolio/en/index.html
+          ! grep -q '\[object Object\]' public/portfolio/de/index.html public/portfolio/en/index.html
           grep -q 'no LLM backend' public/portfolio/en/index.html
           grep -q 'Wie ich AI-Systeme baue' public/portfolio/de/index.html
           grep -q 'How I build AI systems' public/portfolio/en/index.html

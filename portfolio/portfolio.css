@@ -1824,3 +1824,277 @@ html {
     color: #111 !important;
   }
 }
+
+/* -------------------------------------------------------------------------- */
+/* Motion sheet v1.4 — enter once, samples stay, nav does not move            */
+/* -------------------------------------------------------------------------- */
+
+:root,
+html,
+html.light,
+html.dark,
+.dark {
+  --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-micro: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --dur-enter: 520ms;
+  --dur-hairline: 440ms;
+  --dur-sample: 250ms;
+  --dur-micro: 180ms;
+}
+
+.pf-header,
+.pf-header nav,
+.pf-nav-link,
+.pf-brand {
+  transition: none;
+  animation: none;
+  transform: none;
+}
+
+.pf-header [data-mobile-menu] {
+  transition: none;
+}
+
+.pf-hero::before {
+  background: none;
+}
+
+.pf-hero .pf-name {
+  margin-bottom: 1.25rem;
+  color: rgb(var(--faint));
+}
+
+.pf-hero .pf-role {
+  display: block;
+  max-width: 28rem;
+  margin-top: 1.35rem;
+  color: rgb(var(--muted));
+  font-size: 1.05rem;
+  font-weight: 560;
+  letter-spacing: -0.02em;
+}
+
+.pf-brand-mark > span {
+  background: rgb(var(--fg));
+}
+
+.pf-cta {
+  transition:
+    background-color var(--dur-micro) var(--ease-micro),
+    border-color var(--dur-micro) var(--ease-micro),
+    color var(--dur-micro) var(--ease-micro),
+    filter var(--dur-micro) var(--ease-micro);
+}
+
+.pf-cta:active,
+.pf-case-card:hover,
+.pf-case-card:focus-within,
+.pf-spots .pf-case-card:hover,
+.pf-spots .pf-case-card:focus-within {
+  transform: none;
+}
+
+.pf-cases-idea {
+  max-width: 28rem;
+  margin: 0 0 1.75rem;
+  color: rgb(var(--muted));
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+
+.pf-spots .pf-case-title {
+  max-width: 16ch;
+}
+
+.pf-spots {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 0;
+}
+
+.pf-spots .pf-case-card {
+  min-height: 100svh;
+  min-height: 100dvh;
+  justify-content: center;
+  padding-block: clamp(4rem, 10vh, 6rem);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  transform: none;
+}
+
+.pf-spots .pf-case-card::before {
+  content: none;
+  display: none;
+}
+
+.pf-enter .pf-stage-title,
+.pf-enter .pf-case-title {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity var(--dur-enter) var(--ease-enter),
+    transform var(--dur-enter) var(--ease-enter);
+}
+
+.pf-enter .pf-hairline {
+  display: block;
+  width: 2.5rem;
+  height: 1px;
+  margin-bottom: 1.15rem;
+  background: rgb(var(--line));
+  transform-origin: left center;
+  opacity: 0;
+  transform: scaleX(0.92);
+  transition:
+    opacity var(--dur-hairline) var(--ease-enter),
+    transform var(--dur-hairline) var(--ease-enter);
+}
+
+.pf-case-card--lab .pf-hairline {
+  background: rgb(var(--signal));
+}
+
+.pf-enter.is-visible .pf-stage-title,
+.pf-enter.is-visible .pf-case-title,
+.pf-shell.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.pf-enter.is-visible .pf-hairline {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.pf-shell {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity var(--dur-enter) var(--ease-enter),
+    transform var(--dur-enter) var(--ease-enter);
+}
+
+.pf-touch {
+  min-height: 22rem;
+}
+
+.pf-touch-phase,
+.pf-touch-detail,
+.pf-agent-status {
+  transition:
+    color var(--dur-sample) var(--ease-micro),
+    opacity var(--dur-sample) var(--ease-micro);
+}
+
+.pf-tabpanel {
+  min-height: 12rem;
+}
+
+.pf-checks label {
+  min-height: 44px;
+  align-items: center;
+}
+
+.pf-checks input {
+  width: 44px;
+  height: 44px;
+  margin-top: 0;
+  flex: 0 0 44px;
+}
+
+.pf-honesty-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.pf-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0 0.7rem;
+  border: 1px solid rgb(var(--line));
+  border-radius: var(--radius-sm);
+  color: rgb(var(--muted));
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pf-chip--signal {
+  border-color: rgb(var(--signal) / 0.45);
+  color: rgb(var(--signal));
+}
+
+.pf-method {
+  margin-top: clamp(3rem, 8vh, 5rem);
+  padding-top: clamp(2rem, 5vh, 3rem);
+  border-top: 1px solid rgb(var(--line));
+}
+
+.pf-method-title {
+  max-width: 36rem;
+  margin-top: 0.75rem;
+  color: rgb(var(--fg));
+  font-size: 1.15rem;
+  line-height: 1.4;
+}
+
+.pf-record .reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+@media (scripting: none) {
+  .pf-enter .pf-stage-title,
+  .pf-enter .pf-case-title,
+  .pf-enter .pf-hairline,
+  .pf-shell {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .pf-enter .pf-stage-title,
+  .pf-enter .pf-case-title,
+  .pf-shell {
+    transform: translateY(10px);
+  }
+
+  .pf-enter.is-visible .pf-stage-title,
+  .pf-enter.is-visible .pf-case-title,
+  .pf-shell.is-visible {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-enter .pf-stage-title,
+  .pf-enter .pf-case-title,
+  .pf-enter .pf-hairline,
+  .pf-shell,
+  .pf-shell.is-visible,
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .pf-touch-phase,
+  .pf-touch-detail,
+  .pf-agent-status,
+  .pf-tab,
+  .pf-cta,
+  .pf-header,
+  .pf-nav-link {
+    transition: none;
+    animation: none;
+  }
+}

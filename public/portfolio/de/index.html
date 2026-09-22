@@ -32,7 +32,7 @@
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#10151E"/>
 <link rel="icon" href="/portfolio/de/icon.png" type="image/png" sizes="32x32"/>
 <link rel="stylesheet" href="/portfolio/de/_next/static/css/76323045a7107f6a.css"/>
-<link rel="stylesheet" href="/portfolio/portfolio.css?v=cinematic-20260922"/>
+<link rel="stylesheet" href="/portfolio/portfolio.css?v=motion-v14-20260922"/>
 </head>
 <body class="min-h-screen bg-bg font-sans antialiased">
 <script>!function(){try{var d=document.documentElement,c=d.classList;c.remove('light','dark');var e=localStorage.getItem('theme');if('system'===e||(!e&&false)){var t='(prefers-color-scheme: dark)',m=window.matchMedia(t);if(m.media!==t||m.matches){d.style.colorScheme='dark';c.add('dark')}else{d.style.colorScheme='light';c.add('light')}}else if(e){c.add(e||'')}else{c.add('dark')}if(e==='light'||e==='dark'||!e)d.style.colorScheme=e||'dark'}catch(e){}}()</script>
@@ -72,8 +72,9 @@
       <div class="blueprint-grid grid-mask absolute inset-0"></div>
     </div>
     <div class="container pf-stage-center">
+      <p class="pf-name">Peter Henrichs</p>
       <h1 class="pf-hero-title text-balance">Die Schicht zwischen System und Agent.</h1>
-      <p class="pf-hero-lede">Agentische Workflows, die an bestehende Unternehmenssoftware andocken — mit Vertrag, sichtbarem Zustand und menschlicher Abnahme.</p>
+      <p class="pf-role">Senior AI Consultant &amp; Agentic Software Engineer</p>
       <div class="pf-cta-row">
         <a href="#sample-collective" class="pf-cta pf-cta--primary">Arbeit anfassen</a>
       </div>
@@ -81,22 +82,31 @@
   </section>
 <section id="builds" class="pf-stage scroll-mt-24">
     <div class="container pf-stage-narrow">
-      <p class="eyebrow reveal" data-reveal>Was ich baue</p>
-      <h2 class="pf-stage-title reveal" data-reveal>Eine prüfbare Schicht auf dem System, das schon läuft.</h2>
-      <p class="pf-stage-lede reveal" data-reveal>Aufgabe, Artefakt, Abnahme. Agentic AI Solution Consulting, Enterprise AI Integration und AI-Augmented Software Engineering sind dieselbe Schicht — Beratung, Anbindung, Engineering — nicht drei Produkte und keine Demo neben der IT.</p>
-      <p class="pf-split reveal" data-reveal>Independent R&amp;D ist öffentlich prüfbar und kein Kundenbetrieb. Bezahlte Enterprise-Arbeit bleibt bei dem, was geliefert wurde — auch wenn dort kein AI-Bestandteil war.</p>
+      <div class="pf-enter" data-reveal>
+        <span class="pf-hairline" aria-hidden="true"></span>
+        <h2 class="pf-stage-title">Eine prüfbare Schicht auf dem System, das schon läuft.</h2>
+      </div>
+      <p class="pf-stage-lede">Aufgabe, Artefakt, Abnahme. Agentic AI Solution Consulting, Enterprise AI Integration und AI-Augmented Software Engineering sind dieselbe Schicht — Beratung, Anbindung, Engineering — nicht drei Produkte und keine Demo neben der IT.</p>
+      <p class="pf-honesty-chips" aria-label="Was ich baue">
+        <span class="pf-chip pf-chip--signal">Independent R&amp;D</span>
+        <span class="pf-chip">Produktion</span>
+      </p>
+      <p class="pf-split">Independent R&amp;D ist öffentlich prüfbar und kein Kundenbetrieb. Bezahlte Enterprise-Arbeit bleibt bei dem, was geliefert wurde — auch wenn dort kein AI-Bestandteil war.</p>
     </div>
   </section>
 <section id="sample-collective" class="pf-stage scroll-mt-24">
     <div class="container pf-sample">
       <div class="pf-sample-copy">
-        <p class="eyebrow reveal" data-reveal>Anfassbar · Independent R&amp;D</p>
-        <h2 class="pf-stage-title reveal" data-reveal>Zustand, den man Schritt für Schritt sieht.</h2>
-        <p class="pf-stage-lede reveal" data-reveal>Agent Collective ist ein deterministischer Multi-Agent-Simulator ohne LLM-Backend. Dieses Panel spielt den öffentlichen Tick-Vertrag nach: Ereignisse, Aufgabe, Arbeit, Übergabe, Review. Kein Chat, keine Kennzahlen.</p>
-        <p class="pf-stage-lede reveal" data-reveal>Gezeigt: Coder, Critic, Monitor. Das Default-Kollektiv hat zusätzlich Researcher, Trader und Creative.</p>
+        <p class="eyebrow">Anfassbar · Independent R&amp;D</p>
+        <div class="pf-enter" data-reveal>
+          <span class="pf-hairline" aria-hidden="true"></span>
+          <h2 class="pf-stage-title">Zustand, den man Schritt für Schritt sieht.</h2>
+        </div>
+        <p class="pf-stage-lede">Agent Collective ist ein deterministischer Multi-Agent-Simulator ohne LLM-Backend. Dieses Panel spielt den öffentlichen Tick-Vertrag nach: Ereignisse, Aufgabe, Arbeit, Übergabe, Review. Kein Chat, keine Kennzahlen.</p>
+        <p class="pf-stage-lede">Gezeigt: Coder, Critic, Monitor. Das Default-Kollektiv hat zusätzlich Researcher, Trader und Creative.</p>
         <div class="pf-links"><a href="https://github.com/d0npedro/multi-agent" target="_blank" rel="noopener noreferrer">Repository</a><a href="https://multi-agent-six-murex.vercel.app" target="_blank" rel="noopener noreferrer">Live-Demo</a><a href="/multi-agent/">Auf dieser Site</a></div>
       </div>
-      <div class="pf-touch reveal" data-reveal data-touch="collective">
+      <div class="pf-touch" data-touch="collective">
         <div class="pf-touch-bar">
           <p class="pf-badge pf-badge--lab">Independent R&amp;D · deterministisch · kein LLM-Backend</p>
           <p class="pf-touch-tick"><span>Tick</span> <span data-tick>0</span></p>
@@ -105,8 +115,8 @@
         <ul class="pf-agents" data-agents><li class="pf-agent"><span class="pf-agent-role">Coder</span><span class="pf-agent-status" data-status="idle">idle</span></li><li class="pf-agent"><span class="pf-agent-role">Critic</span><span class="pf-agent-status" data-status="idle">idle</span></li><li class="pf-agent"><span class="pf-agent-role">Monitor</span><span class="pf-agent-status" data-status="idle">idle</span></li></ul>
         <p class="pf-touch-detail" data-detail aria-live="polite">Uhr steht bei Tick 0. Seeded Run, kein Backend, kein Modellaufruf.</p>
         <div class="pf-touch-actions">
-          <button type="button" class="pf-touch-btn pf-touch-btn--primary" data-action="step">Schritt</button>
-          <button type="button" class="pf-touch-btn" data-action="fail" aria-pressed="false">[object Object],[object Object]</button>
+          <button type="button" class="pf-touch-btn" data-action="step">Schritt</button>
+          <button type="button" class="pf-touch-btn" data-action="fail" aria-pressed="false">Agent-Failure</button>
           <button type="button" class="pf-touch-btn" data-action="reset">Zurück</button>
         </div>
         <p class="pf-touch-note">Wiedergabe des öffentlichen Vertrags aus dem Repository. Nicht die Live-Engine. Keine erfundenen Durchsatz- oder Latenzzahlen.</p>
@@ -114,44 +124,52 @@
       </div>
     </div>
   </section>
-<section id="cases" class="pf-stage scroll-mt-24">
+<section id="cases" class="pf-cases scroll-mt-24">
     <div class="container">
-      <p class="eyebrow reveal" data-reveal>Ausgewählte AI- &amp; Engineering-Cases</p>
-      <h2 class="pf-stage-title reveal" data-reveal>Drei Arbeiten.</h2>
-      <p class="pf-stage-lede reveal" data-reveal>Independent R&amp;D — öffentlich prüfbar, kein Kundenbetrieb.</p>
-      <p class="pf-stage-lede reveal" data-reveal>Kundenarbeit unter NDA: nur die eigene Rolle und freigabefähige Technik.</p>
-      <div class="pf-spots"><article class="pf-case-card pf-case-card--lab pf-spot reveal" data-reveal>
+      <div class="pf-spots"><article class="pf-case-card pf-case-card--lab pf-spot">
+    <p class="pf-cases-idea">Independent R&amp;D — öffentlich prüfbar, kein Kundenbetrieb.</p>
+    <div class="pf-enter" data-reveal>
+      <span class="pf-hairline" aria-hidden="true"></span>
+      <h3 class="pf-case-title"><a href="/portfolio/de/cases/graph-mastermind/" class="pf-case-title-link">Agentic Engineering für gewachsene Codebasen</a></h3>
+    </div>
     <p class="pf-badge pf-badge--lab">Independent R&amp;D · Agentic AI</p>
     <div class="pf-case-kicker">
       <span>2026</span>
       <span aria-hidden="true">·</span>
       <span>Graph-Mastermind</span>
     </div>
-    <h3 class="pf-case-title"><a href="/portfolio/de/cases/graph-mastermind/" class="pf-case-title-link">Agentic Engineering für gewachsene Codebasen</a></h3>
     <p class="pf-spot-line">Ein agentischer Engineering-Workflow analysiert bestehende Repositories, plant Änderungen, arbeitet mit Entwicklungswerkzeugen und Tests und lässt kritische Ergebnisse separat evaluieren.</p>
     <p class="pf-honesty">Independent R&amp;D — Agent-Paket für Coding Agents, kein festgeschriebenes LLM, kein Kundenbetrieb.</p>
     <p class="pf-eval-note">Evaluation läuft — Die Architektur steht; quantitative Ergebnisse werden erst veröffentlicht, sobald eine reproduzierbare Messbasis vorliegt.</p>
     <div class="pf-links"><a href="https://github.com/d0npedro/graph-mastermind" target="_blank" rel="noopener noreferrer">Repository</a><a href="https://graph-mastermind.vercel.app" target="_blank" rel="noopener noreferrer">Live-Demo</a><a class="pf-case-open" href="/portfolio/de/cases/graph-mastermind/">Agentic-AI-Case ansehen</a></div>
-  </article><article class="pf-case-card pf-case-card--lab pf-spot reveal" data-reveal>
+  </article><article class="pf-case-card pf-case-card--lab pf-spot">
+    
+    <div class="pf-enter" data-reveal>
+      <span class="pf-hairline" aria-hidden="true"></span>
+      <h3 class="pf-case-title"><a href="/portfolio/de/cases/agent-collective/" class="pf-case-title-link">Nachvollziehbare Multi-Agent-Orchestrierung</a></h3>
+    </div>
     <p class="pf-badge pf-badge--lab">Independent R&amp;D · deterministisch · kein LLM-Backend</p>
     <div class="pf-case-kicker">
       <span>2026</span>
       <span aria-hidden="true">·</span>
       <span>Agent Collective</span>
     </div>
-    <h3 class="pf-case-title"><a href="/portfolio/de/cases/agent-collective/" class="pf-case-title-link">Nachvollziehbare Multi-Agent-Orchestrierung</a></h3>
     <p class="pf-spot-line">Ein deterministischer Multi-Agent-Simulator macht Zustände, Quality Gates und Eskalationen sichtbar — bewusst ohne LLM-Backend, damit Orchestrierung und Fehlermodi testbar bleiben.</p>
     <p class="pf-honesty">Deterministischer Multi-Agent-Simulator — kein LLM-Backend, kein Tool-Calling-Stack, kein Kundenbetrieb.</p>
     
     <div class="pf-links"><a href="https://github.com/d0npedro/multi-agent" target="_blank" rel="noopener noreferrer">Repository</a><a href="https://multi-agent-six-murex.vercel.app" target="_blank" rel="noopener noreferrer">Live-Demo</a><a href="/multi-agent/">Auf dieser Site</a><a class="pf-case-open" href="/portfolio/de/cases/agent-collective/">Orchestrierungs-Case ansehen</a></div>
-  </article><article class="pf-case-card pf-case-card--prod pf-spot reveal" data-reveal>
+  </article><article class="pf-case-card pf-case-card--prod pf-spot">
+    
+    <div class="pf-enter" data-reveal>
+      <span class="pf-hairline" aria-hidden="true"></span>
+      <h3 class="pf-case-title"><a href="/portfolio/de/cases/deutschlandcard/" class="pf-case-title-link">Cloud, Identität, Integration</a></h3>
+    </div>
     <p class="pf-badge pf-badge--prod">Berufliche Nachweise · Enterprise</p>
     <div class="pf-case-kicker">
       <span>2023 – 2026</span>
       <span aria-hidden="true">·</span>
       <span>DeutschlandCard</span>
     </div>
-    <h3 class="pf-case-title"><a href="/portfolio/de/cases/deutschlandcard/" class="pf-case-title-link">Cloud, Identität, Integration</a></h3>
     <p class="pf-spot-line">Bezahlte Cloudifizierung des bundesweiten Loyalty-Programms: Azure AD B2C, Terraform, Kubernetes. Genau dieser Identity-/API-/Cloud-Boden ist der Burggraben für spätere AI-Integration — der Case selbst ist kein AI-Projekt.</p>
     <p class="pf-honesty">Kein AI-/LLM-Bestandteil im veröffentlichten Case. Keine Volumen- oder Latenzzahlen (NDA).</p>
     
@@ -162,14 +180,17 @@
 <section id="sample-graph" class="pf-stage scroll-mt-24">
     <div class="container pf-sample">
       <div class="pf-sample-copy">
-        <p class="eyebrow reveal" data-reveal>Anfassbar · Independent R&amp;D</p>
-        <h2 class="pf-stage-title reveal" data-reveal>Ein Vertrag, den man aufklappen kann.</h2>
-        <p class="pf-stage-lede reveal" data-reveal>Graph-Mastermind ist ein Agent-Paket für Coding Agents. AGENT.md, CHECKLIST.md und der Runtime-Vertrag sind das Artefakt. Ein bestimmtes LLM ist nicht vorgeschrieben.</p>
-        <p class="pf-stage-lede reveal" data-reveal>LLM-gestützte Entwicklung nur, wenn ein Coding Agent den Vertrag ausführt. Ohne Modell- oder MCP-Claims.</p>
+        <p class="eyebrow">Anfassbar · Independent R&amp;D</p>
+        <div class="pf-enter" data-reveal>
+          <span class="pf-hairline" aria-hidden="true"></span>
+          <h2 class="pf-stage-title">Ein Vertrag, den man aufklappen kann.</h2>
+        </div>
+        <p class="pf-stage-lede">Graph-Mastermind ist ein Agent-Paket für Coding Agents. AGENT.md, CHECKLIST.md und der Runtime-Vertrag sind das Artefakt. Ein bestimmtes LLM ist nicht vorgeschrieben.</p>
+        <p class="pf-stage-lede">LLM-gestützte Entwicklung nur, wenn ein Coding Agent den Vertrag ausführt. Ohne Modell- oder MCP-Claims.</p>
         <p class="pf-eval-note">Evaluation läuft — Die Architektur steht; quantitative Ergebnisse werden erst veröffentlicht, sobald eine reproduzierbare Messbasis vorliegt.</p>
         <div class="pf-links"><a href="https://github.com/d0npedro/graph-mastermind" target="_blank" rel="noopener noreferrer">Repository</a><a href="https://graph-mastermind.vercel.app" target="_blank" rel="noopener noreferrer">Live-Demo</a></div>
       </div>
-      <div class="pf-touch reveal" data-reveal data-touch="contract">
+      <div class="pf-touch" data-touch="contract">
         <p class="pf-badge pf-badge--lab">Independent R&amp;D · Agent-Paket · kein festgeschriebenes LLM</p>
         <ol class="pf-pipeline" aria-label="Ein Vertrag, den man aufklappen kann."><li>Aufgabe</li><li>AGENT.md</li><li>Graph</li><li>CHECKLIST</li><li>Mensch</li></ol>
         <div class="pf-tabs" role="tablist" aria-label="Ein Vertrag, den man aufklappen kann."><button type="button" class="pf-tab" role="tab" id="tab-agent" data-tab="agent" aria-selected="true" aria-controls="panel-agent" tabindex="0">AGENT.md</button><button type="button" class="pf-tab" role="tab" id="tab-check" data-tab="check" aria-selected="false" aria-controls="panel-check" tabindex="-1">CHECKLIST</button><button type="button" class="pf-tab" role="tab" id="tab-runtime" data-tab="runtime" aria-selected="false" aria-controls="panel-runtime" tabindex="-1">Runtime</button></div>
@@ -203,10 +224,12 @@ Ein Modell ist nicht Teil des Vertrags.</pre>
   </section>
 <section id="offer" class="pf-stage scroll-mt-24">
     <div class="container">
-      <p class="eyebrow reveal" data-reveal>Für Agenturen</p>
-      <h2 class="pf-stage-title reveal" data-reveal>Wie man mich anbietet</h2>
-      <p class="pf-stage-lede reveal" data-reveal>Drei Rollenpakete zum Platzieren, zum Beispiel bei adesso. Scope, Liefergegenstände, passende Lage, Einsatzform. Keine erfundenen Kundenergebnisse, keine Tagessätze.</p>
-      <div class="pf-offers"><article class="pf-offer reveal" data-reveal>
+      <div class="pf-enter" data-reveal>
+        <span class="pf-hairline" aria-hidden="true"></span>
+        <h2 class="pf-stage-title">Wie man mich anbietet</h2>
+      </div>
+      <p class="pf-stage-lede">Drei Rollenpakete zum Platzieren, zum Beispiel bei adesso. Scope, Liefergegenstände, passende Lage, Einsatzform. Keine erfundenen Kundenergebnisse, keine Tagessätze.</p>
+      <div class="pf-offers"><article class="pf-offer">
         <div class="pf-offer-name">
           <p class="pf-offer-index">01</p>
           <h3>Senior AI Consultant</h3>
@@ -219,7 +242,7 @@ Ein Modell ist nicht Teil des Vertrags.</pre>
             <div><dt>Einsatz</dt><dd>Über die Agentur: Architektur-Begleitung auf Zeit oder Vermittlung in ein Kundenteam. Kein eigener Freelancer-Retainer, keine freien Slots.</dd></div>
           </dl>
         </div>
-      </article><article class="pf-offer reveal" data-reveal>
+      </article><article class="pf-offer">
         <div class="pf-offer-name">
           <p class="pf-offer-index">02</p>
           <h3>Agentic Engineer</h3>
@@ -232,7 +255,7 @@ Ein Modell ist nicht Teil des Vertrags.</pre>
             <div><dt>Einsatz</dt><dd>Engineering-Einsatz im Team der Agentur oder des Kunden. Graph-Mastermind und Agent Collective sind Independent R&amp;D und Referenz, kein mitgeliefertes Kundenprodukt. Agent Collective hat kein LLM-Backend.</dd></div>
           </dl>
         </div>
-      </article><article class="pf-offer reveal" data-reveal>
+      </article><article class="pf-offer">
         <div class="pf-offer-name">
           <p class="pf-offer-index">03</p>
           <h3>Transformation Lead</h3>
@@ -246,34 +269,32 @@ Ein Modell ist nicht Teil des Vertrags.</pre>
           </dl>
         </div>
       </article></div>
-    </div>
-  </section>
-<section id="approach" class="pf-stage scroll-mt-24">
-    <div class="container pf-stage-narrow">
-      <p class="eyebrow reveal" data-reveal>Wie ich AI-Systeme baue</p>
-      <h2 class="pf-stage-title reveal" data-reveal>Evaluation, Human-in-the-loop, Security, Observability.</h2>
-      <ol class="pf-trust-list"><li class="pf-trust-item reveal" data-reveal>
+      <div id="approach" class="pf-method">
+    <p class="eyebrow">Wie ich AI-Systeme baue</p>
+    <p class="pf-method-title">Evaluation, Human-in-the-loop, Security, Observability.</p>
+    <ol class="pf-trust-list"><li class="pf-trust-item">
       <h3>Evaluation</h3>
       <p>Abnahme über Tests, CI und prüfbaren Zustand. Zahlen erst mit einem reproduzierbaren Harness.</p>
-    </li><li class="pf-trust-item reveal" data-reveal>
+    </li><li class="pf-trust-item">
       <h3>Human-in-the-Loop</h3>
       <p>Agents liefern Artefakte. Ein Mensch nimmt ab.</p>
-    </li><li class="pf-trust-item reveal" data-reveal>
+    </li><li class="pf-trust-item">
       <h3>Sicherheit</h3>
       <p>Identity, Berechtigungen, synthetische Demos. Auslieferung vor Geschwindigkeit.</p>
-    </li><li class="pf-trust-item reveal" data-reveal>
+    </li><li class="pf-trust-item">
       <h3>Observability</h3>
       <p>Was man nicht sehen kann, skaliert nicht.</p>
     </li></ol>
-      <p class="pf-trust reveal" data-reveal>10+ Jahre Enterprise Engineering. Jetzt angewandt auf Agentic AI — nicht umgekehrt.</p>
-      <p class="pf-domains reveal" data-reveal>adesso · Finanzwesen · Öffentlicher Sektor · Gesundheitswesen · Loyalty</p>
-      <p class="pf-stage-lede reveal" data-reveal>Strategie, Architektur, Agentic Engineering, Umsetzung, Governance.</p>
+    <p class="pf-trust">10+ Jahre Enterprise Engineering. Jetzt angewandt auf Agentic AI — nicht umgekehrt.</p>
+    <p class="pf-domains">adesso · Finanzwesen · Öffentlicher Sektor · Gesundheitswesen · Loyalty</p>
+    <p class="pf-stage-lede">Strategie, Architektur, Agentic Engineering, Umsetzung, Governance.</p>
+  </div>
     </div>
   </section>
 <section id="record" class="pf-record scroll-mt-24">
     <div class="container">
       <details data-record>
-        <summary>Werdegang, Nachweise, Profil</summary>
+        <summary class="pf-shell" data-reveal>Werdegang, Nachweise, Profil</summary>
         <p class="pf-stage-lede">Erreichbar, nicht Teil der Scroll-Geschichte. Stationen, Ausbildung und weitere Mandate stehen hier und im Lebenslauf.</p>
         <p class="pf-contact-row"><a class="secondary" href="/portfolio/cv/">Lebenslauf</a></p>
         <section id="work" class="pf-section-band scroll-mt-24 py-20 md:py-24">
@@ -361,7 +382,7 @@ Ein Modell ist nicht Teil des Vertrags.</pre>
         <p class="mt-1 font-mono text-xs text-faint">2026 · STARTPLATZ Köln</p>
       </article></div>
     <div class="pf-contact-row">
-      <a class="primary" href="/portfolio/cv/">Lebenslauf</a>
+      <a class="secondary" href="/portfolio/cv/">Lebenslauf</a>
       <a class="secondary" href="https://github.com/d0npedro" target="_blank" rel="noopener noreferrer">GitHub</a>
       <a class="secondary" href="https://www.linkedin.com/in/peter-henrichs/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     </div>
@@ -467,7 +488,7 @@ Ein Modell ist nicht Teil des Vertrags.</pre>
       <h2 class="pf-footer-title mt-4 text-balance">Ein Gespräch über AI &amp; Agents.</h2>
       <p class="mt-4 max-w-prose text-muted">Lebenslauf, LinkedIn und GitHub liegen bereit. Agenturen platzieren über die drei Rollenpakete. Kein Freelancer-Retainer, keine freien Slots.</p>
       <div class="mt-10 pf-contact-row pf-contact-row--checkout">
-        <a class="primary" href="mailto:peter.henrichs@web.de">Über AI &amp; Agents sprechen · peter.henrichs@web.de</a>
+        <a class="secondary" href="mailto:peter.henrichs@web.de">Über AI &amp; Agents sprechen · peter.henrichs@web.de</a>
         <a class="secondary" href="https://www.linkedin.com/in/peter-henrichs/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a class="secondary" href="https://github.com/d0npedro" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a class="secondary" href="/portfolio/cv/">Lebenslauf (HTML)</a>
