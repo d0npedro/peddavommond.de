@@ -55,7 +55,13 @@ async function check(locale) {
   assert(html.includes("data-touch=\"collective\"") && html.includes("data-touch=\"contract\""), `${prefix} samples are not interactive`);
   assert(!/GPT-|OpenAI API|Claude API|LLM-powered|powered by an LLM/i.test(html), `${prefix} must not invent an LLM backend`);
   if (locale === "de") {
-    assert(html.includes("Die Schicht zwischen System und Agent."), `${prefix} missing cinematic headline`);
+    assert(
+      html.includes(
+        "Ich baue Agenten-Schichten in laufende Enterprise-Systeme — prüfbar, mit Human-in-the-Loop.",
+      ),
+      `${prefix} missing approved hero headline`,
+    );
+    assert(!html.includes("Die Schicht zwischen System und Agent."), `${prefix} old abstract hero line still present`);
     assert(html.includes("Arbeit anfassen"), `${prefix} missing primary CTA`);
     assert(html.includes("Wie man mich anbietet"), `${prefix} missing How to offer me title`);
     assert(html.includes("kein LLM-Backend"), `${prefix} Agent Collective sample must state no LLM backend`);
@@ -65,7 +71,13 @@ async function check(locale) {
     assert(html.includes("Gesundheitswesen") && html.includes("Loyalty") && html.includes("adesso"), `${prefix} missing compact enterprise contexts`);
     assert(html.includes("Finanzwesen") && html.includes("Öffentlicher Sektor"), `${prefix} missing Finance / Public Sector context line`);
   } else {
-    assert(html.includes("The layer between the system and the agent."), `${prefix} missing cinematic headline`);
+    assert(
+      html.includes(
+        "I build agent layers into running enterprise systems — reviewable, with human-in-the-loop.",
+      ),
+      `${prefix} missing approved hero headline`,
+    );
+    assert(!html.includes("The layer between the system and the agent."), `${prefix} old abstract hero line still present`);
     assert(html.includes("Touch the work"), `${prefix} missing primary CTA`);
     assert(html.includes("How to offer me"), `${prefix} missing How to offer me title`);
     assert(html.includes("no LLM backend"), `${prefix} Agent Collective sample must state no LLM backend`);
@@ -184,8 +196,16 @@ assert(de.includes("Lebenslauf"), "DE CV label missing");
 assert(en.includes("/portfolio/cv/"), "EN CV path missing");
 assert(!de.includes("Where I create value"), "DE value eyebrow still English");
 assert(!de.includes("10+ years enterprise systems"), "DE proof chip still English");
-assert(de.includes("Die Schicht zwischen System und Agent."), "DE H1 missing cinematic promise");
-assert(en.includes("The layer between the system and the agent."), "EN H1 missing cinematic promise");
+assert(
+  de.includes("Ich baue Agenten-Schichten in laufende Enterprise-Systeme — prüfbar, mit Human-in-the-Loop."),
+  "DE H1 missing approved promise",
+);
+assert(
+  en.includes("I build agent layers into running enterprise systems — reviewable, with human-in-the-loop."),
+  "EN H1 missing approved promise",
+);
+assert(!de.includes("Die Schicht zwischen System und Agent."), "DE still has the old abstract hero line");
+assert(!en.includes("The layer between the system and the agent."), "EN still has the old abstract hero line");
 assert(de.includes("Jetzt angewandt auf Agentic AI") || de.includes("nicht umgekehrt"), "DE trust line missing");
 assert(en.includes("Now applied to Agentic AI"), "EN trust line missing");
 assert(de.includes("Wie man mich anbietet") && en.includes("How to offer me"), "How to offer me missing in a locale");

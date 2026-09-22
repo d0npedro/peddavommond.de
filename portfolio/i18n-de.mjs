@@ -33,7 +33,7 @@ export const de = {
   hero: {
     eyebrow: "Enterprise Engineering × Agentic AI × Transformation",
     role: "Senior AI Consultant & Agentic Software Engineer",
-    h1: "Die Schicht zwischen System und Agent.",
+    h1: "Ich baue Agenten-Schichten in laufende Enterprise-Systeme — prüfbar, mit Human-in-the-Loop.",
     location: "Köln · Deutschlandweit / Remote",
     tagline:
       "Agentische Workflows, die an bestehende Unternehmenssoftware andocken — mit Vertrag, sichtbarem Zustand und menschlicher Abnahme.",

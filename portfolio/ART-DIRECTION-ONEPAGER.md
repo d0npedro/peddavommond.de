@@ -17,7 +17,7 @@ Enterprise AI decision surface. Apple product air + Linear calm. Not agency temp
 - No electric cyan, no purple/cyan AI skins
 
 ## TYPE
-Inter prose; JetBrains Mono labels/chips/sample chrome. Hero huge+short; titles ~16ch; body 17–18px.
+Inter prose; JetBrains Mono labels/chips/sample chrome. Hero is the full promise sentence at display size (chip + H1 + one CTA stay in the first viewport); other titles ~16ch; body 17–18px.
 
 ## AIR
 Full-viewport stages. Cases as tall spotlights, not 3-up fight. Career collapsed. One primary CTA.

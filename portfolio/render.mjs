@@ -19,7 +19,7 @@ import { copy } from "./content.mjs";
 
 /** Next export = layout/utilities. Token + component layer is portfolio.css (copied to public/). */
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=ad-scroll-20260922";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=hero-promise-20260922";
 
 function stylesheets() {
   return `<link rel="stylesheet" href="${NEXT_LAYOUT_CSS}"/>
