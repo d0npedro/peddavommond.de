@@ -20,6 +20,7 @@ export const de = {
     toggleMenu: "Menü umschalten",
     profile: "Profil",
     cases: "Cases",
+    offer: "Anbieten",
     experience: "Erfahrung",
     cv: "CV",
     contact: "Kontakt",
@@ -32,10 +33,10 @@ export const de = {
   hero: {
     eyebrow: "Enterprise Engineering × Agentic AI × Transformation",
     role: "Senior AI Consultant & Agentic Software Engineer",
-    h1: "Ich verbinde über 10 Jahre Enterprise Software Engineering mit Agentic AI, LLMs und intelligenter Automatisierung.",
+    h1: "Die Schicht zwischen System und Agent.",
     location: "Köln · Deutschlandweit / Remote",
     tagline:
-      "Ich entwerfe Systeme, die LLMs, Agents und Automation an reale Unternehmenssoftware anbinden — Architektur, Integration und Beratung, nicht Demos neben dem System.",
+      "Agentische Workflows, die an bestehende Unternehmenssoftware andocken — mit Vertrag, sichtbarem Zustand und menschlicher Abnahme.",
     proof:
       "ENTWICKLUNG · 10+ Jahre Enterprise-Systeme · AGENTIC AI · LLMs · Agents · Automatisierung · INTEGRATION · APIs · Cloud · bestehende IT · BERATUNG · Use Cases · Architektur · Transformation",
     proofChips: [
@@ -47,7 +48,7 @@ export const de = {
     contextLine: "adesso · Finanzwesen · Öffentlicher Sektor · Gesundheitswesen · Loyalty",
     trust:
       "10+ Jahre Enterprise Engineering. Jetzt angewandt auf Agentic AI — nicht umgekehrt.",
-    ctaPrimary: "AI Cases ansehen",
+    ctaPrimary: "Arbeit anfassen",
     ctaSecondary: "Lebenslauf",
     ctaTertiary: "Über AI & Agents sprechen",
     diagramTitle: "Agentisches System — Ziel, Orchestrierung, Bewertung, Mensch",
@@ -68,6 +69,209 @@ export const de = {
       "Live-Webportale verantwortet",
     ],
     languagesLabel: "Sprachen",
+  },
+  builds: {
+    eyebrow: "Was ich baue",
+    title: "Eine prüfbare Schicht auf dem System, das schon läuft.",
+    body: "Aufgabe, Artefakt, Abnahme. Agentic AI Solution Consulting, Enterprise AI Integration und AI-Augmented Software Engineering sind dieselbe Schicht — Beratung, Anbindung, Engineering — nicht drei Produkte und keine Demo neben der IT.",
+    split:
+      "Independent R&D ist öffentlich prüfbar und kein Kundenbetrieb. Bezahlte Enterprise-Arbeit bleibt bei dem, was geliefert wurde — auch wenn dort kein AI-Bestandteil war.",
+  },
+  samples: {
+    collective: {
+      eyebrow: "Anfassbar · Independent R&D",
+      title: "Zustand, den man Schritt für Schritt sieht.",
+      body: "Agent Collective ist ein deterministischer Multi-Agent-Simulator ohne LLM-Backend. Dieses Panel spielt den öffentlichen Tick-Vertrag nach: Ereignisse, Aufgabe, Arbeit, Übergabe, Review. Kein Chat, keine Kennzahlen.",
+      badge: "Independent R&D · deterministisch · kein LLM-Backend",
+      step: "Schritt",
+      reset: "Zurück",
+      fail: "Agent-Failure",
+      tickLabel: "Tick",
+      note: "Wiedergabe des öffentlichen Vertrags aus dem Repository. Nicht die Live-Engine. Keine erfundenen Durchsatz- oder Latenzzahlen.",
+      shown:
+        "Gezeigt: Coder, Critic, Monitor. Das Default-Kollektiv hat zusätzlich Researcher, Trader und Creative.",
+      review: [
+        {
+          tick: "0",
+          phase: "Pause",
+          detail: "Uhr steht bei Tick 0. Seeded Run, kein Backend, kein Modellaufruf.",
+          agents: [
+            { role: "Coder", status: "idle" },
+            { role: "Critic", status: "idle" },
+            { role: "Monitor", status: "idle" },
+          ],
+        },
+        {
+          tick: "1",
+          phase: "Ereignisse",
+          detail: "Warteschlange der externen Ereignisse wird angewandt. In diesem Schritt ist sie leer.",
+          agents: [
+            { role: "Coder", status: "idle" },
+            { role: "Critic", status: "idle" },
+            { role: "Monitor", status: "idle" },
+          ],
+        },
+        {
+          tick: "1",
+          phase: "Aufgaben",
+          detail: "Aufgaben entstehen passend zur Rolle: code für Coder, review für Critic. Beansprucht wird erst im nächsten Tick.",
+          agents: [
+            { role: "Coder", status: "idle" },
+            { role: "Critic", status: "idle" },
+            { role: "Monitor", status: "idle" },
+          ],
+        },
+        {
+          tick: "2",
+          phase: "Arbeit",
+          detail: "Coder hat die code-Aufgabe. Fortschritt liegt in der Engine, nicht in einem Chat.",
+          agents: [
+            { role: "Coder", status: "working" },
+            { role: "Critic", status: "idle" },
+            { role: "Monitor", status: "idle" },
+          ],
+        },
+        {
+          tick: "3",
+          phase: "Übergabe",
+          detail: "Handoff über eine Kante. Critic arbeitet die review-Aufgabe — das sichtbare Gate. Kein LLM bewertet es.",
+          agents: [
+            { role: "Coder", status: "communicating" },
+            { role: "Critic", status: "working" },
+            { role: "Monitor", status: "idle" },
+          ],
+        },
+        {
+          tick: "4",
+          phase: "Mensch",
+          detail: "Critique ist zugestellt. Ein Mensch interpretiert. Keine automatische Abnahme.",
+          agents: [
+            { role: "Coder", status: "idle" },
+            { role: "Critic", status: "idle" },
+            { role: "Monitor", status: "idle" },
+          ],
+        },
+      ],
+      fail: [
+        {
+          tick: "5",
+          phase: "Agent-Failure",
+          detail: "Dokumentiertes Ereignis: der gewählte Agent verliert die Aufgabe und geht auf failed. Keine erfundenen Ausfallquoten.",
+          agents: [
+            { role: "Coder", status: "failed" },
+            { role: "Critic", status: "idle" },
+            { role: "Monitor", status: "idle" },
+          ],
+        },
+        {
+          tick: "6",
+          phase: "Recovery",
+          detail: "Recovery über die nächsten Ticks. Der Zustand bleibt sichtbar. Steuerung bleibt beim Menschen.",
+          agents: [
+            { role: "Coder", status: "recovering" },
+            { role: "Critic", status: "idle" },
+            { role: "Monitor", status: "idle" },
+          ],
+        },
+      ],
+    },
+    graph: {
+      eyebrow: "Anfassbar · Independent R&D",
+      title: "Ein Vertrag, den man aufklappen kann.",
+      body: "Graph-Mastermind ist ein Agent-Paket für Coding Agents. AGENT.md, CHECKLIST.md und der Runtime-Vertrag sind das Artefakt. Ein bestimmtes LLM ist nicht vorgeschrieben.",
+      badge: "Independent R&D · Agent-Paket · kein festgeschriebenes LLM",
+      llmLine:
+        "LLM-gestützte Entwicklung nur, wenn ein Coding Agent den Vertrag ausführt. Ohne Modell- oder MCP-Claims.",
+      scratch:
+        "Lokale Merkhilfe. Ein Haken speichert keinen Lauf und ist kein Kundenergebnis. Evaluation läuft — quantitative Kennzahlen gibt es nicht.",
+      pipeline: ["Aufgabe", "AGENT.md", "Graph", "CHECKLIST", "Mensch"],
+      tabs: [
+        {
+          id: "agent",
+          label: "AGENT.md",
+          kind: "code",
+          caption: "Auszug aus dem öffentlichen Vertrag. Nicht der vollständige Prompt.",
+          body: "# Graph-Mastermind — Arbeitsanweisung\n\nRolle: Repo-Analytiker + Graph-Modellierer + Frontend-Umsetzer.\nAuftrag: Repository analysieren, Graph ableiten, SPA bauen.\nTypecheck und Production-Build grün machen.\n\nHarte Verbote:\n- Kein Auth.\n- Kein Pflicht-Backend.\n- Keine erfundenen Module, solange echter Kontext da ist.",
+        },
+        {
+          id: "check",
+          label: "CHECKLIST",
+          kind: "checks",
+          caption: "Abnahme-Ausschnitt aus CHECKLIST.md. Offen heißt: nicht als Lauf behauptet.",
+          items: [
+            "Repo wurde gescannt (Baum, Manifeste, Docs)",
+            "Keine erfundenen Module, solange echter Kontext existierte",
+            "Kein React-State auf Simulation-Ticks",
+            "tsc --noEmit grün",
+            "Production-Build grün",
+          ],
+        },
+        {
+          id: "runtime",
+          label: "Runtime",
+          kind: "code",
+          caption: "Runtime-Vertrag der Referenz-App. Die UI hält nur, was ein Mensch umschaltet.",
+          body: "tick  →  dirty = true\nrAF   →  zeichnen, wenn dirty\nidle  →  Loop schläft, bis ein Event weckt\n\nMensch prüft das Artefakt.\nEin Modell ist nicht Teil des Vertrags.",
+        },
+      ],
+    },
+  },
+  offer: {
+    eyebrow: "Für Agenturen",
+    title: "Wie man mich anbietet",
+    intro:
+      "Drei Rollenpakete zum Platzieren, zum Beispiel bei adesso. Scope, Liefergegenstände, passende Lage, Einsatzform. Keine erfundenen Kundenergebnisse, keine Tagessätze.",
+    deliverables: "Liefergegenstände",
+    ideal: "Passt zu",
+    engagement: "Einsatz",
+    packages: [
+      {
+        name: "Senior AI Consultant",
+        scope:
+          "Use Cases gegen Systeme, Identität und Datenqualität schneiden, bevor gebaut wird. Beratung mit schriftlicher Grenze, nicht ein Tool-Pitch.",
+        deliverables: [
+          "Use-Case-Schnitt: wo ein Agent handeln darf und wo das bestehende System den Prozess schon trägt",
+          "Architekturskizze mit Abnahme, Human-in-the-Loop und expliziten Grenzen",
+          "Schriftliche Liste dessen, was nicht gebaut wird",
+        ],
+        ideal:
+          "Organisationen mit laufender IT, die AI einordnen müssen, bevor sie implementieren. Typische Lagen aus der bisherigen Lieferung: Finanzwesen, öffentlicher Sektor, Gesundheitswesen, Loyalty — als Erfahrungsboden, nicht als behauptetes AI-Mandat bei diesen Kunden.",
+        engagement:
+          "Über die Agentur: Architektur-Begleitung auf Zeit oder Vermittlung in ein Kundenteam. Kein eigener Freelancer-Retainer, keine freien Slots.",
+      },
+      {
+        name: "Agentic Engineer",
+        scope:
+          "Agentische Workflows bauen: Vertrag, Tool-Grenzen, Tests, sichtbarer Zustand. Anbindung an vorhandene APIs und, wo das System schon so liegt, an Java und Spring.",
+        deliverables: [
+          "Agent-Vertrag (Aufgabe, Artefakt, Abnahme) in der Form der öffentlichen Pakete",
+          "Integrationsschnitt an vorhandene APIs, Identität und Pipelines",
+          "Prüfbarer Zustand oder Checkliste — ein Chatprotokoll ist keine Abnahme",
+        ],
+        ideal:
+          "Teams, die einen Prototyp in eine wartbare Schicht überführen. Nicht: ein ungebundenes Modellprodukt ohne Systemgrenze.",
+        engagement:
+          "Engineering-Einsatz im Team der Agentur oder des Kunden. Graph-Mastermind und Agent Collective sind Independent R&D und Referenz, kein mitgeliefertes Kundenprodukt. Agent Collective hat kein LLM-Backend.",
+      },
+      {
+        name: "Transformation Lead",
+        scope:
+          "Zwischen Fach, Delivery und Governance übersetzen. Reihenfolge: Boden (Systeme, Rechte, Daten), dann die Agentenschicht.",
+        deliverables: [
+          "Priorisierte Use-Case-Liste, beurteilt gegen die Landschaft, die existiert",
+          "Betriebsmodell: Vertrag, Abnahme, Human-in-the-Loop — keine autonome Organisation",
+          "Governance-Rahmen aus regulierter Delivery (Berechtigungen, DSGVO) plus EU-AI-Act-Einordnung aus der Spezialisierung 2026",
+        ],
+        ideal:
+          "Programme, die Modernisierung und AI zusammen denken. Nicht: Vorstands-KPI-Theater oder ein Mandat, das öffentlich nicht existiert.",
+        engagement:
+          "Programm-Begleitung über die Agentur. Die Seniorität kommt aus Enterprise-Engineering, unter anderem adesso, Banking, GKV und Loyalty — nicht aus einem AI-Vorstand.",
+      },
+    ],
+  },
+  record: {
+    summary: "Werdegang, Nachweise, Profil",
+    note: "Erreichbar, nicht Teil der Scroll-Geschichte. Stationen, Ausbildung und weitere Mandate stehen hier und im Lebenslauf.",
   },
   value: {
     index: "02",
@@ -163,7 +367,10 @@ export const de = {
   selectedCases: {
     index: "01",
     eyebrow: "Ausgewählte AI- & Engineering-Cases",
+    beatTitle: "Drei Arbeiten.",
     title: "Drei Cases — Lab und Enterprise getrennt gekennzeichnet.",
+    rndLine: "Independent R&D — öffentlich prüfbar, kein Kundenbetrieb.",
+    clientLine: "Kundenarbeit unter NDA: nur die eigene Rolle und freigabefähige Technik.",
     description:
       "Graph-Mastermind und Agent Collective sind unabhängige, öffentlich prüfbare Systeme. DeutschlandCard ist bezahlte Enterprise-Lieferung. DZ BANK und BITMARCK stehen im Track Record, nicht als vierte und fünfte gleichwertige Karte.",
     rndNote:
@@ -206,18 +413,22 @@ export const de = {
     items: {
       evaluation: {
         title: "Evaluation",
+        line: "Abnahme über Tests, CI und prüfbaren Zustand. Zahlen erst mit einem reproduzierbaren Harness.",
         body: "Abnahme über Tests, CI, Checklisten und beobachtbare Zustände. Kein Modellaufruf ohne prüfbares Artefakt. Quantitative Kennzahlen erst, wenn ein reproduzierbarer Harness steht.",
       },
       hitl: {
         title: "Human-in-the-Loop",
+        line: "Agents liefern Artefakte. Ein Mensch nimmt ab.",
         body: "Agents liefern Artefakte zur menschlichen Bewertung. Keine autonomen Schreibzugriffe, keine automatisch vertrauenswürdigen Entscheidungen.",
       },
       security: {
         title: "Sicherheit",
+        line: "Identity, Berechtigungen, synthetische Demos. Auslieferung vor Geschwindigkeit.",
         body: "2FA, RBAC, Identity und DSGVO aus Enterprise-Delivery. Öffentliche Demos nutzen synthetische oder dokumentierte Beispieldaten. Verantwortliche Auslieferung vor Geschwindigkeit.",
       },
       observability: {
         title: "Observability",
+        line: "Was man nicht sehen kann, skaliert nicht.",
         body: "Prometheus, Grafana, Dynatrace in der Banklieferung; schrittweise Snapshots im Simulator. Verhalten muss sichtbar sein, bevor es skaliert.",
       },
     },
@@ -590,6 +801,7 @@ export const de = {
     index: "04",
     eyebrow: "Fähigkeiten",
     title: "Fünf Gruppen — nicht eine Skill-Wand.",
+    line: "Strategie, Architektur, Agentic Engineering, Umsetzung, Governance.",
     description:
       "Strategie, Architektur, Agentic Engineering, Umsetzung, Governance. Der detaillierte Stack ist Nachweis, nicht Identität — und steht nicht auf der Startseite.",
     pillars: [
@@ -836,7 +1048,7 @@ export const de = {
   footer: {
     eyebrow: "Gespräch",
     title: "Ein Gespräch über AI & Agents.",
-    body: "Du suchst jemanden, der Enterprise Software versteht und Agentic AI nicht nur beurteilen, sondern praktisch anbinden kann? Lebenslauf, LinkedIn und GitHub liegen bereit. Kein Freelancer-Retainer, keine freien Slots, kein Agency-Pitch.",
+    body: "Lebenslauf, LinkedIn und GitHub liegen bereit. Agenturen platzieren über die drei Rollenpakete. Kein Freelancer-Retainer, keine freien Slots.",
     email: "E-Mail",
     linkedin: "LinkedIn",
     github: "GitHub",
