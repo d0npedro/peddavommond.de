@@ -83,11 +83,14 @@ jobs:
           grep -q 'The layer between the system and the agent.' public/portfolio/en/index.html
           grep -q 'Arbeit anfassen' public/portfolio/de/index.html
           grep -q 'Touch the work' public/portfolio/en/index.html
+          grep -q 'id="top"' public/portfolio/de/index.html
           grep -q 'id="builds"' public/portfolio/de/index.html
           grep -q 'id="sample-collective"' public/portfolio/de/index.html
           grep -q 'id="cases"' public/portfolio/de/index.html
           grep -q 'id="sample-graph"' public/portfolio/de/index.html
           grep -q 'id="offer"' public/portfolio/de/index.html
+          grep -q 'id="record"' public/portfolio/de/index.html
+          grep -q 'id="contact"' public/portfolio/de/index.html
           grep -q 'id="about"' public/portfolio/de/index.html
           grep -q 'data-touch="collective"' public/portfolio/de/index.html
           grep -q 'data-touch="contract"' public/portfolio/en/index.html

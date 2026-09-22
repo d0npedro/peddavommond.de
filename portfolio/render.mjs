@@ -18,7 +18,7 @@ import { copy } from "./content.mjs";
 
 /** Next export = layout/utilities. Token + component layer is portfolio.css (copied to public/). */
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=motion-v14-20260922";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=quiet-20260922";
 
 function stylesheets() {
   return `<link rel="stylesheet" href="${NEXT_LAYOUT_CSS}"/>
@@ -172,11 +172,7 @@ function renderProofStrip(t) {
 function renderHero(locale) {
   const t = copy(locale);
   return `<section id="top" class="pf-hero pf-stage pf-stage--hero">
-    <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
-      <div class="blueprint-grid grid-mask absolute inset-0"></div>
-    </div>
     <div class="container pf-stage-center">
-      <p class="pf-name">${esc(SITE.name)}</p>
       <h1 class="pf-hero-title text-balance">${esc(t.hero.h1)}</h1>
       <p class="pf-role">${esc(t.hero.role)}</p>
       <div class="pf-cta-row">
@@ -442,7 +438,6 @@ function renderEducation(locale) {
 function renderFooter(locale) {
   const t = copy(locale);
   return `<footer id="contact" class="pf-footer relative scroll-mt-24">
-    <div aria-hidden="true" class="blueprint-grid grid-mask pointer-events-none absolute inset-0 opacity-50"></div>
     <div class="container relative py-20 md:py-28">
       <p class="eyebrow">${esc(t.footer.eyebrow)}</p>
       <p class="pf-location">${esc(t.hero.location)}</p>
