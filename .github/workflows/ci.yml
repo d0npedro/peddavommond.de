@@ -76,27 +76,55 @@ jobs:
           grep -q 'peter.henrichs@web.de' public/portfolio/de/cases/graph-mastermind/index.html
           grep -q 'Köln · Deutschlandweit / Remote' public/portfolio/de/index.html
           grep -q 'Independent R&amp;D' public/portfolio/de/index.html
-          grep -q 'Wie ich AI-Systeme baue' public/portfolio/de/index.html
-          grep -q 'id="value"' public/portfolio/de/index.html
+          grep -q 'Peter Henrichs' public/portfolio/de/index.html
+          grep -q 'Peter Henrichs' public/portfolio/en/index.html
+          grep -q 'peter.henrichs@web.de' public/portfolio/en/index.html
+          grep -q 'Die Schicht zwischen System und Agent.' public/portfolio/de/index.html
+          grep -q 'The layer between the system and the agent.' public/portfolio/en/index.html
+          grep -q 'Arbeit anfassen' public/portfolio/de/index.html
+          grep -q 'Touch the work' public/portfolio/en/index.html
+          grep -q 'id="builds"' public/portfolio/de/index.html
+          grep -q 'id="sample-collective"' public/portfolio/de/index.html
           grep -q 'id="cases"' public/portfolio/de/index.html
+          grep -q 'id="sample-graph"' public/portfolio/de/index.html
+          grep -q 'id="offer"' public/portfolio/de/index.html
           grep -q 'id="about"' public/portfolio/de/index.html
-          grep -q 'AI Cases ansehen' public/portfolio/de/index.html
-          grep -q 'Ich verbinde über 10 Jahre Enterprise Software Engineering mit Agentic AI' public/portfolio/de/index.html
+          grep -q 'data-touch="collective"' public/portfolio/de/index.html
+          grep -q 'data-touch="contract"' public/portfolio/en/index.html
+          grep -q 'Wie man mich anbietet' public/portfolio/de/index.html
+          grep -q 'How to offer me' public/portfolio/en/index.html
+          grep -q 'Senior AI Consultant' public/portfolio/en/index.html
+          grep -q 'Agentic Engineer' public/portfolio/de/index.html
+          grep -q 'Agentic Engineer' public/portfolio/en/index.html
+          grep -q 'Transformation Lead' public/portfolio/de/index.html
+          grep -q 'Transformation Lead' public/portfolio/en/index.html
+          grep -q 'Agent Collective' public/portfolio/de/index.html
+          grep -q 'Agent Collective' public/portfolio/en/index.html
+          grep -q 'DeutschlandCard' public/portfolio/de/index.html
+          grep -q 'DeutschlandCard' public/portfolio/en/index.html
+          grep -q '/portfolio/en/cases/graph-mastermind/' public/portfolio/en/index.html
+          grep -q '/portfolio/en/cases/agent-collective/' public/portfolio/en/index.html
+          grep -q '/portfolio/en/cases/deutschlandcard/' public/portfolio/en/index.html
+          grep -q 'kein LLM-Backend' public/portfolio/de/index.html
+          grep -q 'no LLM backend' public/portfolio/en/index.html
+          grep -q 'Wie ich AI-Systeme baue' public/portfolio/de/index.html
+          grep -q 'How I build AI systems' public/portfolio/en/index.html
           grep -q 'Agentic-AI-Case ansehen' public/portfolio/de/index.html
           grep -q 'Lebenslauf' public/portfolio/de/index.html
           grep -q 'Mein Anteil' public/portfolio/de/cases/graph-mastermind/index.html
-          grep -q 'Wo ich Wirkung erzeuge' public/portfolio/de/index.html
-          ! grep -q 'Where I create value' public/portfolio/de/index.html
-          grep -q '10+ Jahre Enterprise-Systeme' public/portfolio/de/index.html
-          ! grep -q '10+ years enterprise systems' public/portfolio/de/index.html
-          grep -q 'ENTWICKLUNG' public/portfolio/de/index.html
           grep -q 'Evaluation läuft' public/portfolio/de/cases/graph-mastermind/index.html
-          grep -q 'Selected AI &amp; Engineering Cases' public/portfolio/en/index.html
           grep -q 'Independent R&amp;D' public/portfolio/en/index.html
-          grep -q 'How I build AI systems' public/portfolio/en/index.html
           grep -q 'Now applied to Agentic AI' public/portfolio/en/index.html
           grep -q 'ProfilePage' public/portfolio/de/index.html
-          grep -q 'kein LLM-Backend' public/portfolio/de/index.html
+          grep -q 'ProfilePage' public/portfolio/en/index.html
+          ! grep -q 'id="value"' public/portfolio/de/index.html
+          ! grep -q 'AI Cases ansehen' public/portfolio/de/index.html
+          ! grep -q 'Ich verbinde über 10 Jahre Enterprise Software Engineering mit Agentic AI' public/portfolio/de/index.html
+          ! grep -q 'Wo ich Wirkung erzeuge' public/portfolio/de/index.html
+          ! grep -q 'Where I create value' public/portfolio/de/index.html
+          ! grep -q '10+ Jahre Enterprise-Systeme' public/portfolio/de/index.html
+          ! grep -q '10+ years enterprise systems' public/portfolio/de/index.html
+          ! grep -q 'ENTWICKLUNG' public/portfolio/de/index.html
 
       - name: Formula unit test (optional shell util)
         run: node public/win11/js/utils/formula.test.js
