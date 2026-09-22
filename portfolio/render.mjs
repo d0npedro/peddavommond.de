@@ -18,7 +18,7 @@ import { copy } from "./content.mjs";
 
 /** Next export = layout/utilities. Token + component layer is portfolio.css (copied to public/). */
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=record-20260922";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=fail-20260922";
 
 function stylesheets() {
   return `<link rel="stylesheet" href="${NEXT_LAYOUT_CSS}"/>
@@ -31,6 +31,13 @@ export function esc(value) {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
+}
+
+function label(value, name) {
+  if (typeof value !== "string" || value.trim() === "" || value.includes("[object Object]")) {
+    throw new Error(`${name} must be a plain string label`);
+  }
+  return esc(value);
 }
 
 function attr(value) {
@@ -763,9 +770,9 @@ function renderCollectiveSample(locale) {
         <ul class="pf-agents" data-agents>${renderAgentList(first.agents)}</ul>
         <p class="pf-touch-detail" data-detail aria-live="polite">${esc(first.detail)}</p>
         <div class="pf-touch-actions">
-          <button type="button" class="pf-touch-btn" data-action="step">${esc(s.step)}</button>
-          <button type="button" class="pf-touch-btn" data-action="fail" aria-pressed="false">${esc(s.failLabel)}</button>
-          <button type="button" class="pf-touch-btn" data-action="reset">${esc(s.reset)}</button>
+          <button type="button" class="pf-touch-btn" data-action="step">${label(s.step, "samples.collective.step")}</button>
+          <button type="button" class="pf-touch-btn" data-action="fail" aria-pressed="false">${label(s.failLabel, "samples.collective.failLabel")}</button>
+          <button type="button" class="pf-touch-btn" data-action="reset">${label(s.reset, "samples.collective.reset")}</button>
         </div>
         <p class="pf-touch-note">${esc(s.note)}</p>
         ${jsonIsland("pf-collective-frames", { review: s.review, fail: s.fail })}

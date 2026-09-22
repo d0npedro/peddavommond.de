@@ -1319,7 +1319,7 @@ html {
 
 .pf-stage {
   position: relative;
-  padding-block: clamp(5.5rem, 12vh, 8.5rem);
+  padding-block: clamp(4.25rem, 8vh, 6.25rem);
 }
 
 .pf-stage--hero {
@@ -1398,11 +1398,11 @@ html {
 }
 
 .pf-touch {
-  background: rgb(var(--bg-sunken));
+  background: rgb(var(--bg-elevated));
   border: 1px solid rgb(var(--line));
-  border-radius: var(--radius-lg);
-  padding: 1.15rem 1.15rem 1rem;
-  box-shadow: var(--shadow-quiet);
+  border-radius: 1.25rem;
+  padding: clamp(1.35rem, 2vw, 1.85rem);
+  box-shadow: none;
 }
 
 .pf-touch-bar {
@@ -1414,11 +1414,9 @@ html {
 }
 
 .pf-touch-tick,
-.pf-touch-phase,
-.pf-agent,
+.pf-agent-status,
 .pf-snippet,
 .pf-tab,
-.pf-touch-btn,
 .pf-pipeline {
   font-family: var(--font-mono), ui-monospace, monospace;
 }
@@ -1431,9 +1429,11 @@ html {
 }
 
 .pf-touch-phase {
-  margin-top: 1rem;
-  font-size: 1.35rem;
-  letter-spacing: -0.03em;
+  margin-top: 1.15rem;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.45rem;
+  font-weight: 560;
+  letter-spacing: -0.035em;
   color: rgb(var(--fg));
 }
 
@@ -1457,12 +1457,13 @@ html {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  min-height: 2.75rem;
-  padding: 0.35rem 0.75rem;
-  border: 1px solid rgb(var(--line));
-  border-radius: var(--radius-sm);
-  background: rgb(var(--bg-elevated));
-  font-size: 0.82rem;
+  min-height: 2.6rem;
+  padding: 0.2rem 0;
+  border: none;
+  border-bottom: 1px solid rgb(var(--line));
+  border-radius: 0;
+  background: transparent;
+  font-size: 0.92rem;
 }
 
 .pf-agent-role {
@@ -1485,8 +1486,8 @@ html {
 }
 
 .pf-touch-detail {
-  min-height: 4.5rem;
-  margin-top: 0.9rem;
+  min-height: 3.2rem;
+  margin-top: 0.85rem;
   color: rgb(var(--muted));
   font-size: 0.95rem;
   line-height: 1.5;
@@ -1503,11 +1504,12 @@ html {
   min-height: var(--control-h);
   padding: 0 0.95rem;
   border: 1px solid rgb(var(--line));
-  border-radius: var(--radius-sm);
-  background: rgb(var(--bg-elevated));
+  border-radius: 999px;
+  background: transparent;
   color: rgb(var(--fg));
-  font-size: 0.72rem;
-  letter-spacing: 0.04em;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: -0.01em;
   cursor: pointer;
 }
 
@@ -1571,8 +1573,8 @@ html {
 }
 
 .pf-tab[aria-selected="true"] {
-  border-color: rgb(var(--accent) / 0.55);
-  background: rgb(var(--accent-soft));
+  border-color: rgb(var(--fg) / 0.28);
+  background: transparent;
   color: rgb(var(--fg));
 }
 
@@ -1615,15 +1617,15 @@ html {
 .pf-spots {
   display: flex;
   flex-direction: column;
-  gap: clamp(3.5rem, 9vh, 6.5rem);
-  margin-top: clamp(2.5rem, 6vh, 4rem);
+  gap: clamp(2.25rem, 5vh, 3.75rem);
+  margin-top: clamp(1.75rem, 4vh, 2.75rem);
 }
 
 .pf-spots .pf-case-card {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 72vh;
+  min-height: 58vh;
   padding: 0 0 0.25rem;
   background: transparent;
   border: none;
@@ -1673,8 +1675,8 @@ html {
 
 .pf-offer {
   display: grid;
-  gap: 1.25rem;
-  padding-block: clamp(2rem, 5vh, 3.25rem);
+  gap: 1rem;
+  padding-block: clamp(1.35rem, 3vh, 2.15rem);
   border-top: 1px solid rgb(var(--line));
 }
 
@@ -1755,8 +1757,8 @@ html {
 .pf-record {
   display: flex;
   align-items: center;
-  min-height: 70vh;
-  padding-block: clamp(4rem, 12vh, 7rem);
+  min-height: 52vh;
+  padding-block: clamp(3rem, 8vh, 5rem);
 }
 
 .pf-record summary {
@@ -1914,14 +1916,15 @@ html.dark,
   padding: 0.35rem 0;
   border: none;
   background: transparent;
-  color: rgb(var(--accent));
-  font-weight: 500;
-  font-size: 1.0625rem;
+  color: rgb(var(--muted));
+  font-weight: 450;
+  font-size: 1rem;
   letter-spacing: -0.015em;
 }
 
 .pf-hero .pf-cta--primary::after {
   content: "\00a0\2192";
+  color: rgb(var(--accent));
 }
 
 .pf-hero .pf-cta--primary:hover {
@@ -2007,15 +2010,14 @@ html.dark,
 .pf-spots {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: clamp(1.5rem, 4vh, 2.5rem);
   margin-top: 0;
 }
 
 .pf-spots .pf-case-card {
-  min-height: 100svh;
-  min-height: 100dvh;
+  min-height: 72svh;
   justify-content: center;
-  padding-block: clamp(4rem, 10vh, 6rem);
+  padding-block: clamp(2.5rem, 6vh, 4rem);
   background: transparent;
   border: none;
   box-shadow: none;

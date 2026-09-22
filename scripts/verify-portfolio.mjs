@@ -40,8 +40,12 @@ async function check(locale) {
   assert(!hero.includes("pf-cta--secondary"), `${prefix} hero must not have a second CTA`);
   assert(!html.includes("[object Object]"), `${prefix} fail control still stringifies frames`);
   assert(
-    locale === "de" ? html.includes(">Agent-Failure<") : html.includes(">Agent failure<"),
-    `${prefix} fail button missing human label`,
+    locale === "de" ? html.includes(">Fehler zeigen<") : html.includes(">Show failure<"),
+    `${prefix} fail button missing plain-string label`,
+  );
+  assert(
+    !html.includes(">Agent-Failure<") && !html.includes(">Agent failure<"),
+    `${prefix} fail button must not reuse the phase object label`,
   );
   assert(html.includes('id="sample-collective"') && html.includes('id="sample-graph"'), `${prefix} missing touchable samples`);
   assert(html.includes('id="offer"'), `${prefix} missing How to offer me`);

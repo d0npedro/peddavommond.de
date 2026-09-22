@@ -176,25 +176,29 @@
     revealNodes.forEach((node) => io.observe(node));
   }
 
+  function asText(value) {
+    return typeof value === "string" || typeof value === "number" ? String(value) : "";
+  }
+
   function paintCollective(root, data, mode, index) {
     const frame = data[mode][index];
     const tick = root.querySelector("[data-tick]");
     const phase = root.querySelector("[data-phase]");
     const detail = root.querySelector("[data-detail]");
     const list = root.querySelector("[data-agents]");
-    if (tick) tick.textContent = frame.tick;
-    if (phase) phase.textContent = frame.phase;
-    if (detail) detail.textContent = frame.detail;
+    if (tick) tick.textContent = asText(frame.tick);
+    if (phase) phase.textContent = asText(frame.phase);
+    if (detail) detail.textContent = asText(frame.detail);
     if (!list) return;
     const rows = [...list.querySelectorAll(".pf-agent")];
     if (rows.length === frame.agents.length) {
       frame.agents.forEach((agent, i) => {
         const role = rows[i].querySelector(".pf-agent-role");
         const status = rows[i].querySelector(".pf-agent-status");
-        if (role) role.textContent = agent.role;
+        if (role) role.textContent = asText(agent.role);
         if (status) {
-          status.dataset.status = agent.status;
-          status.textContent = agent.status;
+          status.dataset.status = asText(agent.status);
+          status.textContent = asText(agent.status);
         }
       });
       return;
@@ -205,11 +209,11 @@
       li.className = "pf-agent";
       const role = document.createElement("span");
       role.className = "pf-agent-role";
-      role.textContent = agent.role;
+      role.textContent = asText(agent.role);
       const status = document.createElement("span");
       status.className = "pf-agent-status";
-      status.dataset.status = agent.status;
-      status.textContent = agent.status;
+      status.dataset.status = asText(agent.status);
+      status.textContent = asText(agent.status);
       li.append(role, status);
       list.append(li);
     }

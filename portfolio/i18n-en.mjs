@@ -85,7 +85,7 @@ export const en = {
       badge: "Independent R&D · deterministic · no LLM backend",
       step: "Step",
       reset: "Reset",
-      failLabel: "Agent failure",
+      failLabel: "Show failure",
       tickLabel: "Tick",
       note: "Replay of the public contract from the repository. Not the live engine. No invented throughput or latency figures.",
       shown: "Shown: Coder, Critic, Monitor. The default collective also has Researcher, Trader, and Creative.",
