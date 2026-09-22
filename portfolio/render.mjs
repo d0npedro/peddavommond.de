@@ -19,11 +19,17 @@ import { copy } from "./content.mjs";
 
 /** Next export = layout/utilities. Token + component layer is portfolio.css (copied to public/). */
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=hero-beats4-20260922";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=klar-direkt-20260923";
 
 function stylesheets() {
   return `<link rel="stylesheet" href="${NEXT_LAYOUT_CSS}"/>
 <link rel="stylesheet" href="${PORTFOLIO_CSS}"/>`;
+}
+
+function pageScripts() {
+  return `<script src="/portfolio/motion/stage-reveal.js" defer></script>
+<script src="/portfolio/motion/craft-mark.js" defer></script>
+<script src="/portfolio/app.js" defer></script>`;
 }
 
 export function esc(value) {
@@ -131,7 +137,7 @@ function navItems(locale, numbered = false, homePrefix = "") {
 
 function renderNav(locale, { siblingPath = "", homePrefix = "", showTalk = true } = {}) {
   const t = copy(locale);
-  const brandHref = homePrefix || "#top";
+  const brandHref = homePrefix ? `${homePrefix}#hero` : "#hero";
   const contactHref = homePrefix ? `${homePrefix}#contact` : "#contact";
   const talkDesktop = showTalk
     ? `<a href="${attr(contactHref)}" class="pf-nav-cta pf-nav-cta--desktop">${esc(t.nav.talk)}</a>`
@@ -219,12 +225,12 @@ function renderProofStrip(t) {
 
 function renderHero(locale) {
   const t = copy(locale);
-  return `<section id="top" class="pf-hero pf-stage pf-stage--hero">
+  return `<section id="hero" class="pf-hero pf-stage pf-stage--hero">
     <div class="container pf-stage-center">
       <p class="pf-hero-chip">${esc(SITE.name)} · ${esc(t.hero.role)}</p>
       <h1 class="pf-hero-title">${renderPromise(t.hero.h1)}</h1>
       <div class="pf-cta-row">
-        <a href="#builds" class="pf-cta pf-cta--primary">${esc(t.hero.ctaPrimary)}</a>
+        <a href="#offer" class="pf-cta pf-cta--primary">${esc(t.hero.ctaPrimary)}</a>
       </div>
     </div>
   </section>`;
@@ -283,24 +289,25 @@ function caseLinks(item, t, extra = "") {
 function renderCaseCard(item, locale) {
   const t = copy(locale);
   const c = t.cases[item.id];
-  const pageHref = item.hasPage ? caseHref(locale, item.id) : null;
-  const titleText = c.landingTitle || item.name;
-  const title = pageHref
-    ? `<a href="${attr(pageHref)}" class="pf-case-title-link">${esc(titleText)}</a>`
-    : esc(titleText);
-  const open = pageHref
-    ? `<a class="pf-case-open" href="${attr(pageHref)}">${esc(c.landingCta || t.casePage.openCase)}</a>`
-    : "";
+  const spot = t.selectedCases.spots[item.id];
   const ownershipKind = item.ownership?.status === "production" ? "prod" : "lab";
+  let action = "";
+  if (item.id === "graph-mastermind") {
+    action = renderContractExpand(locale);
+  } else if (item.id === "agent-collective") {
+    action = `<p class="pf-case-action"><a class="pf-case-open" href="#sample-collective">${esc(spot.sample)}</a></p>`;
+  } else if (item.hasPage) {
+    action = `<p class="pf-case-action"><a class="pf-case-open" href="${attr(caseHref(locale, item.id))}">${esc(c.landingCta || t.casePage.openCase)}</a></p>`;
+  }
   return `<article class="pf-case-card pf-case-card--${ownershipKind} pf-spot">
     <div class="pf-enter" data-reveal>
       <span class="pf-hairline" aria-hidden="true"></span>
-      <h3 class="pf-case-title">${title}</h3>
+      <h3 class="pf-case-title">${esc(spot.title)}</h3>
     </div>
-    <p class="pf-case-kicker">${esc(item.name)}</p>
-    ${c.badge ? `<p class="pf-badge pf-badge--${ownershipKind}">${esc(c.badge)}</p>` : ""}
-    ${c.oneLiner ? `<p class="pf-spot-line">${esc(c.oneLiner)}</p>` : ""}
-    ${caseLinks(item, t, open)}
+    <p class="pf-chip pf-chip--signal">${esc(spot.chip)}</p>
+    <p class="pf-spot-idea">${esc(spot.idea)}</p>
+    <p class="pf-spot-line">${esc(spot.body)}</p>
+    ${action}
   </article>`;
 }
 
@@ -316,10 +323,16 @@ function renderSecondaryCase(item, locale) {
 }
 
 function renderSelectedCases(locale) {
+  const t = copy(locale);
   const leads = featuredCases();
   const leadHtml = leads.map((item) => renderCaseCard(item, locale)).join("");
   return `<section id="cases" class="pf-cases scroll-mt-24">
     <div class="container">
+      <div class="pf-enter" data-reveal>
+        <span class="pf-hairline" aria-hidden="true"></span>
+        <h2 class="pf-stage-title">${esc(t.selectedCases.beatTitle)}</h2>
+      </div>
+      <p class="pf-stage-lede">${esc(t.selectedCases.lead)}</p>
       <div class="pf-spots">${leadHtml}</div>
     </div>
   </section>`;
@@ -469,20 +482,18 @@ function renderFooter(locale) {
   const t = copy(locale);
   return `<footer id="contact" class="pf-footer relative scroll-mt-24">
     <div class="container relative py-20 md:py-28">
-      <p class="eyebrow">${esc(t.footer.eyebrow)}</p>
-      <p class="pf-location">${esc(t.hero.location)}</p>
-      <h2 class="pf-footer-title mt-4">${renderPromise(t.hero.h1)}</h2>
-      <p class="mt-4 max-w-prose text-muted">${esc(t.footer.body)}</p>
-      <p class="mt-4 max-w-prose text-muted">${esc(t.hero.trust)}</p>
-      <p class="pf-domains">${esc(t.industries.line)}</p>
+      <div class="pf-enter" data-reveal>
+        <span class="pf-hairline" aria-hidden="true"></span>
+        <h2 class="pf-footer-title">${esc(t.footer.title)}</h2>
+      </div>
+      <p class="pf-location">${esc(t.footer.lead)}</p>
+      <p class="pf-contact-echo">${esc(t.footer.echo)}</p>
       <div class="mt-10 pf-contact-row pf-contact-row--checkout">
-        <a class="secondary" href="mailto:${attr(SITE.email)}">${esc(t.hero.ctaTertiary)} · ${esc(SITE.email)}</a>
+        <a class="pf-cta pf-cta--primary" href="mailto:${attr(SITE.email)}">${esc(SITE.email)}</a>
         <a class="secondary" href="${attr(SITE.linkedin)}" target="_blank" rel="noopener noreferrer">${esc(t.footer.linkedin)}</a>
         <a class="secondary" href="${attr(SITE.github)}" target="_blank" rel="noopener noreferrer">${esc(t.footer.github)}</a>
         <a class="secondary" href="${attr(SITE.cvPath)}">${esc(t.footer.cv)}</a>
       </div>
-      <p class="mt-4 max-w-prose text-xs text-faint">${esc(t.footer.cvNote)}</p>
-      <p class="mt-6 max-w-prose text-xs text-muted"><span class="eyebrow">${esc(t.privacy.label)}</span> ${esc(t.privacy.body)}</p>
       <div class="hairline my-12"></div>
       <div class="flex flex-col items-start justify-between gap-4 font-mono text-xs text-faint sm:flex-row sm:items-center">
         <span>© ${SITE.year} ${esc(SITE.name)}</span>
@@ -490,6 +501,24 @@ function renderFooter(locale) {
       </div>
     </div>
   </footer>`;
+}
+
+function renderCraftCredit(locale) {
+  const craft = copy(locale).craft;
+  const modules = craft.modules.map((name) => `<code>${esc(name)}</code>`).join(" · ");
+  return `<section id="craft-credit" class="pf-craft scroll-mt-24">
+    <div class="container pf-stage-narrow">
+      <p class="pf-craft-copy">${esc(craft.body)}</p>
+      <p class="pf-craft-modules">${modules}</p>
+      <p class="pf-honesty-chips"><span class="pf-chip">${esc(craft.chip)}</span></p>
+      <figure class="pf-craft-mark" data-craft-mark>
+        <svg viewBox="0 0 240 24" width="240" height="24" aria-hidden="true" focusable="false">
+          <path d="M4 12 H236" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"></path>
+        </svg>
+        <figcaption class="pf-craft-tech">${esc(craft.technique)}</figcaption>
+      </figure>
+    </div>
+  </section>`;
 }
 
 function jsonLd(locale) {
@@ -734,7 +763,7 @@ ${renderNav(locale, { siblingPath, homePrefix: home })}
 </article>
 </main>
 ${renderFooter(locale)}
-<script src="/portfolio/app.js" defer></script>
+${pageScripts()}
 </body>
 </html>`;
 }
@@ -752,37 +781,21 @@ function renderAgentList(agents) {
     .join("");
 }
 
-function renderBuilds(locale) {
-  const b = copy(locale).builds;
-  return `<section id="builds" class="pf-stage scroll-mt-24">
-    <div class="container pf-stage-narrow">
-      <div class="pf-enter" data-reveal>
-        <span class="pf-hairline" aria-hidden="true"></span>
-        <h2 class="pf-stage-title">${esc(b.title)}</h2>
-      </div>
-    </div>
-  </section>`;
-}
-
 function renderCollectiveSample(locale) {
-  const t = copy(locale);
-  const s = t.samples.collective;
-  const item = caseById("agent-collective");
+  const s = copy(locale).samples.collective;
   const first = s.review[0];
   return `<section id="sample-collective" class="pf-stage scroll-mt-24">
     <div class="container pf-sample">
       <div class="pf-sample-copy">
-        <p class="eyebrow">${esc(s.eyebrow)}</p>
         <div class="pf-enter" data-reveal>
           <span class="pf-hairline" aria-hidden="true"></span>
           <h2 class="pf-stage-title">${esc(s.title)}</h2>
         </div>
         <p class="pf-stage-lede">${esc(s.body)}</p>
-        <p class="pf-honesty-chips" aria-label="${attr(t.caseMeta.statusValues.lab)}">
-          <span class="pf-chip pf-chip--signal">${esc(t.caseMeta.statusValues.lab)}</span>
+        <p class="pf-honesty-chips">
+          <span class="pf-chip pf-chip--signal">${esc(s.badge)}</span>
         </p>
         <p class="pf-stage-lede">${esc(s.shown)}</p>
-        ${caseLinks(item, t)}
       </div>
       <div class="pf-touch" data-touch="collective">
         <div class="pf-touch-bar">
@@ -825,39 +838,24 @@ function renderGraphPanels(tabs) {
     .join("");
 }
 
-function renderGraphSample(locale) {
-  const t = copy(locale);
-  const s = t.samples.graph;
-  const item = caseById("graph-mastermind");
-  const pipeline = s.pipeline.map((step) => `<li>${esc(step)}</li>`).join("");
+function renderContractExpand(locale) {
+  const s = copy(locale).samples.graph;
   const tabs = s.tabs
     .map((tab, index) => {
       const selected = index === 0;
       return `<button type="button" class="pf-tab" role="tab" id="tab-${attr(tab.id)}" data-tab="${attr(tab.id)}" aria-selected="${selected ? "true" : "false"}" aria-controls="panel-${attr(tab.id)}" tabindex="${selected ? "0" : "-1"}">${esc(tab.label)}</button>`;
     })
     .join("");
-  return `<section id="sample-graph" class="pf-stage scroll-mt-24">
-    <div class="container pf-sample">
-      <div class="pf-sample-copy">
-        <p class="eyebrow">${esc(s.eyebrow)}</p>
-        <div class="pf-enter" data-reveal>
-          <span class="pf-hairline" aria-hidden="true"></span>
-          <h2 class="pf-stage-title">${esc(s.title)}</h2>
-        </div>
-        <p class="pf-stage-lede">${esc(s.body)}</p>
-        <p class="pf-stage-lede">${esc(s.llmLine)}</p>
-        <p class="pf-eval-note">${esc(t.casePage.evalInProgress)} — ${esc(t.casePage.evalInProgressNote)}</p>
-        ${caseLinks(item, t)}
-      </div>
-      <div class="pf-touch" data-touch="contract">
-        <p class="pf-badge pf-badge--lab">${esc(s.badge)}</p>
-        <ol class="pf-pipeline" aria-label="${attr(s.title)}">${pipeline}</ol>
-        <div class="pf-tabs" role="tablist" aria-label="${attr(s.title)}">${tabs}</div>
-        ${renderGraphPanels(s.tabs)}
-        <p class="pf-touch-note">${esc(s.scratch)}</p>
-      </div>
+  return `<details class="pf-contract">
+    <summary class="pf-case-open">${esc(s.expand)}</summary>
+    <div class="pf-contract-body" data-touch="contract">
+      <p class="pf-chip pf-chip--signal">${esc(s.status)}</p>
+      <p class="pf-contract-kicker">${esc(s.kicker)}</p>
+      <div class="pf-tabs" role="tablist" aria-label="${attr(s.expand)}">${tabs}</div>
+      ${renderGraphPanels(s.tabs)}
+      <p class="pf-touch-note">${esc(s.scratch)}</p>
     </div>
-  </section>`;
+  </details>`;
 }
 
 function renderOffer(locale) {
@@ -890,7 +888,6 @@ function renderOffer(locale) {
       <p class="pf-stage-lede">${esc(o.intro)}</p>
       <div class="pf-offers">${packages}</div>
       ${renderApproachFold(locale)}
-      <p class="pf-contact-row"><a class="secondary" href="mailto:${attr(SITE.email)}">${esc(SITE.email)}</a></p>
     </div>
   </section>`;
 }
@@ -899,21 +896,39 @@ function renderApproachFold(locale) {
   const t = copy(locale);
   const items = HOW_I_WORK_KEYS.map((key) => {
     const item = t.howIWork.items[key];
-    return `<li class="pf-principle"><h3>${esc(item.title)}</h3><p>${esc(item.line)}</p></li>`;
+    return `<li class="pf-principle"><span class="pf-principle-name">${esc(item.title)}</span><span class="pf-principle-line">${esc(item.line)}</span></li>`;
   }).join("");
   return `<div id="approach" class="pf-method">
-    <h3 class="pf-method-title">${esc(t.howIWork.eyebrow)}</h3>
     <ol class="pf-principles">${items}</ol>
   </div>`;
 }
 
 function renderRecord(locale) {
   const t = copy(locale);
+  const stations = TRACK.map((item) => {
+    const copyItem = t.track.items[item.id];
+    const related = (item.caseIds ?? [])
+      .map((id) => {
+        const relatedCase = caseById(id);
+        if (!relatedCase?.hasPage) return "";
+        return `<a class="pf-track-link" href="${attr(caseHref(locale, id))}">${esc(relatedCase.name)}</a>`;
+      })
+      .filter(Boolean)
+      .join("");
+    return `<li class="pf-station">
+      <p class="pf-archive-meta">${esc(item.period)} · ${esc(item.company)}</p>
+      <h3>${esc(copyItem.title)}</h3>
+      <p>${esc(copyItem.body)}</p>
+      ${related ? `<p class="pf-track-links">${related}</p>` : ""}
+    </li>`;
+  }).join("");
   return `<section id="record" class="pf-record scroll-mt-24">
     <div class="container">
       <details data-record>
-        <summary class="pf-shell" data-reveal>${esc(t.record.summary)}</summary>
+        <summary class="pf-shell" data-reveal><h2 class="pf-record-title">${esc(t.record.summary)}</h2></summary>
         <div class="pf-record-body">
+          <p class="pf-stage-lede">${esc(t.record.note)}</p>
+          <ol class="pf-stations">${stations}</ol>
           <p class="pf-contact-row"><a class="secondary" href="${attr(SITE.cvPath)}">${esc(t.hero.ctaSecondary)}</a></p>
         </div>
       </details>
@@ -967,15 +982,14 @@ ${renderNav(locale, { showTalk: false })}
 <main id="main">
 <script type="application/ld+json">${jsonLd(locale)}</script>
 ${renderHero(locale)}
-${renderBuilds(locale)}
-${renderCollectiveSample(locale)}
-${renderSelectedCases(locale)}
-${renderGraphSample(locale)}
 ${renderOffer(locale)}
+${renderSelectedCases(locale)}
+${renderCollectiveSample(locale)}
 ${renderRecord(locale)}
 </main>
 ${renderFooter(locale)}
-<script src="/portfolio/app.js" defer></script>
+${renderCraftCredit(locale)}
+${pageScripts()}
 </body>
 </html>`;
 }
@@ -1044,7 +1058,7 @@ ${themeBoot()}
   <div class="mt-4">${jobs}</div>
   <p class="cv-todo">${esc(t.cv.todo)}</p>
 </div>
-<script src="/portfolio/app.js" defer></script>
+${pageScripts()}
 </body>
 </html>`;
 }

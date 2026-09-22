@@ -1,3 +1,8 @@
+# Motion Sheet v1.4 — SUPERSEDED
+
+**Do not implement this file.** Canonical sheet is `MOTION-SHEET-v1.5.2.md`.
+`#sample-graph` is not a scroll beat. Spine is `#hero` → `#offer` → `#cases` → `#sample-collective` → `#record` → `#contact` → `#craft-credit`.
+
 # Motion Sheet v1.4 — JOINT LOCK (AD + Product UX)
 **Owner:** Motion Craft · **Consumer:** Design Implement · **Bar:** felt premium, never carnival  
 **Status:** **CO-SIGN CLOSED** — Art Direction + Product UX aligned. This is the **only** file Design Implement should follow.  

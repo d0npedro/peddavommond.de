@@ -1049,8 +1049,9 @@ h3.pf-case-title {
 }
 
 .pf-footer-title {
-  max-width: 40rem;
-  font-size: clamp(1.55rem, 2.6vw, 2.25rem);
+  max-width: 12ch;
+  margin: 0;
+  font-size: clamp(2.4rem, 5vw, 4rem);
   font-weight: 600;
   letter-spacing: -0.035em;
   line-height: 1.1;
@@ -1875,7 +1876,7 @@ html {
 }
 
 /* -------------------------------------------------------------------------- */
-/* Motion sheet v1.4 — enter once, samples stay, nav does not move            */
+/* Motion sheet v1.5.2 — enter once, one sample, nav does not move          */
 /* -------------------------------------------------------------------------- */
 
 :root,
@@ -1941,7 +1942,7 @@ html.dark,
 
 .pf-hero .pf-cta--primary {
   min-width: 0;
-  min-height: 44px;
+  min-height: var(--cta-h);
   padding: 0.45rem 0.95rem;
   border: none;
   background: rgb(var(--accent));
@@ -2330,9 +2331,165 @@ html.dark,
   .pf-nav-link,
   .pf-stagger .pf-principle,
   .pf-touch-btn:active,
-  .pf-tab:active {
+  .pf-tab:active,
+  .pf-craft-mark path {
     transition: none;
     animation: none;
     transform: none;
+  }
+
+  .pf-craft-mark path {
+    stroke-dashoffset: 0 !important;
+  }
+}
+
+.pf-spot-idea {
+  max-width: 36rem;
+  margin-top: 0.85rem;
+  color: rgb(var(--fg));
+  font-size: 1.15rem;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+.pf-case-action {
+  margin-top: 1.35rem;
+}
+
+.pf-contract {
+  margin-top: 1.35rem;
+  max-width: 40rem;
+}
+
+.pf-contract > summary {
+  width: fit-content;
+  cursor: pointer;
+  list-style: none;
+}
+
+.pf-contract > summary::-webkit-details-marker {
+  display: none;
+}
+
+.pf-contract-body {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgb(var(--line));
+}
+
+.pf-contract-kicker {
+  margin: 0.85rem 0 0.65rem;
+  color: rgb(var(--faint));
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pf-principle {
+  display: grid;
+  grid-template-columns: minmax(9.5rem, 12.5rem) minmax(0, 1fr);
+  gap: 0.35rem 1rem;
+  align-items: baseline;
+}
+
+.pf-principle-name {
+  color: rgb(var(--fg));
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pf-principle-line {
+  color: rgb(var(--muted));
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+.pf-record-title {
+  margin: 0;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+
+.pf-stations {
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pf-station + .pf-station {
+  margin-top: 1.15rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid rgb(var(--line));
+}
+
+.pf-station h3 {
+  margin-top: 0.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgb(var(--fg));
+}
+
+.pf-station p {
+  max-width: 40rem;
+  margin-top: 0.3rem;
+  color: rgb(var(--muted));
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.pf-contact-echo {
+  max-width: 36rem;
+  margin-top: 0.85rem;
+  color: rgb(var(--muted));
+  font-size: 1.05rem;
+  line-height: 1.45;
+}
+
+.pf-location {
+  margin-top: 0.85rem;
+  color: rgb(var(--fg));
+}
+
+.pf-craft {
+  padding-block: clamp(3rem, 8vh, 5.5rem);
+  border-top: 1px solid rgb(var(--line));
+}
+
+.pf-craft-copy {
+  max-width: 38rem;
+  color: rgb(var(--muted));
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.pf-craft-modules {
+  margin-top: 0.85rem;
+  color: rgb(var(--faint));
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  line-height: 1.6;
+}
+
+.pf-craft-mark {
+  margin-top: 1.35rem;
+  color: rgb(var(--accent));
+}
+
+.pf-craft-tech {
+  margin-top: 0.35rem;
+  color: rgb(var(--faint));
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .pf-principle {
+    grid-template-columns: 1fr;
   }
 }

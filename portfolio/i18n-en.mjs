@@ -21,6 +21,8 @@ export const en = {
     profile: "Profile",
     cases: "Cases",
     offer: "Offer",
+    sample: "Sample",
+    record: "Career",
     experience: "Experience",
     cv: "CV",
     contact: "Contact",
@@ -48,7 +50,7 @@ export const en = {
     contextLine: "adesso · Finance · Public Sector · Healthcare · Loyalty",
     trust:
       "10+ years of enterprise engineering. Now applied to Agentic AI — not the other way around.",
-    ctaPrimary: "Touch the work",
+    ctaPrimary: "How to offer me",
     ctaSecondary: "CV",
     ctaTertiary: "Talk about AI & agents",
     diagramTitle: "Agentic system — goal, orchestration, evaluation, human",
@@ -80,15 +82,15 @@ export const en = {
   samples: {
     collective: {
       eyebrow: "Touchable · Independent R&D",
-      title: "State you can step through.",
-      body: "Agent Collective is a deterministic multi-agent simulator with no LLM backend. This panel replays the public tick contract: events, task, work, handoff, review. No chat, no metrics.",
+      title: "State you can step through",
+      body: "Replays the public tick contract. No chat. No metrics.",
       badge: "Independent R&D · deterministic · no LLM backend",
       step: "Step",
       reset: "Reset",
       failLabel: "Show failure",
       tickLabel: "Tick",
-      note: "Replay of the public contract from the repository. Not the live engine. No invented throughput or latency figures.",
-      shown: "Shown: Coder, Critic, Monitor. The default collective also has Researcher, Trader, and Creative.",
+      note: "Replay of the public contract. Not the live engine. No invented throughput or latency figures.",
+      shown: "Step / Reset · Coder, Critic, Monitor · Seeded run, no backend",
       review: [
         {
           tick: "0",
@@ -179,6 +181,9 @@ export const en = {
       title: "A contract you can open.",
       body: "Graph-Mastermind is an agent package for coding agents. AGENT.md, CHECKLIST.md, and the runtime contract are the artifact. No specific LLM is prescribed.",
       badge: "Independent R&D · agent package · no prescribed LLM",
+      expand: "View contract",
+      status: "Contract excerpt. Not a demo run. Evaluation in progress — no figures.",
+      kicker: "Excerpt · not the live demo",
       llmLine:
         "LLM-assisted engineering only when a coding agent executes the contract. No model or MCP claims.",
       scratch:
@@ -219,7 +224,7 @@ export const en = {
     eyebrow: "For agencies",
     title: "How to offer me",
     intro:
-      "Three role packages ready to place, for example at adesso. Scope, deliverables, where it fits, engagement. No invented client outcomes, no day rates.",
+      "Three clear packages — ready to place at agencies (e.g. adesso). Scope and deliverables. No day rates. No invented client outcomes.",
     deliverables: "Deliverables",
     ideal: "Fits",
     engagement: "Engagement",
@@ -227,50 +232,46 @@ export const en = {
       {
         name: "Senior AI Consultant",
         scope:
-          "Cut use cases against systems, identity, and data quality before anything is built. Consulting with a written boundary, not a tool pitch.",
+          "Cut use cases against systems that already run, before anyone builds. Written boundary — not a tool pitch.",
         deliverables: [
-          "Use-case cut: where an agent may act, and where the existing system already carries the process",
+          "Use-case cut: where an agent may act vs where the existing system already carries the process",
           "Architecture sketch with acceptance, Human-in-the-Loop, and explicit limits",
           "A written list of what will not be built",
         ],
-        ideal:
-          "Organizations with running IT that need AI assessed before it is implemented. Landscapes from prior delivery — finance, public sector, healthcare, loyalty — are the experience base, not a claimed AI mandate at those clients.",
+        ideal: "Organizations with running IT that need AI framed before implementation.",
         engagement:
-          "Through the agency: time-bounded architecture accompaniment, or placement into a client team. No freelancer retainer of my own, no free slots.",
+          "Through the agency — time-boxed architecture support or placement into a client team.",
       },
       {
         name: "Agentic Engineer",
         scope:
-          "Build agentic workflows: contract, tool boundaries, tests, visible state. Connect them to existing APIs and, where the system already is, to Java and Spring.",
+          "Agent workflows with a contract, tool limits, tests, and visible state. Wired to existing APIs.",
         deliverables: [
           "Agent contract (task, artifact, acceptance) in the form of the public packages",
           "Integration cut against existing APIs, identity, and pipelines",
           "Inspectable state or a checklist — a chat transcript is not acceptance",
         ],
-        ideal:
-          "Teams turning a prototype into a maintainable layer. Not an unbound model product with no system boundary.",
+        ideal: "Teams turning a prototype into a maintainable layer.",
         engagement:
-          "Engineering seat on the agency’s or the client’s team. Graph-Mastermind and Agent Collective are Independent R&D references, not a product included in the engagement. Agent Collective has no LLM backend.",
+          "Engineering seat on the agency or client team. Graph-Mastermind and Agent Collective are Independent R&D — not a bundled client product.",
       },
       {
         name: "Transformation Lead",
         scope:
-          "Translate between the business, delivery, and governance. Order of work: ground (systems, permissions, data), then the agent layer.",
+          "Translate between business, delivery, and governance. Ground first (systems, rights, data), then the agent layer.",
         deliverables: [
           "Prioritized use-case list judged against the landscape that exists",
-          "Operating model: contract, acceptance, Human-in-the-Loop — not an autonomous organization",
-          "Governance frame from regulated delivery (permissions, GDPR) plus an EU AI Act orientation from the 2026 specialization",
+          "Operating model: contract, acceptance, human-in-the-loop — not an autonomous organization",
+          "Governance frame from regulated delivery (permissions, GDPR) plus EU AI Act orientation",
         ],
-        ideal:
-          "Programs that treat modernization and AI as one sequence. Not board-KPI theatre or a mandate that does not exist in public.",
-        engagement:
-          "Program accompaniment through the agency. Seniority comes from enterprise engineering, including adesso, banking, statutory health, and loyalty — not from an AI board seat.",
+        ideal: "Programs that treat modernization and AI as one sequence.",
+        engagement: "Program accompaniment through the agency.",
       },
     ],
   },
   record: {
-    summary: "Career, credentials, profile",
-    note: "Reachable, not part of the scroll story. Stations, education, and further mandates live here and in the CV.",
+    summary: "Career",
+    note: "Engineer → Agentic AI → consulting. Detail in the CV — stations only here.",
   },
   value: {
     index: "02",
@@ -365,7 +366,30 @@ export const en = {
   selectedCases: {
     index: "01",
     eyebrow: "Selected AI & Engineering Cases",
-    beatTitle: "Three pieces of work.",
+    beatTitle: "Three pieces of work",
+    lead:
+      "Independent R&D is publicly inspectable — not client delivery. Paid enterprise work stays with what was actually shipped.",
+    spots: {
+      "graph-mastermind": {
+        title: "Graph-Mastermind",
+        chip: "Independent R&D · Agentic AI",
+        idea: "Agent package for coding agents — contract you can open.",
+        body: "Inspects existing repositories, plans changes, works with development tools and tests. AGENT.md and CHECKLIST.md are the artifact. No prescribed LLM.",
+      },
+      "agent-collective": {
+        title: "Agent Collective",
+        chip: "Independent R&D · deterministic · no LLM",
+        idea: "Multi-agent orchestration with no LLM backend.",
+        body: "Makes state, quality gates, and escalations visible — deliberately no LLM so orchestration and failure modes stay testable. Interactive proof below.",
+        sample: "To the sample ↓",
+      },
+      deutschlandcard: {
+        title: "Cloud, identity, integration",
+        chip: "Client work · no AI component in the published case",
+        idea: "Enterprise ground for later AI integration.",
+        body: "Paid cloudification of a nationwide loyalty program: Azure AD B2C, Terraform, Kubernetes. The case itself is not an AI project — identity, API, and cloud are the moat.",
+      },
+    },
     title: "Three cases — lab and enterprise labeled separately.",
     rndLine: "Independent R&D — publicly inspectable, not client delivery.",
     clientLine: "Client work under NDA: only my role and releasable technical content.",
@@ -411,7 +435,7 @@ export const en = {
     items: {
       evaluation: {
         title: "Evaluation",
-        line: "Acceptance via tests, CI, and inspectable state. Numbers only once a reproducible harness exists.",
+        line: "Acceptance via tests, CI, and inspectable state. Numbers only with a reproducible harness.",
         body: "Acceptance via tests, CI, checklists, and inspectable state. No model call without a verifiable artifact. Quantitative numbers only once a reproducible harness exists.",
       },
       hitl: {
@@ -421,7 +445,7 @@ export const en = {
       },
       security: {
         title: "Security",
-        line: "Identity, permissions, synthetic demos. Responsible delivery before speed.",
+        line: "Identity, permissions, synthetic demos. Responsibility before speed.",
         body: "2FA, RBAC, identity, and GDPR from enterprise delivery. Public demos use synthetic or documented sample data. Responsible deployment before speed.",
       },
       observability: {
@@ -1043,17 +1067,25 @@ export const en = {
     ],
   },
   footer: {
-    eyebrow: "Conversation",
-    title: "A conversation about AI & agents.",
+    eyebrow: "Talk",
+    title: "Talk",
+    lead: "Cologne · Germany-wide / remote",
+    echo: "Agent layers into running systems — reviewable, with human-in-the-loop.",
     body: "CV, LinkedIn, and GitHub are ready. Agencies place him through the three role packages. No freelancer retainer, no free slots.",
     email: "Email",
     linkedin: "LinkedIn",
     github: "GitHub",
-    cv: "CV (HTML)",
+    cv: "CV",
     cvNote:
       "HTML CV for print or Save as PDF. A separate PDF can later be added under /portfolio/cv/. No invented Drive URLs.",
     roleLine: "Senior AI Consultant & Agentic Software Engineer",
     personalNote: "",
+  },
+  craft: {
+    body: "Interaction and scroll story on this page: custom scripts (vanilla JS/CSS). No Three.js, no off-the-shelf animation framework.",
+    chip: "Custom-built · not a library demo",
+    technique: "SVG stroke-dashoffset · drawn once",
+    modules: ["portfolio/motion/stage-reveal.js", "portfolio/motion/craft-mark.js"],
   },
   cv: {
     title: "CV — Peter Henrichs",

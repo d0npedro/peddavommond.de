@@ -37,8 +37,7 @@ async function check(locale) {
   assert(html.includes("10+"), `${prefix} 10+ years proof missing from SSR`);
   assert(!html.includes(">0<!-- -->+") && !html.includes(">0+</"), `${prefix} still has 0+ SSR metrics`);
   assert(/Köln|Cologne/.test(html) && /Remote/.test(html), `${prefix} missing Köln/Cologne and Remote`);
-  const heroEnd = html.indexOf('id="builds"');
-  const hero = heroEnd > 0 ? html.slice(html.indexOf('id="top"'), heroEnd) : "";
+  const hero = html.slice(html.indexOf('id="hero"'), html.indexOf('id="offer"'));
   assert(hero.includes("pf-hero-chip"), `${prefix} first viewport needs the name/role chip`);
   assert(hero.includes("<h1"), `${prefix} hero missing headline`);
   assert((hero.match(/<h1/g) || []).length === 1, `${prefix} first viewport keeps one promise`);
@@ -56,7 +55,9 @@ async function check(locale) {
     !html.includes(">Agent-Failure<") && !html.includes(">Agent failure<"),
     `${prefix} fail button must not reuse the phase object label`,
   );
-  assert(html.includes('id="sample-collective"') && html.includes('id="sample-graph"'), `${prefix} missing touchable samples`);
+  assert(html.includes('id="sample-collective"'), `${prefix} missing the collective sample`);
+  assert(!html.includes('id="sample-graph"'), `${prefix} Graph contract must not be its own stage`);
+  assert(!html.includes('id="builds"') && !html.includes('id="top"'), `${prefix} deleted stages still present`);
   assert(html.includes('id="offer"'), `${prefix} missing How to offer me`);
   assert(html.includes("Senior AI Consultant") && html.includes("Agentic Engineer") && html.includes("Transformation Lead"), `${prefix} missing agency role packages`);
   assert(html.includes("data-touch=\"collective\"") && html.includes("data-touch=\"contract\""), `${prefix} samples are not interactive`);
@@ -64,30 +65,26 @@ async function check(locale) {
   if (locale === "de") {
     assert(visibleText(hero).includes(DE_H1), `${prefix} missing approved hero headline`);
     assert(!html.includes("Die Schicht zwischen System und Agent."), `${prefix} old abstract hero line still present`);
-    assert(html.includes("Arbeit anfassen"), `${prefix} missing primary CTA`);
+    assert(hero.includes("Wie man mich anbietet") && hero.includes('href="#offer"'), `${prefix} hero CTA must open the offer`);
     assert(html.includes("Wie man mich anbietet"), `${prefix} missing How to offer me title`);
     assert(html.includes("kein LLM-Backend"), `${prefix} Agent Collective sample must state no LLM backend`);
     assert(!html.includes("Where I create value"), `${prefix} English value eyebrow leaked`);
     assert(!html.includes("10+ years enterprise systems"), `${prefix} English proof-chip body leaked`);
     assert(!html.includes("Weitere Mandate"), `${prefix} further-mandate wall must stay off the landing`);
-    assert(html.includes("Gesundheitswesen") && html.includes("Loyalty") && html.includes("adesso"), `${prefix} missing compact enterprise contexts`);
-    assert(html.includes("Finanzwesen") && html.includes("Öffentlicher Sektor"), `${prefix} missing Finance / Public Sector context line`);
+    assert(html.includes("Kundenarbeit · kein AI-Bestandteil"), `${prefix} missing DeutschlandCard honesty chip`);
+    assert(html.includes("Zum Sample"), `${prefix} Agent Collective case must link to the sample`);
   } else {
     assert(visibleText(hero).includes(EN_H1), `${prefix} missing approved hero headline`);
     assert(!html.includes("The layer between the system and the agent."), `${prefix} old abstract hero line still present`);
-    assert(html.includes("Touch the work"), `${prefix} missing primary CTA`);
+    assert(hero.includes("How to offer me") && hero.includes('href="#offer"'), `${prefix} hero CTA must open the offer`);
     assert(html.includes("How to offer me"), `${prefix} missing How to offer me title`);
     assert(html.includes("no LLM backend"), `${prefix} Agent Collective sample must state no LLM backend`);
     assert(!html.includes("Further mandates"), `${prefix} further-mandate wall must stay off the landing`);
-    assert(html.includes("Healthcare") && html.includes("Loyalty") && html.includes("adesso"), `${prefix} missing compact enterprise contexts`);
-    assert(html.includes("Finance") && html.includes("Public Sector"), `${prefix} missing Finance / Public Sector context line`);
+    assert(html.includes("Client work · no AI component"), `${prefix} missing DeutschlandCard honesty chip`);
+    assert(html.includes("To the sample"), `${prefix} Agent Collective case must link to the sample`);
   }
   assert(html.includes("AI Agents") || html.includes("AI agents"), `${prefix} missing AI Agents in copy/schema`);
   assert(html.includes("Java"), `${prefix} missing Java in capabilities`);
-  assert(html.includes("graph-mastermind.vercel.app"), `${prefix} missing Graph-Mastermind demo`);
-  assert(html.includes("github.com/d0npedro/graph-mastermind"), `${prefix} missing Graph-Mastermind repo`);
-  assert(html.includes("github.com/d0npedro/multi-agent"), `${prefix} missing Agent Collective repo`);
-  assert(html.includes("multi-agent-six-murex.vercel.app") || html.includes("/multi-agent/"), `${prefix} missing Agent Collective demo`);
   assert(html.includes("peter.henrichs@web.de"), `${prefix} missing email`);
   assert(!html.includes("ph@d0npedro.com"), `${prefix} still has old hiring email`);
   assert(!/Hennrichs/.test(html), `${prefix} misspelled personal name`);
@@ -107,50 +104,53 @@ async function check(locale) {
   assert(!/book a slot|freie Slots|free slots|Retainer-Platz/i.test(html) || /kein Freelancer|No freelancer/.test(html), `${prefix} freelancer/slot pitch leaked`);
   assert(html.includes("Independent R&amp;D") || html.includes("Independent R&D"), `${prefix} missing Independent R&D credibility label`);
   assert(!html.includes("Independent Lab"), `${prefix} still uses hobby-adjacent Independent Lab label`);
-  assert(
-    html.includes("How I build AI systems") || html.includes("Wie ich AI-Systeme baue"),
-    `${prefix} missing How I build AI systems`,
-  );
   assert(html.includes("Human-in-the-Loop"), `${prefix} missing HITL`);
-  assert(
-    html.includes('id="builds"') &&
-      html.includes('id="sample-collective"') &&
-      html.includes('id="cases"') &&
-      html.includes('id="sample-graph"') &&
-      html.includes('id="offer"') &&
-      html.includes('id="approach"') &&
-      html.includes('id="record"'),
-    `${prefix} missing cinematic section ids`,
-  );
-  assert(html.indexOf('id="builds"') < html.indexOf('id="sample-collective"'), `${prefix} what he builds should precede the first sample`);
-  assert(html.indexOf('id="sample-collective"') < html.indexOf('id="cases"'), `${prefix} collective sample should precede case spotlights`);
-  const collective = html.slice(html.indexOf('id="sample-collective"'), html.indexOf('id="cases"'));
-  assert(collective.includes("Independent R&amp;D") || collective.includes("Independent R&D"), `${prefix} collective sample keeps Independent R&D`);
-  assert(!collective.includes(">Produktion<") && !collective.includes(">Production<"), `${prefix} collective sample must not claim production`);
-  assert(html.indexOf('id="cases"') < html.indexOf('id="sample-graph"'), `${prefix} cases should precede the contract sample`);
-  assert(html.indexOf('id="sample-graph"') < html.indexOf('id="offer"'), `${prefix} contract sample should precede How to offer me`);
+  assert(html.includes('id="craft-credit"'), `${prefix} missing craft credit`);
+  assert(html.includes("portfolio/motion/stage-reveal.js") && html.includes("portfolio/motion/craft-mark.js"), `${prefix} craft credit must name the motion modules`);
+  assert(html.includes("Kein Three.js") || html.includes("No Three.js"), `${prefix} craft credit must state the Three.js refusal`);
+  const heroAt = html.indexOf('id="hero"');
   const offerAt = html.indexOf('id="offer"');
+  const casesAt = html.indexOf('id="cases"');
+  const sampleAt = html.indexOf('id="sample-collective"');
   const approachAt = html.indexOf('id="approach"');
   const recordAt = html.indexOf('id="record"');
   const contactAt = html.indexOf('id="contact"');
+  const craftAt = html.indexOf('id="craft-credit"');
+  assert(
+    heroAt < offerAt && offerAt < casesAt && casesAt < sampleAt && sampleAt < recordAt && recordAt < contactAt && contactAt < craftAt,
+    `${prefix} spine must be hero → offer → cases → sample → record → contact → craft-credit`,
+  );
+  const collective = html.slice(sampleAt, recordAt);
+  assert(collective.includes("Independent R&amp;D") || collective.includes("Independent R&D"), `${prefix} collective sample keeps Independent R&D`);
+  assert(!collective.includes(">Produktion<") && !collective.includes(">Production<"), `${prefix} collective sample must not claim production`);
+  assert(!collective.includes('id="sample-graph"'), `${prefix} collective beat must not host the graph stage`);
   assert(offerAt < approachAt && approachAt < recordAt, `${prefix} principles fold inside the offer, before the record`);
   const offerClose = html.indexOf("</section>", offerAt);
-  assert(offerClose > approachAt && offerClose < recordAt, `${prefix} approach must sit inside #offer, not as its own beat`);
+  assert(offerClose > approachAt && offerClose < casesAt, `${prefix} approach must sit inside #offer, not as its own beat`);
   const recordSlice = html.slice(recordAt, contactAt);
   assert(recordSlice.includes("<details"), `${prefix} #record must be one collapsed details block`);
   assert(!recordSlice.includes("<details open"), `${prefix} #record must start collapsed`);
   assert(!recordSlice.includes('id="approach"'), `${prefix} principles stay out of #record`);
-  assert(!recordSlice.includes("pf-archive-list"), `${prefix} record must not open a career grid`);
+  assert((recordSlice.match(/class="pf-station"/g) || []).length === 5, `${prefix} record keeps the five career stations`);
   assert(!recordSlice.includes("Weitere Mandate") && !recordSlice.includes("Further mandates"), `${prefix} record must not open a mandate wall`);
   assert(recordSlice.includes("/portfolio/cv/"), `${prefix} record keeps the CV path`);
-  const builds = html.slice(html.indexOf('id="builds"'), html.indexOf('id="sample-collective"'));
-  assert(!builds.includes("pf-honesty-chips") && !builds.includes("pf-stage-lede"), `${prefix} #builds is one claim only`);
-  const cases = html.slice(html.indexOf('id="cases"'), html.indexOf('id="sample-graph"'));
+  const cases = html.slice(casesAt, sampleAt);
   assert((cases.match(/class="pf-case-card /g) || []).length === 3, `${prefix} landing cases are exactly three`);
+  assert(cases.includes('data-touch="contract"'), `${prefix} Graph contract expands inside the Graph case`);
+  assert(!cases.includes("github.com/d0npedro/graph-mastermind"), `${prefix} case cards must not pile repo CTAs`);
   assert(!cases.includes("dz-bank-okvp") && !cases.includes("bitmarck-bitgo"), `${prefix} extra cases must stay out of #cases`);
   assert(!cases.includes("pf-cases-idea") && !cases.includes('class="eyebrow"'), `${prefix} cases intro must not precede the first case`);
-  const approach = html.slice(approachAt, recordAt);
-  assert((approach.match(/class="pf-principle"/g) || []).length === 4, `${prefix} principles are four one-liners under the offer`);
+  const offerSlice = html.slice(offerAt, offerClose);
+  assert((offerSlice.match(/class="pf-principle"/g) || []).length === 4, `${prefix} principles are four one-liners under the offer`);
+  const contactSlice = html.slice(contactAt, craftAt);
+  const lockedH1 = locale === "de" ? DE_H1 : EN_H1;
+  assert(!visibleText(contactSlice).includes(lockedH1), `${prefix} contact must not repeat the hero H1`);
+  const craft = html.slice(craftAt);
+  const craftCopy = locale === "de"
+    ? "Interaktion und Scroll-Story auf dieser Seite: eigene Skripte (Vanilla JS/CSS). Kein Three.js, kein zugekauftes Animation-Framework."
+    : "Interaction and scroll story on this page: custom scripts (vanilla JS/CSS). No Three.js, no off-the-shelf animation framework.";
+  assert(craft.includes(craftCopy), `${prefix} craft-credit copy drifted`);
+  assert(craft.includes("Custom-built · not a library demo"), `${prefix} craft chip missing`);
   assert(!recordSlice.includes("pf-section-band"), `${prefix} record must not use full-bleed stage bands`);
   assert(html.indexOf('id="offer"') < recordAt, `${prefix} offer packages stay before the record`);
   assert(html.includes("ProfilePage") && html.includes("jobTitle") && html.includes("knowsAbout") && html.includes("sameAs"), `${prefix} missing Person/ProfilePage JSON-LD`);
@@ -158,7 +158,6 @@ async function check(locale) {
   assert(html.indexOf("Graph-Mastermind") < html.indexOf("DeutschlandCard"), `${prefix} Graph-Mastermind should lead flagships`);
   assert(html.indexOf("Graph-Mastermind") < recordAt, `${prefix} Graph-Mastermind should appear before the record`);
   assert(html.includes("Agentic AI"), `${prefix} missing Agentic AI in content/schema`);
-  assert(html.includes("LLM-assisted") || html.includes("LLM-gestützte"), `${prefix} missing LLM-assisted engineering term`);
   assert(!html.includes("MCP") || /MCP claims|MCP-Claims|ohne Modell/.test(html), `${prefix} should not claim MCP as a skill`);
   assert(!html.includes("PeddaVomMond") && !html.includes("Hans Feger"), `${prefix} unexpected entertainment branding`);
   for (const id of FLAGSHIP_IDS) {
@@ -187,8 +186,8 @@ const [de, en] = await Promise.all([
   readFile(join(root, "public/portfolio/de/index.html"), "utf8"),
   readFile(join(root, "public/portfolio/en/index.html"), "utf8"),
 ]);
-assert(de.includes("Arbeit anfassen"), "DE primary CTA missing");
-assert(en.includes("Touch the work"), "EN primary CTA missing");
+assert(de.includes('href="#offer"') && de.includes("Wie man mich anbietet"), "DE hero CTA missing");
+assert(en.includes('href="#offer"') && en.includes("How to offer me"), "EN hero CTA missing");
 assert(de.includes("Lebenslauf"), "DE CV label missing");
 assert(en.includes("/portfolio/cv/"), "EN CV path missing");
 assert(!de.includes("Where I create value"), "DE value eyebrow still English");
@@ -197,14 +196,12 @@ assert(visibleText(de).includes(DE_H1), "DE H1 missing approved promise");
 assert(visibleText(en).includes(EN_H1), "EN H1 missing approved promise");
 assert(!de.includes("Die Schicht zwischen System und Agent."), "DE still has the old abstract hero line");
 assert(!en.includes("The layer between the system and the agent."), "EN still has the old abstract hero line");
-assert(de.includes("Jetzt angewandt auf Agentic AI") || de.includes("nicht umgekehrt"), "DE trust line missing");
-assert(en.includes("Now applied to Agentic AI"), "EN trust line missing");
 assert(de.includes("Wie man mich anbietet") && en.includes("How to offer me"), "How to offer me missing in a locale");
 assert(de.includes("Agentic Engineer") && en.includes("Agentic Engineer"), "Agentic Engineer package missing");
 assert(de.includes("Transformation Lead") && en.includes("Transformation Lead"), "Transformation Lead package missing");
-assert(de.includes("Über AI &amp; Agents sprechen") || de.includes("Über AI & Agents sprechen") || de.includes("Gespräch über AI"), "DE talk CTA missing");
-assert(de.includes("Agentic-AI-Case ansehen"), "DE Graph-Mastermind CTA should be information-rich");
-assert(en.includes("View the agentic-engineering case"), "EN Graph-Mastermind CTA should be information-rich");
+assert(de.includes(">Gespräch<") && en.includes(">Talk<"), "contact heading missing");
+assert(de.includes("Vertrag ansehen") && en.includes("View contract"), "in-case contract expand missing");
+assert(!de.includes("id=\"sample-graph\"") && !en.includes("id=\"sample-graph\""), "sample-graph stage still on a landing");
 assert(!de.includes("Hennrichs") && !en.includes("Hennrichs"), "audit misspelling leaked");
 assert(JSON.stringify(FLAGSHIP_IDS) === JSON.stringify(["graph-mastermind", "agent-collective", "deutschlandcard"]), "lead cases must map to existing real projects");
 assert(!de.includes("enterprise-integration") && !en.includes("enterprise-integration"), "fabricated enterprise-integration product still on landing");
@@ -278,7 +275,17 @@ for (const locale of ["de", "en"]) {
     await checkCase(locale, id);
   }
 }
+async function checkLibs() {
+  const pkg = await readFile(join(root, "package.json"), "utf8");
+  assert(!/"three"|"gsap"|"framer-motion"|"animejs"|"lottie-web"/.test(pkg), "package.json must not add a motion framework");
+  for (const rel of ["portfolio/app.js", "portfolio/motion/stage-reveal.js", "portfolio/motion/craft-mark.js", "portfolio/render.mjs"]) {
+    const src = await readFile(join(root, rel), "utf8");
+    assert(!/from ["'](?:three|gsap|framer-motion|animejs|lottie)/.test(src), `${rel} imports a forbidden motion library`);
+  }
+}
+
 await checkSitemap();
+await checkLibs();
 
 if (failures.length) {
   console.error("portfolio verify failed:\n- " + failures.join("\n- "));
