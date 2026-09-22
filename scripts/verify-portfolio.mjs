@@ -32,7 +32,9 @@ async function check(locale) {
   assert(/Köln|Cologne/.test(html) && /Remote/.test(html), `${prefix} missing Köln/Cologne and Remote`);
   const heroEnd = html.indexOf('id="builds"');
   const hero = heroEnd > 0 ? html.slice(html.indexOf('id="top"'), heroEnd) : "";
+  assert(hero.includes("pf-hero-chip"), `${prefix} first viewport needs the name/role chip`);
   assert(hero.includes("<h1"), `${prefix} hero missing headline`);
+  assert((hero.match(/<h1/g) || []).length === 1, `${prefix} first viewport keeps one promise`);
   assert(!hero.includes("pf-proof"), `${prefix} proof chips still in the first viewport`);
   assert(!hero.includes("pf-diagram"), `${prefix} diagram still in the first viewport`);
   assert(!hero.includes("pf-case"), `${prefix} case grid still in the first viewport`);
@@ -123,16 +125,25 @@ async function check(locale) {
   assert(html.indexOf('id="sample-collective"') < html.indexOf('id="cases"'), `${prefix} collective sample should precede case spotlights`);
   assert(html.indexOf('id="cases"') < html.indexOf('id="sample-graph"'), `${prefix} cases should precede the contract sample`);
   assert(html.indexOf('id="sample-graph"') < html.indexOf('id="offer"'), `${prefix} contract sample should precede How to offer me`);
-  assert(html.indexOf('id="offer"') < html.indexOf('id="approach"'), `${prefix} packages should precede how he works`);
-  assert(html.indexOf('id="approach"') < html.indexOf('id="work"'), `${prefix} career record should follow the scroll story`);
+  assert(html.indexOf('id="offer"') < html.indexOf('id="approach"'), `${prefix} packages should precede principles`);
+  assert(html.indexOf('id="approach"') < html.indexOf('id="record"'), `${prefix} principles stay before the collapsed record`);
   const recordAt = html.indexOf('id="record"');
   const contactAt = html.indexOf('id="contact"');
   const recordSlice = html.slice(recordAt, contactAt);
   assert(recordSlice.includes("<details"), `${prefix} #record must be one collapsed details block`);
   assert(!recordSlice.includes("<details open"), `${prefix} #record must start collapsed`);
-  for (const id of ["approach", "work", "credentials", "about", "education"]) {
+  assert(!recordSlice.includes('id="approach"'), `${prefix} principles are their own beat, not inside #record`);
+  for (const id of ["work", "credentials", "about", "education"]) {
     assert(recordSlice.includes(`id="${id}"`), `${prefix} ${id} must live inside #record`);
   }
+  const builds = html.slice(html.indexOf('id="builds"'), html.indexOf('id="sample-collective"'));
+  assert(!builds.includes("pf-honesty-chips") && !builds.includes("pf-stage-lede"), `${prefix} #builds is one claim only`);
+  const cases = html.slice(html.indexOf('id="cases"'), html.indexOf('id="sample-graph"'));
+  assert((cases.match(/class="pf-case-card /g) || []).length === 3, `${prefix} landing cases are exactly three`);
+  assert(!cases.includes("dz-bank-okvp") && !cases.includes("bitmarck-bitgo"), `${prefix} extra cases must stay out of #cases`);
+  assert(cases.includes(locale === "de" ? "Problem / Geschäftskontext" : "Problem / business context") || cases.includes("Architektur") || cases.includes("Architecture"), `${prefix} cases should show problem, system, outcome, role`);
+  const approach = html.slice(html.indexOf('id="approach"'), recordAt);
+  assert((approach.match(/class="pf-principle"/g) || []).length === 4, `${prefix} principles are four one-liners`);
   assert(!recordSlice.includes("pf-section-band"), `${prefix} record must not use full-bleed stage bands`);
   assert(html.indexOf('id="offer"') < recordAt, `${prefix} offer packages stay before the record`);
   assert(html.includes("Agentic AI Solution Consulting") && html.includes("Enterprise AI Integration") && html.includes("AI-Augmented Software Engineering"), `${prefix} missing consulting fields`);

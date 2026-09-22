@@ -171,7 +171,7 @@
           observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.15 },
+      { threshold: 0.18, rootMargin: "0px 0px -8% 0px" },
     );
     revealNodes.forEach((node) => io.observe(node));
   }
@@ -182,6 +182,7 @@
 
   function paintCollective(root, data, mode, index) {
     const frame = data[mode][index];
+    const apply = () => {
     const tick = root.querySelector("[data-tick]");
     const phase = root.querySelector("[data-phase]");
     const detail = root.querySelector("[data-detail]");
@@ -217,6 +218,17 @@
       li.append(role, status);
       list.append(li);
     }
+    };
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      apply();
+      return;
+    }
+    root.classList.add("is-swapping");
+    window.setTimeout(() => {
+      apply();
+      root.classList.remove("is-swapping");
+    }, 120);
   }
 
   document.querySelectorAll("[data-touch='collective']").forEach((root) => {

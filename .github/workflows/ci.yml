@@ -97,6 +97,10 @@ jobs:
           ! grep -q '<details open' public/portfolio/en/index.html
           grep -q 'id="approach"' public/portfolio/de/index.html
           grep -q 'id="approach"' public/portfolio/en/index.html
+          grep -q 'pf-hero-chip' public/portfolio/de/index.html
+          grep -q 'pf-hero-chip' public/portfolio/en/index.html
+          grep -q 'pf-principle' public/portfolio/de/index.html
+          grep -q 'pf-principle' public/portfolio/en/index.html
           grep -q 'id="education"' public/portfolio/de/index.html
           grep -q 'id="education"' public/portfolio/en/index.html
           grep -q 'id="work"' public/portfolio/de/index.html
