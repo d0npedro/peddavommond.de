@@ -85,7 +85,7 @@ export const de = {
       badge: "Independent R&D · deterministisch · kein LLM-Backend",
       step: "Schritt",
       reset: "Zurück",
-      fail: "Agent-Failure",
+      failLabel: "Agent-Failure",
       tickLabel: "Tick",
       note: "Wiedergabe des öffentlichen Vertrags aus dem Repository. Nicht die Live-Engine. Keine erfundenen Durchsatz- oder Latenzzahlen.",
       shown:

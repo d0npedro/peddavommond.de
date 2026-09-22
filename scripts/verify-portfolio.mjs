@@ -38,6 +38,11 @@ async function check(locale) {
   assert(!hero.includes("pf-case"), `${prefix} case grid still in the first viewport`);
   assert((hero.match(/pf-cta--primary/g) || []).length === 1, `${prefix} hero must have exactly one primary CTA`);
   assert(!hero.includes("pf-cta--secondary"), `${prefix} hero must not have a second CTA`);
+  assert(!html.includes("[object Object]"), `${prefix} fail control still stringifies frames`);
+  assert(
+    locale === "de" ? html.includes(">Agent-Failure<") : html.includes(">Agent failure<"),
+    `${prefix} fail button missing human label`,
+  );
   assert(html.includes('id="sample-collective"') && html.includes('id="sample-graph"'), `${prefix} missing touchable samples`);
   assert(html.includes('id="offer"'), `${prefix} missing How to offer me`);
   assert(html.includes("Senior AI Consultant") && html.includes("Agentic Engineer") && html.includes("Transformation Lead"), `${prefix} missing agency role packages`);

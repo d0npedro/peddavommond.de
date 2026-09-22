@@ -186,6 +186,19 @@
     if (phase) phase.textContent = frame.phase;
     if (detail) detail.textContent = frame.detail;
     if (!list) return;
+    const rows = [...list.querySelectorAll(".pf-agent")];
+    if (rows.length === frame.agents.length) {
+      frame.agents.forEach((agent, i) => {
+        const role = rows[i].querySelector(".pf-agent-role");
+        const status = rows[i].querySelector(".pf-agent-status");
+        if (role) role.textContent = agent.role;
+        if (status) {
+          status.dataset.status = agent.status;
+          status.textContent = agent.status;
+        }
+      });
+      return;
+    }
     list.replaceChildren();
     for (const agent of frame.agents) {
       const li = document.createElement("li");
