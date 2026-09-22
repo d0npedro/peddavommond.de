@@ -32,7 +32,7 @@
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#10151E"/>
 <link rel="icon" href="/portfolio/de/icon.png" type="image/png" sizes="32x32"/>
 <link rel="stylesheet" href="/portfolio/de/_next/static/css/76323045a7107f6a.css"/>
-<link rel="stylesheet" href="/portfolio/portfolio.css?v=quiet-20260922"/>
+<link rel="stylesheet" href="/portfolio/portfolio.css?v=fail-20260922"/>
 </head>
 <body class="min-h-screen bg-bg font-sans antialiased">
 <script>!function(){try{var d=document.documentElement,c=d.classList;c.remove('light','dark');var e=localStorage.getItem('theme');if('system'===e||(!e&&false)){var t='(prefers-color-scheme: dark)',m=window.matchMedia(t);if(m.media!==t||m.matches){d.style.colorScheme='dark';c.add('dark')}else{d.style.colorScheme='light';c.add('light')}}else if(e){c.add(e||'')}else{c.add('dark')}if(e==='light'||e==='dark'||!e)d.style.colorScheme=e||'dark'}catch(e){}}()</script>
@@ -112,7 +112,7 @@
         <p class="pf-touch-detail" data-detail aria-live="polite">Uhr steht bei Tick 0. Seeded Run, kein Backend, kein Modellaufruf.</p>
         <div class="pf-touch-actions">
           <button type="button" class="pf-touch-btn" data-action="step">Schritt</button>
-          <button type="button" class="pf-touch-btn" data-action="fail" aria-pressed="false">Agent-Failure</button>
+          <button type="button" class="pf-touch-btn" data-action="fail" aria-pressed="false">Fehler zeigen</button>
           <button type="button" class="pf-touch-btn" data-action="reset">Zurück</button>
         </div>
         <p class="pf-touch-note">Wiedergabe des öffentlichen Vertrags aus dem Repository. Nicht die Live-Engine. Keine erfundenen Durchsatz- oder Latenzzahlen.</p>
@@ -265,10 +265,19 @@ Ein Modell ist nicht Teil des Vertrags.</pre>
           </dl>
         </div>
       </article></div>
-      <div id="approach" class="pf-method">
-    <p class="eyebrow">Wie ich AI-Systeme baue</p>
-    <p class="pf-method-title">Evaluation, Human-in-the-loop, Security, Observability.</p>
-    <ol class="pf-trust-list"><li class="pf-trust-item">
+    </div>
+  </section>
+<section id="record" class="pf-record scroll-mt-24">
+    <div class="container">
+      <details data-record>
+        <summary class="pf-shell" data-reveal>Werdegang, Nachweise, Profil</summary>
+        <div class="pf-record-body">
+          <p>Erreichbar, nicht Teil der Scroll-Geschichte. Stationen, Ausbildung und weitere Mandate stehen hier und im Lebenslauf.</p>
+          <p class="pf-contact-row"><a class="secondary" href="/portfolio/cv/">Lebenslauf</a></p>
+          <div id="approach" class="pf-archive">
+    <h2 class="pf-archive-title">Wie ich AI-Systeme baue</h2>
+    <p>Evaluation, Human-in-the-loop, Security, Observability.</p>
+    <ol class="pf-archive-list"><li class="pf-trust-item">
       <h3>Evaluation</h3>
       <p>Abnahme über Tests, CI und prüfbaren Zustand. Zahlen erst mit einem reproduzierbaren Harness.</p>
     </li><li class="pf-trust-item">
@@ -281,62 +290,49 @@ Ein Modell ist nicht Teil des Vertrags.</pre>
       <h3>Observability</h3>
       <p>Was man nicht sehen kann, skaliert nicht.</p>
     </li></ol>
+    <div class="pf-archive-skills">
+    <h3 class="pf-archive-title">Fünf Gruppen — nicht eine Skill-Wand.</h3>
+    <ul class="pf-archive-list"><li class="pf-archive-item"><h3>Strategie</h3><p>Use Cases dort, wo Systeme, Identität und Datenqualität schon tragen. AI als Schicht auf bestehender Landschaft — nicht als Tool-erste Identität.</p></li><li class="pf-archive-item"><h3>Architektur</h3><p>Java/Spring, REST, Identity, Messaging, Cloud. Systeme, die schon da sind, nicht Greenfield-Demos.</p></li><li class="pf-archive-item"><h3>Agentic Engineering</h3><p>Agent-Verträge, Repository-Intelligence, testbare Multi-Agent-Orchestrierung, LLM-gestützte Entwicklung. Öffentlich belegbar, ohne Modell- oder MCP-Claims.</p></li><li class="pf-archive-item"><h3>Umsetzung</h3><p>CI/CD, Terraform, Kubernetes, OpenShift, Lead-Dev-Ownership. Entkopplung ohne Big Bang. Was in Produktion überlebt.</p></li><li class="pf-archive-item"><h3>Governance</h3><p>DSGVO, EU AI Act, 2FA, feingranulare Berechtigungen, HITL, regulierte Daten. Guardrails vor Geschwindigkeit.</p></li></ul>
+  </div>
     <p class="pf-trust">10+ Jahre Enterprise Engineering. Jetzt angewandt auf Agentic AI — nicht umgekehrt.</p>
     <p class="pf-domains">adesso · Finanzwesen · Öffentlicher Sektor · Gesundheitswesen · Loyalty</p>
-    <p class="pf-stage-lede">Strategie, Architektur, Agentic Engineering, Umsetzung, Governance.</p>
   </div>
-    </div>
-  </section>
-<section id="record" class="pf-record scroll-mt-24">
-    <div class="container">
-      <details data-record>
-        <summary class="pf-shell" data-reveal>Werdegang, Nachweise, Profil</summary>
-        <p class="pf-stage-lede">Erreichbar, nicht Teil der Scroll-Geschichte. Stationen, Ausbildung und weitere Mandate stehen hier und im Lebenslauf.</p>
-        <p class="pf-contact-row"><a class="secondary" href="/portfolio/cv/">Lebenslauf</a></p>
-        <section id="work" class="pf-section-band scroll-mt-24 py-20 md:py-24">
-    <div class="container">
-      <div class="mb-12 md:mb-16 reveal" data-reveal>
-    <div class="flex items-center gap-3 text-faint">
-      <span class="font-mono text-xs">03</span>
-      <span class="hairline w-10"></span>
-      <span class="eyebrow">Karrierebogen</span>
-    </div>
-    <h2 class="pf-section-title mt-5 text-balance">Engineer → Agentic AI → Beratung. Fünf Stationen, nicht der Lebenslauf.</h2>
-    <p class="mt-4 max-w-prose text-[1.05rem] leading-relaxed text-muted">Die Seniorität beginnt nicht 2026. Agentic AI sitzt auf bezahlter Enterprise-Lieferung — Banking, öffentlicher Sektor, Gesundheitswesen, Loyalty. Details und NDA-Grenzen stehen in den Cases und im CV.</p>
-  </div>
-      <div class="pf-track"><article class="panel p-5 reveal" data-reveal>
-      <p class="font-mono text-xs text-faint">2013 – 2017 · ella Verlag</p>
-      <h3 class="mt-2 text-base font-semibold text-fg">Entwicklung &amp; Verantwortung</h3>
-      <p class="mt-2 text-sm leading-relaxed text-muted">Sechs Live-Portale end-to-end: Aufbau, Betrieb, Intranet. Die Grundlage für spätere Systemverantwortung.</p>
+          <section id="work" class="pf-archive">
+    <div>
+      <h2 class="pf-archive-title">Engineer → Agentic AI → Beratung. Fünf Stationen, nicht der Lebenslauf.</h2>
+      <ol class="pf-archive-list"><li class="pf-archive-item">
+      <p class="pf-archive-meta">2013 – 2017 · ella Verlag</p>
+      <h3>Entwicklung &amp; Verantwortung</h3>
+      <p>Sechs Live-Portale end-to-end: Aufbau, Betrieb, Intranet. Die Grundlage für spätere Systemverantwortung.</p>
       
-    </article><article class="panel p-5 reveal" data-reveal>
-      <p class="font-mono text-xs text-faint">2018 – 2022 · adesso · NextGen · binaris</p>
-      <h3 class="mt-2 text-base font-semibold text-fg">Enterprise Engineering</h3>
-      <p class="mt-2 text-sm leading-relaxed text-muted">Regulierte Landschaften bei adesso, NextGen und binaris: Banking-Migration, GKV-Security, Behörden-APIs, Healthcare-Interoperabilität.</p>
+    </li><li class="pf-archive-item">
+      <p class="pf-archive-meta">2018 – 2022 · adesso · NextGen · binaris</p>
+      <h3>Enterprise Engineering</h3>
+      <p>Regulierte Landschaften bei adesso, NextGen und binaris: Banking-Migration, GKV-Security, Behörden-APIs, Healthcare-Interoperabilität.</p>
       <p class="pf-track-links"><a class="pf-track-link" href="/portfolio/de/cases/dz-bank-okvp/">DZ BANK OKVP</a><a class="pf-track-link" href="/portfolio/de/cases/bitmarck-bitgo/">BITMARCK bitGo_Web</a></p>
-    </article><article class="panel p-5 reveal" data-reveal>
-      <p class="font-mono text-xs text-faint">2023 – 2026 · direct services Gütersloh GmbH</p>
-      <h3 class="mt-2 text-base font-semibold text-fg">Komplexe Systeme in Produktion</h3>
-      <p class="mt-2 text-sm leading-relaxed text-muted">Cloud, Identity und Integration im bundesweiten Loyalty-Programm. Der Enterprise-Boden, auf den Agents später landen müssen.</p>
+    </li><li class="pf-archive-item">
+      <p class="pf-archive-meta">2023 – 2026 · direct services Gütersloh GmbH</p>
+      <h3>Komplexe Systeme in Produktion</h3>
+      <p>Cloud, Identity und Integration im bundesweiten Loyalty-Programm. Der Enterprise-Boden, auf den Agents später landen müssen.</p>
       <p class="pf-track-links"><a class="pf-track-link" href="/portfolio/de/cases/deutschlandcard/">DeutschlandCard</a></p>
-    </article><article class="panel p-5 reveal" data-reveal>
-      <p class="font-mono text-xs text-faint">2026 · Independent R&amp;D</p>
-      <h3 class="mt-2 text-base font-semibold text-fg">Agentic AI — Independent R&amp;D</h3>
-      <p class="mt-2 text-sm leading-relaxed text-muted">Öffentliche Systeme für gewachsene Codebasen und prüfbare Multi-Agent-Orchestrierung. Kein Kundenbetrieb, kein erfundenes LLM-Backend.</p>
+    </li><li class="pf-archive-item">
+      <p class="pf-archive-meta">2026 · Independent R&amp;D</p>
+      <h3>Agentic AI — Independent R&amp;D</h3>
+      <p>Öffentliche Systeme für gewachsene Codebasen und prüfbare Multi-Agent-Orchestrierung. Kein Kundenbetrieb, kein erfundenes LLM-Backend.</p>
       <p class="pf-track-links"><a class="pf-track-link" href="/portfolio/de/cases/graph-mastermind/">Graph-Mastermind</a><a class="pf-track-link" href="/portfolio/de/cases/agent-collective/">Agent Collective</a></p>
-    </article><article class="panel p-5 reveal" data-reveal>
-      <p class="font-mono text-xs text-faint">2026 · KI-Manager · AI Automation</p>
-      <h3 class="mt-2 text-base font-semibold text-fg">Consulting- und Leadership-Pfad</h3>
-      <p class="mt-2 text-sm leading-relaxed text-muted">KI-Manager und AI Automation stützen die Spezialisierung. Sie ersetzen keine Enterprise-Seniorität und keine bezahlte AI-Kundenlieferung.</p>
+    </li><li class="pf-archive-item">
+      <p class="pf-archive-meta">2026 · KI-Manager · AI Automation</p>
+      <h3>Consulting- und Leadership-Pfad</h3>
+      <p>KI-Manager und AI Automation stützen die Spezialisierung. Sie ersetzen keine Enterprise-Seniorität und keine bezahlte AI-Kundenlieferung.</p>
       
-    </article></div>
+    </li></ol>
       <div class="mt-8 pf-contact-row">
         <a class="secondary" href="/portfolio/cv/">Alle Stationen im Lebenslauf</a>
       </div>
-      <div class="container pt-12 md:pt-16">
-    <p class="eyebrow mb-3">Weitere Mandate</p>
-    <p class="mb-6 max-w-prose text-sm text-muted">Gesundheitswesen-Interoperabilität, wehrnahe Lizenzierung, Automotive und Verlagswesen — im Track Record und CV, nicht mit gleichem Startseiten-Gewicht.</p>
-    <div class="pf-secondary"><article class="panel p-5">
+      <div class="pf-archive-more">
+    <p class="pf-archive-meta">Weitere Mandate</p>
+    <p>Gesundheitswesen-Interoperabilität, wehrnahe Lizenzierung, Automotive und Verlagswesen — im Track Record und CV, nicht mit gleichem Startseiten-Gewicht.</p>
+    <div class="pf-archive-list"><article class="panel p-5">
     <p class="font-mono text-[0.7rem] text-faint">2021 · Healthcare-ECM · Interoperabilität</p>
     <h3 class="mt-1.5 text-base font-semibold text-fg">März IHE BOX</h3>
     <p class="mt-2 text-sm text-muted">Produktionsnahe Healthcare-Integrations- und Terminologiearbeit, u. a. mit Fraunhofer.</p>
@@ -360,22 +356,14 @@ Ein Modell ist nicht Teil des Vertrags.</pre>
   </div>
     </div>
   </section>
-        <section id="credentials" class="container scroll-mt-24 pt-20 md:pt-24">
-    <div class="mb-12 md:mb-16 reveal" data-reveal>
-    <div class="flex items-center gap-3 text-faint">
-      <span class="font-mono text-xs">05</span>
-      <span class="hairline w-10"></span>
-      <span class="eyebrow">Nachweise</span>
-    </div>
-    <h2 class="pf-section-title mt-5 text-balance">KI-Manager und AI Automation stützen die Spezialisierung — sie tragen sie nicht.</h2>
-    <p class="mt-4 max-w-prose text-[1.05rem] leading-relaxed text-muted">Weiterbildung 2026 und öffentliche Repos belegen den Fokus. Die Seniorität steht in der Enterprise-Erfahrung. Nachweise ersetzen keine bezahlte AI-Kundenlieferung.</p>
-  </div>
-    <div class="grid gap-4 sm:grid-cols-2 mb-8"><article class="panel p-5 reveal" data-reveal>
-        <h3 class="text-base font-semibold text-fg">KI-Manager</h3>
-        <p class="mt-1 font-mono text-xs text-faint">2026 · Akademie für die Deutsche Wirtschaft</p>
-      </article><article class="panel p-5 reveal" data-reveal>
-        <h3 class="text-base font-semibold text-fg">AI Automation</h3>
-        <p class="mt-1 font-mono text-xs text-faint">2026 · STARTPLATZ Köln</p>
+          <section id="credentials" class="pf-archive">
+    <h2 class="pf-archive-title">KI-Manager und AI Automation stützen die Spezialisierung — sie tragen sie nicht.</h2>
+    <div class="pf-archive-list"><article class="pf-archive-item">
+        <h3>KI-Manager</h3>
+        <p class="pf-archive-meta">2026 · Akademie für die Deutsche Wirtschaft</p>
+      </article><article class="pf-archive-item">
+        <h3>AI Automation</h3>
+        <p class="pf-archive-meta">2026 · STARTPLATZ Köln</p>
       </article></div>
     <div class="pf-contact-row">
       <a class="secondary" href="/portfolio/cv/">Lebenslauf</a>
@@ -384,52 +372,20 @@ Ein Modell ist nicht Teil des Vertrags.</pre>
     </div>
     <p class="mt-6 max-w-prose text-sm text-muted">Ausbildung und Weiterbildung folgen darunter. Sie sind Nachweise, nicht der primäre Erfahrungsbeweis.</p>
   </section>
-        <div class="container scroll-mt-24 pt-20 md:pt-28">
-    <div class="mb-12 md:mb-16 reveal" data-reveal>
-    <div class="flex items-center gap-3 text-faint">
-      <span class="font-mono text-xs">04</span>
-      <span class="hairline w-10"></span>
-      <span class="eyebrow">Fähigkeiten</span>
-    </div>
-    <h2 class="pf-section-title mt-5 text-balance">Fünf Gruppen — nicht eine Skill-Wand.</h2>
-    <p class="mt-4 max-w-prose text-[1.05rem] leading-relaxed text-muted">Strategie, Architektur, Agentic Engineering, Umsetzung, Governance. Der detaillierte Stack ist Nachweis, nicht Identität — und steht nicht auf der Startseite.</p>
-  </div>
-    <div class="pf-pillars"><article class="panel p-5 pf-pillar reveal" data-reveal><h3 class="text-sm font-semibold text-fg">Strategie</h3><p class="mt-2 text-sm leading-relaxed text-muted">Use Cases dort, wo Systeme, Identität und Datenqualität schon tragen. AI als Schicht auf bestehender Landschaft — nicht als Tool-erste Identität.</p></article><article class="panel p-5 pf-pillar reveal" data-reveal><h3 class="text-sm font-semibold text-fg">Architektur</h3><p class="mt-2 text-sm leading-relaxed text-muted">Java/Spring, REST, Identity, Messaging, Cloud. Systeme, die schon da sind, nicht Greenfield-Demos.</p></article><article class="panel p-5 pf-pillar reveal" data-reveal><h3 class="text-sm font-semibold text-fg">Agentic Engineering</h3><p class="mt-2 text-sm leading-relaxed text-muted">Agent-Verträge, Repository-Intelligence, testbare Multi-Agent-Orchestrierung, LLM-gestützte Entwicklung. Öffentlich belegbar, ohne Modell- oder MCP-Claims.</p></article><article class="panel p-5 pf-pillar reveal" data-reveal><h3 class="text-sm font-semibold text-fg">Umsetzung</h3><p class="mt-2 text-sm leading-relaxed text-muted">CI/CD, Terraform, Kubernetes, OpenShift, Lead-Dev-Ownership. Entkopplung ohne Big Bang. Was in Produktion überlebt.</p></article><article class="panel p-5 pf-pillar reveal" data-reveal><h3 class="text-sm font-semibold text-fg">Governance</h3><p class="mt-2 text-sm leading-relaxed text-muted">DSGVO, EU AI Act, 2FA, feingranulare Berechtigungen, HITL, regulierte Daten. Guardrails vor Geschwindigkeit.</p></article></div>
-  </div>
-        <aside class="container pt-12 md:pt-16">
-    <article class="panel p-6 md:p-8">
-      <p class="eyebrow">Beratung &amp; Governance</p>
-      <h3 class="mt-3 text-xl font-semibold text-fg">Was sich aus echter Delivery übertragen lässt — ohne Board-Fiction.</h3>
-      <p class="mt-3 max-w-prose text-sm leading-relaxed text-muted">Use Cases dort priorisieren, wo Systeme, Identität und Datenqualität schon tragen. Betriebsmodell: Agents mit Vertrag und Abnahme, nicht als autonome Organisation. Governance aus regulierter Delivery (Berechtigungen, sensible Daten, DSGVO) plus EU-AI-Act-Rahmen aus der Spezialisierung — keine erfundenen Vorstandsmandate, keine erfundenen AI-KPIs.</p>
-    </article>
+          <aside class="pf-archive">
+    <h2 class="pf-archive-title">Was sich aus echter Delivery übertragen lässt — ohne Board-Fiction.</h2>
+    <p>Use Cases dort priorisieren, wo Systeme, Identität und Datenqualität schon tragen. Betriebsmodell: Agents mit Vertrag und Abnahme, nicht als autonome Organisation. Governance aus regulierter Delivery (Berechtigungen, sensible Daten, DSGVO) plus EU-AI-Act-Rahmen aus der Spezialisierung — keine erfundenen Vorstandsmandate, keine erfundenen AI-KPIs.</p>
   </aside>
-        <section id="about" class="container scroll-mt-24 py-20 md:py-24">
-    <div class="mb-12 md:mb-16 reveal" data-reveal>
-    <div class="flex items-center gap-3 text-faint">
-      <span class="font-mono text-xs">07</span>
-      <span class="hairline w-10"></span>
-      <span class="eyebrow">Über mich</span>
-    </div>
-    <h2 class="pf-section-title mt-5 text-balance">Kurz, damit die Cases die Arbeit tragen.</h2>
-    
-  </div>
-    <p class="max-w-prose text-base leading-relaxed text-muted reveal" data-reveal>Ich komme aus der Softwareentwicklung und beschäftige mich seit Jahren damit, komplexe Systeme verständlicher, wartbarer und automatisierbarer zu machen. LLMs und agentische Systeme sind für mich deshalb kein isolierter Technologietrend, sondern die nächste Evolutionsstufe von Software Engineering und Prozessautomatisierung. Ich arbeite aus Köln — deutschlandweit und remote.</p>
-    <p class="mt-6 flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs text-faint reveal" data-reveal>
+          <section id="about" class="pf-archive">
+    <h2 class="pf-archive-title">Kurz, damit die Cases die Arbeit tragen.</h2>
+    <p class="max-w-prose text-base leading-relaxed text-muted">Ich komme aus der Softwareentwicklung und beschäftige mich seit Jahren damit, komplexe Systeme verständlicher, wartbarer und automatisierbarer zu machen. LLMs und agentische Systeme sind für mich deshalb kein isolierter Technologietrend, sondern die nächste Evolutionsstufe von Software Engineering und Prozessautomatisierung. Ich arbeite aus Köln — deutschlandweit und remote.</p>
+    <p class="mt-6 flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs text-faint">
       <span class="eyebrow">Sprachen</span><span>Deutsch<span class="text-faint"> · Muttersprache</span></span><span>Englisch<span class="text-faint"> · Fließend</span></span><span>Spanisch<span class="text-faint"> · Verhandlungssicher</span></span>
     </p>
   </section>
-        <section id="education" class="pf-section-band scroll-mt-24 py-20 md:py-28">
-    <div class="container">
-      <div class="mb-12 md:mb-16 reveal" data-reveal>
-    <div class="flex items-center gap-3 text-faint">
-      <span class="font-mono text-xs">06</span>
-      <span class="hairline w-10"></span>
-      <span class="eyebrow">Ausbildung &amp; Weiterbildung</span>
-    </div>
-    <h2 class="pf-section-title mt-5 text-balance">Medien-Wurzeln, Web-Programmier-Handwerk — und 2026 die Spezialisierung. Nachweise, nicht der primäre Jobbeweis.</h2>
-    
-  </div>
-      <div class="space-y-3"><article class="panel grid gap-3 p-5 md:grid-cols-[10rem_1fr] md:gap-6">
+          <section id="education" class="pf-archive">
+    <h2 class="pf-archive-title">Medien-Wurzeln, Web-Programmier-Handwerk — und 2026 die Spezialisierung. Nachweise, nicht der primäre Jobbeweis.</h2>
+    <div class="pf-archive-list"><article class="pf-archive-item">
       <div class="flex items-start gap-2.5">
         <span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-signal"></span>
         <span class="font-mono text-xs leading-tight text-faint">08/2026 – 09/2026</span>
@@ -439,7 +395,7 @@ Ein Modell ist nicht Teil des Vertrags.</pre>
         <p class="mt-0.5 text-sm text-muted">STARTPLATZ Köln GmbH</p>
         <ul class="mt-3 grid gap-1.5 sm:grid-cols-2"><li class="flex gap-2 text-sm text-fg/80"><span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent"></span><span>Architektur und Implementierung autonomer, KI-gestützter System-Workflows</span></li><li class="flex gap-2 text-sm text-fg/80"><span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent"></span><span>Messbare Reduktion manuellen Aufwands</span></li><li class="flex gap-2 text-sm text-fg/80"><span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent"></span><span>KI-Agenten-Frameworks und komplexe API-Integrationen</span></li><li class="flex gap-2 text-sm text-fg/80"><span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent"></span><span>Prompt-Automation; performante, skalierbare Automations-Pipelines</span></li></ul>
       </div>
-    </article><article class="panel grid gap-3 p-5 md:grid-cols-[10rem_1fr] md:gap-6">
+    </article><article class="pf-archive-item">
       <div class="flex items-start gap-2.5">
         <span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-signal"></span>
         <span class="font-mono text-xs leading-tight text-faint">03/2026 – 07/2026</span>
@@ -449,7 +405,7 @@ Ein Modell ist nicht Teil des Vertrags.</pre>
         <p class="mt-0.5 text-sm text-muted">Akademie für die Deutsche Wirtschaft GmbH</p>
         <ul class="mt-3 grid gap-1.5 sm:grid-cols-2"><li class="flex gap-2 text-sm text-fg/80"><span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent"></span><span>Strategische Integration und Steuerung von KI in Unternehmen</span></li><li class="flex gap-2 text-sm text-fg/80"><span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent"></span><span>Technische Grundlagen und praktische Use Cases</span></li><li class="flex gap-2 text-sm text-fg/80"><span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent"></span><span>End-to-End-Leitung von KI-Projekten; Prompt Engineering</span></li><li class="flex gap-2 text-sm text-fg/80"><span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent"></span><span>Rechtlich / ethischer Rahmen: DSGVO, EU AI Act</span></li><li class="flex gap-2 text-sm text-fg/80"><span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent"></span><span>Change-Management und skalierbare KI-Strategien</span></li></ul>
       </div>
-    </article><article class="panel grid gap-3 p-5 md:grid-cols-[10rem_1fr] md:gap-6">
+    </article><article class="pf-archive-item">
       <div class="flex items-start gap-2.5">
         <span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-accent"></span>
         <span class="font-mono text-xs leading-tight text-faint">11/2011 – 03/2013</span>
@@ -459,7 +415,7 @@ Ein Modell ist nicht Teil des Vertrags.</pre>
         <p class="mt-0.5 text-sm text-muted">Deutsche POP · Köln</p>
         
       </div>
-    </article><article class="panel grid gap-3 p-5 md:grid-cols-[10rem_1fr] md:gap-6">
+    </article><article class="pf-archive-item">
       <div class="flex items-start gap-2.5">
         <span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-accent"></span>
         <span class="font-mono text-xs leading-tight text-faint">10/2010 – 09/2011</span>
@@ -470,8 +426,8 @@ Ein Modell ist nicht Teil des Vertrags.</pre>
         
       </div>
     </article></div>
-    </div>
   </section>
+        </div>
       </details>
     </div>
   </section>

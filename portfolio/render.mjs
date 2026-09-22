@@ -18,7 +18,7 @@ import { copy } from "./content.mjs";
 
 /** Next export = layout/utilities. Token + component layer is portfolio.css (copied to public/). */
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=quiet-20260922";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=fail-20260922";
 
 function stylesheets() {
   return `<link rel="stylesheet" href="${NEXT_LAYOUT_CSS}"/>
@@ -31,6 +31,13 @@ export function esc(value) {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
+}
+
+function label(value, name) {
+  if (typeof value !== "string" || value.trim() === "" || value.includes("[object Object]")) {
+    throw new Error(`${name} must be a plain string label`);
+  }
+  return esc(value);
 }
 
 function attr(value) {
@@ -307,12 +314,9 @@ function renderHowIWork(locale) {
 
 function renderConsulting(locale) {
   const t = copy(locale);
-  return `<aside class="container pt-12 md:pt-16">
-    <article class="panel p-6 md:p-8">
-      <p class="eyebrow">${esc(t.consulting.eyebrow)}</p>
-      <h3 class="mt-3 text-xl font-semibold text-fg">${esc(t.consulting.title)}</h3>
-      <p class="mt-3 max-w-prose text-sm leading-relaxed text-muted">${esc(t.consulting.body)}</p>
-    </article>
+  return `<aside class="pf-archive">
+    <h2 class="pf-archive-title">${esc(t.consulting.title)}</h2>
+    <p>${esc(t.consulting.body)}</p>
   </aside>`;
 }
 
@@ -320,15 +324,15 @@ function renderCredentials(locale) {
   const t = copy(locale);
   const highlights = (t.credentials.highlights ?? [])
     .map(
-      (item) => `<article class="panel p-5 reveal" data-reveal>
-        <h3 class="text-base font-semibold text-fg">${esc(item.title)}</h3>
-        <p class="mt-1 font-mono text-xs text-faint">${esc(item.meta)}</p>
+      (item) => `<article class="pf-archive-item">
+        <h3>${esc(item.title)}</h3>
+        <p class="pf-archive-meta">${esc(item.meta)}</p>
       </article>`,
     )
     .join("");
-  return `<section id="credentials" class="container scroll-mt-24 pt-20 md:pt-24">
-    ${heading(t.credentials)}
-    <div class="grid gap-4 sm:grid-cols-2 mb-8">${highlights}</div>
+  return `<section id="credentials" class="pf-archive">
+    <h2 class="pf-archive-title">${esc(t.credentials.title)}</h2>
+    <div class="pf-archive-list">${highlights}</div>
     <div class="pf-contact-row">
       <a class="secondary" href="${attr(SITE.cvPath)}">${esc(t.credentials.cv)}</a>
       <a class="secondary" href="${attr(SITE.github)}" target="_blank" rel="noopener noreferrer">${esc(t.credentials.github)}</a>
@@ -342,22 +346,22 @@ function renderCompetencies(locale) {
   const t = copy(locale);
   const pillars = t.competencies.pillars
     .map(
-      (p) => `<article class="panel p-5 pf-pillar reveal" data-reveal><h3 class="text-sm font-semibold text-fg">${esc(p.title)}</h3><p class="mt-2 text-sm leading-relaxed text-muted">${esc(p.body)}</p></article>`,
+      (p) => `<li class="pf-archive-item"><h3>${esc(p.title)}</h3><p>${esc(p.body)}</p></li>`,
     )
     .join("");
-  return `<div class="container scroll-mt-24 pt-20 md:pt-28">
-    ${heading(t.competencies)}
-    <div class="pf-pillars">${pillars}</div>
+  return `<div class="pf-archive-skills">
+    <h3 class="pf-archive-title">${esc(t.competencies.title)}</h3>
+    <ul class="pf-archive-list">${pillars}</ul>
   </div>`;
 }
 
 function renderFurtherMandates(locale) {
   const t = copy(locale);
   const secondary = casesBySection("secondary").map((item) => renderSecondaryCase(item, locale)).join("");
-  return `<div class="container pt-12 md:pt-16">
-    <p class="eyebrow mb-3">${esc(t.selectedCases.secondaryEyebrow)}</p>
-    <p class="mb-6 max-w-prose text-sm text-muted">${esc(t.selectedCases.secondaryNote)}</p>
-    <div class="pf-secondary">${secondary}</div>
+  return `<div class="pf-archive-more">
+    <p class="pf-archive-meta">${esc(t.selectedCases.secondaryEyebrow)}</p>
+    <p>${esc(t.selectedCases.secondaryNote)}</p>
+    <div class="pf-archive-list">${secondary}</div>
   </div>`;
 }
 
@@ -372,17 +376,17 @@ function renderTrack(locale) {
         return `<a class="pf-track-link" href="${attr(caseHref(locale, id))}">${esc(relatedCase.name)}</a>`;
       })
       .join("");
-    return `<article class="panel p-5 reveal" data-reveal>
-      <p class="font-mono text-xs text-faint">${esc(item.period)} · ${esc(item.company)}</p>
-      <h3 class="mt-2 text-base font-semibold text-fg">${esc(copyItem.title)}</h3>
-      <p class="mt-2 text-sm leading-relaxed text-muted">${esc(copyItem.body)}</p>
+    return `<li class="pf-archive-item">
+      <p class="pf-archive-meta">${esc(item.period)} · ${esc(item.company)}</p>
+      <h3>${esc(copyItem.title)}</h3>
+      <p>${esc(copyItem.body)}</p>
       ${related ? `<p class="pf-track-links">${related}</p>` : ""}
-    </article>`;
+    </li>`;
   }).join("");
-  return `<section id="work" class="pf-section-band scroll-mt-24 py-20 md:py-24">
-    <div class="container">
-      ${heading(t.track)}
-      <div class="pf-track">${items}</div>
+  return `<section id="work" class="pf-archive">
+    <div>
+      <h2 class="pf-archive-title">${esc(t.track.title)}</h2>
+      <ol class="pf-archive-list">${items}</ol>
       <div class="mt-8 pf-contact-row">
         <a class="secondary" href="${attr(SITE.cvPath)}">${esc(t.track.more)}</a>
       </div>
@@ -397,10 +401,10 @@ function renderAbout(locale) {
     const item = row[locale];
     return `<span>${esc(item.name)}<span class="text-faint"> · ${esc(item.level)}</span></span>`;
   }).join("");
-  return `<section id="about" class="container scroll-mt-24 py-20 md:py-24">
-    ${heading(t.about)}
-    <p class="max-w-prose text-base leading-relaxed text-muted reveal" data-reveal>${esc(t.about.body)}</p>
-    <p class="mt-6 flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs text-faint reveal" data-reveal>
+  return `<section id="about" class="pf-archive">
+    <h2 class="pf-archive-title">${esc(t.about.title)}</h2>
+    <p class="max-w-prose text-base leading-relaxed text-muted">${esc(t.about.body)}</p>
+    <p class="mt-6 flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs text-faint">
       <span class="eyebrow">${esc(t.hero.languagesLabel)}</span>${langs}
     </p>
   </section>`;
@@ -415,7 +419,7 @@ function renderEducation(locale) {
           .map((line) => `<li class="flex gap-2 text-sm text-fg/80"><span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent"></span><span>${esc(line)}</span></li>`)
           .join("")}</ul>`
       : "";
-    return `<article class="panel grid gap-3 p-5 md:grid-cols-[10rem_1fr] md:gap-6">
+    return `<article class="pf-archive-item">
       <div class="flex items-start gap-2.5">
         <span class="mt-1 h-2 w-2 shrink-0 rounded-full ${item.kind === "continuing" ? "bg-signal" : "bg-accent"}"></span>
         <span class="font-mono text-xs leading-tight text-faint">${esc(item.period)}</span>
@@ -427,11 +431,9 @@ function renderEducation(locale) {
       </div>
     </article>`;
   }).join("");
-  return `<section id="education" class="pf-section-band scroll-mt-24 py-20 md:py-28">
-    <div class="container">
-      ${heading({ ...t.education, description: "" })}
-      <div class="space-y-3">${items}</div>
-    </div>
+  return `<section id="education" class="pf-archive">
+    <h2 class="pf-archive-title">${esc(t.education.title)}</h2>
+    <div class="pf-archive-list">${items}</div>
   </section>`;
 }
 
@@ -768,9 +770,9 @@ function renderCollectiveSample(locale) {
         <ul class="pf-agents" data-agents>${renderAgentList(first.agents)}</ul>
         <p class="pf-touch-detail" data-detail aria-live="polite">${esc(first.detail)}</p>
         <div class="pf-touch-actions">
-          <button type="button" class="pf-touch-btn" data-action="step">${esc(s.step)}</button>
-          <button type="button" class="pf-touch-btn" data-action="fail" aria-pressed="false">${esc(s.failLabel)}</button>
-          <button type="button" class="pf-touch-btn" data-action="reset">${esc(s.reset)}</button>
+          <button type="button" class="pf-touch-btn" data-action="step">${label(s.step, "samples.collective.step")}</button>
+          <button type="button" class="pf-touch-btn" data-action="fail" aria-pressed="false">${label(s.failLabel, "samples.collective.failLabel")}</button>
+          <button type="button" class="pf-touch-btn" data-action="reset">${label(s.reset, "samples.collective.reset")}</button>
         </div>
         <p class="pf-touch-note">${esc(s.note)}</p>
         ${jsonIsland("pf-collective-frames", { review: s.review, fail: s.fail })}
@@ -864,7 +866,6 @@ function renderOffer(locale) {
       </div>
       <p class="pf-stage-lede">${esc(o.intro)}</p>
       <div class="pf-offers">${packages}</div>
-      ${renderMethodFold(locale)}
     </div>
   </section>`;
 }
@@ -878,13 +879,13 @@ function renderMethodFold(locale) {
       <p>${esc(item.line || item.body)}</p>
     </li>`;
   }).join("");
-  return `<div id="approach" class="pf-method">
-    <p class="eyebrow">${esc(t.howIWork.eyebrow)}</p>
-    <p class="pf-method-title">${esc(t.howIWork.title)}</p>
-    <ol class="pf-trust-list">${items}</ol>
+  return `<div id="approach" class="pf-archive">
+    <h2 class="pf-archive-title">${esc(t.howIWork.eyebrow)}</h2>
+    <p>${esc(t.howIWork.title)}</p>
+    <ol class="pf-archive-list">${items}</ol>
+    ${renderCompetencies(locale)}
     <p class="pf-trust">${esc(t.hero.trust)}</p>
     <p class="pf-domains">${esc(t.industries.line)}</p>
-    <p class="pf-stage-lede">${esc(t.competencies.line || t.competencies.description)}</p>
   </div>`;
 }
 
@@ -894,14 +895,16 @@ function renderRecord(locale) {
     <div class="container">
       <details data-record>
         <summary class="pf-shell" data-reveal>${esc(t.record.summary)}</summary>
-        <p class="pf-stage-lede">${esc(t.record.note)}</p>
-        <p class="pf-contact-row"><a class="secondary" href="${attr(SITE.cvPath)}">${esc(t.hero.ctaSecondary)}</a></p>
-        ${renderTrack(locale)}
-        ${renderCredentials(locale)}
-        ${renderCompetencies(locale)}
-        ${renderConsulting(locale)}
-        ${renderAbout(locale)}
-        ${renderEducation(locale)}
+        <div class="pf-record-body">
+          <p>${esc(t.record.note)}</p>
+          <p class="pf-contact-row"><a class="secondary" href="${attr(SITE.cvPath)}">${esc(t.hero.ctaSecondary)}</a></p>
+          ${renderMethodFold(locale)}
+          ${renderTrack(locale)}
+          ${renderCredentials(locale)}
+          ${renderConsulting(locale)}
+          ${renderAbout(locale)}
+          ${renderEducation(locale)}
+        </div>
       </details>
     </div>
   </section>`;
