@@ -6,8 +6,8 @@ Identity locks: Peter Henrichs · peter.henrichs@web.de · Senior AI Consultant 
 --- TARGET SECTION SEQUENCE (wireframe) ---
 
 Beat 0 · #top · First viewport = ONE promise only
-DE lock: „Die Schicht zwischen System und Agent.“
-EN lock: „The layer between the system and the agent.“
+DE lock: „Ich baue Agenten-Schichten in laufende Enterprise-Systeme — prüfbar, mit Human-in-the-Loop.“
+EN lock: „I build agent layers into running enterprise systems — reviewable, with human-in-the-loop.“
 On-screen: name/role chip + that one line + one soft next (scroll or Angebot). Nothing else in first viewport — no cases grid, no skill chips, no career dates, no dual CTAs.
 
 Beat 1 · #builds · Optional one-breath restatement OR cut
