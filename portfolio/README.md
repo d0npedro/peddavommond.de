@@ -28,9 +28,11 @@ Two stylesheets load on every generated page:
 
 Tokens are declared on `html` / `html.light` / `html.dark` so they beat the export’s `:root` / `.dark`. Every surface, chip, and CTA should consume these — do not add one-off hex in markup.
 
-Dark is the default. Accent is used sparingly (CTAs, focus, key labels). Bronze (`--signal`) is reserved for honesty / Independent R&D chips.
+Light paper is the only theme. The start page and Stage 1 pages share `--s1-*` tokens from `portfolio.css`. Small text and controls use `#2F6E79`. `#4AA8B8` is limited to decorative rules. There is no dark-mode toggle. Bronze (`--signal`) is reserved for honesty / Independent R&D chips and failure states.
 
-### Dark (default) — charcoal navy / ink
+Pages do not add `class="dark"`, and nothing reads a stored theme. The old `.dark` token block is unused.
+
+### Dark (unused) — charcoal navy / ink
 
 | Token | RGB | Hex | Contrast notes |
 | --- | --- | --- | --- |
@@ -52,16 +54,17 @@ Dark is the default. Accent is used sparingly (CTAs, focus, key labels). Bronze 
 | Token | RGB | Hex | Contrast notes |
 | --- | --- | --- | --- |
 | `--bg` | `244 240 232` | `#F4F0E8` | paper |
-| `--bg-elevated` | `252 250 245` | `#FCFAF5` | sheet |
+| `--bg-elevated` | `250 247 241` | `#FAF7F1` | sheet |
 | `--bg-sunken` | `232 226 216` | `#E8E2D8` | stone |
-| `--fg` | `20 23 30` | `#14171E` | 15.8:1 on paper |
-| `--muted` | `60 68 80` | `#3C4450` | 8.7:1 body |
-| `--faint` | `90 98 112` | `#5A6270` | 5.4:1 meta |
-| `--line` | `210 203 190` | `#D2CBBE` | hairline |
-| `--accent` | `22 108 122` | `#166C7A` | teal–azure; 5.3:1 text |
+| `--fg` | `20 23 30` | `#14171E` | 15.78:1 on paper |
+| `--muted` | `90 86 80` | `#5A5650` | 6.41:1 body |
+| `--faint` | `90 98 112` | `#5A6270` | 5.41:1 meta |
+| `--line` | `212 207 196` | `#D4CFC4` | decorative hairline |
+| `--accent` | `47 110 121` | `#2F6E79` | accent-ink; 5.09:1 text, 5.79:1 white on it |
+| `--accent-rule` | `74 168 184` | `#4AA8B8` | decorative rules only; 2.44:1 |
 | `--accent-soft` | `214 232 232` | `#D6E8E8` | wash |
-| `--signal` | `138 85 30` | `#8A551E` | bronze; 5.4:1 |
-| `--on-accent` | `255 255 255` | `#FFFFFF` | 6.1:1 on accent CTA |
+| `--signal` | `138 85 30` | `#8A551E` | bronze; 5.44:1 |
+| `--on-accent` | `255 255 255` | `#FFFFFF` | on ink or accent-ink controls |
 | `--grid-rgb` / `--grid-opacity` | `36 32 26` / `0.04` | | quiet blueprint |
 
-Body type is 17px (mobile) / 18px (desktop). Inter for prose; JetBrains Mono only for labels, chips, and meta. Theme-color meta: `#F4F0E8` / `#10151E`.
+Body type on paper pages is 18px. Inter for prose; JetBrains Mono only for labels, chips, and meta. Theme-color meta: `#F4F0E8`.

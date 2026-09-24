@@ -194,8 +194,8 @@ export const en = {
           id: "agent",
           label: "AGENT.md",
           kind: "code",
-          caption: "Excerpt from the public contract. The source file is German. Not the full prompt.",
-          body: "# Graph-Mastermind — Arbeitsanweisung\n\nRolle: Repo-Analytiker + Graph-Modellierer + Frontend-Umsetzer.\nAuftrag: Repository analysieren, Graph ableiten, SPA bauen.\nTypecheck und Production-Build grün machen.\n\nHarte Verbote:\n- Kein Auth.\n- Kein Pflicht-Backend.\n- Keine erfundenen Module, solange echter Kontext da ist.",
+          caption: "Excerpt from the public contract. Not the full prompt.",
+          body: "# Graph-Mastermind — Work instruction\n\nRole: Repo analyst + graph modeler + frontend implementer.\nTask: Analyze the repository, derive the graph, build the SPA.\nGet typecheck and production build green.\n\nHard prohibitions:\n- No auth.\n- No required backend.\n- No invented modules as long as real context exists.",
         },
         {
           id: "check",
@@ -203,11 +203,11 @@ export const en = {
           kind: "checks",
           caption: "Acceptance excerpt from CHECKLIST.md. Unchecked means: not claimed as a finished run.",
           items: [
-            "Repo wurde gescannt (Baum, Manifeste, Docs)",
-            "Keine erfundenen Module, solange echter Kontext existierte",
-            "Kein React-State auf Simulation-Ticks",
-            "tsc --noEmit grün",
-            "Production-Build grün",
+            "Repo was scanned (tree, manifests, docs)",
+            "No invented modules as long as real context existed",
+            "No React state on simulation ticks",
+            "tsc --noEmit green",
+            "Production build green",
           ],
         },
         {
@@ -736,15 +736,15 @@ export const en = {
         "Consultant/developer on a team: backend, REST to existing systems, legacy decoupling, 2FA for especially protected data. Paid delivery.",
       pageTitle: "BITMARCK bitGo_Web — GKV modernization, security, 2FA | Peter Henrichs",
       pageDescription:
-        "Regulated statutory-health online Geschäftsstelle: legacy decoupling, REST to existing systems, 2FA for especially protected data. No AI component.",
+        "Regulated statutory-health online service office: legacy decoupling, REST to existing systems, 2FA for especially protected data. No AI component.",
       context:
-        "BITMARCK Technik, 2019–2020. Digital channels of statutory health insurers (online Geschäftsstelle) interacting with BITMARCK_21c|ng: legacy, especially protected data, high security requirements.",
+        "BITMARCK Technik, 2019–2020. Digital channels of statutory health insurers (online service office) interacting with BITMARCK_21c|ng: legacy, especially protected data, high security requirements.",
       problem:
-        "Digital channels of statutory health insurers as an online Geschäftsstelle interacting with BITMARCK_21c|ng — legacy, sensitive data, high security requirements.",
+        "Digital channels of statutory health insurers as an online service office interacting with BITMARCK_21c|ng — legacy, sensitive data, high security requirements.",
       decision:
         "Decouple modules from the legacy landscape; REST interfaces to existing systems; 2FA for especially protected data; configurable frontend for insurer editors instead of a monolithic redesign.",
       architecture:
-        "bitGo_Web sits in front of BITMARCK_21c|ng and legacy systems. REST interfaces and 2FA connect the online Geschäftsstelle to sensitive data without replacing the monolith in one cut. The frontend is configurable for insurer editors.",
+        "bitGo_Web sits in front of BITMARCK_21c|ng and legacy systems. REST interfaces and 2FA connect the online service office to sensitive data without replacing the monolith in one cut. The frontend is configurable for insurer editors.",
       architectureSteps: [
         "Insurer editors",
         "bitGo_Web + 2FA",
@@ -995,9 +995,9 @@ export const en = {
       },
       "adesso-bitmarck-bitgo": {
         role: "Berater / Entwickler",
-        project: "BITMARCK / BMT_bitGo — GKV online Geschäftsstelle",
+        project: "BITMARCK / BMT_bitGo — GKV online service office",
         mission:
-          "Digital channels of statutory health insurers as an online Geschäftsstelle interacting with BITMARCK_21c|ng; bitGo_Web unifies Geschäftsstelle and KV via a technical redesign.",
+          "Digital channels of statutory health insurers as an online service office interacting with BITMARCK_21c|ng; bitGo_Web unifies the service office and KV via a technical redesign.",
         tasks: [
           "Backend information processing and REST interfaces to existing systems",
           "Decoupling and redesign of modules from a legacy landscape",
@@ -1082,7 +1082,7 @@ export const en = {
     personalNote: "",
   },
   craft: {
-    body: "Interaction and scroll story on this page: custom scripts (vanilla JS/CSS). No Three.js, no off-the-shelf animation framework.",
+    body: "Interaction and scroll story on this site: custom scripts (vanilla JS/CSS). No Three.js, no off-the-shelf animation framework.",
     chip: "Custom-built · not a library demo",
     technique: "SVG stroke-dashoffset · drawn once",
     modules: ["stage-reveal.js", "craft-mark.js", "timeline.js"],

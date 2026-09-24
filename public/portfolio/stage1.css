@@ -1,24 +1,9 @@
 /* Stage 1 paper pages. Loads after portfolio.css on role, timeline, deep-dive and contact pages.
    Light paper only. One accent. No gradients, no hover-lift. */
 
-html.stage1 {
-  --bg: 244 240 232;
-  --fg: 20 23 30;
-  --muted: 90 86 80;
-  --accent: 74 168 184;
-  --s1-bg: #f4f0e8;
-  --s1-ink: #14171e;
-  --s1-muted: #5a5650;
-  --s1-line: #d4cfc4;
-  /* #4AA8B8 on paper #F4F0E8 is ~2.44:1. Large type, rules and non-text accents
-     keep it. Small text, links and mono labels use --s1-accent-ink #2F6E79
-     (same hue ~189°, ~5.1:1 on paper, white text on it ~5.8:1). */
-  --s1-accent: #4aa8b8;
-  --s1-accent-ink: #2f6e79;
-  --s1-paper: #faf7f1;
-  --s1-rust: #8a3e24;
-  --s1-sans: var(--font-sans), "Inter", ui-sans-serif, system-ui, sans-serif;
-  --s1-mono: var(--font-mono), "JetBrains Mono", ui-monospace, monospace;
+html.stage1,
+html.paper {
+  /* Tokens live once on :root in portfolio.css (--s1-*, --bg, --accent). */
   --topbar: 4.25rem;
   color-scheme: light;
   background: var(--s1-bg);
@@ -68,7 +53,7 @@ html.stage1 a:hover {
   }
 }
 
-html.stage1 .skip {
+:is(html.stage1, html.paper) .skip {
   position: absolute;
   left: 0.75rem;
   top: 0.75rem;
@@ -80,11 +65,11 @@ html.stage1 .skip {
   text-decoration: none;
 }
 
-html.stage1 .skip:focus {
+:is(html.stage1, html.paper) .skip:focus {
   transform: none;
 }
 
-html.stage1 .topbar {
+:is(html.stage1, html.paper) .topbar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -97,7 +82,7 @@ html.stage1 .topbar {
   z-index: 30;
 }
 
-html.stage1 .brand {
+:is(html.stage1, html.paper) .brand {
   font-family: var(--s1-mono);
   font-size: 0.75rem;
   letter-spacing: 0.04em;
@@ -106,7 +91,7 @@ html.stage1 .brand {
   text-decoration: none;
 }
 
-html.stage1 .top-links {
+:is(html.stage1, html.paper) .top-links {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem 1rem;
@@ -116,24 +101,24 @@ html.stage1 .top-links {
   text-transform: uppercase;
 }
 
-html.stage1 .top-links a {
+:is(html.stage1, html.paper) .top-links a {
   color: var(--s1-muted);
   text-decoration: none;
 }
 
-html.stage1 .top-links a[aria-current="page"],
-html.stage1 .top-links a:hover {
+:is(html.stage1, html.paper) .top-links a[aria-current="page"],
+:is(html.stage1, html.paper) .top-links a:hover {
   color: var(--s1-ink);
 }
 
-html.stage1 .top-tools {
+:is(html.stage1, html.paper) .top-tools {
   display: flex;
   align-items: center;
   gap: 0.6rem;
   margin-left: auto;
 }
 
-html.stage1 .lang {
+:is(html.stage1, html.paper) .lang {
   display: inline-flex;
   gap: 0.15rem;
   font-family: var(--s1-mono);
@@ -141,18 +126,18 @@ html.stage1 .lang {
   letter-spacing: 0.06em;
 }
 
-html.stage1 .lang a {
+:is(html.stage1, html.paper) .lang a {
   color: var(--s1-muted);
   text-decoration: none;
   padding: 0.2rem 0.35rem;
 }
 
-html.stage1 .lang a[aria-current="true"] {
+:is(html.stage1, html.paper) .lang a[aria-current="true"] {
   color: var(--s1-ink);
-  box-shadow: inset 0 -1px 0 var(--s1-accent);
+  box-shadow: inset 0 -1px 0 var(--s1-accent-ink);
 }
 
-html.stage1 .pf-offer-chip {
+:is(html.stage1, html.paper) .pf-offer-chip {
   display: inline-flex;
   align-items: center;
   font-family: var(--s1-mono);
@@ -167,7 +152,7 @@ html.stage1 .pf-offer-chip {
   white-space: nowrap;
 }
 
-html.stage1 .pf-offer-chip:hover {
+:is(html.stage1, html.paper) .pf-offer-chip:hover {
   color: var(--s1-accent-ink);
   border-color: var(--s1-accent-ink);
 }
@@ -396,7 +381,7 @@ html.stage1 .entry-card:last-child {
 
 html.stage1 .entry-card[aria-current="true"],
 html.stage1 .entry-card:focus-visible {
-  outline: 2px solid var(--s1-accent);
+  outline: 2px solid var(--s1-accent-ink);
   outline-offset: 2px;
 }
 
@@ -536,7 +521,7 @@ html.stage1.js .year-rail {
 }
 
 html.stage1 .year-rail:focus-visible {
-  outline: 2px solid var(--s1-accent);
+  outline: 2px solid var(--s1-accent-ink);
   outline-offset: -2px;
 }
 
@@ -570,7 +555,7 @@ html.stage1 .rail-thumb {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: var(--s1-accent);
+  background: var(--s1-accent-ink);
   border: 2px solid var(--s1-bg);
   transform: translate(-50%, -50%);
 }
@@ -593,7 +578,7 @@ html.stage1 .rail-years span {
 
 html.stage1 .mobile-scrub input[type="range"] {
   flex: 1;
-  accent-color: var(--s1-accent);
+  accent-color: var(--s1-accent-ink);
 }
 
 html.stage1 .deep-dive[hidden] {
@@ -715,11 +700,11 @@ html.stage1 .back-row {
   }
 }
 
-html.stage1 .nav-fold {
+:is(html.stage1, html.paper) .nav-fold {
   display: none;
 }
 
-html.stage1 .s1-footer {
+:is(html.stage1, html.paper) .s1-footer {
   border-top: 1px solid var(--s1-line);
   padding: 1rem 1.25rem 1.4rem;
   color: var(--s1-muted);
@@ -728,11 +713,11 @@ html.stage1 .s1-footer {
   letter-spacing: 0.04em;
 }
 
-html.stage1 .s1-footer p {
+:is(html.stage1, html.paper) .s1-footer p {
   margin: 0;
 }
 
-html.stage1 .s1-footer a {
+:is(html.stage1, html.paper) .s1-footer a {
   color: var(--s1-accent-ink);
 }
 
@@ -741,11 +726,12 @@ html.stage1 #einsatz {
 }
 
 @media (max-width: 719px) {
-  html.stage1 {
+  html.stage1,
+  html.paper {
     --topbar: 3.25rem;
   }
 
-  html.stage1 .topbar,
+  :is(html.stage1, html.paper) .topbar,
   html.stage1 .dd-bar {
     flex-wrap: nowrap;
     align-items: center;
@@ -753,21 +739,21 @@ html.stage1 #einsatz {
     padding: 0.5rem 0.75rem;
   }
 
-  html.stage1 .brand {
+  :is(html.stage1, html.paper) .brand {
     font-size: 0.62rem;
     min-width: 0;
   }
 
-  html.stage1 .top-links-wide {
+  :is(html.stage1, html.paper) .top-links-wide {
     display: none;
   }
 
-  html.stage1 .nav-fold {
+  :is(html.stage1, html.paper) .nav-fold {
     display: block;
     position: relative;
   }
 
-  html.stage1 .nav-fold > summary {
+  :is(html.stage1, html.paper) .nav-fold > summary {
     font-family: var(--s1-mono);
     font-size: 0.62rem;
     letter-spacing: 0.05em;
@@ -777,11 +763,11 @@ html.stage1 #einsatz {
     list-style: none;
   }
 
-  html.stage1 .nav-fold > summary::-webkit-details-marker {
+  :is(html.stage1, html.paper) .nav-fold > summary::-webkit-details-marker {
     display: none;
   }
 
-  html.stage1 .nav-fold .top-links {
+  :is(html.stage1, html.paper) .nav-fold .top-links {
     display: none;
     position: absolute;
     top: calc(100% + 0.35rem);
@@ -795,24 +781,24 @@ html.stage1 #einsatz {
     border: 1px solid var(--s1-line);
   }
 
-  html.stage1 .nav-fold[open] .top-links {
+  :is(html.stage1, html.paper) .nav-fold[open] .top-links {
     display: flex;
   }
 
-  html.stage1 .top-tools {
+  :is(html.stage1, html.paper) .top-tools {
     margin-left: auto;
     width: auto;
     flex: 0 0 auto;
     gap: 0.35rem;
   }
 
-  html.stage1 .pf-offer-chip {
+  :is(html.stage1, html.paper) .pf-offer-chip {
     margin-left: 0;
     padding: 0.32rem 0.45rem;
     font-size: 0.58rem;
   }
 
-  html.stage1 .lang a {
+  :is(html.stage1, html.paper) .lang a {
     padding: 0.15rem 0.25rem;
   }
 

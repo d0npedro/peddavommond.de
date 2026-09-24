@@ -11,7 +11,7 @@ export default {
   },
   "summary": {
     "de": "Digitale Kanäle gesetzlicher Krankenkassen als Online-Geschäftsstelle im Zusammenspiel mit BITMARCK_21c|ng; bitGo_Web vereint Geschäftsstelle und KV über einen technischen Redesign.",
-    "en": "Digital channels of statutory health insurers as an online Geschäftsstelle interacting with BITMARCK_21c|ng; bitGo_Web unifies Geschäftsstelle and KV via a technical redesign."
+    "en": "Digital channels of statutory health insurers as an online service office interacting with BITMARCK_21c|ng; bitGo_Web unifies the service office and KV via a technical redesign."
   },
   "period": {
     "from": "2019-06",
@@ -25,11 +25,11 @@ export default {
   },
   "project": {
     "de": "BITMARCK / BMT_bitGo — Online-Geschäftsstelle der GKV",
-    "en": "BITMARCK / BMT_bitGo — GKV online Geschäftsstelle"
+    "en": "BITMARCK / BMT_bitGo — GKV online service office"
   },
   "mission": {
     "de": "Digitale Kanäle gesetzlicher Krankenkassen als Online-Geschäftsstelle im Zusammenspiel mit BITMARCK_21c|ng; bitGo_Web vereint Geschäftsstelle und KV über einen technischen Redesign.",
-    "en": "Digital channels of statutory health insurers as an online Geschäftsstelle interacting with BITMARCK_21c|ng; bitGo_Web unifies Geschäftsstelle and KV via a technical redesign."
+    "en": "Digital channels of statutory health insurers as an online service office interacting with BITMARCK_21c|ng; bitGo_Web unifies the service office and KV via a technical redesign."
   },
   "tasks": {
     "de": [

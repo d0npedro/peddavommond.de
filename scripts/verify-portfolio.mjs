@@ -95,7 +95,28 @@ async function check(locale) {
     assert(!html.includes("Further mandates"), `${prefix} further-mandate wall must stay off the landing`);
     assert(html.includes("Client work · no AI component"), `${prefix} missing DeutschlandCard honesty chip`);
     assert(html.includes("To the sample"), `${prefix} Agent Collective case must link to the sample`);
+    const bannedDe = [
+      "Typecheck und Production-Build grün machen",
+      "Keine erfundenen Module, solange echter Kontext da ist",
+      "Keine erfundenen Module, solange echter Kontext existierte",
+      "Arbeitsanweisung",
+      "Harte Verbote",
+      "Repo wurde gescannt",
+      "Kein React-State auf Simulation-Ticks",
+      "tsc --noEmit grün",
+      "Production-Build grün",
+      "Kein Pflicht-Backend",
+    ];
+    for (const phrase of bannedDe) {
+      assert(!html.includes(phrase), `${prefix} EN start still contains German: ${phrase}`);
+    }
+    assert(html.includes("Get typecheck and production build green."), `${prefix} missing English typecheck line`);
+    assert(html.includes("No invented modules as long as real context exists."), `${prefix} missing English invented-modules line`);
+    assert(html.includes("No invented modules as long as real context existed"), `${prefix} missing English checklist line`);
   }
+  assert(!html.includes("data-theme-toggle"), `${prefix} dark-mode toggle must be gone`);
+  assert(html.includes('class="topbar"'), `${prefix} start page must use the shared paper header`);
+  assert(html.includes("stage1.css"), `${prefix} start page must load the shared stage stylesheet`);
   assert(html.includes("AI Agents") || html.includes("AI agents"), `${prefix} missing AI Agents in copy/schema`);
   assert(html.includes("Java"), `${prefix} missing Java in capabilities`);
   assert(html.includes("peter.henrichs@web.de"), `${prefix} missing email`);
@@ -161,8 +182,8 @@ async function check(locale) {
   assert(!visibleText(contactSlice).includes(lockedH1), `${prefix} contact must not repeat the hero H1`);
   const craft = html.slice(craftAt);
   const craftCopy = locale === "de"
-    ? "Interaktion und Scroll-Story auf dieser Seite: eigene Skripte (Vanilla JS/CSS). Kein Three.js, kein zugekauftes Animation-Framework."
-    : "Interaction and scroll story on this page: custom scripts (vanilla JS/CSS). No Three.js, no off-the-shelf animation framework.";
+    ? "Interaktion und Scroll-Story auf dieser Site: eigene Skripte (Vanilla JS/CSS). Kein Three.js, kein zugekauftes Animation-Framework."
+    : "Interaction and scroll story on this site: custom scripts (vanilla JS/CSS). No Three.js, no off-the-shelf animation framework.";
   assert(craft.includes(craftCopy), `${prefix} craft-credit copy drifted`);
   assert(craft.includes("Custom-built · not a library demo"), `${prefix} craft chip missing`);
   assert(!recordSlice.includes("pf-section-band"), `${prefix} record must not use full-bleed stage bands`);
@@ -187,6 +208,7 @@ async function check(locale) {
 async function checkCv() {
   const html = await readFile(join(root, "public/portfolio/cv/index.html"), "utf8");
   assert(html.includes("/portfolio/portfolio.css"), "CV missing token stylesheet (production path)");
+  assert(!html.includes("data-theme-toggle"), "CV dark-mode toggle must be gone");
   assert(html.includes("Senior AI Consultant"), "CV missing role");
   assert(html.includes("peter.henrichs@web.de"), "CV missing email");
   assert(html.includes(offerLabel("de")) && html.includes(`href="${offerHref("de")}"`), "CV missing quick link");
@@ -271,6 +293,7 @@ async function checkCase(locale, id) {
     assert(/Kein AI|No AI/.test(html), `${prefix} must not invent client AI work`);
   }
   assert(!html.includes("enterprise-integration"), `${prefix} fabricated enterprise-integration product leaked`);
+  assert(!html.includes("data-theme-toggle"), `${prefix} dark-mode toggle must be gone`);
 }
 
 async function checkSitemap() {
@@ -317,6 +340,7 @@ async function checkStage1() {
     assert(home.includes(`/portfolio/${locale}/rollen/java-backend/`), `[${locale}] start page missing Java role link`);
     assert(home.includes(`/portfolio/${locale}/lebenslauf/`), `[${locale}] start page missing Lebenslauf link`);
     assert(home.includes(`/portfolio/${locale}/kontakt/`), `[${locale}] start page missing kontakt page link`);
+    assert(!home.includes('class="s1-footer"'), `[${locale}] start page must not render the timeline footer`);
     const hero = home.slice(home.indexOf('id="hero"'), home.indexOf('id="offer"'));
     const locked = locale === "de"
       ? "Ich baue Agenten-Schichten in laufende Enterprise-Systeme — prüfbar, mit Human-in-the-Loop."
@@ -333,7 +357,7 @@ async function checkStage1() {
       const html = await readFile(path, "utf8");
       assert(html.includes(chip) && html.includes(`href="${href}"`), `${rel} missing quick link`);
       assert(html.includes(needle), `${rel} missing ${needle}`);
-      assert(html.includes("<footer") && html.includes("timeline.js"), `${rel} missing footer credit`);
+      assert(!html.includes('class="s1-footer"'), `${rel} timeline footer belongs on Lebenslauf and deep dives only`);
       if (slug === "agentic-ai") {
         assert(html.includes("peter.henrichs@web.de"), `${rel} missing email`);
         assert(html.includes("Senior AI Consultant") && html.includes("Agentic Engineer") && html.includes("Transformation Lead"), `${rel} missing the three packages`);
@@ -382,7 +406,7 @@ async function checkStage1() {
     assert(contact.includes("mailto:peter.henrichs@web.de"), `${contactRel} missing email`);
     assert(contact.includes("linkedin.com/in/peter-henrichs"), `${contactRel} missing LinkedIn`);
     assert(contact.includes("github.com/d0npedro"), `${contactRel} missing GitHub`);
-    assert(contact.includes("<footer") && contact.includes("timeline.js"), `${contactRel} missing footer credit`);
+    assert(!contact.includes('class="s1-footer"'), `${contactRel} timeline footer belongs on Lebenslauf and deep dives only`);
 
     const collective = await readFile(join(root, "public/portfolio", locale, "lebenslauf", "case-agent-collective", "index.html"), "utf8");
     assert(/ohne LLM|without an LLM|No LLM|Kein LLM/i.test(collective), `[${locale}] Agent Collective deep dive must say there is no LLM`);
