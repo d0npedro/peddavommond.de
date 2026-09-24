@@ -224,7 +224,7 @@ export const de = {
     eyebrow: "Für Agenturen",
     title: "Wie man mich anbietet",
     intro:
-      "Drei klare Pakete — zum Platzieren bei Agenturen. Scope und Liefergegenstände. Keine Tagessätze. Keine erfundenen Kundenergebnisse.",
+      "Drei klare Pakete — zum Platzieren bei Agenturen. Scope und Liefergegenstände. Keine Tagessätze.",
     deliverables: "Liefergegenstände",
     ideal: "Passt zu",
     engagement: "Einsatz",
@@ -575,7 +575,7 @@ export const de = {
         "Menschliche Prüfung",
       ],
       outcome:
-        "Öffentliches Agent-Paket, Live-Demo, Tests, Typecheck, CI und reproduzierbarer Production-Build. Qualitativ beobachtet: nachvollziehbare Artefakte statt Black-Box-Analyse. Keine erfundenen Nutzungs- oder Business-KPIs.",
+        "Öffentliches Agent-Paket, Live-Demo, Tests, Typecheck, CI und reproduzierbarer Production-Build. Qualitativ beobachtet: nachvollziehbare Artefakte statt Black-Box-Analyse.",
       role: "Solo — Konzeption und Umsetzung des wiederverwendbaren Agent-Workflows und der Referenzanwendung. Independent R&D, kein Kundeneinsatz.",
       evaluation:
         "Evaluation läuft. Abnahme heute über CHECKLIST.md, Typecheck, Tests und CI. Der Agent liefert einen prüfbaren Graphen — ein Mensch bewertet das Ergebnis (Human-in-the-Loop). Quantitative Kennzahlen werden erst veröffentlicht, sobald ein reproduzierbarer Eval-Harness steht.",

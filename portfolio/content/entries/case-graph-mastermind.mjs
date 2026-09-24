@@ -28,8 +28,8 @@ export default {
     "CI / Typecheck"
   ],
   "result": {
-    "de": "Öffentliches Agent-Paket, Live-Demo, Tests, Typecheck, CI und reproduzierbarer Production-Build. Qualitativ beobachtet: nachvollziehbare Artefakte statt Black-Box-Analyse. Keine erfundenen Nutzungs- oder Business-KPIs.",
-    "en": "Public agent package, live demo, tests, typecheck, CI and reproducible production build. Qualitatively observed: inspectable artifacts instead of black-box analysis. No invented usage or business KPIs."
+    "de": "Öffentliches Agent-Paket, Live-Demo, Tests, Typecheck, CI und reproduzierbarer Production-Build. Qualitativ beobachtet: nachvollziehbare Artefakte statt Black-Box-Analyse.",
+    "en": "Public agent package, live demo, tests, typecheck, CI and reproducible production build. Qualitatively observed: inspectable artifacts instead of black-box analysis."
   },
   "media": {
     "preview": "https://raw.githubusercontent.com/d0npedro/graph-mastermind/main/docs/screenshots/overview.png",
@@ -75,8 +75,8 @@ export default {
       "en": "Evaluation in progress. Acceptance today via CHECKLIST.md, typecheck, tests and CI. Quantitative metrics only once a reproducible eval harness exists."
     },
     "ergebnis": {
-      "de": "Öffentliches Agent-Paket mit Live-Demo. Qualitativ beobachtet: nachvollziehbare Artefakte. Keine erfundenen Nutzungs- oder Business-KPIs.",
-      "en": "Public agent package with live demo. Qualitatively observed: inspectable artifacts. No invented usage or business KPIs."
+      "de": "Öffentliches Agent-Paket mit Live-Demo. Qualitativ beobachtet: nachvollziehbare Artefakte.",
+      "en": "Public agent package with live demo. Qualitatively observed: inspectable artifacts."
     }
   },
   "show": {

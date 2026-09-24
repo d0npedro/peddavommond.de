@@ -224,7 +224,7 @@ export const en = {
     eyebrow: "For agencies",
     title: "How to offer me",
     intro:
-      "Three clear packages — ready to place at agencies. Scope and deliverables. No day rates. No invented client outcomes.",
+      "Three clear packages — ready to place at agencies. Scope and deliverables. No day rates.",
     deliverables: "Deliverables",
     ideal: "Fits",
     engagement: "Engagement",
@@ -574,7 +574,7 @@ export const en = {
         "Human review",
       ],
       outcome:
-        "Public agent package, live demo, tests, typecheck, CI, and a reproducible production build. Qualitatively observed: inspectable artifacts instead of a black-box analysis. No invented usage or business KPIs.",
+        "Public agent package, live demo, tests, typecheck, CI, and a reproducible production build. Qualitatively observed: inspectable artifacts instead of a black-box analysis.",
       role: "Solo — design and delivery of the reusable agent workflow and the reference application. Independent R&D, not a client engagement.",
       evaluation:
         "Evaluation in progress. Acceptance today via CHECKLIST.md, typecheck, tests, and CI. The agent delivers an inspectable graph — a human reviews the result (human-in-the-loop). Quantitative numbers will be published only once a reproducible eval harness exists.",

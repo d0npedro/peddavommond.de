@@ -325,7 +325,7 @@ async function checkStage1() {
 
     for (const [slug, needle] of [
       ["agentic-ai", 'id="angebot"'],
-      ["java-backend", locale === "de" ? "Senior Backend Java Engineer · KI-empowered" : "Senior Backend Java Engineer · AI-empowered"],
+      ["java-backend", locale === "de" ? "Senior Backend Java Engineer · KI-gestützt" : "Senior Backend Java Engineer · AI-assisted"],
     ]) {
       const rel = join("public/portfolio", locale, "rollen", slug, "index.html");
       const path = join(root, rel);
@@ -340,7 +340,7 @@ async function checkStage1() {
         assert(html.includes(locale === "de" ? "Consultant · Pakete" : "Consulting · Packages"), `${rel} eyebrow must describe consulting packages`);
         assert(!html.includes("z. B. adesso") && !html.includes("e.g. adesso"), `${rel} still names adesso in the offer intro`);
         const honesty = locale === "de" ? "Keine erfundenen Kundenergebnisse" : "No invented client outcomes";
-        assert((html.split(honesty).length - 1) <= 1, `${rel} repeats the honesty rule`);
+        assert(!html.includes(honesty), `${rel} still has the meta-honesty line`);
       }
       if (slug === "java-backend") {
         assert(html.includes('id="einsatz"'), `${rel} missing engagement anchor`);

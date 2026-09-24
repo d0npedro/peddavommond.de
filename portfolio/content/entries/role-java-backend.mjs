@@ -6,12 +6,12 @@ export default {
   "order": 20,
   "priority": 90,
   "title": {
-    "de": "Senior Backend Java Engineer · KI-empowered",
-    "en": "Senior Backend Java Engineer · AI-empowered"
+    "de": "Senior Backend Java Engineer · KI-gestützt",
+    "en": "Senior Backend Java Engineer · AI-assisted"
   },
   "summary": {
-    "de": "Ich habe Java-Backends über Jahre verstanden, indem ich Code gelesen habe: Architektur, Seiteneffekte und die Gründe, warum etwas so gebaut wurde. Heute arbeite ich KI-beschleunigt. Die langen Schleifen aus Fehler suchen und Fehler ausmerzen fallen weg, und ich komme direkt vom Proposal zur Umsetzung. Jede Änderung bleibt dabei reviewbar.",
-    "en": "I spent years understanding Java backends by reading code: architecture, side effects, and why things were built the way they are. Today I work AI-accelerated. The long loops of hunting and fixing bugs are gone, and I go straight from the proposal to the implementation. Every change stays reviewable."
+    "de": "Ich habe Java-Backends über Jahre verstanden, indem ich Code gelesen habe: Architektur, Seiteneffekte und die Gründe, warum etwas so gebaut wurde. Heute arbeite ich KI-beschleunigt. Die langen Schleifen aus Fehler suchen und Fehler ausmerzen werden deutlich kürzer, und ich komme direkt vom Proposal zur Umsetzung. Jede Änderung bleibt dabei reviewbar.",
+    "en": "I spent years understanding Java backends by reading code: architecture, side effects, and why things were built the way they are. Today I work AI-accelerated. The long loops of hunting and fixing bugs get much shorter, and I go straight from the proposal to the implementation. Every change stays reviewable."
   },
   "topics": [
     "java",
