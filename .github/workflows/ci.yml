@@ -99,8 +99,8 @@ jobs:
           grep -q 'id="craft-credit"' public/portfolio/en/index.html
           grep -q 'portfolio/motion/stage-reveal.js' public/portfolio/de/index.html
           grep -q 'portfolio/motion/craft-mark.js' public/portfolio/en/index.html
-          grep -q 'Interaktion und Scroll-Story auf dieser Seite' public/portfolio/de/index.html
-          grep -q 'Interaction and scroll story on this page' public/portfolio/en/index.html
+          grep -q 'Interaktion und Scroll-Story auf dieser Site' public/portfolio/de/index.html
+          grep -q 'Interaction and scroll story on this site' public/portfolio/en/index.html
           grep -q 'id="record"' public/portfolio/de/index.html
           grep -q 'id="contact"' public/portfolio/de/index.html
           grep -q '<details' public/portfolio/de/index.html
