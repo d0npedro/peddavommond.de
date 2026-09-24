@@ -555,7 +555,7 @@ html.stage1 .rail-thumb {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: var(--s1-accent);
+  background: var(--s1-accent-ink);
   border: 2px solid var(--s1-bg);
   transform: translate(-50%, -50%);
 }
@@ -578,7 +578,7 @@ html.stage1 .rail-years span {
 
 html.stage1 .mobile-scrub input[type="range"] {
   flex: 1;
-  accent-color: var(--s1-accent);
+  accent-color: var(--s1-accent-ink);
 }
 
 html.stage1 .deep-dive[hidden] {

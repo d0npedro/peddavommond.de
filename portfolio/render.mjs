@@ -14,12 +14,12 @@ import {
   caseHref,
 } from "./shared.mjs";
 import { copy } from "./content.mjs";
-import { offerChip, stageEntryNav, stageFooter, stageTopbar } from "./render-stage1.mjs";
+import { offerChip, stageEntryNav, stageTopbar } from "./render-stage1.mjs";
 
 /** Next export = layout/utilities. Token + component layer is portfolio.css (copied to public/). */
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=paper-20260924";
-const STAGE_CSS = "/portfolio/stage1.css?v=paper-20260924";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=paper-20260924b";
+const STAGE_CSS = "/portfolio/stage1.css?v=paper-20260924b";
 
 function stylesheets() {
   return `<link rel="stylesheet" href="${NEXT_LAYOUT_CSS}"/>
@@ -55,7 +55,7 @@ const PROMISE_LINES = new Map([
     "I build agent layers into running enterprise systems — reviewable, with human-in-the-loop.",
     [
       "I build agent layers",
-      "into running enterprise systems —",
+      { before: "into running enterprise ", keep: "systems —" },
       { before: "reviewable, with ", keep: "human-in-the-loop." },
     ],
   ],
@@ -912,7 +912,6 @@ ${renderRecord(locale)}
 </main>
 ${renderFooter(locale)}
 ${renderCraftCredit(locale)}
-${stageFooter(locale)}
 ${pageScripts()}
 </body>
 </html>`;

@@ -182,8 +182,8 @@ async function check(locale) {
   assert(!visibleText(contactSlice).includes(lockedH1), `${prefix} contact must not repeat the hero H1`);
   const craft = html.slice(craftAt);
   const craftCopy = locale === "de"
-    ? "Interaktion und Scroll-Story auf dieser Seite: eigene Skripte (Vanilla JS/CSS). Kein Three.js, kein zugekauftes Animation-Framework."
-    : "Interaction and scroll story on this page: custom scripts (vanilla JS/CSS). No Three.js, no off-the-shelf animation framework.";
+    ? "Interaktion und Scroll-Story auf dieser Site: eigene Skripte (Vanilla JS/CSS). Kein Three.js, kein zugekauftes Animation-Framework."
+    : "Interaction and scroll story on this site: custom scripts (vanilla JS/CSS). No Three.js, no off-the-shelf animation framework.";
   assert(craft.includes(craftCopy), `${prefix} craft-credit copy drifted`);
   assert(craft.includes("Custom-built · not a library demo"), `${prefix} craft chip missing`);
   assert(!recordSlice.includes("pf-section-band"), `${prefix} record must not use full-bleed stage bands`);
@@ -340,6 +340,7 @@ async function checkStage1() {
     assert(home.includes(`/portfolio/${locale}/rollen/java-backend/`), `[${locale}] start page missing Java role link`);
     assert(home.includes(`/portfolio/${locale}/lebenslauf/`), `[${locale}] start page missing Lebenslauf link`);
     assert(home.includes(`/portfolio/${locale}/kontakt/`), `[${locale}] start page missing kontakt page link`);
+    assert(!home.includes('class="s1-footer"'), `[${locale}] start page must not render the timeline footer`);
     const hero = home.slice(home.indexOf('id="hero"'), home.indexOf('id="offer"'));
     const locked = locale === "de"
       ? "Ich baue Agenten-Schichten in laufende Enterprise-Systeme — prüfbar, mit Human-in-the-Loop."
@@ -356,7 +357,7 @@ async function checkStage1() {
       const html = await readFile(path, "utf8");
       assert(html.includes(chip) && html.includes(`href="${href}"`), `${rel} missing quick link`);
       assert(html.includes(needle), `${rel} missing ${needle}`);
-      assert(html.includes("<footer") && html.includes("timeline.js"), `${rel} missing footer credit`);
+      assert(!html.includes('class="s1-footer"'), `${rel} timeline footer belongs on Lebenslauf and deep dives only`);
       if (slug === "agentic-ai") {
         assert(html.includes("peter.henrichs@web.de"), `${rel} missing email`);
         assert(html.includes("Senior AI Consultant") && html.includes("Agentic Engineer") && html.includes("Transformation Lead"), `${rel} missing the three packages`);
@@ -405,7 +406,7 @@ async function checkStage1() {
     assert(contact.includes("mailto:peter.henrichs@web.de"), `${contactRel} missing email`);
     assert(contact.includes("linkedin.com/in/peter-henrichs"), `${contactRel} missing LinkedIn`);
     assert(contact.includes("github.com/d0npedro"), `${contactRel} missing GitHub`);
-    assert(contact.includes("<footer") && contact.includes("timeline.js"), `${contactRel} missing footer credit`);
+    assert(!contact.includes('class="s1-footer"'), `${contactRel} timeline footer belongs on Lebenslauf and deep dives only`);
 
     const collective = await readFile(join(root, "public/portfolio", locale, "lebenslauf", "case-agent-collective", "index.html"), "utf8");
     assert(/ohne LLM|without an LLM|No LLM|Kein LLM/i.test(collective), `[${locale}] Agent Collective deep dive must say there is no LLM`);

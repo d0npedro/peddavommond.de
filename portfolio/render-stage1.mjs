@@ -10,8 +10,8 @@ import { offerHref, offerLabel } from "./offer-link.mjs";
 import { SITE, caseById, caseHref } from "./shared.mjs";
 
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=paper-20260924";
-const STAGE_CSS = "/portfolio/stage1.css?v=paper-20260924";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=paper-20260924b";
+const STAGE_CSS = "/portfolio/stage1.css?v=paper-20260924b";
 
 const CHAPTER_KEYS = ["ausgangslage", "schnitt", "umsetzung", "nachweis", "ergebnis"];
 
@@ -280,7 +280,7 @@ export function stageFooter(locale) {
   return `<footer class="s1-footer"><p><code>timeline.js</code> · <a href="${esc(contactHref(locale))}">${esc(ui.contactNav)}</a></p></footer>`;
 }
 
-function pageShell({ locale, title, description, canonicalPath, siblingPath, current, body, boot, extraClass = "", showTopbar = true }) {
+function pageShell({ locale, title, description, canonicalPath, siblingPath, current, body, boot, extraClass = "", showTopbar = true, showFooter = false }) {
   const ui = UI[locale];
   const url = `${SITE.origin}${canonicalPath}`;
   const bootTag = boot
@@ -316,7 +316,7 @@ ${boot ? `<script>document.documentElement.classList.add("js")</script>` : ""}
 ${showTopbar ? `<a class="skip" href="#main">${esc(ui.skip)}</a>` : ""}
 ${showTopbar ? topbar(locale, siblingPath, { current }) : ""}
 ${body}
-${showTopbar ? stageFooter(locale) : ""}
+${showFooter ? stageFooter(locale) : ""}
 ${bootTag}
 ${script}
 </body>
@@ -552,6 +552,7 @@ export function renderTimelinePage(locale) {
     current: "timeline",
     body,
     boot: bootPayload(locale, "timeline"),
+    showFooter: true,
   });
 }
 
