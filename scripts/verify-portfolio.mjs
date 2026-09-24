@@ -1,7 +1,9 @@
-import { readFile, access } from "node:fs/promises";
+import { readFile, access, readdir } from "node:fs/promises";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { pagedCases, caseHref, SITE, FLAGSHIP_IDS } from "../portfolio/shared.mjs";
+import { timelineEntries } from "../portfolio/content/index.mjs";
+import { offerHref, offerLabel } from "../portfolio/offer-link.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const failures = [];
@@ -12,7 +14,18 @@ function assert(cond, message) {
 }
 
 function visibleText(html) {
-  return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
+  return html
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ");
+}
+
+function sourceLeak(text) {
+  if (/\.mjs\b/.test(text)) return ".mjs";
+  if (/\(main\)/.test(text)) return "(main)";
+  if (/\bportfolio\/(?!(?:de|en|cv)(?:\/|\b))/.test(text)) return "portfolio/ source path";
+  return "";
 }
 
 const DE_H1 = "Ich baue Agenten-Schichten in laufende Enterprise-Systeme — prüfbar, mit Human-in-the-Loop.";
@@ -106,7 +119,8 @@ async function check(locale) {
   assert(!html.includes("Independent Lab"), `${prefix} still uses hobby-adjacent Independent Lab label`);
   assert(html.includes("Human-in-the-Loop"), `${prefix} missing HITL`);
   assert(html.includes('id="craft-credit"'), `${prefix} missing craft credit`);
-  assert(html.includes("portfolio/motion/stage-reveal.js") && html.includes("portfolio/motion/craft-mark.js"), `${prefix} craft credit must name the motion modules`);
+  assert(html.includes("stage-reveal.js") && html.includes("craft-mark.js") && html.includes("timeline.js"), `${prefix} craft credit must name the motion modules`);
+  assert(html.includes("/portfolio/motion/stage-reveal.js") && html.includes("/portfolio/motion/craft-mark.js"), `${prefix} motion scripts missing`);
   assert(html.includes("Kein Three.js") || html.includes("No Three.js"), `${prefix} craft credit must state the Three.js refusal`);
   const heroAt = html.indexOf('id="hero"');
   const offerAt = html.indexOf('id="offer"');
@@ -175,6 +189,7 @@ async function checkCv() {
   assert(html.includes("/portfolio/portfolio.css"), "CV missing token stylesheet (production path)");
   assert(html.includes("Senior AI Consultant"), "CV missing role");
   assert(html.includes("peter.henrichs@web.de"), "CV missing email");
+  assert(html.includes(offerLabel("de")) && html.includes(`href="${offerHref("de")}"`), "CV missing quick link");
   assert(!html.includes("ph@d0npedro.com"), "CV still has old hiring email");
   assert(html.includes("Graph-Mastermind"), "CV missing Graph-Mastermind");
   for (const id of CASE_IDS) {
@@ -224,6 +239,7 @@ async function checkCase(locale, id) {
   const html = await readFile(path, "utf8");
   const prefix = `[${locale}/${id}]`;
   assert(html.includes("peter.henrichs@web.de"), `${prefix} missing email`);
+  assert(html.includes(offerLabel(locale)) && html.includes(`href="${offerHref(locale)}"`), `${prefix} missing quick link`);
   assert(!html.includes("ph@d0npedro.com"), `${prefix} still has old hiring email`);
   assert(html.includes("Senior AI Consultant"), `${prefix} missing positioning`);
   const hasProblem = html.includes(">Problem<") || html.includes("Problem");
@@ -278,7 +294,7 @@ for (const locale of ["de", "en"]) {
 async function checkLibs() {
   const pkg = await readFile(join(root, "package.json"), "utf8");
   assert(!/"three"|"gsap"|"framer-motion"|"animejs"|"lottie-web"/.test(pkg), "package.json must not add a motion framework");
-  for (const rel of ["portfolio/app.js", "portfolio/motion/stage-reveal.js", "portfolio/motion/craft-mark.js", "portfolio/render.mjs"]) {
+  for (const rel of ["portfolio/app.js", "portfolio/motion/stage-reveal.js", "portfolio/motion/craft-mark.js", "portfolio/motion/timeline.js", "portfolio/render.mjs", "portfolio/render-stage1.mjs"]) {
     const src = await readFile(join(root, rel), "utf8");
     assert(!/from ["'](?:three|gsap|framer-motion|animejs|lottie)/.test(src), `${rel} imports a forbidden motion library`);
   }
@@ -286,6 +302,131 @@ async function checkLibs() {
 
 await checkSitemap();
 await checkLibs();
+await checkStage1();
+
+async function checkStage1() {
+  const entries = timelineEntries();
+  const placeholders = ["[Jahr]", "[CMS]", "[Dauer]", "[Ergebnis]", "[Metrik]", "[Arbeitgeber]"];
+  for (const locale of ["de", "en"]) {
+    const home = await readFile(join(root, "public/portfolio", locale, "index.html"), "utf8");
+    const chip = offerLabel(locale);
+    const href = offerHref(locale);
+    assert(home.includes(chip), `[${locale}] start page missing quick link label`);
+    assert(home.includes(`href="${href}"`), `[${locale}] start page quick link must target the offer anchor`);
+    assert(home.includes(`/portfolio/${locale}/rollen/agentic-ai/`), `[${locale}] start page missing Agentic AI role link`);
+    assert(home.includes(`/portfolio/${locale}/rollen/java-backend/`), `[${locale}] start page missing Java role link`);
+    assert(home.includes(`/portfolio/${locale}/lebenslauf/`), `[${locale}] start page missing Lebenslauf link`);
+    assert(home.includes(`/portfolio/${locale}/kontakt/`), `[${locale}] start page missing kontakt page link`);
+    const hero = home.slice(home.indexOf('id="hero"'), home.indexOf('id="offer"'));
+    const locked = locale === "de"
+      ? "Ich baue Agenten-Schichten in laufende Enterprise-Systeme — prüfbar, mit Human-in-the-Loop."
+      : "I build agent layers into running enterprise systems — reviewable, with human-in-the-loop.";
+    assert(visibleText(hero).includes(locked), `[${locale}] hero H1 changed`);
+
+    for (const [slug, needle] of [
+      ["agentic-ai", 'id="angebot"'],
+      ["java-backend", locale === "de" ? "Senior Backend Java Engineer · KI-gestützt" : "Senior Backend Java Engineer · AI-assisted"],
+    ]) {
+      const rel = join("public/portfolio", locale, "rollen", slug, "index.html");
+      const path = join(root, rel);
+      assert(await exists(path), `missing role page ${rel}`);
+      const html = await readFile(path, "utf8");
+      assert(html.includes(chip) && html.includes(`href="${href}"`), `${rel} missing quick link`);
+      assert(html.includes(needle), `${rel} missing ${needle}`);
+      assert(html.includes("<footer") && html.includes("timeline.js"), `${rel} missing footer credit`);
+      if (slug === "agentic-ai") {
+        assert(html.includes("peter.henrichs@web.de"), `${rel} missing email`);
+        assert(html.includes("Senior AI Consultant") && html.includes("Agentic Engineer") && html.includes("Transformation Lead"), `${rel} missing the three packages`);
+        assert(html.includes(locale === "de" ? "Consultant · Pakete" : "Consulting · Packages"), `${rel} eyebrow must describe consulting packages`);
+        assert(!html.includes("z. B. adesso") && !html.includes("e.g. adesso"), `${rel} still names adesso in the offer intro`);
+        const honesty = locale === "de" ? "Keine erfundenen Kundenergebnisse" : "No invented client outcomes";
+        assert(!html.includes(honesty), `${rel} still has the meta-honesty line`);
+      }
+      if (slug === "java-backend") {
+        assert(html.includes('id="einsatz"'), `${rel} missing engagement anchor`);
+        assert(html.includes(`/portfolio/${locale}/kontakt/`), `${rel} engagement must link to kontakt`);
+        assert(html.includes(locale === "de" ? "Engineering-Seat" : "Engineering seat"), `${rel} eyebrow must use the entry engagement form`);
+        assert(html.includes(locale === "de" ? "Lebenslauf · Stationen" : "Career · stations"), `${rel} proof source must be a human link`);
+        assert(html.includes(`href="/portfolio/${locale}/lebenslauf/"`), `${rel} proof source must link to the timeline`);
+        assert(!/Rolle · Anstellung|Role · Employment/.test(html), `${rel} still labels the role as employment`);
+      }
+      const leak = sourceLeak(visibleText(html));
+      assert(!leak, `${rel} leaks ${leak} in visible text`);
+    }
+
+    const timelineRel = join("public/portfolio", locale, "lebenslauf", "index.html");
+    const timelinePath = join(root, timelineRel);
+    assert(await exists(timelinePath), `missing timeline ${timelineRel}`);
+    const timeline = await readFile(timelinePath, "utf8");
+    assert(timeline.includes(chip) && timeline.includes(`href="${href}"`), `${timelineRel} missing quick link`);
+    assert(timeline.includes('id="entry-list"') && timeline.includes('id="year-rail"') && timeline.includes('id="preview"'), `${timelineRel} missing timeline regions`);
+    assert(timeline.includes("/portfolio/motion/timeline.js"), `${timelineRel} missing timeline module`);
+    assert(timeline.includes('class="entry-card"'), `${timelineRel} missing the no-JS link list`);
+    assert(timeline.includes("<footer") && timeline.includes("timeline.js"), `${timelineRel} missing footer credit`);
+    for (const entry of entries) {
+      const diveRel = join("public/portfolio", locale, "lebenslauf", entry.id, "index.html");
+      const divePath = join(root, diveRel);
+      assert(await exists(divePath), `missing deep dive ${diveRel}`);
+      assert(timeline.includes(`/portfolio/${locale}/lebenslauf/${entry.id}/`), `${timelineRel} missing link to ${entry.id}`);
+      const dive = await readFile(divePath, "utf8");
+      assert(dive.includes('role="dialog"') && dive.includes('aria-modal="true"'), `${diveRel} missing dialog semantics`);
+      assert(dive.includes(chip) && dive.includes(`href="${href}"`), `${diveRel} missing quick link`);
+      assert(dive.includes(entry.title[locale]), `${diveRel} missing title`);
+      assert(dive.includes(`/portfolio/${locale}/lebenslauf/#${entry.id}`), `${diveRel} close link must return to the list item`);
+      assert(dive.includes("<footer") && dive.includes("timeline.js"), `${diveRel} missing footer credit`);
+    }
+
+    const contactRel = join("public/portfolio", locale, "kontakt", "index.html");
+    const contact = await readFile(join(root, contactRel), "utf8");
+    assert(contact.includes(chip) && contact.includes(`href="${href}"`), `${contactRel} missing quick link`);
+    assert(contact.includes("mailto:peter.henrichs@web.de"), `${contactRel} missing email`);
+    assert(contact.includes("linkedin.com/in/peter-henrichs"), `${contactRel} missing LinkedIn`);
+    assert(contact.includes("github.com/d0npedro"), `${contactRel} missing GitHub`);
+    assert(contact.includes("<footer") && contact.includes("timeline.js"), `${contactRel} missing footer credit`);
+
+    const collective = await readFile(join(root, "public/portfolio", locale, "lebenslauf", "case-agent-collective", "index.html"), "utf8");
+    assert(/ohne LLM|without an LLM|No LLM|Kein LLM/i.test(collective), `[${locale}] Agent Collective deep dive must say there is no LLM`);
+    assert(!/LLM-driven|powered by an LLM|GPT-|OpenAI API/i.test(collective), `[${locale}] Agent Collective deep dive must not invent an LLM`);
+  }
+
+  const experiment = await readFile(join(root, "public/portfolio/de/lebenslauf/experiment-cms-before-after/index.html"), "utf8");
+  const harness = await readFile(join(root, "public/portfolio/de/lebenslauf/experiment-agent-contract-harness/index.html"), "utf8");
+  const loop = await readFile(join(root, "public/portfolio/de/lebenslauf/experiment-backend-change-loop/index.html"), "utf8");
+  const combined = experiment + harness + loop;
+  for (const token of placeholders) {
+    assert(combined.includes(`<mark class="ph-token">${token}</mark>`), `placeholder ${token} is not visibly marked`);
+  }
+  const enTokens = ["[Year]", "[CMS]", "[Duration]", "[Result]", "[Metric]", "[Employer]"];
+  const enExperiment = await readFile(join(root, "public/portfolio/en/lebenslauf/experiment-cms-before-after/index.html"), "utf8");
+  const enHarness = await readFile(join(root, "public/portfolio/en/lebenslauf/experiment-agent-contract-harness/index.html"), "utf8");
+  const enLoop = await readFile(join(root, "public/portfolio/en/lebenslauf/experiment-backend-change-loop/index.html"), "utf8");
+  const enCombined = enExperiment + enHarness + enLoop;
+  for (const token of enTokens) {
+    assert(enCombined.includes(`<mark class="ph-token">${token}</mark>`), `EN placeholder ${token} is not visibly marked`);
+  }
+  for (const token of ["[Jahr]", "[Dauer]", "[Ergebnis]", "[Metrik]", "[Arbeitgeber]"]) {
+    assert(!enCombined.includes(token), `EN experiment pages still show ${token}`);
+  }
+  const experimentBody = visibleText(experiment);
+  const experimentCut = experimentBody.slice(experimentBody.indexOf("Webseite mit"));
+  assert(experimentCut.length > 0 && !/20\d{2}/.test(experimentCut), "experiment placeholder page must not invent a year");
+
+  async function walkHtml(dir) {
+    const found = [];
+    const entries = await readdir(dir, { withFileTypes: true });
+    for (const entry of entries) {
+      const path = join(dir, entry.name);
+      if (entry.isDirectory()) found.push(...await walkHtml(path));
+      else if (entry.name.endsWith(".html")) found.push(path);
+    }
+    return found;
+  }
+  for (const path of await walkHtml(join(root, "public/portfolio"))) {
+    const html = await readFile(path, "utf8");
+    const leak = sourceLeak(visibleText(html));
+    assert(!leak, `${path} leaks ${leak} in visible text`);
+  }
+}
 
 if (failures.length) {
   console.error("portfolio verify failed:\n- " + failures.join("\n- "));

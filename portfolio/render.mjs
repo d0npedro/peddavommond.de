@@ -16,10 +16,11 @@ import {
   caseHref,
 } from "./shared.mjs";
 import { copy } from "./content.mjs";
+import { offerChip, stageEntryNav } from "./render-stage1.mjs";
 
 /** Next export = layout/utilities. Token + component layer is portfolio.css (copied to public/). */
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=klar-direkt-20260923";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=stage1-20260924r2";
 
 function stylesheets() {
   return `<link rel="stylesheet" href="${NEXT_LAYOUT_CSS}"/>
@@ -146,13 +147,14 @@ function renderNav(locale, { siblingPath = "", homePrefix = "", showTalk = true 
     ? `<li><a href="${attr(contactHref)}" class="pf-nav-cta mt-2 flex w-full items-center justify-center">${esc(t.nav.talk)}</a></li>`
     : "";
   return `<header class="pf-header fixed inset-x-0 top-0 z-50" data-site-header>
-  <nav aria-label="${attr(t.nav.ariaPrimary)}" class="container flex items-center justify-between gap-4">
+  <nav aria-label="${attr(t.nav.ariaPrimary)}" class="container pf-header-bar flex items-center justify-between gap-4">
     <a href="${attr(brandHref)}" class="pf-brand">
       <span class="pf-brand-mark" aria-hidden="true"><span></span></span>
       <span class="pf-brand-name">${esc(SITE.name)}</span>
     </a>
-    <ul class="hidden items-center gap-0.5 md:flex">${navItems(locale, false, homePrefix)}</ul>
-    <div class="flex items-center gap-2">
+    <ul class="pf-header-nav hidden items-center gap-0.5 md:flex">${navItems(locale, false, homePrefix)}</ul>
+    <div class="pf-header-tools flex items-center gap-2">
+      ${offerChip(locale)}
       ${talkDesktop}
       ${langSwitch(locale, "hidden sm:inline-flex", siblingPath)}
       <button type="button" data-theme-toggle aria-label="${attr(t.theme.toDark)}" class="pf-icon-btn group relative">${iconSun()}${iconMoon()}</button>
@@ -232,6 +234,7 @@ function renderHero(locale) {
       <div class="pf-cta-row">
         <a href="#offer" class="pf-cta pf-cta--primary">${esc(t.hero.ctaPrimary)}</a>
       </div>
+      ${stageEntryNav(locale)}
     </div>
   </section>`;
 }
@@ -493,6 +496,7 @@ function renderFooter(locale) {
         <a class="secondary" href="${attr(SITE.linkedin)}" target="_blank" rel="noopener noreferrer">${esc(t.footer.linkedin)}</a>
         <a class="secondary" href="${attr(SITE.github)}" target="_blank" rel="noopener noreferrer">${esc(t.footer.github)}</a>
         <a class="secondary" href="${attr(SITE.cvPath)}">${esc(t.footer.cv)}</a>
+        <a class="secondary" href="/portfolio/${locale}/kontakt/">${esc(locale === "de" ? "Kontaktseite" : "Contact page")}</a>
       </div>
       <div class="hairline my-12"></div>
       <div class="flex flex-col items-start justify-between gap-4 font-mono text-xs text-faint sm:flex-row sm:items-center">
@@ -1031,7 +1035,8 @@ ${themeBoot()}
       <span class="pf-brand-mark" aria-hidden="true"><span></span></span>
       <span class="hidden sm:inline">${esc(SITE.name)}</span>
     </a>
-    <div class="flex items-center gap-2">
+    <div class="flex flex-wrap items-center justify-end gap-2">
+      ${offerChip(locale)}
       <a href="/portfolio/${locale}" class="pf-nav-cta pf-nav-cta--always">${esc(t.cv.back)}</a>
       <button type="button" data-theme-toggle aria-label="${attr(t.theme.toDark)}" class="pf-icon-btn group relative">${iconSun()}${iconMoon()}</button>
     </div>
@@ -1063,7 +1068,7 @@ ${pageScripts()}
 </html>`;
 }
 
-export function renderSitemap() {
+export function renderSitemap(extra = []) {
   const now = new Date().toISOString();
   const pages = [
     { de: `${SITE.origin}/portfolio/de`, en: `${SITE.origin}/portfolio/en`, priority: "0.8" },
@@ -1072,6 +1077,7 @@ export function renderSitemap() {
       en: `${SITE.origin}${caseHref("en", item.id)}`,
       priority: item.section === "ai" ? "0.7" : "0.65",
     })),
+    ...extra,
   ];
   const urls = pages
     .flatMap((page) => [

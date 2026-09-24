@@ -48,6 +48,7 @@ source ./scripts/load-ops-env.sh
 | `vercel.json` | Redirects/rewrites, static build settings |
 | `scripts/prepare-static-deploy.mjs` | Production static prepare (`vercel-build`) |
 | `portfolio/` | Peter Henrichs portfolio content model (DE/EN) → `public/portfolio/` |
+| `portfolio/content/` | Stage 1 entries, schema and validator (roles, Lebenslauf, contact) |
 | `public/index.html` | Root hub landing (streaming + social tiles, Windows 11 tile) |
 | `public/hub/` | Hub logos and banner from the streaming-platforms zip |
 | `app/` | Next/vinext routes (`/listen`) — SSR not used in current prod static mode |

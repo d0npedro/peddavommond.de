@@ -74,6 +74,38 @@
       "destination": "/portfolio/:locale/cases/:id/index.html"
     },
     {
+      "source": "/portfolio/:locale/rollen/:slug",
+      "destination": "/portfolio/:locale/rollen/:slug/index.html"
+    },
+    {
+      "source": "/portfolio/:locale/rollen/:slug/",
+      "destination": "/portfolio/:locale/rollen/:slug/index.html"
+    },
+    {
+      "source": "/portfolio/:locale/lebenslauf",
+      "destination": "/portfolio/:locale/lebenslauf/index.html"
+    },
+    {
+      "source": "/portfolio/:locale/lebenslauf/",
+      "destination": "/portfolio/:locale/lebenslauf/index.html"
+    },
+    {
+      "source": "/portfolio/:locale/lebenslauf/:id",
+      "destination": "/portfolio/:locale/lebenslauf/:id/index.html"
+    },
+    {
+      "source": "/portfolio/:locale/lebenslauf/:id/",
+      "destination": "/portfolio/:locale/lebenslauf/:id/index.html"
+    },
+    {
+      "source": "/portfolio/:locale/kontakt",
+      "destination": "/portfolio/:locale/kontakt/index.html"
+    },
+    {
+      "source": "/portfolio/:locale/kontakt/",
+      "destination": "/portfolio/:locale/kontakt/index.html"
+    },
+    {
       "source": "/win11",
       "destination": "/win11/index.html"
     },

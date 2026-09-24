@@ -224,7 +224,7 @@ export const en = {
     eyebrow: "For agencies",
     title: "How to offer me",
     intro:
-      "Three clear packages — ready to place at agencies (e.g. adesso). Scope and deliverables. No day rates. No invented client outcomes.",
+      "Three clear packages — ready to place at agencies. Scope and deliverables. No day rates.",
     deliverables: "Deliverables",
     ideal: "Fits",
     engagement: "Engagement",
@@ -574,7 +574,7 @@ export const en = {
         "Human review",
       ],
       outcome:
-        "Public agent package, live demo, tests, typecheck, CI, and a reproducible production build. Qualitatively observed: inspectable artifacts instead of a black-box analysis. No invented usage or business KPIs.",
+        "Public agent package, live demo, tests, typecheck, CI, and a reproducible production build. Qualitatively observed: inspectable artifacts instead of a black-box analysis.",
       role: "Solo — design and delivery of the reusable agent workflow and the reference application. Independent R&D, not a client engagement.",
       evaluation:
         "Evaluation in progress. Acceptance today via CHECKLIST.md, typecheck, tests, and CI. The agent delivers an inspectable graph — a human reviews the result (human-in-the-loop). Quantitative numbers will be published only once a reproducible eval harness exists.",
@@ -1085,7 +1085,7 @@ export const en = {
     body: "Interaction and scroll story on this page: custom scripts (vanilla JS/CSS). No Three.js, no off-the-shelf animation framework.",
     chip: "Custom-built · not a library demo",
     technique: "SVG stroke-dashoffset · drawn once",
-    modules: ["portfolio/motion/stage-reveal.js", "portfolio/motion/craft-mark.js"],
+    modules: ["stage-reveal.js", "craft-mark.js", "timeline.js"],
   },
   cv: {
     title: "CV — Peter Henrichs",
