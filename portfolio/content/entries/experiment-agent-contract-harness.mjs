@@ -15,7 +15,7 @@ export default {
     "en": "Placeholder: reproducible eval harness for coding agents — [Metric] not published yet until [Measurement basis] exists."
   },
   "period": {
-    "date": "[Jahr]"
+    "date": { "de": "[Jahr]", "en": "[Year]" }
   },
   "topics": [
     "agent-contracts",

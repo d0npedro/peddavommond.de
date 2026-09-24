@@ -224,7 +224,7 @@ export const de = {
     eyebrow: "Für Agenturen",
     title: "Wie man mich anbietet",
     intro:
-      "Drei klare Pakete — zum Platzieren bei Agenturen (z. B. adesso). Scope und Liefergegenstände. Keine Tagessätze. Keine erfundenen Kundenergebnisse.",
+      "Drei klare Pakete — zum Platzieren bei Agenturen. Scope und Liefergegenstände. Keine Tagessätze. Keine erfundenen Kundenergebnisse.",
     deliverables: "Liefergegenstände",
     ideal: "Passt zu",
     engagement: "Einsatz",
@@ -1087,7 +1087,7 @@ export const de = {
     body: "Interaktion und Scroll-Story auf dieser Seite: eigene Skripte (Vanilla JS/CSS). Kein Three.js, kein zugekauftes Animation-Framework.",
     chip: "Custom-built · not a library demo",
     technique: "SVG stroke-dashoffset · einmal gezeichnet",
-    modules: ["portfolio/motion/stage-reveal.js", "portfolio/motion/craft-mark.js", "portfolio/motion/timeline.js"],
+    modules: ["stage-reveal.js", "craft-mark.js", "timeline.js"],
   },
   cv: {
     title: "Lebenslauf — Peter Henrichs",

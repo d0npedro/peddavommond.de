@@ -14,10 +14,40 @@ const LOCKED_H1 = {
 };
 
 const PLACEHOLDERS = {
-  "experiment-cms-before-after": ["[CMS]", "[Jahr]", "[Dauer]", "[Ergebnis]", "[Stack]", "[Duration]"],
-  "experiment-backend-change-loop": ["[Jahr]", "[Dauer]", "[Arbeitgeber]", "[Messmethode]", "[Stack]", "[Duration]", "[Employer]"],
-  "experiment-agent-contract-harness": ["[Jahr]", "[Metrik]", "[Messbasis]", "[Ergebnis]", "[Eval-Harness]", "[Metric]", "[Result]"],
+  de: {
+    "experiment-cms-before-after": ["[CMS]", "[Jahr]", "[Dauer]", "[Ergebnis]", "[Stack]"],
+    "experiment-backend-change-loop": ["[Jahr]", "[Dauer]", "[Arbeitgeber]", "[Messmethode]", "[Stack]"],
+    "experiment-agent-contract-harness": ["[Jahr]", "[Metrik]", "[Messbasis]", "[Ergebnis]", "[Eval-Harness]"],
+  },
+  en: {
+    "experiment-cms-before-after": ["[CMS]", "[Year]", "[Duration]", "[Result]", "[Stack]"],
+    "experiment-backend-change-loop": ["[Year]", "[Duration]", "[Employer]", "[Measurement method]", "[Stack]"],
+    "experiment-agent-contract-harness": ["[Year]", "[Metric]", "[Measurement basis]", "[Result]", "[Eval-Harness]"],
+  },
 };
+
+const GERMAN_ONLY_TOKENS = ["[Jahr]", "[Dauer]", "[Ergebnis]", "[Metrik]", "[Arbeitgeber]", "[Messmethode]", "[Messbasis]"];
+
+function localeText(value, locale, out) {
+  if (typeof value === "string") {
+    out.push(value);
+    return;
+  }
+  if (Array.isArray(value)) {
+    for (const item of value) localeText(item, locale, out);
+    return;
+  }
+  if (!value || typeof value !== "object") return;
+  if (typeof value.de === "string" || typeof value.en === "string") {
+    if (typeof value[locale] === "string") out.push(value[locale]);
+    for (const [key, child] of Object.entries(value)) {
+      if (key === "de" || key === "en") continue;
+      localeText(child, locale, out);
+    }
+    return;
+  }
+  for (const child of Object.values(value)) localeText(child, locale, out);
+}
 
 export function assertPortfolioContent() {
   const errors = [];
@@ -56,10 +86,19 @@ export function assertPortfolioContent() {
     errors.push("Agent Collective must not be described as LLM-driven");
   }
 
-  for (const [id, tokens] of Object.entries(PLACEHOLDERS)) {
-    const raw = JSON.stringify(byId(id));
-    for (const token of tokens) {
-      if (!raw.includes(token)) errors.push(`${id} lost placeholder ${token}`);
+  for (const locale of ["de", "en"]) {
+    for (const [id, tokens] of Object.entries(PLACEHOLDERS[locale])) {
+      const parts = [];
+      localeText(byId(id), locale, parts);
+      const blob = parts.join("\n");
+      for (const token of tokens) {
+        if (!blob.includes(token)) errors.push(`${id} ${locale} lost placeholder ${token}`);
+      }
+      if (locale === "en") {
+        for (const token of GERMAN_ONLY_TOKENS) {
+          if (blob.includes(token)) errors.push(`${id} EN still has German placeholder ${token}`);
+        }
+      }
     }
   }
 

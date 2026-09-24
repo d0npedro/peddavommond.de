@@ -10,8 +10,8 @@ import { offerHref, offerLabel } from "./offer-link.mjs";
 import { SITE, caseById, caseHref } from "./shared.mjs";
 
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=stage1-20260924";
-const STAGE_CSS = "/portfolio/stage1.css?v=stage1-20260924";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=stage1-20260924r2";
+const STAGE_CSS = "/portfolio/stage1.css?v=stage1-20260924r2";
 
 const CHAPTER_KEYS = ["ausgangslage", "schnitt", "umsetzung", "nachweis", "ergebnis"];
 
@@ -47,7 +47,11 @@ const UI = {
     skip: "Zum Inhalt springen",
     timelineTitle: "Lebenslauf",
     timelineLede:
-      "Stationen, Cases und Experimente — scrubbar nach Jahr. Keine erfundenen KPIs. Independent R&D und Kundenarbeit getrennt gekennzeichnet.",
+      "Stationen, Cases und Experimente — scrubbar nach Jahr. Independent R&D und Kundenarbeit getrennt gekennzeichnet.",
+    menu: "Menü",
+    engagementTitle: "Einsatz",
+    contactCta: "Kontakt",
+    stations: "Lebenslauf · Stationen",
     placeholderNote:
       "Eckige Klammern sind offene Platzhalter. Sie bleiben stehen, bis eine echte Angabe mit Quelle da ist.",
     yearRail: "Jahr-Schiene",
@@ -91,7 +95,11 @@ const UI = {
     skip: "Skip to content",
     timelineTitle: "Career",
     timelineLede:
-      "Stations, cases and experiments — scrubbable by year. No invented KPIs. Independent R&D and client work are labeled separately.",
+      "Stations, cases and experiments — scrubbable by year. Independent R&D and client work are labeled separately.",
+    menu: "Menu",
+    engagementTitle: "Engagement",
+    contactCta: "Contact",
+    stations: "Career · stations",
     placeholderNote:
       "Square brackets are open placeholders. They stay until a real figure with a source exists.",
     yearRail: "Year rail",
@@ -157,12 +165,28 @@ export function stageEntryNav(locale) {
   return `<nav class="pf-entry-row" aria-label="${esc(label)}">${links}</nav>`;
 }
 
-function periodLabel(entry) {
+function periodLabel(entry, locale) {
   if (entry.periodLabel) return entry.periodLabel;
   const p = entry.period ?? {};
   if (p.from && p.to) return `${p.from} – ${p.to}`;
-  if (p.date) return String(p.date);
+  if (p.date) {
+    if (typeof p.date === "object") return String(p.date[locale] ?? p.date.de ?? "");
+    return String(p.date);
+  }
   return "";
+}
+
+function isInternalSource(source) {
+  return /\.mjs|\(main\)|\bportfolio\//.test(String(source ?? ""));
+}
+
+function roleEyebrow(locale, entry) {
+  if (entry.packages?.length) {
+    return locale === "de" ? "Consultant · Pakete" : "Consulting · Packages";
+  }
+  const line = entry.engagement?.[locale] ?? "";
+  const head = line.split(/[,.]/)[0].trim();
+  return head || (locale === "de" ? "Rolle" : "Role");
 }
 
 function yearOf(entry) {
@@ -218,25 +242,38 @@ function langSwitch(locale, siblingPath) {
   return `<div class="lang" role="group" aria-label="${esc(ui.lang)}">${link("de")}${link("en")}</div>`;
 }
 
-function topbar(locale, siblingPath, { current } = {}) {
+function navLinks(locale, current) {
   const ui = UI[locale];
   const item = (href, label, key) => {
     const here = current === key ? ' aria-current="page"' : "";
     return `<a href="${esc(href)}"${here}>${esc(label)}</a>`;
   };
-  return `<header class="topbar">
-  <a class="brand" href="/portfolio/${locale}/">${esc(SITE.name)}</a>
-  <nav class="top-links" aria-label="${esc(ui.navLabel)}">
-    ${item(roleHref(locale, "agentic-ai"), ui.roleShort, "agentic-ai")}
+  return `${item(roleHref(locale, "agentic-ai"), ui.roleShort, "agentic-ai")}
     ${item(roleHref(locale, "java-backend"), ui.javaShort, "java-backend")}
     ${item(timelineHref(locale), ui.timelineNav, "timeline")}
-    ${item(contactHref(locale), ui.contactNav, "contact")}
-  </nav>
+    ${item(contactHref(locale), ui.contactNav, "contact")}`;
+}
+
+function topbar(locale, siblingPath, { current } = {}) {
+  const ui = UI[locale];
+  const links = navLinks(locale, current);
+  return `<header class="topbar">
+  <a class="brand" href="/portfolio/${locale}/">${esc(SITE.name)}</a>
+  <nav class="top-links top-links-wide" aria-label="${esc(ui.navLabel)}">${links}</nav>
+  <details class="nav-fold">
+    <summary>${esc(ui.menu)}</summary>
+    <nav class="top-links" aria-label="${esc(ui.navLabel)}">${links}</nav>
+  </details>
   <div class="top-tools">
     ${langSwitch(locale, siblingPath)}
     ${offerChip(locale)}
   </div>
 </header>`;
+}
+
+function stageFooter(locale) {
+  const ui = UI[locale];
+  return `<footer class="s1-footer"><p><code>timeline.js</code> · <a href="${esc(contactHref(locale))}">${esc(ui.contactNav)}</a></p></footer>`;
 }
 
 function pageShell({ locale, title, description, canonicalPath, siblingPath, current, body, boot, extraClass = "", showTopbar = true }) {
@@ -275,6 +312,7 @@ ${boot ? `<script>document.documentElement.classList.add("js")</script>` : ""}
 ${showTopbar ? `<a class="skip" href="#main">${esc(ui.skip)}</a>` : ""}
 ${showTopbar ? topbar(locale, siblingPath, { current }) : ""}
 ${body}
+${showTopbar ? stageFooter(locale) : ""}
 ${bootTag}
 ${script}
 </body>
@@ -287,10 +325,16 @@ function listBlock(locale, items, title) {
   return `<section class="block"><h2>${esc(title)}</h2><ul>${lis}</ul></section>`;
 }
 
-function resultBlock(locale, result) {
-  if (!result) return "";
+function resultBlock(locale, entry) {
+  const result = entry?.result;
+  if (!result?.[locale]) return "";
   const ui = UI[locale];
-  const source = result.source ? `<span class="src">${esc(ui.source)}: ${esc(result.source)}</span>` : "";
+  let source = "";
+  if (entry.id === "role-java-backend") {
+    source = `<span class="src">${esc(ui.source)}: <a href="${esc(timelineHref(locale))}">${esc(ui.stations)}</a></span>`;
+  } else if (result.source && !isInternalSource(result.source)) {
+    source = `<span class="src">${esc(ui.source)}: ${esc(result.source)}</span>`;
+  }
   return `<div class="result">${mark(result[locale])}${source}</div>`;
 }
 
@@ -317,7 +361,6 @@ function relatedBlock(locale, entry) {
 }
 
 function packagesBlock(locale) {
-  const ui = UI[locale];
   const offer = copy(locale).offer;
   const packages = livePackages(locale)
     .map((pkg, index) => {
@@ -337,7 +380,7 @@ function packagesBlock(locale) {
     })
     .join("");
   return `<section id="angebot" class="packages" tabindex="-1">
-  <p class="kicker">${esc(ui.roleKicker)}</p>
+  <p class="kicker">${esc(offer.eyebrow)}</p>
   <h2>${mark(offer.title)}</h2>
   <p class="lede">${mark(offer.intro)}</p>
   ${packages}
@@ -350,18 +393,27 @@ export function renderRolePage(locale, slug) {
   const entry = byId(id);
   if (!entry) throw new Error(`Unknown role slug: ${slug}`);
   const offer = copy(locale).offer;
+  const javaEngagement = slug === "java-backend"
+    ? `<section id="einsatz" class="block" tabindex="-1">
+  <h2>${esc(ui.engagementTitle)}</h2>
+  <p>${mark(entry.engagement[locale])}</p>
+  ${listBlock(locale, entry.fits?.[locale], ui.fits)}
+  <p class="contact-line"><a class="btn" href="${esc(contactHref(locale))}">${esc(ui.contactCta)}</a></p>
+</section>`
+    : "";
   const bodyInner = `
 <main id="main" class="sheet">
-  <p class="kicker">${esc(ui.roleKicker)} · ${esc(ui.honesty[entry.honesty] ?? entry.honesty)}</p>
+  <p class="kicker">${esc(roleEyebrow(locale, entry))}</p>
   <h1>${mark(entry.title[locale])}</h1>
   <p class="lede">${mark(entry.summary[locale])}</p>
-  ${entry.engagement ? `<p class="engagement">${mark(entry.engagement[locale])}</p>` : ""}
-  ${listBlock(locale, entry.fits?.[locale], ui.fits)}
+  ${slug === "agentic-ai" && entry.engagement ? `<p class="engagement">${mark(entry.engagement[locale])}</p>` : ""}
+  ${slug === "agentic-ai" ? listBlock(locale, entry.fits?.[locale], ui.fits) : ""}
+  ${javaEngagement}
   ${listBlock(locale, entry.notFits?.[locale], ui.notFits)}
   ${listBlock(locale, entry.deliverables?.[locale], offer.deliverables)}
   ${slug === "agentic-ai" ? packagesBlock(locale) : ""}
-  ${resultBlock(locale, entry.result)}
-  <p class="contact-line"><a href="mailto:${esc(SITE.email)}">${esc(SITE.email)}</a></p>
+  ${resultBlock(locale, entry)}
+  ${slug === "agentic-ai" ? `<p class="contact-line"><a href="mailto:${esc(SITE.email)}">${esc(SITE.email)}</a></p>` : ""}
   ${relatedBlock(locale, entry)}
 </main>`;
   const description = entry.summary[locale];
@@ -383,7 +435,7 @@ function entryCard(locale, entry, { current = false } = {}) {
   const company = entry.company ? `<p class="company">${mark(entry.company)}</p>` : "";
   const here = current ? ' aria-current="true"' : "";
   return `<a class="entry-card" id="${esc(entry.id)}" href="${esc(diveHref(locale, entry.id))}" data-id="${esc(entry.id)}" data-year="${esc(year)}"${here}>
-  <p class="meta"><span>${esc(ui.type[entry.type] ?? entry.type)}</span><span class="honesty-${esc(entry.honesty)}">${esc(ui.honesty[entry.honesty] ?? entry.honesty)}</span><span>${mark(periodLabel(entry))}</span>${flag}</p>
+  <p class="meta"><span>${esc(ui.type[entry.type] ?? entry.type)}</span><span class="honesty-${esc(entry.honesty)}">${esc(ui.honesty[entry.honesty] ?? entry.honesty)}</span><span>${mark(periodLabel(entry, locale))}</span>${flag}</p>
   <p class="title">${mark(entry.title[locale])}</p>
   ${company}
 </a>`;
@@ -395,12 +447,12 @@ function previewInner(locale, entry) {
   const media = entry.media?.preview
     ? `<img class="preview-media" src="${esc(entry.media.preview)}" alt="${esc(entry.media.alt?.[locale] ?? "")}" loading="lazy" decoding="async"/>`
     : "";
-  return `<p class="kicker">${esc(ui.type[entry.type] ?? entry.type)} · ${esc(ui.honesty[entry.honesty] ?? entry.honesty)} · ${mark(periodLabel(entry))}</p>
+  return `<p class="kicker">${esc(ui.type[entry.type] ?? entry.type)} · ${esc(ui.honesty[entry.honesty] ?? entry.honesty)} · ${mark(periodLabel(entry, locale))}</p>
 <h2>${mark(entry.title[locale])}</h2>
 ${media}
 <p class="body">${mark(entry.summary[locale])}</p>
 ${stack ? `<ul class="stack">${stack}</ul>` : ""}
-${resultBlock(locale, entry.result)}
+${resultBlock(locale, entry)}
 <a class="btn" href="${esc(diveHref(locale, entry.id))}" data-open-dive="${esc(entry.id)}">${esc(ui.openDive)}</a>`;
 }
 
@@ -412,12 +464,17 @@ function publicEntry(locale, entry) {
     placeholder: Boolean(entry.placeholder),
     title: entry.title[locale],
     summary: entry.summary[locale],
-    periodLabel: periodLabel(entry),
+    periodLabel: periodLabel(entry, locale),
     year: yearOf(entry),
     company: entry.company ?? "",
     stack: entry.stack ?? [],
     tasks: entry.tasks?.[locale]?.filter(Boolean) ?? [],
-    result: entry.result ? { text: entry.result[locale], source: entry.result.source ?? "" } : null,
+    result: entry.result
+      ? {
+          text: entry.result[locale],
+          source: entry.result.source && !isInternalSource(entry.result.source) ? entry.result.source : "",
+        }
+      : null,
     media: entry.media?.preview
       ? { src: entry.media.preview, alt: entry.media.alt?.[locale] ?? "" }
       : null,
@@ -541,17 +598,18 @@ export function renderDeepDivePage(locale, id) {
     <a class="btn ghost" id="dd-close" data-close href="${esc(timelineHref(locale))}#${esc(id)}">${esc(ui.close)}</a>
   </div>
   <article id="main" class="dd-body">
-    <p class="meta">${esc(ui.type[entry.type] ?? entry.type)} · ${esc(ui.honesty[entry.honesty] ?? entry.honesty)} · ${mark(periodLabel(entry))}${company}</p>
+    <p class="meta">${esc(ui.type[entry.type] ?? entry.type)} · ${esc(ui.honesty[entry.honesty] ?? entry.honesty)} · ${mark(periodLabel(entry, locale))}${company}</p>
     ${flag}
     <h1 id="dd-title">${mark(entry.title[locale])}</h1>
     ${media}
     <p class="lede">${mark(entry.summary[locale])}</p>
     ${stack ? `<ul class="stack">${stack}</ul>` : ""}
-    ${resultBlock(locale, entry.result)}
+    ${resultBlock(locale, entry)}
     ${taskBlock}
     ${chapterBlocks(locale, entry)}
     ${linkRow(locale, entry)}
     <p class="back-row"><a href="${esc(timelineHref(locale))}#${esc(id)}">${esc(ui.backTimeline)}</a></p>
+    ${stageFooter(locale)}
   </article>
 </div>`;
   return pageShell({

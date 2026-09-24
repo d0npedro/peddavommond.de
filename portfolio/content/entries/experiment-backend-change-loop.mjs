@@ -15,7 +15,7 @@ export default {
     "en": "Placeholder: time from proposal to reviewable diff in a [Stack] backend — before [Duration], after [Duration] (AI-accelerated, still review-required)."
   },
   "period": {
-    "date": "[Jahr]"
+    "date": { "de": "[Jahr]", "en": "[Year]" }
   },
   "topics": [
     "java",

@@ -101,7 +101,8 @@ function yearKey(e) {
   if (p.to) return Number(String(p.to).slice(0, 4)) || 0;
   if (p.from) return Number(String(p.from).slice(0, 4)) || 0;
   if (p.date) {
-    const n = Number(String(p.date).replace(/\D/g, "").slice(0, 4));
+    const raw = typeof p.date === "string" ? p.date : p.date.de || p.date.en || "";
+    const n = Number(String(raw).replace(/\D/g, "").slice(0, 4));
     return Number.isFinite(n) ? n : 0;
   }
   return 0;

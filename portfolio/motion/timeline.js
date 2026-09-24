@@ -129,7 +129,7 @@ function initTimeline(boot) {
     }, reducedMotion() ? 40 : 700);
   }
 
-  function previewHTML(entry) {
+  function previewHTML(entry, { inline = false } = {}) {
     if (!entry) return "";
     const honesty = boot.honesty[entry.honesty] ?? entry.honesty;
     const type = boot.types[entry.type] ?? entry.type;
@@ -143,19 +143,27 @@ function initTimeline(boot) {
         }</div>`
       : "";
     const flag = entry.placeholder ? `<p class="placeholder-flag">${esc(boot.placeholderLabel)}</p>` : "";
-    return `<p class="kicker">${esc(type)} · ${esc(honesty)} · ${mark(entry.periodLabel)}</p>
+    const head = inline
+      ? ""
+      : `<p class="kicker">${esc(type)} · ${esc(honesty)} · ${mark(entry.periodLabel)}</p>
 ${flag}
-<h2>${mark(entry.title)}</h2>
+<h2>${mark(entry.title)}</h2>`;
+    const open = inline
+      ? ""
+      : `<a class="btn" href="${esc(entry.diveHref)}" data-open-dive="${esc(entry.id)}">${esc(boot.openLabel)}</a>`;
+    return `${head}
 ${media}
 <p class="body">${mark(entry.summary)}</p>
 ${stack ? `<ul class="stack">${stack}</ul>` : ""}
 ${result}
-<a class="btn" href="${esc(entry.diveHref)}" data-open-dive="${esc(entry.id)}">${esc(boot.openLabel)}</a>`;
+${open}`;
   }
 
   function renderPreview() {
     previewEl.innerHTML = previewHTML(byId[activeId]);
   }
+
+  let hoverLock = false;
 
   function updateInline() {
     listEl.querySelectorAll(".preview-inline").forEach((node) => node.remove());
@@ -164,9 +172,9 @@ ${result}
     const card = listEl.querySelector(`[data-id="${CSS.escape(activeId)}"]`);
     if (!card) return;
     const pane = document.createElement("div");
-    pane.className = "preview-pane preview-inline";
-    pane.innerHTML = previewHTML(byId[activeId]);
-    card.insertAdjacentElement("afterend", pane);
+    pane.className = "preview-inline";
+    pane.innerHTML = previewHTML(byId[activeId], { inline: true });
+    card.append(pane);
   }
 
   function setCurrent(id) {
@@ -408,6 +416,21 @@ ${result}
     hideDive();
   }
 
+  listEl.addEventListener("pointerover", (ev) => {
+    const card = ev.target.closest(".entry-card");
+    if (!card || !listEl.contains(card) || !card.dataset.id) return;
+    hoverLock = true;
+    setActive(card.dataset.id);
+  });
+  listEl.addEventListener("pointerleave", () => {
+    hoverLock = false;
+  });
+  listEl.addEventListener("focusin", (ev) => {
+    const card = ev.target.closest(".entry-card");
+    if (!card?.dataset.id) return;
+    setActive(card.dataset.id);
+  });
+
   listEl.addEventListener("click", (ev) => {
     const trigger = ev.target.closest("[data-id], [data-open-dive]");
     if (!trigger || !listEl.contains(trigger)) return;
@@ -438,7 +461,7 @@ ${result}
         if (spyFrame) return;
         spyFrame = window.requestAnimationFrame(() => {
           spyFrame = 0;
-          if (lockSpy || !diveEl.hidden) return;
+          if (lockSpy || hoverLock || !diveEl.hidden) return;
           let best = null;
           let bestRatio = 0;
           for (const card of cards) {

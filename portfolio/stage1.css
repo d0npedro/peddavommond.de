@@ -10,7 +10,11 @@ html.stage1 {
   --s1-ink: #14171e;
   --s1-muted: #5a5650;
   --s1-line: #d4cfc4;
+  /* #4AA8B8 on paper #F4F0E8 is ~2.44:1. Large type, rules and non-text accents
+     keep it. Small text, links and mono labels use --s1-accent-ink #2F6E79
+     (same hue ~189°, ~5.1:1 on paper, white text on it ~5.8:1). */
   --s1-accent: #4aa8b8;
+  --s1-accent-ink: #2f6e79;
   --s1-paper: #faf7f1;
   --s1-rust: #8a3e24;
   --s1-sans: var(--font-sans), "Inter", ui-sans-serif, system-ui, sans-serif;
@@ -41,7 +45,7 @@ html.stage1 h3 {
 }
 
 html.stage1 a {
-  color: var(--s1-accent);
+  color: var(--s1-accent-ink);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.18em;
 }
@@ -164,8 +168,8 @@ html.stage1 .pf-offer-chip {
 }
 
 html.stage1 .pf-offer-chip:hover {
-  color: var(--s1-accent);
-  border-color: var(--s1-accent);
+  color: var(--s1-accent-ink);
+  border-color: var(--s1-accent-ink);
 }
 
 html.stage1 .sheet {
@@ -191,7 +195,7 @@ html.stage1 .placeholder-note {
 
 html.stage1 .kicker {
   margin: 0 0 0.8rem;
-  color: var(--s1-accent);
+  color: var(--s1-accent-ink);
   font-size: 0.72rem;
 }
 
@@ -265,7 +269,7 @@ html.stage1 .package dt {
   font-size: 0.68rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--s1-accent);
+  color: var(--s1-accent-ink);
   margin-top: 0.85rem;
 }
 
@@ -357,7 +361,7 @@ html.stage1 .contact-list a {
 }
 
 html.stage1 .contact-list a:hover {
-  color: var(--s1-accent);
+  color: var(--s1-accent-ink);
 }
 
 /* Timeline */
@@ -406,7 +410,7 @@ html.stage1 .entry-card .meta {
 }
 
 html.stage1 .entry-card .meta .honesty-independent-rnd {
-  color: var(--s1-accent);
+  color: var(--s1-accent-ink);
 }
 
 html.stage1 .entry-card .title {
@@ -503,8 +507,8 @@ html.stage1 .btn {
 }
 
 html.stage1 .btn:hover {
-  background: var(--s1-accent);
-  border-color: var(--s1-accent);
+  background: var(--s1-accent-ink);
+  border-color: var(--s1-accent-ink);
   color: #fff;
 }
 
@@ -515,8 +519,8 @@ html.stage1 .btn.ghost {
 
 html.stage1 .btn.ghost:hover {
   background: transparent;
-  color: var(--s1-accent);
-  border-color: var(--s1-accent);
+  color: var(--s1-accent-ink);
+  border-color: var(--s1-accent-ink);
 }
 
 html.stage1.js .year-rail {
@@ -681,11 +685,17 @@ html.stage1 .back-row {
     border-right: 0;
   }
 
-  html.stage1.js .preview-pane.preview-inline {
+  html.stage1.js .entry-card .preview-inline {
     display: block;
-    margin: 0.25rem 0 0.75rem;
-    padding: 1rem;
-    border: 1px solid var(--s1-line);
+    margin-top: 0.85rem;
+  }
+
+  html.stage1.js .entry-card .preview-inline .body {
+    margin: 0 0 0.75rem;
+    color: var(--s1-muted);
+    font-size: 1rem;
+    text-transform: none;
+    letter-spacing: 0;
   }
 
   html.stage1.js .year-rail {
@@ -705,14 +715,115 @@ html.stage1 .back-row {
   }
 }
 
-@media (max-width: 720px) {
+html.stage1 .nav-fold {
+  display: none;
+}
+
+html.stage1 .s1-footer {
+  border-top: 1px solid var(--s1-line);
+  padding: 1rem 1.25rem 1.4rem;
+  color: var(--s1-muted);
+  font-family: var(--s1-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+}
+
+html.stage1 .s1-footer p {
+  margin: 0;
+}
+
+html.stage1 .s1-footer a {
+  color: var(--s1-accent-ink);
+}
+
+html.stage1 #einsatz {
+  scroll-margin-top: calc(var(--topbar) + 1rem);
+}
+
+@media (max-width: 719px) {
+  html.stage1 {
+    --topbar: 3.25rem;
+  }
+
+  html.stage1 .topbar,
+  html.stage1 .dd-bar {
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  html.stage1 .brand {
+    font-size: 0.62rem;
+    min-width: 0;
+  }
+
+  html.stage1 .top-links-wide {
+    display: none;
+  }
+
+  html.stage1 .nav-fold {
+    display: block;
+    position: relative;
+  }
+
+  html.stage1 .nav-fold > summary {
+    font-family: var(--s1-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--s1-accent-ink);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  html.stage1 .nav-fold > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  html.stage1 .nav-fold .top-links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.35rem);
+    left: 0;
+    z-index: 40;
+    flex-direction: column;
+    gap: 0.45rem;
+    min-width: 11rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--s1-paper);
+    border: 1px solid var(--s1-line);
+  }
+
+  html.stage1 .nav-fold[open] .top-links {
+    display: flex;
+  }
+
   html.stage1 .top-tools {
-    margin-left: 0;
-    width: 100%;
-    justify-content: space-between;
+    margin-left: auto;
+    width: auto;
+    flex: 0 0 auto;
+    gap: 0.35rem;
   }
 
   html.stage1 .pf-offer-chip {
-    margin-left: auto;
+    margin-left: 0;
+    padding: 0.32rem 0.45rem;
+    font-size: 0.58rem;
+  }
+
+  html.stage1 .lang a {
+    padding: 0.15rem 0.25rem;
+  }
+
+  html.stage1 .dd-bar .btn {
+    margin-left: 0;
+    padding: 0.4rem 0.5rem;
+    font-size: 0.62rem;
+  }
+
+  html.stage1 .sheet,
+  html.stage1 .list-pane {
+    padding-top: 1.35rem;
   }
 }

@@ -10,8 +10,8 @@ export default {
     "en": "Senior AI Consultant & Agentic Software Engineer"
   },
   "summary": {
-    "de": "Drei klare Pakete — zum Platzieren bei Agenturen (z. B. adesso). Scope und Liefergegenstände. Keine Tagessätze. Keine erfundenen Kundenergebnisse. Agentische Workflows, die an bestehende Unternehmenssoftware andocken — mit Vertrag, sichtbarem Zustand und menschlicher Abnahme.",
-    "en": "Three clear packages — ready to place at agencies (e.g. adesso). Scope and deliverables. No day rates. No invented client outcomes. Agentic workflows that dock onto existing enterprise software — with a contract, visible state, and human acceptance."
+    "de": "Agentische Workflows, die an bestehende Unternehmenssoftware andocken — mit Vertrag, sichtbarem Zustand und menschlicher Abnahme.",
+    "en": "Agentic workflows that dock onto existing enterprise software — with a contract, visible state, and human acceptance."
   },
   "topics": [
     "agentic-ai",

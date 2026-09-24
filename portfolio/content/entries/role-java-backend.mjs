@@ -88,8 +88,8 @@ export default {
     ]
   },
   "result": {
-    "de": "Enterprise-Java-Delivery über Jahre (siehe CV-Stationen und Cases) — keine erfundenen Durchsatz-KPIs.",
-    "en": "Years of enterprise Java delivery (see CV stations and cases) — no invented throughput KPIs.",
+    "de": "Enterprise-Java-Delivery über Jahre (siehe CV-Stationen und Cases).",
+    "en": "Years of enterprise Java delivery (see CV stations and cases).",
     "source": "portfolio/shared.mjs EXPERIENCE + CASES (main)"
   },
   "links": [

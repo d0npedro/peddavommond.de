@@ -224,7 +224,7 @@ export const en = {
     eyebrow: "For agencies",
     title: "How to offer me",
     intro:
-      "Three clear packages — ready to place at agencies (e.g. adesso). Scope and deliverables. No day rates. No invented client outcomes.",
+      "Three clear packages — ready to place at agencies. Scope and deliverables. No day rates. No invented client outcomes.",
     deliverables: "Deliverables",
     ideal: "Fits",
     engagement: "Engagement",
@@ -1085,7 +1085,7 @@ export const en = {
     body: "Interaction and scroll story on this page: custom scripts (vanilla JS/CSS). No Three.js, no off-the-shelf animation framework.",
     chip: "Custom-built · not a library demo",
     technique: "SVG stroke-dashoffset · drawn once",
-    modules: ["portfolio/motion/stage-reveal.js", "portfolio/motion/craft-mark.js", "portfolio/motion/timeline.js"],
+    modules: ["stage-reveal.js", "craft-mark.js", "timeline.js"],
   },
   cv: {
     title: "CV — Peter Henrichs",

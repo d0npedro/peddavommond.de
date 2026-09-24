@@ -20,7 +20,7 @@ import { offerChip, stageEntryNav } from "./render-stage1.mjs";
 
 /** Next export = layout/utilities. Token + component layer is portfolio.css (copied to public/). */
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=stage1-20260924";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=stage1-20260924r2";
 
 function stylesheets() {
   return `<link rel="stylesheet" href="${NEXT_LAYOUT_CSS}"/>
@@ -496,6 +496,7 @@ function renderFooter(locale) {
         <a class="secondary" href="${attr(SITE.linkedin)}" target="_blank" rel="noopener noreferrer">${esc(t.footer.linkedin)}</a>
         <a class="secondary" href="${attr(SITE.github)}" target="_blank" rel="noopener noreferrer">${esc(t.footer.github)}</a>
         <a class="secondary" href="${attr(SITE.cvPath)}">${esc(t.footer.cv)}</a>
+        <a class="secondary" href="/portfolio/${locale}/kontakt/">${esc(locale === "de" ? "Kontaktseite" : "Contact page")}</a>
       </div>
       <div class="hairline my-12"></div>
       <div class="flex flex-col items-start justify-between gap-4 font-mono text-xs text-faint sm:flex-row sm:items-center">

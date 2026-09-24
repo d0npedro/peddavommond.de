@@ -15,7 +15,7 @@ export default {
     "en": "Placeholder experiment: website with [CMS] — before [Duration], after [Duration]. No measured numbers yet; Stage-1 placeholder for the timeline."
   },
   "period": {
-    "date": "[Jahr]"
+    "date": { "de": "[Jahr]", "en": "[Year]" }
   },
   "topics": [
     "before-after",
@@ -27,8 +27,8 @@ export default {
     "[Stack]"
   ],
   "result": {
-    "de": "Früher [Dauer], heute [Dauer]. [Ergebnis] — Platzhalter, keine erfundenen Zahlen.",
-    "en": "Before [Duration], after [Duration]. [Result] — placeholder, no invented numbers."
+    "de": "Früher [Dauer], heute [Dauer]. [Ergebnis].",
+    "en": "Before [Duration], after [Duration]. [Result]."
   },
   "relations": {
     "roles": [],
