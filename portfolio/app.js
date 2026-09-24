@@ -1,35 +1,7 @@
 (() => {
-  const root = document.documentElement;
   const header = document.querySelector("[data-site-header]");
-  const themeBtn = document.querySelector("[data-theme-toggle]");
   const menuBtn = document.querySelector("[data-menu-toggle]");
   const mobileMenu = document.querySelector("[data-mobile-menu]");
-
-  function currentTheme() {
-    return root.classList.contains("light") ? "light" : "dark";
-  }
-
-  function applyTheme(next) {
-    root.classList.remove("light", "dark");
-    root.classList.add(next);
-    root.style.colorScheme = next;
-    try {
-      localStorage.setItem("theme", next);
-    } catch {
-      /* ignore */
-    }
-    if (themeBtn) {
-      const toLight = themeBtn.getAttribute("data-to-light") || themeBtn.getAttribute("aria-label");
-      themeBtn.setAttribute("aria-label", next === "dark" ? (themeBtn.dataset.toLight || toLight) : (themeBtn.dataset.toDark || toLight));
-    }
-  }
-
-  if (themeBtn) {
-    themeBtn.dataset.toLight = themeBtn.getAttribute("aria-label") || "";
-    themeBtn.addEventListener("click", () => {
-      applyTheme(currentTheme() === "dark" ? "light" : "dark");
-    });
-  }
 
   function setMenu(open) {
     if (!mobileMenu || !menuBtn) return;

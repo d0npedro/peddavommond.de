@@ -1,7 +1,5 @@
 import {
   SITE,
-  LOCALES,
-  NAV,
   EXPERIENCE,
   EDUCATION,
   LANGUAGES_META,
@@ -16,15 +14,17 @@ import {
   caseHref,
 } from "./shared.mjs";
 import { copy } from "./content.mjs";
-import { offerChip, stageEntryNav } from "./render-stage1.mjs";
+import { offerChip, stageEntryNav, stageFooter, stageTopbar } from "./render-stage1.mjs";
 
 /** Next export = layout/utilities. Token + component layer is portfolio.css (copied to public/). */
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=stage1-20260924r2";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=paper-20260924";
+const STAGE_CSS = "/portfolio/stage1.css?v=paper-20260924";
 
 function stylesheets() {
   return `<link rel="stylesheet" href="${NEXT_LAYOUT_CSS}"/>
-<link rel="stylesheet" href="${PORTFOLIO_CSS}"/>`;
+<link rel="stylesheet" href="${PORTFOLIO_CSS}"/>
+<link rel="stylesheet" href="${STAGE_CSS}"/>`;
 }
 
 function pageScripts() {
@@ -102,79 +102,6 @@ function heading({ index, eyebrow, title, description }) {
     <h2 class="pf-section-title mt-5 text-balance">${esc(title)}</h2>
     ${description ? `<p class="mt-4 max-w-prose text-[1.05rem] leading-relaxed text-muted">${esc(description)}</p>` : ""}
   </div>`;
-}
-
-function iconSun() {
-  return `<svg aria-hidden="true" viewBox="0 0 24 24" class="h-[18px] w-[18px] transition-all duration-300 ease-precision dark:-rotate-90 dark:scale-0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>`;
-}
-
-function iconMoon() {
-  return `<svg aria-hidden="true" viewBox="0 0 24 24" class="absolute h-[18px] w-[18px] rotate-90 scale-0 transition-all duration-300 ease-precision dark:rotate-0 dark:scale-100" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>`;
-}
-
-function langSwitch(locale, extraClass = "", siblingPath = "") {
-  const t = copy(locale);
-  const items = LOCALES.map((code) => {
-    const current = code === locale;
-    return `<a href="/portfolio/${code}${siblingPath}" hreflang="${code}"${current ? ' aria-current="true"' : ""} class="rounded-[3px] px-2 py-1 uppercase tracking-wide transition-colors duration-150 ${current ? "bg-accent/15 text-accent" : "text-muted hover:text-fg"}"><span class="sr-only">${esc(t.common.localeName[code])}: </span>${code}</a>`;
-  }).join("");
-  return `<div class="pf-lang inline-flex items-center rounded-card border border-line bg-bg-elevated p-0.5 font-mono text-xs ${extraClass}" role="group" aria-label="${attr(t.common.langSwitchAria)}">${items}</div>`;
-}
-
-function navItems(locale, numbered = false, homePrefix = "") {
-  const t = copy(locale);
-  return NAV.map((item, i) => {
-    const label = t.nav[item.key];
-    const href = item.href ?? `${homePrefix}#${item.id}`;
-    const extra = numbered
-      ? `<span class="font-mono text-xs text-faint">${String(i + 1).padStart(2, "0")}</span>`
-      : "";
-    const cls = numbered
-      ? "flex items-center justify-between py-3 text-base text-fg"
-      : "pf-nav-link";
-    return `<li><a href="${attr(href)}" class="${cls}" data-nav="${attr(item.id ?? item.key)}"><span>${esc(label)}</span>${extra}</a></li>`;
-  }).join("");
-}
-
-function renderNav(locale, { siblingPath = "", homePrefix = "", showTalk = true } = {}) {
-  const t = copy(locale);
-  const brandHref = homePrefix ? `${homePrefix}#hero` : "#hero";
-  const contactHref = homePrefix ? `${homePrefix}#contact` : "#contact";
-  const talkDesktop = showTalk
-    ? `<a href="${attr(contactHref)}" class="pf-nav-cta pf-nav-cta--desktop">${esc(t.nav.talk)}</a>`
-    : "";
-  const talkMobile = showTalk
-    ? `<li><a href="${attr(contactHref)}" class="pf-nav-cta mt-2 flex w-full items-center justify-center">${esc(t.nav.talk)}</a></li>`
-    : "";
-  return `<header class="pf-header fixed inset-x-0 top-0 z-50" data-site-header>
-  <nav aria-label="${attr(t.nav.ariaPrimary)}" class="container pf-header-bar flex items-center justify-between gap-4">
-    <a href="${attr(brandHref)}" class="pf-brand">
-      <span class="pf-brand-mark" aria-hidden="true"><span></span></span>
-      <span class="pf-brand-name">${esc(SITE.name)}</span>
-    </a>
-    <ul class="pf-header-nav hidden items-center gap-0.5 md:flex">${navItems(locale, false, homePrefix)}</ul>
-    <div class="pf-header-tools flex items-center gap-2">
-      ${offerChip(locale)}
-      ${talkDesktop}
-      ${langSwitch(locale, "hidden sm:inline-flex", siblingPath)}
-      <button type="button" data-theme-toggle aria-label="${attr(t.theme.toDark)}" class="pf-icon-btn group relative">${iconSun()}${iconMoon()}</button>
-      <button type="button" data-menu-toggle aria-label="${attr(t.nav.toggleMenu)}" aria-expanded="false" class="pf-icon-btn md:hidden">
-        <span class="relative block h-3.5 w-4">
-          <span class="absolute left-0 top-0 h-0.5 w-full bg-current transition-transform duration-200" data-burger="top"></span>
-          <span class="absolute left-0 top-[7px] h-0.5 w-full bg-current transition-opacity duration-200" data-burger="mid"></span>
-          <span class="absolute bottom-0 left-0 h-0.5 w-full bg-current transition-transform duration-200" data-burger="bot"></span>
-        </span>
-      </button>
-    </div>
-  </nav>
-  <div data-mobile-menu class="overflow-hidden border-t border-line bg-bg/95 backdrop-blur-md transition-[max-height,opacity] duration-300 md:hidden max-h-0 opacity-0">
-    <ul class="container flex flex-col py-3">
-      ${navItems(locale, true, homePrefix)}
-      ${talkMobile}
-      <li class="mt-3 flex justify-center pb-1">${langSwitch(locale, "", siblingPath)}</li>
-    </ul>
-  </div>
-</header>`;
 }
 
 function renderHeroDiagram(t) {
@@ -483,7 +410,7 @@ function renderEducation(locale) {
 
 function renderFooter(locale) {
   const t = copy(locale);
-  return `<footer id="contact" class="pf-footer relative scroll-mt-24">
+  return `<section id="contact" class="pf-footer relative scroll-mt-24">
     <div class="container relative py-20 md:py-28">
       <div class="pf-enter" data-reveal>
         <span class="pf-hairline" aria-hidden="true"></span>
@@ -504,7 +431,7 @@ function renderFooter(locale) {
         <span class="hidden sm:inline">${esc(t.footer.roleLine)}</span>
       </div>
     </div>
-  </footer>`;
+  </section>`;
 }
 
 function renderCraftCredit(locale) {
@@ -561,10 +488,6 @@ function jsonLd(locale) {
     ],
   };
   return JSON.stringify(data);
-}
-
-function themeBoot() {
-  return `<script>!function(){try{var d=document.documentElement,c=d.classList;c.remove('light','dark');var e=localStorage.getItem('theme');if('system'===e||(!e&&false)){var t='(prefers-color-scheme: dark)',m=window.matchMedia(t);if(m.media!==t||m.matches){d.style.colorScheme='dark';c.add('dark')}else{d.style.colorScheme='light';c.add('light')}}else if(e){c.add(e||'')}else{c.add('dark')}if(e==='light'||e==='dark'||!e)d.style.colorScheme=e||'dark'}catch(e){}}()</script>`;
 }
 
 function caseJsonLd(locale, item, copyCase, url) {
@@ -703,7 +626,7 @@ export function renderCasePage(locale, id) {
     .map((h) => `<li class="flex gap-2.5 text-sm text-fg/85"><span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent"></span><span>${esc(h)}</span></li>`)
     .join("");
   return `<!DOCTYPE html>
-<html lang="${locale}" class="__variable_3f18cd __variable_f3e80d">
+<html lang="${locale}" class="__variable_3f18cd __variable_f3e80d light paper">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -730,18 +653,16 @@ export function renderCasePage(locale, id) {
 <meta name="twitter:title" content="${attr(title)}"/>
 <meta name="twitter:description" content="${attr(description)}"/>
 <meta name="twitter:image" content="${attr(og)}"/>
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F4F0E8"/>
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#10151E"/>
+<meta name="theme-color" content="#F4F0E8"/>
 <link rel="icon" href="/portfolio/${locale}/icon.png" type="image/png" sizes="32x32"/>
 ${stylesheets()}
 </head>
 <body class="min-h-screen bg-bg font-sans antialiased">
-${themeBoot()}
-<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:panel focus:px-4 focus:py-2 focus:text-sm">${esc(t.common.skipToContent)}</a>
-${renderNav(locale, { siblingPath, homePrefix: home })}
+<a class="skip" href="#main">${esc(t.common.skipToContent)}</a>
+${stageTopbar(locale, siblingPath)}
 <main id="main" class="pf-case-page">
 <script type="application/ld+json">${caseJsonLd(locale, item, c, url)}</script>
-<article class="container pb-20 pt-28 md:pb-28 md:pt-32">
+<article class="container pb-16 pt-8 md:pb-20">
   <p class="eyebrow">${esc(t.casePage.caseStudy)}</p>
   <p class="mt-4 font-mono text-xs text-faint"><a href="${attr(home)}" class="hover:text-accent">${esc(t.casePage.back)}</a> · ${esc(item.period)} · ${esc(c.domain)}</p>
   <h1 class="pf-case-page-title mt-4 text-balance">${esc(c.landingTitle || item.name)}</h1>
@@ -945,7 +866,7 @@ export function renderPage(locale) {
   const url = `${SITE.origin}/portfolio/${locale}`;
   const og = `${SITE.origin}/portfolio/${locale}/opengraph-image.png`;
   return `<!DOCTYPE html>
-<html lang="${locale}" class="__variable_3f18cd __variable_f3e80d">
+<html lang="${locale}" class="__variable_3f18cd __variable_f3e80d light paper">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -974,15 +895,13 @@ export function renderPage(locale) {
 <meta name="twitter:title" content="${attr(t.meta.title)}"/>
 <meta name="twitter:description" content="${attr(t.meta.description)}"/>
 <meta name="twitter:image" content="${attr(og)}"/>
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F4F0E8"/>
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#10151E"/>
+<meta name="theme-color" content="#F4F0E8"/>
 <link rel="icon" href="/portfolio/${locale}/icon.png" type="image/png" sizes="32x32"/>
 ${stylesheets()}
 </head>
 <body class="min-h-screen bg-bg font-sans antialiased">
-${themeBoot()}
-<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:panel focus:px-4 focus:py-2 focus:text-sm">${esc(t.common.skipToContent)}</a>
-${renderNav(locale, { showTalk: false })}
+<a class="skip" href="#main">${esc(t.common.skipToContent)}</a>
+${stageTopbar(locale, "/")}
 <main id="main">
 <script type="application/ld+json">${jsonLd(locale)}</script>
 ${renderHero(locale)}
@@ -993,6 +912,7 @@ ${renderRecord(locale)}
 </main>
 ${renderFooter(locale)}
 ${renderCraftCredit(locale)}
+${stageFooter(locale)}
 ${pageScripts()}
 </body>
 </html>`;
@@ -1016,19 +936,17 @@ export function renderCv(locale) {
     return `<article class="mb-4"><p class="font-mono text-xs text-faint">${esc(item.period)}</p><h3 class="font-semibold text-fg">${esc(entry.role)} — ${esc(item.company)}</h3>${entry.project ? `<p class="text-sm text-muted">${esc(entry.project)}</p>` : ""}<p class="mt-1 text-sm">${esc(entry.mission)}</p></article>`;
   }).join("");
   return `<!DOCTYPE html>
-<html lang="${locale}" class="__variable_3f18cd __variable_f3e80d">
+<html lang="${locale}" class="__variable_3f18cd __variable_f3e80d light">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>${esc(t.cv.title)}</title>
 <meta name="description" content="${attr(t.cv.intro)}"/>
 <meta name="robots" content="noindex"/>
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F4F0E8"/>
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#10151E"/>
+<meta name="theme-color" content="#F4F0E8"/>
 ${stylesheets()}
 </head>
 <body class="min-h-screen bg-bg font-sans antialiased">
-${themeBoot()}
 <header class="pf-header fixed inset-x-0 top-0 z-50" data-site-header>
   <nav aria-label="${attr(t.nav.ariaPrimary)}" class="container flex items-center justify-between gap-4">
     <a href="/portfolio/${locale}" class="pf-brand">
@@ -1038,7 +956,6 @@ ${themeBoot()}
     <div class="flex flex-wrap items-center justify-end gap-2">
       ${offerChip(locale)}
       <a href="/portfolio/${locale}" class="pf-nav-cta pf-nav-cta--always">${esc(t.cv.back)}</a>
-      <button type="button" data-theme-toggle aria-label="${attr(t.theme.toDark)}" class="pf-icon-btn group relative">${iconSun()}${iconMoon()}</button>
     </div>
   </nav>
 </header>

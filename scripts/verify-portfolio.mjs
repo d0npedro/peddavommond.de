@@ -95,7 +95,28 @@ async function check(locale) {
     assert(!html.includes("Further mandates"), `${prefix} further-mandate wall must stay off the landing`);
     assert(html.includes("Client work · no AI component"), `${prefix} missing DeutschlandCard honesty chip`);
     assert(html.includes("To the sample"), `${prefix} Agent Collective case must link to the sample`);
+    const bannedDe = [
+      "Typecheck und Production-Build grün machen",
+      "Keine erfundenen Module, solange echter Kontext da ist",
+      "Keine erfundenen Module, solange echter Kontext existierte",
+      "Arbeitsanweisung",
+      "Harte Verbote",
+      "Repo wurde gescannt",
+      "Kein React-State auf Simulation-Ticks",
+      "tsc --noEmit grün",
+      "Production-Build grün",
+      "Kein Pflicht-Backend",
+    ];
+    for (const phrase of bannedDe) {
+      assert(!html.includes(phrase), `${prefix} EN start still contains German: ${phrase}`);
+    }
+    assert(html.includes("Get typecheck and production build green."), `${prefix} missing English typecheck line`);
+    assert(html.includes("No invented modules as long as real context exists."), `${prefix} missing English invented-modules line`);
+    assert(html.includes("No invented modules as long as real context existed"), `${prefix} missing English checklist line`);
   }
+  assert(!html.includes("data-theme-toggle"), `${prefix} dark-mode toggle must be gone`);
+  assert(html.includes('class="topbar"'), `${prefix} start page must use the shared paper header`);
+  assert(html.includes("stage1.css"), `${prefix} start page must load the shared stage stylesheet`);
   assert(html.includes("AI Agents") || html.includes("AI agents"), `${prefix} missing AI Agents in copy/schema`);
   assert(html.includes("Java"), `${prefix} missing Java in capabilities`);
   assert(html.includes("peter.henrichs@web.de"), `${prefix} missing email`);
@@ -187,6 +208,7 @@ async function check(locale) {
 async function checkCv() {
   const html = await readFile(join(root, "public/portfolio/cv/index.html"), "utf8");
   assert(html.includes("/portfolio/portfolio.css"), "CV missing token stylesheet (production path)");
+  assert(!html.includes("data-theme-toggle"), "CV dark-mode toggle must be gone");
   assert(html.includes("Senior AI Consultant"), "CV missing role");
   assert(html.includes("peter.henrichs@web.de"), "CV missing email");
   assert(html.includes(offerLabel("de")) && html.includes(`href="${offerHref("de")}"`), "CV missing quick link");
@@ -271,6 +293,7 @@ async function checkCase(locale, id) {
     assert(/Kein AI|No AI/.test(html), `${prefix} must not invent client AI work`);
   }
   assert(!html.includes("enterprise-integration"), `${prefix} fabricated enterprise-integration product leaked`);
+  assert(!html.includes("data-theme-toggle"), `${prefix} dark-mode toggle must be gone`);
 }
 
 async function checkSitemap() {

@@ -1,7 +1,8 @@
-/* Peter Henrichs recruiter portfolio — Enterprise AI decision surface.
+/* Peter Henrichs recruiter portfolio — paper decision surface.
    Source of truth for color/type/elevation. Loads after the Tailwind export
-   and overrides its :root / .dark RGB tokens so every utility inherits the
-   new system. Do not scatter one-off hex in components. */
+   and overrides its :root RGB tokens so every utility inherits the system.
+   Light paper is the only theme. Stage-1 pages read the same --s1-* tokens.
+   Do not scatter one-off hex in components. */
 
 /* -------------------------------------------------------------------------- */
 /* Tokens                                                                      */
@@ -14,20 +15,31 @@ html.light {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
 
-  /* Light: warm paper / cool stone */
+  /* Light paper — shared with Stage 1. Measured on #F4F0E8. */
   --bg: 244 240 232;            /* #F4F0E8 paper */
-  --bg-elevated: 252 250 245;   /* #FCFAF5 sheet */
+  --bg-elevated: 250 247 241;   /* #FAF7F1 sheet */
   --bg-sunken: 232 226 216;     /* #E8E2D8 stone well */
-  --fg: 20 23 30;               /* #14171E near-black */
-  --muted: 60 68 80;            /* #3C4450 body ≥ 8.6:1 */
-  --faint: 90 98 112;           /* #5A6270 meta ≥ 5.4:1 */
-  --line: 210 203 190;          /* #D2CBBE hairline */
-  --accent: 22 108 122;         /* #166C7A teal–azure */
+  --fg: 20 23 30;               /* #14171E ink, 15.78:1 */
+  --muted: 90 86 80;            /* #5A5650 body, 6.41:1 */
+  --faint: 90 98 112;           /* #5A6270 meta, 5.41:1 */
+  --line: 212 207 196;          /* #D4CFC4 hairline, decorative */
+  --accent: 47 110 121;         /* #2F6E79 accent-ink, 5.09:1 small text and UI */
+  --accent-rule: 74 168 184;    /* #4AA8B8 rules only, 2.44:1 — not for text or controls */
   --accent-soft: 214 232 232;   /* #D6E8E8 wash */
-  --signal: 138 85 30;          /* #8A551E bronze */
-  --on-accent: 255 255 255;     /* #FFFFFF on primary CTA */
+  --signal: 138 85 30;          /* #8A551E bronze, 5.44:1 fail/honesty text */
+  --on-accent: 255 255 255;     /* #FFFFFF, 5.79:1 on accent-ink */
   --grid-rgb: 36 32 26;
   --grid-opacity: 0.035;
+  --s1-bg: #f4f0e8;
+  --s1-ink: #14171e;
+  --s1-muted: #5a5650;
+  --s1-line: #d4cfc4;
+  --s1-accent: #4aa8b8;
+  --s1-accent-ink: #2f6e79;
+  --s1-paper: #faf7f1;
+  --s1-rust: #8a3e24;
+  --s1-sans: var(--font-sans), "Inter", ui-sans-serif, system-ui, sans-serif;
+  --s1-mono: var(--font-mono), "JetBrains Mono", ui-monospace, monospace;
 
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -2552,5 +2564,321 @@ html.dark,
     order: 3;
     flex: 1 0 100%;
     margin-top: 0.15rem;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Paper start page — same tokens, type, chrome rhythm as Stage 1            */
+/* -------------------------------------------------------------------------- */
+
+html.paper {
+  scroll-padding-top: var(--topbar);
+  background: var(--s1-bg);
+}
+
+html.paper body {
+  background: var(--s1-bg);
+  color: var(--s1-ink);
+  font-family: var(--s1-sans);
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+
+html.paper .container {
+  width: min(100% - 2.5rem, 46rem);
+  max-width: none;
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
+html.paper .pf-stage,
+html.paper .pf-record,
+html.paper #contact,
+html.paper #craft-credit {
+  background: var(--s1-bg);
+}
+
+html.paper .pf-stage {
+  padding-block: 3.5rem;
+}
+
+html.paper .pf-stage--hero {
+  min-height: 0;
+  align-items: flex-start;
+  padding: 3.5rem 0 2.75rem;
+  border-bottom: 0;
+}
+
+html.paper .pf-hero::before {
+  background: none;
+}
+
+html.paper .pf-hero-chip {
+  margin-bottom: 0.8rem;
+  color: var(--s1-accent-ink);
+  font-family: var(--s1-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+html.paper .pf-hero .pf-hero-title,
+html.paper h1.pf-hero-title {
+  max-width: 16em;
+  font-size: clamp(2.4rem, 6vw, 4.25rem);
+  font-weight: 520;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  color: var(--s1-ink);
+}
+
+html.paper .pf-stage-title,
+html.paper .pf-footer-title,
+html.paper .pf-record summary {
+  max-width: 20em;
+  font-size: clamp(1.7rem, 3vw, 2.15rem);
+  font-weight: 520;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  color: var(--s1-ink);
+}
+
+html.paper .pf-stage-lede,
+html.paper .pf-offer-scope,
+html.paper .pf-contact-echo,
+html.paper .pf-craft-copy {
+  color: var(--s1-muted);
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+html.paper .pf-enter .pf-hairline {
+  background: var(--s1-accent);
+}
+
+html.paper .pf-hero .pf-cta-row {
+  margin-top: 1.75rem;
+}
+
+html.paper .pf-cta--primary,
+html.paper .pf-hero .pf-cta--primary,
+html.paper .pf-contact-row a.primary,
+html.paper .pf-contact-row--checkout a.primary {
+  min-width: 0;
+  min-height: 0;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--s1-ink);
+  border-radius: 0;
+  background: var(--s1-ink);
+  color: var(--s1-bg);
+  font-family: var(--s1-mono);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+html.paper .pf-cta--primary:hover,
+html.paper .pf-hero .pf-cta--primary:hover,
+html.paper .pf-contact-row a.primary:hover {
+  filter: none;
+  text-decoration: none;
+  background: var(--s1-accent-ink);
+  border-color: var(--s1-accent-ink);
+  color: #fff;
+}
+
+html.paper .pf-contact-row a.secondary,
+html.paper .pf-contact-row a.secondary {
+  min-height: 44px;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--s1-ink);
+  border-radius: 0;
+  background: transparent;
+  color: var(--s1-ink);
+  font-family: var(--s1-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+html.paper .pf-contact-row a.secondary:hover {
+  border-color: var(--s1-accent-ink);
+  color: var(--s1-accent-ink);
+}
+
+html.paper .pf-offers {
+  margin-top: 0.5rem;
+}
+
+html.paper .pf-offer {
+  padding-block: 1.5rem;
+  border-top: 1px solid var(--s1-line);
+}
+
+html.paper .pf-offer h3 {
+  font-size: 1.7rem;
+  font-weight: 520;
+  letter-spacing: -0.03em;
+}
+
+html.paper .pf-offer-index,
+html.paper .pf-offer-dl dt,
+html.paper .pf-principle-name,
+html.paper .pf-archive-meta,
+html.paper .pf-contract-kicker,
+html.paper .pf-touch-tick,
+html.paper .pf-touch-note,
+html.paper .pf-craft-modules,
+html.paper .pf-craft-tech {
+  color: var(--s1-muted);
+}
+
+html.paper .pf-offer-dl dt,
+html.paper .pf-principle-name {
+  color: var(--s1-accent-ink);
+}
+
+html.paper .pf-method {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--s1-line);
+}
+
+html.paper .pf-sample {
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+}
+
+html.paper .pf-spots {
+  gap: 0;
+  margin-top: 0.5rem;
+}
+
+html.paper .pf-spots .pf-case-card {
+  min-height: 0;
+  justify-content: flex-start;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--s1-line);
+}
+
+html.paper .pf-spots .pf-case-card::before,
+html.paper .pf-spots .pf-case-card--lab::before {
+  background: var(--s1-accent);
+}
+
+html.paper .pf-case-title,
+html.paper h3.pf-case-title {
+  font-size: 1.7rem;
+  font-weight: 520;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+html.paper .pf-touch {
+  border: 1px solid var(--s1-line);
+  border-radius: 0;
+  background: var(--s1-paper);
+  box-shadow: none;
+}
+
+html.paper .pf-snippet {
+  border: 1px solid var(--s1-line);
+  border-radius: 0;
+  background: var(--s1-bg);
+  color: var(--s1-ink);
+}
+
+html.paper .pf-tab,
+html.paper .pf-touch-btn {
+  border: 1px solid var(--s1-ink);
+  border-radius: 0;
+  background: var(--s1-bg);
+  color: var(--s1-ink);
+  font-family: var(--s1-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+html.paper .pf-tab[aria-selected="true"] {
+  border-color: var(--s1-accent-ink);
+  background: var(--s1-bg);
+  color: var(--s1-ink);
+  box-shadow: inset 0 -2px 0 var(--s1-accent-ink);
+}
+
+html.paper .pf-touch-btn[aria-pressed="true"] {
+  border-color: rgb(var(--signal));
+  color: rgb(var(--signal));
+  background: var(--s1-bg);
+}
+
+html.paper .pf-checks input {
+  accent-color: var(--s1-accent-ink);
+}
+
+html.paper .pf-agent {
+  border-bottom-color: var(--s1-line);
+}
+
+html.paper .pf-agent-status[data-status="working"],
+html.paper .pf-agent-status[data-status="communicating"] {
+  color: var(--s1-accent-ink);
+}
+
+html.paper .pf-agent-status[data-status="failed"],
+html.paper .pf-agent-status[data-status="recovering"] {
+  color: rgb(var(--signal));
+}
+
+html.paper .pf-record {
+  display: block;
+  min-height: 0;
+  padding-block: 3.5rem;
+}
+
+html.paper #contact.pf-footer {
+  border-top: 1px solid var(--s1-line);
+}
+
+html.paper #contact .container {
+  padding-block: 3.5rem 2.5rem;
+}
+
+html.paper .pf-craft {
+  padding-block: 2.5rem 3rem;
+  border-top: 1px solid var(--s1-line);
+}
+
+html.paper .pf-craft-mark {
+  color: var(--s1-accent-ink);
+}
+
+html.paper .pf-links a,
+html.paper .pf-case-open,
+html.paper .pf-track-link,
+html.paper .pf-case-title-link {
+  color: var(--s1-accent-ink);
+}
+
+html.paper .pf-links a:hover,
+html.paper .pf-case-open:hover,
+html.paper .pf-track-link:hover,
+html.paper .pf-case-title-link:hover {
+  color: var(--s1-ink);
+}
+
+html.paper :focus-visible {
+  outline: 2px solid var(--s1-accent-ink);
+  outline-offset: 2px;
+}
+
+@media (min-width: 960px) {
+  html.paper .pf-sample,
+  html.paper .pf-offer {
+    grid-template-columns: 1fr;
   }
 }

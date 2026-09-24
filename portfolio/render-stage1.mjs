@@ -10,8 +10,8 @@ import { offerHref, offerLabel } from "./offer-link.mjs";
 import { SITE, caseById, caseHref } from "./shared.mjs";
 
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=stage1-20260924r2";
-const STAGE_CSS = "/portfolio/stage1.css?v=stage1-20260924r2";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=paper-20260924";
+const STAGE_CSS = "/portfolio/stage1.css?v=paper-20260924";
 
 const CHAPTER_KEYS = ["ausgangslage", "schnitt", "umsetzung", "nachweis", "ergebnis"];
 
@@ -254,6 +254,10 @@ function navLinks(locale, current) {
     ${item(contactHref(locale), ui.contactNav, "contact")}`;
 }
 
+export function stageTopbar(locale, siblingPath = "/", current) {
+  return topbar(locale, siblingPath, { current });
+}
+
 function topbar(locale, siblingPath, { current } = {}) {
   const ui = UI[locale];
   const links = navLinks(locale, current);
@@ -271,7 +275,7 @@ function topbar(locale, siblingPath, { current } = {}) {
 </header>`;
 }
 
-function stageFooter(locale) {
+export function stageFooter(locale) {
   const ui = UI[locale];
   return `<footer class="s1-footer"><p><code>timeline.js</code> · <a href="${esc(contactHref(locale))}">${esc(ui.contactNav)}</a></p></footer>`;
 }

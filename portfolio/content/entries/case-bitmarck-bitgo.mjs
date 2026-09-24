@@ -10,7 +10,7 @@ export default {
   },
   "summary": {
     "de": "Regulierte GKV-Online-Geschäftsstelle: Legacy-Entkopplung, REST zu Bestandssystemen, 2FA für besonders geschützte Daten. Kein AI-Bestandteil.",
-    "en": "Regulated GKV online Geschäftsstelle: legacy decoupling, REST to existing systems, 2FA for especially protected data. No AI component."
+    "en": "Regulated GKV online service office: legacy decoupling, REST to existing systems, 2FA for especially protected data. No AI component."
   },
   "period": {
     "from": "2019",
@@ -55,7 +55,7 @@ export default {
     },
     "umsetzung": {
       "de": "bitGo_Web sitzt vor BITMARCK_21c|ng und Legacy-Bestand. REST und Zwei-Faktor-Authentifizierung koppeln die Online-Geschäftsstelle an sensible Daten.",
-      "en": "bitGo_Web sits in front of BITMARCK_21c|ng and legacy stock. REST and two-factor authentication couple the online Geschäftsstelle to sensitive data."
+      "en": "bitGo_Web sits in front of BITMARCK_21c|ng and legacy stock. REST and two-factor authentication couple the online service office to sensitive data."
     },
     "nachweis": {
       "de": "Kein AI-/LLM-Bestandteil. Bewertung über Zwei-Faktor-Authentifizierung, REST an Bestand und konfigurierbares Frontend.",
