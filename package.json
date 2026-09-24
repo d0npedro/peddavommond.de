@@ -12,6 +12,7 @@
     "vercel-build": "node scripts/prepare-static-deploy.mjs",
     "portfolio:build": "node scripts/build-portfolio.mjs",
     "portfolio:verify": "node scripts/verify-portfolio.mjs",
+    "portfolio:validate": "node scripts/validate-portfolio-content.mjs",
     "embed:multi-agent": "node scripts/embed-multi-agent.mjs",
     "ci": "npm run vercel-build && node public/win11/js/utils/formula.test.js",
     "serve:static": "npx --yes serve public -l 8080",

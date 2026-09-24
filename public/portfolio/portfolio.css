@@ -2493,3 +2493,64 @@ html.dark,
     grid-template-columns: 1fr;
   }
 }
+
+/* Stage 1 entry points on the Klar/direkt landing. No lift, no card grid. */
+.pf-entry-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.25rem;
+  margin-top: 1.75rem;
+}
+
+.pf-entry-link {
+  color: rgb(var(--fg));
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgb(var(--accent));
+  padding-bottom: 0.12rem;
+}
+
+.pf-entry-link:hover {
+  color: rgb(var(--accent));
+}
+
+.pf-offer-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(var(--fg));
+  background: rgb(var(--bg));
+  color: rgb(var(--fg));
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 0.5rem 0.7rem;
+  white-space: nowrap;
+}
+
+.pf-offer-chip:hover {
+  color: rgb(var(--accent));
+  border-color: rgb(var(--accent));
+}
+
+.pf-header-bar {
+  flex-wrap: wrap;
+}
+
+@media (max-width: 767px) {
+  .pf-header-tools {
+    display: contents;
+  }
+
+  .pf-header-bar .pf-offer-chip {
+    order: 3;
+    flex: 1 0 100%;
+    margin-top: 0.15rem;
+  }
+}

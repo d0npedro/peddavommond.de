@@ -17,6 +17,8 @@ Public default positioning is Variant C: **Senior AI Consultant & Agentic Softwa
 
 Keep the credibility split explicit: paid Professional Experience, Independent Applied AI R&D / public systems, and AI Transformation Perspective (what transfers). Independent R&D is not client delivery and not a hobby disclaimer. Do not invent KPIs or an LLM backend for the deterministic Agent Collective simulator. The landing spine is Klar/direkt: `#hero` → `#offer` → `#cases` → `#sample-collective` (the only touchable sample) → `#record` → `#contact` → `#craft-credit`. The Graph contract expands inside the Graph case. Motion is custom vanilla JS in `portfolio/motion/` — see `MOTION-SHEET-v1.5.2.md`.
 
+Stage 1 pages (same slugs in DE and EN) are generated from `portfolio/content/`: `/rollen/agentic-ai/` (`#angebot`), `/rollen/java-backend/`, `/lebenslauf/`, `/lebenslauf/<id>/`, `/kontakt/`. `npm run portfolio:validate` fails the build when an entry breaks the schema, invents a KPI, or fills a placeholder.
+
 ## Visual system — Enterprise AI decision surface
 
 Two stylesheets load on every generated page:

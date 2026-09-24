@@ -1085,7 +1085,7 @@ export const en = {
     body: "Interaction and scroll story on this page: custom scripts (vanilla JS/CSS). No Three.js, no off-the-shelf animation framework.",
     chip: "Custom-built · not a library demo",
     technique: "SVG stroke-dashoffset · drawn once",
-    modules: ["portfolio/motion/stage-reveal.js", "portfolio/motion/craft-mark.js"],
+    modules: ["portfolio/motion/stage-reveal.js", "portfolio/motion/craft-mark.js", "portfolio/motion/timeline.js"],
   },
   cv: {
     title: "CV — Peter Henrichs",

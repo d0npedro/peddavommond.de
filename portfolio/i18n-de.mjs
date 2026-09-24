@@ -1087,7 +1087,7 @@ export const de = {
     body: "Interaktion und Scroll-Story auf dieser Seite: eigene Skripte (Vanilla JS/CSS). Kein Three.js, kein zugekauftes Animation-Framework.",
     chip: "Custom-built · not a library demo",
     technique: "SVG stroke-dashoffset · einmal gezeichnet",
-    modules: ["portfolio/motion/stage-reveal.js", "portfolio/motion/craft-mark.js"],
+    modules: ["portfolio/motion/stage-reveal.js", "portfolio/motion/craft-mark.js", "portfolio/motion/timeline.js"],
   },
   cv: {
     title: "Lebenslauf — Peter Henrichs",
