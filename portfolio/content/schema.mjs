@@ -3,7 +3,7 @@
  * Vanilla Validator, keine Dependencies.
  *
  * Typen: 'role' | 'case' | 'experiment' | 'cv'
- * Honesty: 'independent-rnd' | 'client' | 'employment'
+ * Honesty: 'independent-rnd' | 'client' | 'employment' | 'education'
  *
  * Regeln:
  * - Pflichtfelder je Typ (siehe validateEntry)
@@ -15,6 +15,7 @@ export const HONESTY = Object.freeze([
   "independent-rnd",
   "client",
   "employment",
+  "education",
 ]);
 
 export const TYPES = Object.freeze(["role", "case", "experiment", "cv"]);

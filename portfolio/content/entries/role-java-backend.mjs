@@ -10,12 +10,12 @@ export default {
     "en": "Senior Backend Java Engineer · AI-assisted"
   },
   "summary": {
-    "de": "Seit 2018 entwickle ich Java-Backends mit Spring Boot in bezahlten Projekten: Microservices, REST-Schnittstellen zu Bestandssystemen, Container auf Kubernetes und OpenShift, Pipelines bis in den Betrieb. Gewachsenen Code verstehe ich, indem ich ihn lese: Architektur, Seiteneffekte und die Gründe, warum etwas so gebaut wurde. Heute arbeite ich KI-gestützt. Fehlersuche und Korrekturschleifen werden deutlich kürzer, und jede Änderung bleibt reviewbar.",
-    "en": "Since 2018 I have built Java backends with Spring Boot in paid projects: microservices, REST interfaces to existing systems, containers on Kubernetes and OpenShift, pipelines through to operations. I understand grown code by reading it: architecture, side effects, and why things were built the way they are. Today I work AI-assisted. Bug hunting and fix loops get much shorter, and every change stays reviewable."
+    "de": "Durchgehend seit 05/2018 entwickle ich Java-Backends mit Spring Boot in bezahlten Projekten: Microservices, REST-Schnittstellen zu Bestandssystemen, Container auf Kubernetes und OpenShift, Pipelines bis in den Betrieb. Gewachsenen Code verstehe ich, indem ich ihn lese: Architektur, Seiteneffekte und die Gründe, warum etwas so gebaut wurde. Heute arbeite ich KI-gestützt. Fehlersuche und Korrekturschleifen werden deutlich kürzer, und jede Änderung bleibt reviewbar.",
+    "en": "Continuously since 05/2018 I have built Java backends with Spring Boot in paid projects: microservices, REST interfaces to existing systems, containers on Kubernetes and OpenShift, pipelines through to operations. I understand grown code by reading it: architecture, side effects, and why things were built the way they are. Today I work AI-assisted. Bug hunting and fix loops get much shorter, and every change stays reviewable."
   },
   "metaDescription": {
-    "de": "Java-Backends mit Spring Boot seit 2018: Microservices, REST, Container auf Kubernetes und OpenShift, Pipelines und Monitoring. KI-gestützt, jede Änderung reviewbar.",
-    "en": "Java backends with Spring Boot since 2018: microservices, REST, containers on Kubernetes and OpenShift, pipelines and monitoring. AI-assisted, every change reviewable."
+    "de": "Java-Backends mit Spring Boot, Java durchgehend seit 05/2018: Microservices, REST, Container auf Kubernetes und OpenShift, Pipelines und Monitoring. KI-gestützt, jede Änderung reviewbar.",
+    "en": "Java backends with Spring Boot, Java continuously since 05/2018: microservices, REST, containers on Kubernetes and OpenShift, pipelines and monitoring. AI-assisted, every change reviewable."
   },
   "topics": [
     "java",
@@ -77,7 +77,8 @@ export default {
       "Schnittstellen: REST zu Bestandssystemen bei Krankenkassen und Bank, REST und OpenAPI bei den Behörden-APIs, Kafka im Stack der Bankplattform.",
       "Container und Betrieb: Docker in den meisten Stationen seit 2018, Kubernetes für die Werkstatt-Services und im Bonusprogramm auf Azure, OpenShift-Umgebungen verwaltet, Infrastruktur per Terraform, Monitoring mit Prometheus, Grafana und Dynatrace.",
       "Pipelines und Qualität: Jenkins mit Shared Libraries, mehrstufige Build-Pipelines auf OpenShift, SonarQube als Quality Gate.",
-      "Arbeitsweise: Scrum-Teams in vier Stationen, Rollen vom Entwickler bis zum Lead-Dev/DevOps."
+      "Arbeitsweise: Scrum-Teams in vier Stationen, Rollen vom Entwickler bis zum Lead-Dev/DevOps.",
+      "Batch-Verarbeitung: wiederkehrende Tagesend-Prozesse auf Apache Airflow, zum Beispiel Kassendaten von Partnerunternehmen."
     ],
     "en": [
       "Spring Boot in paid projects since 2018: workshop services for an electric car, e-records for public administration, an online service office for statutory health insurers, APIs for government mobile apps, a nationwide loyalty program.",
@@ -85,7 +86,8 @@ export default {
       "Interfaces: REST to existing systems for health insurers and a bank, REST and OpenAPI for the government APIs, Kafka in the banking platform's stack.",
       "Containers and operations: Docker in most engagements since 2018, Kubernetes for the workshop services and for the loyalty program on Azure, OpenShift environments managed, infrastructure via Terraform, monitoring with Prometheus, Grafana, and Dynatrace.",
       "Pipelines and quality: Jenkins with shared libraries, multi-stage build pipelines on OpenShift, SonarQube as a quality gate.",
-      "Way of working: Scrum teams in four engagements, roles from developer to lead dev/DevOps."
+      "Way of working: Scrum teams in four engagements, roles from developer to lead dev/DevOps.",
+      "Batch processing: recurring end-of-day processes on Apache Airflow, for example partner companies' cash-register data."
     ]
   },
   "engagement": {
@@ -105,6 +107,7 @@ export default {
     "cv": [
       "cv-direct-services-deutschlandcard",
       "cv-aleri",
+      "cv-nextgen-bwi-lzs",
       "cv-adesso-dz-bank-okvp",
       "cv-adesso-bitmarck-bitgo",
       "cv-binaris-domea",
@@ -112,8 +115,8 @@ export default {
     ]
   },
   "result": {
-    "de": "Java in neun bezahlten Stationen seit 05/2018, Spring Boot in sieben davon.",
-    "en": "Java in nine paid engagements since 05/2018, Spring Boot in seven of them.",
+    "de": "Java in zehn bezahlten Stationen, durchgehend seit 05/2018, Spring Boot in sieben davon.",
+    "en": "Java in ten paid engagements, continuously since 05/2018, Spring Boot in seven of them.",
     "source": "portfolio/shared.mjs EXPERIENCE (main)"
   },
   "links": [

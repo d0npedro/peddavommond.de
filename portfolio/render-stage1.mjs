@@ -76,6 +76,7 @@ const UI = {
       "independent-rnd": "Independent R&D",
       client: "Kundenarbeit",
       employment: "Anstellung",
+      education: "Ausbildung",
     },
     type: { role: "Rolle", case: "Case", experiment: "Experiment", cv: "CV" },
     chapters: {
@@ -126,6 +127,7 @@ const UI = {
       "independent-rnd": "Independent R&D",
       client: "Client work",
       employment: "Employment",
+      education: "Education",
     },
     type: { role: "Role", case: "Case", experiment: "Experiment", cv: "CV" },
     chapters: {

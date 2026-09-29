@@ -35,12 +35,14 @@ export default {
     "de": [
       "Individuelle Login-Journey auf Azure AD B2C",
       "Terraform-Skripte für automatisierte Cloud-Infrastruktur",
-      "Cloudifizierung der DeutschlandCard-Services in eine skalierbare Azure-Umgebung"
+      "Cloudifizierung der DeutschlandCard-Services in eine skalierbare Azure-Umgebung",
+      "Im Rahmen der Cloud-Migration wiederkehrende Tagesend-Batchprozesse auf Apache Airflow umgesetzt, zum Beispiel das Einlesen von Kassendaten der Partnerunternehmen"
     ],
     "en": [
       "Custom Login Journey on Azure AD B2C",
       "Terraform scripts for automated cloud infrastructure",
-      "Cloudification of DeutschlandCard services into a scalable Azure environment"
+      "Cloudification of DeutschlandCard services into a scalable Azure environment",
+      "As part of the cloud migration, implemented recurring end-of-day batch processes on Apache Airflow, for example reading in partner companies' cash-register data"
     ]
   },
   "stack": [

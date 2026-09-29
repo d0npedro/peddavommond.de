@@ -947,12 +947,15 @@ export const en = {
           "Custom Login Journey on Azure AD B2C",
           "Terraform scripts for automated cloud infrastructure",
           "Cloudification of DeutschlandCard services into a scalable Azure environment",
+          "As part of the cloud migration, implemented recurring end-of-day batch processes on Apache Airflow, for example reading in partner companies' cash-register data",
         ],
       },
       aleri: {
         role: "Entwickler",
         mission: "Backend development engagement.",
-        tasks: [],
+        tasks: [
+          "Built a push notification system for a mobile app together with the customer",
+        ],
       },
       "nextgen-itzbund-push": {
         role: "Berater / Entwickler Fullstack",
@@ -969,6 +972,7 @@ export const en = {
           "Interfaces into the Bundeswehr IT landscape",
           "Evolution of the frontend web server",
           "Modular architecture with selective read/write down to the data element",
+          "Wrote Java together with OData (Apache Olingo) for data-driven user interfaces",
         ],
       },
       "nextgen-maerz-ihe": {

@@ -35,17 +35,20 @@ export default {
     "de": [
       "Schnittstellen in die IT-Landschaft der Bundeswehr",
       "Weiterentwicklung des Frontend-Webservers",
-      "Modulare Architektur mit selektivem Lesen/Schreiben bis auf das einzelne Datenelement"
+      "Modulare Architektur mit selektivem Lesen/Schreiben bis auf das einzelne Datenelement",
+      "Java zusammen mit OData (Apache Olingo) für datengetriebene Benutzeroberflächen geschrieben"
     ],
     "en": [
       "Interfaces into the Bundeswehr IT landscape",
       "Evolution of the frontend web server",
-      "Modular architecture with selective read/write down to the data element"
+      "Modular architecture with selective read/write down to the data element",
+      "Wrote Java together with OData (Apache Olingo) for data-driven user interfaces"
     ]
   },
   "stack": [
+    "Java",
     "OpenUI5",
-    "OData V4",
+    "OData (Apache Olingo)",
     "IBM DB2",
     "SAP",
     "Apache HTTPD",

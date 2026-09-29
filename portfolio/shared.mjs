@@ -408,6 +408,7 @@ export const EXPERIENCE = [
       "Apache Tomcat",
       "IBM DB2",
       "SAP",
+      "Java",
       "OpenUI5",
       "Olingo",
       "PDFBox",
