@@ -14,7 +14,7 @@ import {
   caseHref,
 } from "./shared.mjs";
 import { copy } from "./content.mjs";
-import { offerChip, stageEntryNav, stageTopbar } from "./render-stage1.mjs";
+import { offerChip, splitFocusNote, stageEntryNav, stageTopbar } from "./render-stage1.mjs";
 
 /** Next export = layout/utilities. Token + component layer is portfolio.css (copied to public/). */
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
@@ -788,6 +788,9 @@ function renderOffer(locale) {
   const packages = o.packages
     .map((pkg, index) => {
       const items = pkg.deliverables.map((line) => `<li>${esc(line)}</li>`).join("");
+      const { fit, note } = splitFocusNote(locale, pkg.ideal);
+      const idealRow = fit ? `<div><dt>${esc(o.ideal)}</dt><dd>${esc(fit)}</dd></div>` : "";
+      const noteRow = note ? `<p class="pf-offer-scope">${esc(note)}</p>` : "";
       return `<article class="pf-offer">
         <div class="pf-offer-name">
           <p class="pf-offer-index">${String(index + 1).padStart(2, "0")}</p>
@@ -797,8 +800,9 @@ function renderOffer(locale) {
           <p class="pf-offer-scope">${esc(pkg.scope)}</p>
           <dl class="pf-offer-dl">
             <div><dt>${esc(o.deliverables)}</dt><dd><ul>${items}</ul></dd></div>
-            <div><dt>${esc(o.ideal)}</dt><dd>${esc(pkg.ideal)}</dd></div>
+            ${idealRow}
           </dl>
+          ${noteRow}
         </div>
       </article>`;
     })

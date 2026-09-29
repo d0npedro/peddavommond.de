@@ -247,7 +247,7 @@ export const de = {
         deliverables: [
           "Zielarchitektur mit Integrationspunkten (APIs, Identität, Pipelines), Abnahme und Human-in-the-Loop",
           "Agent-Vertrag (Aufgabe, Artefakt, Abnahme) in der Form der öffentlichen Pakete",
-          "Prüfbarer Zustand oder Checkliste — Abgenommen wird über Tests und Logs, nicht über einen Chatverlauf.",
+          "Prüfbarer Zustand oder Checkliste — abgenommen wird über Tests und Logs, nicht über einen Chatverlauf.",
         ],
         ideal:
           "Teams, die einen Prototyp in eine wartbare Schicht überführen. Graph-Mastermind und Agent Collective sind Independent R&D — kein mitgeliefertes Kundenprodukt.",

@@ -247,7 +247,7 @@ export const en = {
         deliverables: [
           "Target architecture with integration points (APIs, identity, pipelines), acceptance, and human-in-the-loop",
           "Agent contract (task, artifact, acceptance) in the form of the public packages",
-          "Inspectable state or a checklist — Acceptance is based on tests and logs, not on a chat history.",
+          "Inspectable state or a checklist — acceptance is based on tests and logs, not on a chat history.",
         ],
         ideal:
           "Teams turning a prototype into a maintainable layer. Graph-Mastermind and Agent Collective are Independent R&D — not a bundled client product.",

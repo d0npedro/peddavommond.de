@@ -58,7 +58,7 @@ export default {
       "Schriftliche Liste dessen, was nicht gebaut wird",
       "Zielarchitektur mit Integrationspunkten (APIs, Identität, Pipelines), Abnahme und Human-in-the-Loop",
       "Agent-Vertrag (Aufgabe, Artefakt, Abnahme) in der Form der öffentlichen Pakete",
-      "Prüfbarer Zustand oder Checkliste — Abgenommen wird über Tests und Logs, nicht über einen Chatverlauf.",
+      "Prüfbarer Zustand oder Checkliste — abgenommen wird über Tests und Logs, nicht über einen Chatverlauf.",
       "Betriebsmodell: wer freigibt, wer eingreift, wann ein Mensch übernimmt.",
       "Erfolgskriterien vor dem Bau: Messgrößen wie Abnahmequote, Review-Aufwand und Regressionen — Zahlen erst, wenn gemessen",
       "Governance-Rahmen aus regulierter Delivery (Berechtigungen, DSGVO) plus EU-AI-Act-Orientierung"
@@ -69,7 +69,7 @@ export default {
       "A written list of what will not be built",
       "Target architecture with integration points (APIs, identity, pipelines), acceptance, and human-in-the-loop",
       "Agent contract (task, artifact, acceptance) in the form of the public packages",
-      "Inspectable state or a checklist — Acceptance is based on tests and logs, not on a chat history.",
+      "Inspectable state or a checklist — acceptance is based on tests and logs, not on a chat history.",
       "Operating model: who approves, who steps in, when a human takes over.",
       "Success criteria before building: measures such as acceptance rate, review effort, and regressions — numbers only once measured",
       "Governance frame from regulated delivery (permissions, GDPR) plus EU AI Act orientation"
@@ -146,12 +146,12 @@ export default {
         "de": [
           "Zielarchitektur mit Integrationspunkten (APIs, Identität, Pipelines), Abnahme und Human-in-the-Loop",
           "Agent-Vertrag (Aufgabe, Artefakt, Abnahme) in der Form der öffentlichen Pakete",
-          "Prüfbarer Zustand oder Checkliste — Abgenommen wird über Tests und Logs, nicht über einen Chatverlauf."
+          "Prüfbarer Zustand oder Checkliste — abgenommen wird über Tests und Logs, nicht über einen Chatverlauf."
         ],
         "en": [
           "Target architecture with integration points (APIs, identity, pipelines), acceptance, and human-in-the-loop",
           "Agent contract (task, artifact, acceptance) in the form of the public packages",
-          "Inspectable state or a checklist — Acceptance is based on tests and logs, not on a chat history."
+          "Inspectable state or a checklist — acceptance is based on tests and logs, not on a chat history."
         ]
       },
       "ideal": {

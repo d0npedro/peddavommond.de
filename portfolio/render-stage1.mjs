@@ -378,13 +378,16 @@ function relatedBlock(locale, entry) {
   return `<section class="block"><h2>${esc(ui.related)}</h2><ul class="related">${links.join("")}</ul></section>`;
 }
 
-function focusIdeal(locale, ideal) {
+export function splitFocusNote(locale, ideal) {
   const fits = byId("role-agentic-ai-consulting")?.fits?.[locale] ?? [];
-  if (!ideal || fits.includes(ideal)) return "";
+  if (!ideal) return { fit: "", note: "" };
   for (const line of fits) {
-    if (ideal.startsWith(line)) return ideal.slice(line.length).replace(/^[\s.]+/, "").trim();
+    if (ideal === line) return { fit: line, note: "" };
+    if (ideal.startsWith(line)) {
+      return { fit: line, note: ideal.slice(line.length).replace(/^[\s.]+/, "").trim() };
+    }
   }
-  return ideal;
+  return { fit: ideal, note: "" };
 }
 
 function packagesBlock(locale) {
@@ -392,10 +395,8 @@ function packagesBlock(locale) {
   const packages = livePackages(locale)
     .map((pkg, index) => {
       const items = pkg.deliverables.map((line) => `<li>${mark(line)}</li>`).join("");
-      const ideal = focusIdeal(locale, pkg.ideal);
-      const idealRow = ideal
-        ? `<div><dt>${esc(offer.ideal)}</dt><dd>${mark(ideal)}</dd></div>`
-        : "";
+      const { note } = splitFocusNote(locale, pkg.ideal);
+      const noteRow = note ? `<p>${mark(note)}</p>` : "";
       return `<article class="package">
   <p class="pkg-index">${String(index + 1).padStart(2, "0")}</p>
   <div>
@@ -403,8 +404,8 @@ function packagesBlock(locale) {
     <p>${mark(pkg.scope)}</p>
     <dl>
       <div><dt>${esc(offer.deliverables)}</dt><dd><ul>${items}</ul></dd></div>
-      ${idealRow}
     </dl>
+    ${noteRow}
   </div>
 </article>`;
     })
