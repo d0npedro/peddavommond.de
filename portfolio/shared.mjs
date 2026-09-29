@@ -85,7 +85,7 @@ export const TRACK = [
   {
     id: "consulting",
     period: "2026",
-    company: "KI-Manager · AI Automation",
+    company: { de: "KI-Manager · AI Automation", en: "AI Manager · AI Automation" },
     era: "consulting",
   },
 ];
@@ -408,6 +408,7 @@ export const EXPERIENCE = [
       "Apache Tomcat",
       "IBM DB2",
       "SAP",
+      "Java",
       "OpenUI5",
       "Olingo",
       "PDFBox",
@@ -540,7 +541,10 @@ export const EXPERIENCE = [
     id: "binaris-ego",
     period: "05/2018 – 08/2018",
     start: "2018-05",
-    company: "binaris Informatik GmbH (for Valtech Mobility GmbH)",
+    company: {
+      de: "binaris Informatik GmbH (für Valtech Mobility GmbH)",
+      en: "binaris Informatik GmbH (for Valtech Mobility GmbH)",
+    },
     tech: [
       "Spring Boot",
       "Java",

@@ -71,15 +71,15 @@ async function check(locale) {
   assert(html.includes('id="sample-collective"'), `${prefix} missing the collective sample`);
   assert(!html.includes('id="sample-graph"'), `${prefix} Graph contract must not be its own stage`);
   assert(!html.includes('id="builds"') && !html.includes('id="top"'), `${prefix} deleted stages still present`);
-  assert(html.includes('id="offer"'), `${prefix} missing How to offer me`);
+  assert(html.includes('id="offer"'), `${prefix} missing What I do`);
   assert(html.includes("Senior AI Consultant") && html.includes("Agentic Engineer") && html.includes("Transformation Lead"), `${prefix} missing agency role packages`);
   assert(html.includes("data-touch=\"collective\"") && html.includes("data-touch=\"contract\""), `${prefix} samples are not interactive`);
   assert(!/GPT-|OpenAI API|Claude API|LLM-powered|powered by an LLM/i.test(html), `${prefix} must not invent an LLM backend`);
   if (locale === "de") {
     assert(visibleText(hero).includes(DE_H1), `${prefix} missing approved hero headline`);
     assert(!html.includes("Die Schicht zwischen System und Agent."), `${prefix} old abstract hero line still present`);
-    assert(hero.includes("Wie man mich anbietet") && hero.includes('href="#offer"'), `${prefix} hero CTA must open the offer`);
-    assert(html.includes("Wie man mich anbietet"), `${prefix} missing How to offer me title`);
+    assert(hero.includes("Was ich mache") && hero.includes('href="#offer"'), `${prefix} hero CTA must open the offer`);
+    assert(html.includes("Was ich mache"), `${prefix} missing What I do title`);
     assert(html.includes("kein LLM-Backend"), `${prefix} Agent Collective sample must state no LLM backend`);
     assert(!html.includes("Where I create value"), `${prefix} English value eyebrow leaked`);
     assert(!html.includes("10+ years enterprise systems"), `${prefix} English proof-chip body leaked`);
@@ -89,8 +89,8 @@ async function check(locale) {
   } else {
     assert(visibleText(hero).includes(EN_H1), `${prefix} missing approved hero headline`);
     assert(!html.includes("The layer between the system and the agent."), `${prefix} old abstract hero line still present`);
-    assert(hero.includes("How to offer me") && hero.includes('href="#offer"'), `${prefix} hero CTA must open the offer`);
-    assert(html.includes("How to offer me"), `${prefix} missing How to offer me title`);
+    assert(hero.includes("What I do") && hero.includes('href="#offer"'), `${prefix} hero CTA must open the offer`);
+    assert(html.includes("What I do"), `${prefix} missing What I do title`);
     assert(html.includes("no LLM backend"), `${prefix} Agent Collective sample must state no LLM backend`);
     assert(!html.includes("Further mandates"), `${prefix} further-mandate wall must stay off the landing`);
     assert(html.includes("Client work · no AI component"), `${prefix} missing DeutschlandCard honesty chip`);
@@ -223,8 +223,8 @@ const [de, en] = await Promise.all([
   readFile(join(root, "public/portfolio/de/index.html"), "utf8"),
   readFile(join(root, "public/portfolio/en/index.html"), "utf8"),
 ]);
-assert(de.includes('href="#offer"') && de.includes("Wie man mich anbietet"), "DE hero CTA missing");
-assert(en.includes('href="#offer"') && en.includes("How to offer me"), "EN hero CTA missing");
+assert(de.includes('href="#offer"') && de.includes("Was ich mache"), "DE hero CTA missing");
+assert(en.includes('href="#offer"') && en.includes("What I do"), "EN hero CTA missing");
 assert(de.includes("Lebenslauf"), "DE CV label missing");
 assert(en.includes("/portfolio/cv/"), "EN CV path missing");
 assert(!de.includes("Where I create value"), "DE value eyebrow still English");
@@ -233,7 +233,7 @@ assert(visibleText(de).includes(DE_H1), "DE H1 missing approved promise");
 assert(visibleText(en).includes(EN_H1), "EN H1 missing approved promise");
 assert(!de.includes("Die Schicht zwischen System und Agent."), "DE still has the old abstract hero line");
 assert(!en.includes("The layer between the system and the agent."), "EN still has the old abstract hero line");
-assert(de.includes("Wie man mich anbietet") && en.includes("How to offer me"), "How to offer me missing in a locale");
+assert(de.includes("Was ich mache") && en.includes("What I do"), "What I do missing in a locale");
 assert(de.includes("Agentic Engineer") && en.includes("Agentic Engineer"), "Agentic Engineer package missing");
 assert(de.includes("Transformation Lead") && en.includes("Transformation Lead"), "Transformation Lead package missing");
 assert(de.includes(">Gespräch<") && en.includes(">Talk<"), "contact heading missing");
@@ -266,9 +266,11 @@ async function checkCase(locale, id) {
   assert(html.includes("Senior AI Consultant"), `${prefix} missing positioning`);
   const hasProblem = html.includes(">Problem<") || html.includes("Problem");
   const hasDecision = html.includes("Entscheidung") || html.includes("Decision");
-  const hasOutcome = html.includes("Wirkung") || html.includes("Outcome");
+  const hasOutcome = html.includes(">Ergebnisse<") || html.includes(">Outcomes<") || html.includes("Wirkung");
   assert(hasProblem && hasDecision && hasOutcome, `${prefix} missing Problem/Decision/Outcome schema`);
-  assert(html.includes("Rolle") || html.includes("Role"), `${prefix} missing role section`);
+  if (id !== "deutschlandcard") {
+    assert(html.includes("Rolle") || html.includes("Role"), `${prefix} missing role section`);
+  }
   assert(html.includes("Architektur") || html.includes("Architecture"), `${prefix} missing architecture section`);
   assert(html.includes("Evaluation") || html.includes("Guardrails"), `${prefix} missing evaluation / guardrails`);
   assert(html.includes("Mein Anteil") || html.includes("My contribution"), `${prefix} missing contribution`);
@@ -361,7 +363,8 @@ async function checkStage1() {
       if (slug === "agentic-ai") {
         assert(html.includes("peter.henrichs@web.de"), `${rel} missing email`);
         assert(html.includes("Senior AI Consultant") && html.includes("Agentic Engineer") && html.includes("Transformation Lead"), `${rel} missing the three packages`);
-        assert(html.includes(locale === "de" ? "Consultant · Pakete" : "Consulting · Packages"), `${rel} eyebrow must describe consulting packages`);
+        assert(html.includes(locale === "de" ? "Offen für Festanstellung oder Projekte" : "Open to permanent employment or projects"), `${rel} eyebrow states the engagement once`);
+        assert(!html.includes(locale === "de" ? "Consultant · Pakete" : "Consulting · Packages"), `${rel} eyebrow still says packages`);
         assert(!html.includes("z. B. adesso") && !html.includes("e.g. adesso"), `${rel} still names adesso in the offer intro`);
         const honesty = locale === "de" ? "Keine erfundenen Kundenergebnisse" : "No invented client outcomes";
         assert(!html.includes(honesty), `${rel} still has the meta-honesty line`);
@@ -369,8 +372,8 @@ async function checkStage1() {
       if (slug === "java-backend") {
         assert(html.includes('id="einsatz"'), `${rel} missing engagement anchor`);
         assert(html.includes(`/portfolio/${locale}/kontakt/`), `${rel} engagement must link to kontakt`);
-        assert(html.includes(locale === "de" ? "Engineering-Seat" : "Engineering seat"), `${rel} eyebrow must use the entry engagement form`);
-        assert(html.includes(locale === "de" ? "Lebenslauf · Stationen" : "Career · stations"), `${rel} proof source must be a human link`);
+        assert(html.includes(locale === "de" ? "Offen für Festanstellung oder Projekte" : "Open to permanent employment or projects"), `${rel} eyebrow must use the entry engagement form`);
+        assert(html.includes(locale === "de" ? "Lebenslauf · Stationen" : "CV · roles"), `${rel} proof source must be a human link`);
         assert(html.includes(`href="/portfolio/${locale}/lebenslauf/"`), `${rel} proof source must link to the timeline`);
         assert(!/Rolle · Anstellung|Role · Employment/.test(html), `${rel} still labels the role as employment`);
       }

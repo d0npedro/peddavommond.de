@@ -121,8 +121,8 @@ jobs:
           ! grep -q 'Further mandates' public/portfolio/en/index.html
           grep -q 'data-touch="collective"' public/portfolio/de/index.html
           grep -q 'data-touch="contract"' public/portfolio/en/index.html
-          grep -q 'Wie man mich anbietet' public/portfolio/de/index.html
-          grep -q 'How to offer me' public/portfolio/en/index.html
+          grep -q 'Was ich mache' public/portfolio/de/index.html
+          grep -q 'What I do' public/portfolio/en/index.html
           grep -q 'Senior AI Consultant' public/portfolio/en/index.html
           grep -q 'Agentic Engineer' public/portfolio/de/index.html
           grep -q 'Agentic Engineer' public/portfolio/en/index.html

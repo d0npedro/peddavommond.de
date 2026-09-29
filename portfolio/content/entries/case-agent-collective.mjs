@@ -68,8 +68,8 @@ export default {
       "en": "Independent Applied AI R&D, 2026. Process automation needs visible states, validation and a human escape hatch — not a chat UI that hides system behaviour."
     },
     "schnitt": {
-      "de": "TypeScript-State-Machine mit sechs Rollen, Workflow-Graph, Failure Injection, Recovery und seeded RNG. Bewusst kein reales LLM.",
-      "en": "TypeScript state machine with six roles, workflow graph, failure injection, recovery and seeded RNG. Deliberately no real LLM."
+      "de": "TypeScript-State-Machine mit sechs Rollen, Workflow-Graph, Failure Injection, Recovery und seeded RNG. Bewusst kein reales LLM. Der Preis: kein echtes Sprachmodell im Test. Dafür sind Orchestrierung und Fehlermodi reproduzierbar.",
+      "en": "TypeScript state machine with six roles, workflow graph, failure injection, recovery and seeded RNG. Deliberately no real LLM. The price: no real language model under test. In return, orchestration and failure modes are reproducible."
     },
     "umsetzung": {
       "de": "Input / Aufgabe → Rollen in der Engine → Structured State → Validation / Failure Injection → automatischer Schritt oder Human Review → Audit. Reine TypeScript-Engine besitzt den Weltzustand.",

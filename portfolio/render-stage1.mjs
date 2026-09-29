@@ -10,8 +10,8 @@ import { offerHref, offerLabel } from "./offer-link.mjs";
 import { SITE, caseById, caseHref } from "./shared.mjs";
 
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=paper-20260924b";
-const STAGE_CSS = "/portfolio/stage1.css?v=paper-20260924b";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=paper-20260929a";
+const STAGE_CSS = "/portfolio/stage1.css?v=paper-20260929a";
 
 const CHAPTER_KEYS = ["ausgangslage", "schnitt", "umsetzung", "nachweis", "ergebnis"];
 
@@ -64,9 +64,12 @@ const UI = {
     tasks: "Aufgaben",
     casePage: "Zur Case-Seite",
     contactTitle: "Kontakt",
-    contactLede: "Peter Henrichs · Köln. E-Mail, LinkedIn und GitHub.",
+    contactLede: "Peter Henrichs · Köln, deutschlandweit und remote. Deutsch Muttersprache, Englisch fließend. E-Mail, LinkedIn und GitHub.",
+    approach: "Vorgehen",
+    proof: "Nachweise aus Projekten",
     email: "E-Mail",
-    fits: "Passt",
+    fits: "Passt zu",
+    outcomes: "Ergebnisse",
     notFits: "Passt nicht",
     related: "Verknüpft",
     roleKicker: "Rolle",
@@ -74,6 +77,7 @@ const UI = {
       "independent-rnd": "Independent R&D",
       client: "Kundenarbeit",
       employment: "Anstellung",
+      education: "Ausbildung",
     },
     type: { role: "Rolle", case: "Case", experiment: "Experiment", cv: "CV" },
     chapters: {
@@ -81,7 +85,7 @@ const UI = {
       schnitt: "Schnitt",
       umsetzung: "Umsetzung",
       nachweis: "Nachweis",
-      ergebnis: "Ergebnis",
+      ergebnis: "Ergebnisse",
     },
     linkKind: { repo: "Repository", demo: "Live-Demo", anchor: "Link" },
   },
@@ -89,32 +93,35 @@ const UI = {
     navLabel: "Portfolio",
     roleShort: "Agentic AI",
     javaShort: "Java Backend",
-    timelineNav: "Career",
+    timelineNav: "CV",
     contactNav: "Contact",
     lang: "Language",
     skip: "Skip to content",
-    timelineTitle: "Career",
+    timelineTitle: "CV",
     timelineLede:
-      "Stations, cases and experiments — scrubbable by year. Independent R&D and client work are labeled separately.",
+      "Roles, cases and experiments — scrubbable by year. Independent R&D and client work are labeled separately.",
     menu: "Menu",
     engagementTitle: "Engagement",
     contactCta: "Contact",
-    stations: "Career · stations",
+    stations: "CV · roles",
     placeholderNote:
       "Square brackets are open placeholders. They stay until a real figure with a source exists.",
     yearRail: "Year rail",
     chooseYear: "Choose year",
     openDive: "Open deep dive",
     close: "Close",
-    backTimeline: "Back to the career timeline",
+    backTimeline: "Back to the CV",
     source: "Source",
     placeholder: "Placeholder",
     tasks: "Tasks",
     casePage: "Full case page",
     contactTitle: "Contact",
-    contactLede: "Peter Henrichs · Cologne. Email, LinkedIn and GitHub.",
+    contactLede: "Peter Henrichs · Cologne, Germany-wide and remote. German native, English fluent. Email, LinkedIn and GitHub.",
+    approach: "How I work",
+    proof: "Evidence from projects",
     email: "Email",
-    fits: "Fits",
+    fits: "Good fit",
+    outcomes: "Outcomes",
     notFits: "Does not fit",
     related: "Related",
     roleKicker: "Role",
@@ -122,6 +129,7 @@ const UI = {
       "independent-rnd": "Independent R&D",
       client: "Client work",
       employment: "Employment",
+      education: "Education",
     },
     type: { role: "Role", case: "Case", experiment: "Experiment", cv: "CV" },
     chapters: {
@@ -129,7 +137,7 @@ const UI = {
       schnitt: "Cut",
       umsetzung: "Implementation",
       nachweis: "Evidence",
-      ergebnis: "Result",
+      ergebnis: "Outcomes",
     },
     linkKind: { repo: "Repository", demo: "Live demo", anchor: "Link" },
   },
@@ -180,13 +188,13 @@ function isInternalSource(source) {
   return /\.mjs|\(main\)|\bportfolio\//.test(String(source ?? ""));
 }
 
+function companyText(company, locale) {
+  if (company && typeof company === "object") return company[locale] ?? company.de ?? "";
+  return company ?? "";
+}
+
 function roleEyebrow(locale, entry) {
-  if (entry.packages?.length) {
-    return locale === "de" ? "Consultant · Pakete" : "Consulting · Packages";
-  }
-  const line = entry.engagement?.[locale] ?? "";
-  const head = line.split(/[,.]/)[0].trim();
-  return head || (locale === "de" ? "Rolle" : "Role");
+  return entry.engagement?.[locale] ?? "";
 }
 
 function yearOf(entry) {
@@ -339,7 +347,13 @@ function resultBlock(locale, entry) {
   } else if (result.source && !isInternalSource(result.source)) {
     source = `<span class="src">${esc(ui.source)}: ${esc(result.source)}</span>`;
   }
-  return `<div class="result">${mark(result[locale])}${source}</div>`;
+  const resultLabel =
+    entry.id === "role-agentic-ai-consulting"
+      ? locale === "de"
+        ? "Erfahrung"
+        : "Background"
+      : ui.outcomes;
+  return `<div class="result"><p class="kicker">${esc(resultLabel)}</p>${mark(result[locale])}${source}</div>`;
 }
 
 function relatedBlock(locale, entry) {
@@ -364,11 +378,25 @@ function relatedBlock(locale, entry) {
   return `<section class="block"><h2>${esc(ui.related)}</h2><ul class="related">${links.join("")}</ul></section>`;
 }
 
+export function splitFocusNote(locale, ideal) {
+  const fits = byId("role-agentic-ai-consulting")?.fits?.[locale] ?? [];
+  if (!ideal) return { fit: "", note: "" };
+  for (const line of fits) {
+    if (ideal === line) return { fit: line, note: "" };
+    if (ideal.startsWith(line)) {
+      return { fit: line, note: ideal.slice(line.length).replace(/^[\s.]+/, "").trim() };
+    }
+  }
+  return { fit: ideal, note: "" };
+}
+
 function packagesBlock(locale) {
   const offer = copy(locale).offer;
   const packages = livePackages(locale)
     .map((pkg, index) => {
       const items = pkg.deliverables.map((line) => `<li>${mark(line)}</li>`).join("");
+      const { note } = splitFocusNote(locale, pkg.ideal);
+      const noteRow = note ? `<p>${mark(note)}</p>` : "";
       return `<article class="package">
   <p class="pkg-index">${String(index + 1).padStart(2, "0")}</p>
   <div>
@@ -376,9 +404,8 @@ function packagesBlock(locale) {
     <p>${mark(pkg.scope)}</p>
     <dl>
       <div><dt>${esc(offer.deliverables)}</dt><dd><ul>${items}</ul></dd></div>
-      <div><dt>${esc(offer.ideal)}</dt><dd>${mark(pkg.ideal)}</dd></div>
-      <div><dt>${esc(offer.engagement)}</dt><dd>${mark(pkg.engagement)}</dd></div>
     </dl>
+    ${noteRow}
   </div>
 </article>`;
     })
@@ -399,8 +426,6 @@ export function renderRolePage(locale, slug) {
   const offer = copy(locale).offer;
   const javaEngagement = slug === "java-backend"
     ? `<section id="einsatz" class="block" tabindex="-1">
-  <h2>${esc(ui.engagementTitle)}</h2>
-  <p>${mark(entry.engagement[locale])}</p>
   ${listBlock(locale, entry.fits?.[locale], ui.fits)}
   <p class="contact-line"><a class="btn" href="${esc(contactHref(locale))}">${esc(ui.contactCta)}</a></p>
 </section>`
@@ -410,17 +435,19 @@ export function renderRolePage(locale, slug) {
   <p class="kicker">${esc(roleEyebrow(locale, entry))}</p>
   <h1>${mark(entry.title[locale])}</h1>
   <p class="lede">${mark(entry.summary[locale])}</p>
-  ${slug === "agentic-ai" && entry.engagement ? `<p class="engagement">${mark(entry.engagement[locale])}</p>` : ""}
   ${slug === "agentic-ai" ? listBlock(locale, entry.fits?.[locale], ui.fits) : ""}
   ${javaEngagement}
+  ${slug === "java-backend" ? listBlock(locale, entry.proof?.[locale], ui.proof) : ""}
   ${listBlock(locale, entry.notFits?.[locale], ui.notFits)}
-  ${listBlock(locale, entry.deliverables?.[locale], offer.deliverables)}
+  ${slug === "agentic-ai"
+    ? listBlock(locale, entry.approach?.[locale], ui.approach)
+    : listBlock(locale, entry.deliverables?.[locale], offer.deliverables)}
   ${slug === "agentic-ai" ? packagesBlock(locale) : ""}
   ${resultBlock(locale, entry)}
   ${slug === "agentic-ai" ? `<p class="contact-line"><a href="mailto:${esc(SITE.email)}">${esc(SITE.email)}</a></p>` : ""}
   ${relatedBlock(locale, entry)}
 </main>`;
-  const description = entry.summary[locale];
+  const description = entry.metaDescription?.[locale] ?? entry.summary[locale];
   return pageShell({
     locale,
     title: `${entry.title[locale]} — ${SITE.name}`,
@@ -436,7 +463,8 @@ function entryCard(locale, entry, { current = false } = {}) {
   const ui = UI[locale];
   const year = yearOf(entry);
   const flag = entry.placeholder ? `<span class="placeholder-flag">${esc(ui.placeholder)}</span>` : "";
-  const company = entry.company ? `<p class="company">${mark(entry.company)}</p>` : "";
+  const companyName = companyText(entry.company, locale);
+  const company = companyName ? `<p class="company">${mark(companyName)}</p>` : "";
   const here = current ? ' aria-current="true"' : "";
   return `<a class="entry-card" id="${esc(entry.id)}" href="${esc(diveHref(locale, entry.id))}" data-id="${esc(entry.id)}" data-year="${esc(year)}"${here}>
   <p class="meta"><span>${esc(ui.type[entry.type] ?? entry.type)}</span><span class="honesty-${esc(entry.honesty)}">${esc(ui.honesty[entry.honesty] ?? entry.honesty)}</span><span>${mark(periodLabel(entry, locale))}</span>${flag}</p>
@@ -470,7 +498,7 @@ function publicEntry(locale, entry) {
     summary: entry.summary[locale],
     periodLabel: periodLabel(entry, locale),
     year: yearOf(entry),
-    company: entry.company ?? "",
+    company: companyText(entry.company, locale),
     stack: entry.stack ?? [],
     tasks: entry.tasks?.[locale]?.filter(Boolean) ?? [],
     result: entry.result
@@ -593,7 +621,8 @@ export function renderDeepDivePage(locale, id) {
     ? `<img class="preview-media" src="${esc(entry.media.preview)}" alt="${esc(entry.media.alt?.[locale] ?? "")}" loading="lazy" decoding="async"/>`
     : "";
   const flag = entry.placeholder ? `<p class="placeholder-flag">${esc(ui.placeholder)}</p>` : "";
-  const company = entry.company ? ` · ${mark(entry.company)}` : "";
+  const companyName = companyText(entry.company, locale);
+  const company = companyName ? ` · ${mark(companyName)}` : "";
   const body = `<div id="deep-dive" class="deep-dive is-static" role="dialog" aria-modal="true" aria-labelledby="dd-title" open>
   <a class="skip" href="#dd-title">${esc(ui.skip)}</a>
   <div class="dd-bar">
@@ -637,6 +666,7 @@ export function renderContactPage(locale) {
   <p class="kicker">${esc(ui.contactNav)}</p>
   <h1>${esc(ui.contactTitle)}</h1>
   <p class="lede">${esc(ui.contactLede)}</p>
+  <p>${esc(copy(locale).footer.availability)}</p>
   <ul class="contact-list">
     <li><span>${esc(ui.email)}</span><a href="mailto:${esc(SITE.email)}">${esc(SITE.email)}</a></li>
     <li><span>LinkedIn</span><a href="${esc(SITE.linkedin)}" target="_blank" rel="noopener noreferrer">${esc(SITE.linkedin)}</a></li>

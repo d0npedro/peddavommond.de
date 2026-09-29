@@ -26,28 +26,11 @@ Two stylesheets load on every generated page:
 1. The frozen Next export (`public/portfolio/de/_next/static/css/76323045a7107f6a.css`) — fonts, Tailwind utilities, leftover layout classes.
 2. `portfolio/portfolio.css` — **token + component source of truth**. `scripts/build-portfolio.mjs` copies it to `public/portfolio/portfolio.css` (this is what production serves). The HTML link is cache-busted (`?v=trust-…`) and loads second.
 
-Tokens are declared on `html` / `html.light` / `html.dark` so they beat the export’s `:root` / `.dark`. Every surface, chip, and CTA should consume these — do not add one-off hex in markup.
+Tokens are declared on `html` / `html.light` so they beat the export’s `:root` / `.dark`. Every surface, chip, and CTA should consume these — do not add one-off hex in markup.
 
-Light paper is the only theme. The start page and Stage 1 pages share `--s1-*` tokens from `portfolio.css`. Small text and controls use `#2F6E79`. `#4AA8B8` is limited to decorative rules. There is no dark-mode toggle. Bronze (`--signal`) is reserved for honesty / Independent R&D chips and failure states.
+Light paper is the only theme. The start page and Stage 1 pages share `--s1-*` tokens from `portfolio.css`. Small text and controls use `#2F6E79`. `#4AA8B8` is limited to decorative rules. There is no dark-mode toggle and no `html.dark` palette. Bronze (`--signal`) is reserved for honesty / Independent R&D chips and failure states.
 
-Pages do not add `class="dark"`, and nothing reads a stored theme. The old `.dark` token block is unused.
-
-### Dark (unused) — charcoal navy / ink
-
-| Token | RGB | Hex | Contrast notes |
-| --- | --- | --- | --- |
-| `--bg` | `16 21 30` | `#10151E` | canvas (not `#000`) |
-| `--bg-elevated` | `23 30 42` | `#171E2A` | cards / nav sheets |
-| `--bg-sunken` | `12 16 23` | `#0C1017` | wells / band fills |
-| `--fg` | `238 242 246` | `#EEF2F6` | 16.3:1 on canvas |
-| `--muted` | `180 188 200` | `#B4BCC8` | 9.6:1 body |
-| `--faint` | `142 152 166` | `#8E98A6` | 6.3:1 meta |
-| `--line` | `44 54 68` | `#2C3644` | hairline |
-| `--accent` | `74 168 184` | `#4AA8B8` | teal–azure; 6.6:1 text |
-| `--accent-soft` | `24 48 58` | `#18303A` | wash / diagram fill |
-| `--signal` | `196 146 74` | `#C4924A` | bronze honesty |
-| `--on-accent` | `16 21 30` | `#10151E` | 6.6:1 on accent CTA |
-| `--grid-rgb` / `--grid-opacity` | `148 168 188` / `0.045` | | quiet blueprint |
+Pages do not add `class="dark"`, and nothing reads a stored theme.
 
 ### Light — warm paper / cool stone
 

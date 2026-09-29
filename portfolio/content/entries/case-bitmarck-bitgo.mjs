@@ -10,7 +10,7 @@ export default {
   },
   "summary": {
     "de": "Regulierte GKV-Online-Geschäftsstelle: Legacy-Entkopplung, REST zu Bestandssystemen, 2FA für besonders geschützte Daten. Kein AI-Bestandteil.",
-    "en": "Regulated GKV online service office: legacy decoupling, REST to existing systems, 2FA for especially protected data. No AI component."
+    "en": "Regulated online service office for statutory health insurers: legacy decoupling, REST to existing systems, 2FA for especially protected data. No AI component."
   },
   "period": {
     "from": "2019",

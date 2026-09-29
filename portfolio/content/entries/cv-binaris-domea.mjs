@@ -11,7 +11,7 @@ export default {
   },
   "summary": {
     "de": "Die öffentliche Verwaltung von Papier auf elektronische Akten in JEE-basierten Fachanwendungen überführen.",
-    "en": "Move public administration from paper to electronic records on JEE-based Fachanwendungen."
+    "en": "Move public administration from paper to electronic records in JEE-based specialist applications."
   },
   "period": {
     "from": "2018-09",
@@ -25,11 +25,11 @@ export default {
   },
   "project": {
     "de": "Elektronisches Fachverfahren für die öffentliche Verwaltung (Papier → E-Akte / DOMEA)",
-    "en": "Electronic Fachverfahren for public administration (paper → e-records / DOMEA)"
+    "en": "Electronic case-handling system for public administration (paper → e-records / DOMEA)"
   },
   "mission": {
     "de": "Die öffentliche Verwaltung von Papier auf elektronische Akten in JEE-basierten Fachanwendungen überführen.",
-    "en": "Move public administration from paper to electronic records on JEE-based Fachanwendungen."
+    "en": "Move public administration from paper to electronic records in JEE-based specialist applications."
   },
   "tasks": {
     "de": [
@@ -38,9 +38,9 @@ export default {
       "Schnittstellen zu Bestandssystemen (z. B. zur Registratur einer Bundesbehörde)"
     ],
     "en": [
-      "Advise existing clients on JEE-based Fachanwendungen in public administration",
+      "Advise existing clients on JEE-based specialist applications in public administration",
       "Design and implement Java applications",
-      "Interfaces to existing systems (e.g. the Registratur of a federal office)"
+      "Interfaces to existing systems (e.g. the records registry of a federal office)"
     ]
   },
   "stack": [
@@ -48,7 +48,9 @@ export default {
     "JavaEE",
     "Spring Boot",
     "Docker",
-    "DOMEA"
+    "DOMEA",
+    "Jenkins",
+    "SonarQube"
   ],
   "compact": false,
   "relations": {

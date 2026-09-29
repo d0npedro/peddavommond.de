@@ -5,5 +5,5 @@ export function offerHref(locale) {
 }
 
 export function offerLabel(locale) {
-  return locale === "de" ? "Direkt zum Angebot" : "Straight to the offer";
+  return locale === "de" ? "Was ich mache" : "What I do";
 }

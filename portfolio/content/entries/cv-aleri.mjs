@@ -32,8 +32,12 @@ export default {
     "en": "Backend development engagement."
   },
   "tasks": {
-    "de": [],
-    "en": []
+    "de": [
+      "Push-Benachrichtigungssystem für eine Mobile-App zusammen mit dem Kunden gebaut"
+    ],
+    "en": [
+      "Built a push notification system for a mobile app together with the customer"
+    ]
   },
   "stack": [
     "Java",

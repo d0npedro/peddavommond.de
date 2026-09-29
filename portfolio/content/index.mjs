@@ -19,6 +19,7 @@ import cvBinarisCrm from "./entries/cv-binaris-crm.mjs";
 import cvBinarisDomea from "./entries/cv-binaris-domea.mjs";
 import cvBinarisEgo from "./entries/cv-binaris-ego.mjs";
 import cvEllaVerlag from "./entries/cv-ella-verlag.mjs";
+import cvEducationDeutschePop from "./entries/cv-education-deutsche-pop.mjs";
 import caseGraphMastermind from "./entries/case-graph-mastermind.mjs";
 import caseAgentCollective from "./entries/case-agent-collective.mjs";
 import caseDeutschlandcard from "./entries/case-deutschlandcard.mjs";
@@ -48,6 +49,7 @@ export const entries = [
   cvBinarisDomea,
   cvBinarisEgo,
   cvEllaVerlag,
+  cvEducationDeutschePop,
   caseGraphMastermind,
   caseAgentCollective,
   caseDeutschlandcard,

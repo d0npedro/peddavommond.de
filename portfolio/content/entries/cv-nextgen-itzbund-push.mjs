@@ -11,7 +11,7 @@ export default {
   },
   "summary": {
     "de": "APIs zwischen mobilen Endgeräten und behördlichen Fachverfahren.",
-    "en": "APIs between mobile devices and government specialist procedures (Fachverfahren)."
+    "en": "APIs between mobile devices and government case-handling systems."
   },
   "period": {
     "from": "2021-11",
@@ -29,7 +29,7 @@ export default {
   },
   "mission": {
     "de": "APIs zwischen mobilen Endgeräten und behördlichen Fachverfahren.",
-    "en": "APIs between mobile devices and government specialist procedures (Fachverfahren)."
+    "en": "APIs between mobile devices and government case-handling systems."
   },
   "tasks": {
     "de": [
@@ -48,7 +48,10 @@ export default {
     "OAuth2",
     "Jenkins",
     "Docker",
-    "Java"
+    "Java",
+    "REST / OpenAPI",
+    "Spring Batch",
+    "Scrum"
   ],
   "compact": false,
   "relations": {

@@ -14,12 +14,12 @@ import {
   caseHref,
 } from "./shared.mjs";
 import { copy } from "./content.mjs";
-import { offerChip, stageEntryNav, stageTopbar } from "./render-stage1.mjs";
+import { offerChip, splitFocusNote, stageEntryNav, stageTopbar } from "./render-stage1.mjs";
 
 /** Next export = layout/utilities. Token + component layer is portfolio.css (copied to public/). */
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=paper-20260924b";
-const STAGE_CSS = "/portfolio/stage1.css?v=paper-20260924b";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=paper-20260929a";
+const STAGE_CSS = "/portfolio/stage1.css?v=paper-20260929a";
 
 function stylesheets() {
   return `<link rel="stylesheet" href="${NEXT_LAYOUT_CSS}"/>
@@ -348,7 +348,7 @@ function renderTrack(locale) {
       })
       .join("");
     return `<li class="pf-archive-item">
-      <p class="pf-archive-meta">${esc(item.period)} · ${esc(item.company)}</p>
+      <p class="pf-archive-meta">${esc(item.period)} · ${esc(item.company[locale] ?? item.company)}</p>
       <h3>${esc(copyItem.title)}</h3>
       <p>${esc(copyItem.body)}</p>
       ${related ? `<p class="pf-track-links">${related}</p>` : ""}
@@ -408,8 +408,9 @@ function renderEducation(locale) {
   </section>`;
 }
 
-function renderFooter(locale) {
+function renderFooter(locale, { availability = false } = {}) {
   const t = copy(locale);
+  const availabilityLine = availability ? `<p>${esc(t.footer.availability)}</p>` : "";
   return `<section id="contact" class="pf-footer relative scroll-mt-24">
     <div class="container relative py-20 md:py-28">
       <div class="pf-enter" data-reveal>
@@ -418,6 +419,7 @@ function renderFooter(locale) {
       </div>
       <p class="pf-location">${esc(t.footer.lead)}</p>
       <p class="pf-contact-echo">${esc(t.footer.echo)}</p>
+      ${availabilityLine}
       <div class="mt-10 pf-contact-row pf-contact-row--checkout">
         <a class="pf-cta pf-cta--primary" href="mailto:${attr(SITE.email)}">${esc(SITE.email)}</a>
         <a class="secondary" href="${attr(SITE.linkedin)}" target="_blank" rel="noopener noreferrer">${esc(t.footer.linkedin)}</a>
@@ -676,6 +678,7 @@ ${stageTopbar(locale, siblingPath)}
   ${renderCaseSection(t.caseFields.contribution, c.contribution)}
   ${renderCaseSection(t.caseFields.decision, c.decision)}
   ${renderArchitecture(c, t, item.tech)}
+  ${renderCaseSection(t.caseFields.operations, c.operations)}
   ${renderCaseSection(t.caseFields.evaluation, c.evaluation)}
   ${renderEvalMetrics(c, t)}
   ${renderCaseSection(t.caseFields.outcome, c.outcome)}
@@ -717,9 +720,6 @@ function renderCollectiveSample(locale) {
           <h2 class="pf-stage-title">${esc(s.title)}</h2>
         </div>
         <p class="pf-stage-lede">${esc(s.body)}</p>
-        <p class="pf-honesty-chips">
-          <span class="pf-chip pf-chip--signal">${esc(s.badge)}</span>
-        </p>
         <p class="pf-stage-lede">${esc(s.shown)}</p>
       </div>
       <div class="pf-touch" data-touch="collective">
@@ -788,6 +788,9 @@ function renderOffer(locale) {
   const packages = o.packages
     .map((pkg, index) => {
       const items = pkg.deliverables.map((line) => `<li>${esc(line)}</li>`).join("");
+      const { fit, note } = splitFocusNote(locale, pkg.ideal);
+      const idealRow = fit ? `<div><dt>${esc(o.ideal)}</dt><dd>${esc(fit)}</dd></div>` : "";
+      const noteRow = note ? `<p class="pf-offer-scope">${esc(note)}</p>` : "";
       return `<article class="pf-offer">
         <div class="pf-offer-name">
           <p class="pf-offer-index">${String(index + 1).padStart(2, "0")}</p>
@@ -797,9 +800,9 @@ function renderOffer(locale) {
           <p class="pf-offer-scope">${esc(pkg.scope)}</p>
           <dl class="pf-offer-dl">
             <div><dt>${esc(o.deliverables)}</dt><dd><ul>${items}</ul></dd></div>
-            <div><dt>${esc(o.ideal)}</dt><dd>${esc(pkg.ideal)}</dd></div>
-            <div><dt>${esc(o.engagement)}</dt><dd>${esc(pkg.engagement)}</dd></div>
+            ${idealRow}
           </dl>
+          ${noteRow}
         </div>
       </article>`;
     })
@@ -841,7 +844,7 @@ function renderRecord(locale) {
       .filter(Boolean)
       .join("");
     return `<li class="pf-station">
-      <p class="pf-archive-meta">${esc(item.period)} · ${esc(item.company)}</p>
+      <p class="pf-archive-meta">${esc(item.period)} · ${esc(item.company[locale] ?? item.company)}</p>
       <h3>${esc(copyItem.title)}</h3>
       <p>${esc(copyItem.body)}</p>
       ${related ? `<p class="pf-track-links">${related}</p>` : ""}
@@ -910,7 +913,7 @@ ${renderSelectedCases(locale)}
 ${renderCollectiveSample(locale)}
 ${renderRecord(locale)}
 </main>
-${renderFooter(locale)}
+${renderFooter(locale, { availability: true })}
 ${renderCraftCredit(locale)}
 ${pageScripts()}
 </body>
@@ -932,7 +935,8 @@ export function renderCv(locale) {
     .join("");
   const jobs = EXPERIENCE.map((item) => {
     const entry = t.experience.entries[item.id];
-    return `<article class="mb-4"><p class="font-mono text-xs text-faint">${esc(item.period)}</p><h3 class="font-semibold text-fg">${esc(entry.role)} — ${esc(item.company)}</h3>${entry.project ? `<p class="text-sm text-muted">${esc(entry.project)}</p>` : ""}<p class="mt-1 text-sm">${esc(entry.mission)}</p></article>`;
+    const company = item.company && typeof item.company === "object" ? item.company[locale] ?? item.company.de ?? "" : item.company;
+    return `<article class="mb-4"><p class="font-mono text-xs text-faint">${esc(item.period)}</p><h3 class="font-semibold text-fg">${esc(entry.role)} — ${esc(company)}</h3>${entry.project ? `<p class="text-sm text-muted">${esc(entry.project)}</p>` : ""}<p class="mt-1 text-sm">${esc(entry.mission)}</p></article>`;
   }).join("");
   return `<!DOCTYPE html>
 <html lang="${locale}" class="__variable_3f18cd __variable_f3e80d light">

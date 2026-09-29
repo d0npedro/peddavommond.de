@@ -2,13 +2,13 @@ export const en = {
   meta: {
     title: "Peter Henrichs | Senior AI Consultant & Agentic Software Engineer",
     description:
-      "Senior AI Consultant and software engineer with 10+ years of enterprise experience. Focus on LLMs, AI agents, automation, and enterprise integration.",
+      "I assess AI-agent use cases and build them into running enterprise systems, reviewable and with human-in-the-loop. 10+ years of software development, Java/Spring Boot since 2018. Cologne.",
     ogAlt: "Peter Henrichs | Senior AI Consultant & Agentic Software Engineer · Cologne",
     keywords:
       "Peter Henrichs,Cologne,Senior AI Consultant,Agentic Software Engineer,Agentic AI,LLMs,AI Agents,Automation,Enterprise Engineering,Java,Spring,Cloud",
     jobTitle: "Senior AI Consultant & Agentic Software Engineer",
     personDescription:
-      "Peter Henrichs is a Senior AI Consultant and Agentic Software Engineer based in Cologne. Seniority comes from 10+ years of enterprise software engineering; Agentic AI, LLMs, and automation are the current specialization on that foundation — not instead of it.",
+      "I am a Senior AI Consultant and Agentic Software Engineer in Cologne. The seniority comes from more than ten years of enterprise software engineering. Agentic AI, LLMs, and automation are the current specialization on that.",
   },
   common: {
     skipToContent: "Skip to content",
@@ -20,7 +20,7 @@ export const en = {
     toggleMenu: "Toggle menu",
     profile: "Profile",
     cases: "Cases",
-    offer: "Offer",
+    offer: "What I do",
     sample: "Sample",
     record: "Career",
     experience: "Experience",
@@ -49,8 +49,8 @@ export const en = {
     ],
     contextLine: "adesso · Finance · Public Sector · Healthcare · Loyalty",
     trust:
-      "10+ years of enterprise engineering. Now applied to Agentic AI — not the other way around.",
-    ctaPrimary: "How to offer me",
+      "More than ten years of enterprise engineering. Agentic AI sits on top of that.",
+    ctaPrimary: "What I do",
     ctaSecondary: "CV",
     ctaTertiary: "Talk about AI & agents",
     diagramTitle: "Agentic system — goal, orchestration, evaluation, human",
@@ -221,62 +221,60 @@ export const en = {
     },
   },
   offer: {
-    eyebrow: "For agencies",
-    title: "How to offer me",
-    intro:
-      "Three clear packages — ready to place at agencies. Scope and deliverables. No day rates.",
-    deliverables: "Deliverables",
-    ideal: "Fits",
+    eyebrow: "Work",
+    title: "Three focus areas",
+    intro: "What is included is listed below.",
+    deliverables: "What you get",
+    ideal: "Good fit",
     engagement: "Engagement",
     packages: [
       {
         name: "Senior AI Consultant",
         scope:
-          "Cut use cases against systems that already run, before anyone builds. Written boundary — not a tool pitch.",
+          "Assess use cases and cut them against the systems that already run, before anyone builds. Agree in writing beforehand what the agent may and may not do.",
         deliverables: [
+          "Assessed use-case list: value, feasibility, data and access situation, risk — in order, with reasons",
           "Use-case cut: where an agent may act vs where the existing system already carries the process",
-          "Architecture sketch with acceptance, Human-in-the-Loop, and explicit limits",
           "A written list of what will not be built",
         ],
         ideal: "Organizations with running IT that need AI framed before implementation.",
-        engagement:
-          "Through the agency — time-boxed architecture support or placement into a client team.",
+        engagement: "",
       },
       {
         name: "Agentic Engineer",
         scope:
           "Agent workflows with a contract, tool limits, tests, and visible state. Wired to existing APIs.",
         deliverables: [
+          "Target architecture with integration points (APIs, identity, pipelines), acceptance, and human-in-the-loop",
           "Agent contract (task, artifact, acceptance) in the form of the public packages",
-          "Integration cut against existing APIs, identity, and pipelines",
-          "Inspectable state or a checklist — a chat transcript is not acceptance",
+          "Inspectable state or a checklist — acceptance is based on tests and logs, not on a chat history.",
         ],
-        ideal: "Teams turning a prototype into a maintainable layer.",
-        engagement:
-          "Engineering seat on the agency or client team. Graph-Mastermind and Agent Collective are Independent R&D — not a bundled client product.",
+        ideal:
+          "Teams turning a prototype into a maintainable layer. Graph-Mastermind and Agent Collective are Independent R&D — not a bundled client product.",
+        engagement: "",
       },
       {
         name: "Transformation Lead",
         scope:
-          "Translate between business, delivery, and governance. Ground first (systems, rights, data), then the agent layer.",
+          "Translate between business, delivery, and governance. First I look at systems, permissions and data, then the agent comes in.",
         deliverables: [
-          "Prioritized use-case list judged against the landscape that exists",
-          "Operating model: contract, acceptance, human-in-the-loop — not an autonomous organization",
+          "Operating model: who approves, who steps in, when a human takes over.",
+          "Success criteria before building: measures such as acceptance rate, review effort, and regressions — numbers only once measured",
           "Governance frame from regulated delivery (permissions, GDPR) plus EU AI Act orientation",
         ],
-        ideal: "Programs that treat modernization and AI as one sequence.",
-        engagement: "Program accompaniment through the agency.",
+        ideal: "Projects where old systems are modernized and AI is added.",
+        engagement: "",
       },
     ],
   },
   record: {
     summary: "Career",
-    note: "Engineer → Agentic AI → consulting. Detail in the CV — stations only here.",
+    note: "Engineering, then Agentic AI, then consulting. The roles are in the CV.",
   },
   value: {
     index: "02",
-    eyebrow: "Where I create value",
-    title: "Where I can be put to work — concrete, no marketese.",
+    eyebrow: "Work",
+    title: "What I work on.",
     description:
       "I understand the system that exists today. I understand what current AI can realistically do. And I can connect the two.",
     items: [
@@ -294,7 +292,7 @@ export const en = {
       },
       {
         title: "AI Transformation & Use Cases",
-        body: "Join business potential, feasibility, and the landscape that already exists. No board-level fiction, no invented KPIs.",
+        body: "Join business potential, feasibility, and the landscape that already exists. No invented board results, no invented KPIs.",
       },
       {
         title: "AI Platform & Modernization",
@@ -306,42 +304,42 @@ export const en = {
     index: "07",
     eyebrow: "About",
     title: "Short, so the cases carry the work.",
-    body: "I come from software engineering and have spent years making complex systems easier to understand, maintain, and automate. LLMs and agentic systems are therefore not an isolated technology trend for me, but the next evolution of software engineering and process automation. I work from Cologne — Germany-wide and remote.",
+    body: "I come from software engineering. For years I have made complex systems easier to understand, maintain, and automate. LLMs and agentic systems are my current specialization of that. I work from Cologne, Germany-wide and remote.",
   },
   track: {
     index: "03",
     eyebrow: "Career trajectory",
-    title: "Engineer → Agentic AI → Consulting. Five stations, not the CV.",
+    title: "Engineer → Agentic AI → Consulting. Five roles, not the CV.",
     description:
       "Seniority does not start in 2026. Agentic AI sits on paid enterprise delivery — banking, public sector, healthcare, loyalty. Details and NDA limits live on the case pages and in the CV.",
-    more: "All stations in the CV",
+    more: "All roles in the CV",
     items: {
       builder: {
-        title: "Engineer & ownership",
+        title: "Development & ownership",
         body: "Six live portals end to end: build, operations, intranet. The base for later system ownership.",
       },
       enterprise: {
         title: "Enterprise engineering",
-        body: "Regulated landscapes at adesso, NextGen, and binaris: banking migration, statutory-health security, government APIs, healthcare interoperability.",
+        body: "Java/Spring Boot backends and microservices in regulated landscapes at adesso, NextGen, and binaris: banking migration as lead dev/DevOps, security for statutory health insurers, government APIs, healthcare interoperability.",
       },
       deutschlandcard: {
         title: "Complex systems in production",
-        body: "Cloud, identity, and integration on the nationwide loyalty program. The enterprise ground agents later have to land on.",
+        body: "Spring Boot services, identity, and cloud on the nationwide loyalty program: Kubernetes in Azure, infrastructure via Terraform.",
       },
       agentic: {
         title: "Agentic AI — Independent R&D",
-        body: "Public systems for grown codebases and inspectable multi-agent orchestration. Not client operations, not an invented LLM backend.",
+        body: "Public systems for legacy codebases and inspectable multi-agent orchestration. Not client operations, not an invented LLM backend.",
       },
       consulting: {
-        title: "Consulting and leadership path",
-        body: "AI Manager and AI Automation support the specialization. They do not replace enterprise seniority or paid AI client delivery.",
+        title: "Continuing education 2026",
+        body: "Continuing education in 2026: introducing and steering AI in an organization, the legal frame (GDPR, EU AI Act), change management. It supports the specialization and does not replace paid AI client delivery.",
       },
     },
   },
   arc: {
     index: "00",
-    eyebrow: "Proof · the through-line",
-    title: "One arc, three eras — the AI layer sits on top of the backend years.",
+    eyebrow: "Path",
+    title: "Three stretches. The AI layer sits on the backend years.",
     description:
       "Seniority is not new. The specialization is: robust Java/Spring enterprise delivery (public sector, banking, health insurance, media, automotive) → cloudification (Azure, Kubernetes, Terraform) → LLMs, AI Agents, and Automation on top of production systems.",
     nowLabel: "now",
@@ -359,7 +357,7 @@ export const en = {
       {
         title: "Agentic AI & Transformation",
         blurb:
-          "Public agent packages and multi-agent simulation, AI Automation and governance (GDPR / EU AI Act) — layered on 12+ years of production systems. Continuity, not a break.",
+          "Public agent packages and multi-agent simulation, AI Automation and governance (GDPR / EU AI Act), on 12+ years of production systems.",
       },
     ],
   },
@@ -386,8 +384,8 @@ export const en = {
       deutschlandcard: {
         title: "Cloud, identity, integration",
         chip: "Client work · no AI component in the published case",
-        idea: "Enterprise ground for later AI integration.",
-        body: "Paid cloudification of a nationwide loyalty program: Azure AD B2C, Terraform, Kubernetes. The case itself is not an AI project — identity, API, and cloud are the moat.",
+        idea: "Paid cloud migration.",
+        body: "Paid cloudification of a nationwide loyalty program: Spring Boot services on Kubernetes in Azure, sign-in via Azure AD B2C, infrastructure via Terraform.",
       },
     },
     title: "Three cases — lab and enterprise labeled separately.",
@@ -399,14 +397,14 @@ export const en = {
       "Independent R&D — conceived and delivered independently. Technical results and project status are deliberately kept separate from productive client work.",
     clientNote:
       "Client work — customer and system details are partly abstracted under NDA. Only my own role and releasable technical content are described.",
-    secondaryEyebrow: "Further mandates",
+    secondaryEyebrow: "Further cases",
     secondaryNote:
       "Healthcare interoperability, defense-adjacent licensing, automotive, and publishing — in the track record and CV, not equal homepage weight.",
   },
   lab: {
     index: "03",
     eyebrow: "Independent Applied AI R&D",
-    title: "Public systems conceived independently — not client delivery, not a hobby disclaimer.",
+    title: "Public systems, built on my own. Not client delivery.",
     description:
       "Graph-Mastermind and Agent Collective show how I construct agent contracts, evaluation, failure handling, and observability. Independent R&D: inspectable, versioned, tested — and explicitly not client delivery.",
     perspectiveEyebrow: "AI Transformation Perspective",
@@ -435,7 +433,7 @@ export const en = {
     items: {
       evaluation: {
         title: "Evaluation",
-        line: "Acceptance via tests, CI, and inspectable state. Numbers only with a reproducible harness.",
+        line: "Measures fixed before building; acceptance via tests, CI, and inspectable state.",
         body: "Acceptance via tests, CI, checklists, and inspectable state. No model call without a verifiable artifact. Quantitative numbers only once a reproducible harness exists.",
       },
       hitl: {
@@ -445,20 +443,20 @@ export const en = {
       },
       security: {
         title: "Security",
-        line: "Identity, permissions, synthetic demos. Responsibility before speed.",
+        line: "Identity, permissions, synthetic demos.",
         body: "2FA, RBAC, identity, and GDPR from enterprise delivery. Public demos use synthetic or documented sample data. Responsible deployment before speed.",
       },
       observability: {
         title: "Observability",
-        line: "What you cannot see does not scale.",
+        line: "State has to be visible.",
         body: "Prometheus, Grafana, Dynatrace in banking delivery; stepwise snapshots in the simulator. Behavior has to be visible before it scales.",
       },
     },
   },
   consulting: {
     eyebrow: "Consulting & Governance",
-    title: "What transfers from real delivery — without board-level fiction.",
-    body: "Prioritize use cases where systems, identity, and data quality already exist. Operating model: agents with a contract and acceptance, not an autonomous organization. Governance from regulated delivery (permissions, sensitive data, GDPR) plus an EU AI Act frame from the specialization — no invented board mandates, no invented AI KPIs.",
+    title: "What transfers from the delivery.",
+    body: "Prioritize use cases where systems, identity, and data quality already exist. Operating model: agents with a contract and acceptance. Governance from regulated delivery (permissions, sensitive data, GDPR) plus an EU AI Act frame from the specialization — no invented board mandates, no invented AI KPIs.",
   },
   credentials: {
     index: "05",
@@ -482,13 +480,14 @@ export const en = {
     problem: "Problem / business context",
     context: "Context",
     decision: "Decision / trade-off",
-    outcome: "Outcome",
+    outcome: "Outcomes",
     role: "Role & ownership",
     evidence: "Evidence",
     ownWork: "Own work",
     contribution: "My contribution",
     transfer: "Enterprise transferability",
     architecture: "Architecture",
+    operations: "How it ran",
     evaluation: "Evaluation, guardrails, failure handling",
     repo: "Repository",
     demo: "Live demo",
@@ -501,7 +500,7 @@ export const en = {
     team: "Team",
     data: "Data",
     code: "Code",
-    result: "Result",
+    result: "Outcomes",
     statusValues: {
       production: "Production",
       prototype: "Prototype",
@@ -511,7 +510,7 @@ export const en = {
     },
     teamValues: {
       solo: "Solo",
-      team: "Team",
+      team: "Developer in a team",
     },
     dataValues: {
       real: "real data (not public)",
@@ -531,7 +530,7 @@ export const en = {
   },
   casePage: {
     back: "Back to portfolio",
-    caseStudy: "Case study",
+    caseStudy: "Case",
     openCase: "View case",
     screenshots: "Screenshots",
     noPublicShots: "No public screenshots — client NDA; evidence stays qualitative and grounded in the engagement description.",
@@ -541,19 +540,19 @@ export const en = {
     evalInProgressNote:
       "The architecture is in place; quantitative results are published only once a reproducible measurement baseline exists.",
     evalToMeasure: "to measure",
-    related: "Related engagements",
+    related: "Related cases",
     moreEnterprise: "Enterprise cases",
   },
   cases: {
     "graph-mastermind": {
       domain: "Agentic Software Engineering · Repository Intelligence",
       badge: "Independent R&D · Agentic AI",
-      landingTitle: "Agentic engineering for grown codebases",
+      landingTitle: "Agentic engineering for legacy codebases",
       landingCta: "View the agentic-engineering case",
       oneLiner:
         "An agentic engineering workflow inspects existing repositories, plans changes, works with development tools and tests, and keeps critical results under separate evaluation.",
       honesty: "Independent R&D — agent package for coding agents, no prescribed LLM, no client operations.",
-      pageTitle: "Agentic engineering for grown codebases | Peter Henrichs",
+      pageTitle: "Agentic engineering for legacy codebases | Peter Henrichs",
       pageDescription:
         "Independent R&D: agentic workflow for grown repositories. AGENT.md, SPEC.md and CHECKLIST.md as the work contract. No prescribed LLM, no invented KPIs.",
       context:
@@ -563,9 +562,11 @@ export const en = {
       contribution:
         "Workflow architecture, agent roles, tool integration, model/context strategy, evaluation loops, and the technical implementation — solo, conceived and delivered independently.",
       decision:
-        "Reusable agent package: a coding agent receives an explicit work and acceptance contract via AGENT.md, SPEC.md, and CHECKLIST.md. It inspects the target repository, derives components and relationships, and produces an interactive architecture view. Contract, data model, visualization runtime, and UI stay separate. No specific LLM is required.",
+        "Reusable agent package: a coding agent receives an explicit work and acceptance contract via AGENT.md, SPEC.md, and CHECKLIST.md. It inspects the target repository, derives components and relationships, and produces an interactive architecture view. Contract, data model, visualization runtime, and UI stay separate. No specific LLM is required. The price: the agent does not write to the repository on its own. In return, every change stays reviewable.",
       architecture:
         "Task / issue → planner contract (AGENT.md / SPEC.md / CHECKLIST.md) → repository context and tools → artifact (graph / architecture view) → tests and checklist → human review. No backend, no prescribed LLM, no autonomous writes.",
+      operations:
+        "No backend, no autonomous writes. Every change to the package goes through typecheck, tests, and CI, and the production build is reproducible. A human accepts the artifact.",
       architectureSteps: [
         "Task / issue",
         "Planner / contract",
@@ -619,9 +620,11 @@ export const en = {
       contribution:
         "Workflow architecture, role model, failure injection, quality gates in the engine, observability via snapshots, and the technical implementation — solo, conceived and delivered independently.",
       decision:
-        "TypeScript state machine with six roles, a workflow graph, failure injection, recovery, and a seeded RNG for reproducible runs. The simulation layer is separated from the UI. Deliberately no real LLM, so orchestration and failure modes stay testable.",
+        "TypeScript state machine with six roles, a workflow graph, failure injection, recovery, and a seeded RNG for reproducible runs. The simulation layer is separated from the UI. Deliberately no real LLM, so orchestration and failure modes stay testable. The price: no real language model under test. In return, orchestration and failure modes are reproducible.",
       architecture:
         "Input / task → roles in the engine → structured state → validation / failure injection → automatic step or human review → audit / observability. A pure TypeScript engine owns world state; the UI only renders. No LLM, no invented extraction rates.",
+      operations:
+        "The engine runs deterministically with a seeded RNG, so every run is reproducible. Vitest runs in CI. Failures are injected on purpose, and recovery is visible step by step in the live dashboard. No LLM, no client operations.",
       architectureSteps: [
         "Input / task",
         "Roles / engine",
@@ -660,21 +663,22 @@ export const en = {
       landingTitle: "Cloud, identity, integration",
       landingCta: "View the enterprise case",
       oneLiner:
-        "Paid cloudification of the nationwide loyalty program: Azure AD B2C, Terraform, Kubernetes. That identity/API/cloud ground is the moat for later AI integration — the case itself is not an AI project.",
+        "Paid cloudification of the nationwide loyalty program: Azure AD B2C, Terraform, Kubernetes.",
       honesty: "No AI/LLM component in the published case. No volume or latency figures (NDA).",
       contribution:
-        "Login journey on Azure AD B2C, Terraform automation, and service cloudification — developer on a team, paid delivery.",
+        "Developer on a team: login journey on Azure AD B2C, Terraform automation, and service cloudification. Paid enterprise delivery.",
       pageTitle: "DeutschlandCard — cloud, identity, Terraform | Peter Henrichs",
       pageDescription:
-        "Enterprise cloudification of the nationwide loyalty program: Azure AD B2C, Terraform, Kubernetes. No AI component, no invented volume metrics.",
-      context:
-        "Nationwide loyalty program (direct services Gütersloh, 2023–2026). Partner onboarding, realtime points, and campaigns had to move into a controllable cloud without cutting existing partner APIs.",
+        "Enterprise cloudification of the nationwide loyalty program: Azure AD B2C, Terraform, Kubernetes. No invented volume metrics.",
+      context: "",
       problem:
-        "Backend and interface architecture for partner onboarding, realtime point transactions, and personalized campaigns had to move into a scalable cloud environment.",
+        "Nationwide loyalty program (direct services Gütersloh, 2023–2026). Partner onboarding, realtime points, and personalized campaigns needed a backend and interface architecture in a scalable cloud, without cutting existing partner APIs.",
       decision:
-        "Cloudify onto Azure; custom Azure AD B2C login journey; infrastructure via Terraform so identity, delivery, and existing partner APIs stay controllable — not a big-bang cutover.",
+        "Moved to Azure; custom Azure AD B2C login journey; infrastructure via Terraform so identity, delivery, and existing partner APIs stay controllable — not a big-bang cutover.",
       architecture:
-        "Spring Boot / Cloud services, Azure AD B2C as the identity layer, Terraform for reproducible infrastructure, Kubernetes/Azure as the runtime. Partner APIs stay attachable — cloudification instead of a big-bang cut.",
+        "Spring Boot / Cloud services, Azure AD B2C as the identity layer, Terraform for reproducible infrastructure, Kubernetes/Azure as the runtime. Partner APIs keep working.",
+      operations:
+        "The services run on Kubernetes in Azure. Infrastructure is reproducible from Terraform, and sign-in runs through Azure AD B2C. Critical access stays in the existing permission and operations paths.",
       architectureSteps: [
         "Partner APIs",
         "Spring Cloud services",
@@ -683,15 +687,14 @@ export const en = {
       ],
       outcome:
         "Services in a scalable Azure environment; existing interfaces remain usable. Observed in delivery, not publicly measured. No volume or latency figures (NDA).",
-      role: "Developer on a team — login journey, Terraform automation, service cloudification. Paid enterprise delivery.",
+      role: "",
       evaluation:
-        "No public AI evaluation metrics — the case has no AI/LLM component. Assessment via identity (Azure AD B2C), reproducible infrastructure (Terraform), and partner APIs that stay usable. Critical access stays in existing permission and operations paths.",
-      transfer:
-        "Transferable: identity, APIs, cloud, and governance are the ground agents later have to land on. The case itself is not an AI project and is not presented as one.",
+        "No public AI evaluation metrics. Assessment via identity (Azure AD B2C), reproducible infrastructure (Terraform), and partner APIs that stay usable.",
+      transfer: "Transferable: identity, APIs, cloud, and governance.",
       highlights: [
         "Custom login journey on Azure AD B2C",
         "Terraform-automated cloud infrastructure",
-        "Cloudification without a big-bang partner-API cutover",
+        "Cloudification without replacing the partner APIs",
       ],
     },
     "dz-bank-okvp": {
@@ -710,6 +713,8 @@ export const en = {
         "Decouple into independently shippable “Features”; multi-stage pipelines on OpenShift; observability with Prometheus, Grafana, and Dynatrace. Lead-dev/DevOps ownership rather than feature delivery only.",
       architecture:
         "OKVP splits grown sales platforms into independently shippable features. Delivery via multi-stage OpenShift pipelines; service discovery via Consul; observability with Prometheus, Grafana, and Dynatrace.",
+      operations:
+        "The OpenShift environments and the multi-stage build pipelines were part of my lead-dev/DevOps responsibility. Runtime behavior was visible through Prometheus, Grafana, and Dynatrace; service discovery ran via Consul.",
       architectureSteps: [
         "Fiducia & GAD platforms",
         "OKVP features",
@@ -734,7 +739,7 @@ export const en = {
       honesty: "No AI/LLM component in the published case.",
       contribution:
         "Consultant/developer on a team: backend, REST to existing systems, legacy decoupling, 2FA for especially protected data. Paid delivery.",
-      pageTitle: "BITMARCK bitGo_Web — GKV modernization, security, 2FA | Peter Henrichs",
+      pageTitle: "BITMARCK bitGo_Web — statutory health insurance modernization, security, 2FA | Peter Henrichs",
       pageDescription:
         "Regulated statutory-health online service office: legacy decoupling, REST to existing systems, 2FA for especially protected data. No AI component.",
       context:
@@ -897,7 +902,7 @@ export const en = {
   },
   industries: {
     eyebrow: "Enterprise domains",
-    title: "Regulated and operational landscapes — no logo wallpaper.",
+    title: "Regulated and operational environments.",
     line: "adesso · Finance · Public Sector · Healthcare · Loyalty",
     names: [
       "Banking",
@@ -912,12 +917,12 @@ export const en = {
   experience: {
     index: "02",
     eyebrow: "Professional Experience · paid enterprise work",
-    title: "Career stations — the deep dive lives in the CV; here only the context.",
+    title: "Career roles — the deep dive lives in the CV; here only the context.",
     description:
       "2013 through 2026 in productive, paid engagements. This is professional experience. Graph-Mastermind and Agent Collective live in the Lab, not in this list. 2026 continuing education lives under Credentials, not as the first job proof.",
     filterAria: "Filter experience by era",
     filters: {
-      all: "All stations",
+      all: "All roles",
       enterprise: "Enterprise · 2018–26",
       builder: "Builder · 2013–17",
     },
@@ -927,7 +932,7 @@ export const en = {
       builder: "2013–2017 · Builder",
     },
     compactNote: "Compact station — engagement on record; no public project dossier.",
-    countTemplate: "{shown} / {total} stations shown · {era}",
+    countTemplate: "{shown} / {total} roles shown · {era}",
     entries: {
       "direct-services-deutschlandcard": {
         role: "Entwickler",
@@ -938,17 +943,20 @@ export const en = {
           "Custom Login Journey on Azure AD B2C",
           "Terraform scripts for automated cloud infrastructure",
           "Cloudification of DeutschlandCard services into a scalable Azure environment",
+          "As part of the cloud migration, implemented recurring end-of-day batch processes on Apache Airflow, for example reading in partner companies' cash-register data",
         ],
       },
       aleri: {
         role: "Entwickler",
         mission: "Backend development engagement.",
-        tasks: [],
+        tasks: [
+          "Built a push notification system for a mobile app together with the customer",
+        ],
       },
       "nextgen-itzbund-push": {
         role: "Berater / Entwickler Fullstack",
         project: "ITZBund — Mobile Push App",
-        mission: "APIs between mobile devices and government specialist procedures (Fachverfahren).",
+        mission: "APIs between mobile devices and government case-handling systems.",
         tasks: ["Jenkins Shared Libraries", "OAuth2 authentication workflow"],
       },
       "nextgen-bwi-lzs": {
@@ -960,6 +968,7 @@ export const en = {
           "Interfaces into the Bundeswehr IT landscape",
           "Evolution of the frontend web server",
           "Modular architecture with selective read/write down to the data element",
+          "Wrote Java together with OData (Apache Olingo) for data-driven user interfaces",
         ],
       },
       "nextgen-maerz-ihe": {
@@ -995,7 +1004,7 @@ export const en = {
       },
       "adesso-bitmarck-bitgo": {
         role: "Berater / Entwickler",
-        project: "BITMARCK / BMT_bitGo — GKV online service office",
+        project: "BITMARCK / BMT_bitGo — online service office for statutory health insurers",
         mission:
           "Digital channels of statutory health insurers as an online service office interacting with BITMARCK_21c|ng; bitGo_Web unifies the service office and KV via a technical redesign.",
         tasks: [
@@ -1013,13 +1022,13 @@ export const en = {
       },
       "binaris-domea": {
         role: "Berater / Entwickler",
-        project: "Electronic Fachverfahren for public administration (paper → e-records / DOMEA)",
+        project: "Electronic case-handling system for public administration (paper → e-records / DOMEA)",
         mission:
-          "Move public administration from paper to electronic records on JEE-based Fachanwendungen.",
+          "Move public administration from paper to electronic records in JEE-based specialist applications.",
         tasks: [
-          "Advise existing clients on JEE-based Fachanwendungen in public administration",
+          "Advise existing clients on JEE-based specialist applications in public administration",
           "Design and implement Java applications",
-          "Interfaces to existing systems (e.g. the Registratur of a federal office)",
+          "Interfaces to existing systems (e.g. the records registry of a federal office)",
         ],
       },
       "binaris-ego": {
@@ -1071,7 +1080,8 @@ export const en = {
     title: "Talk",
     lead: "Cologne · Germany-wide / remote",
     echo: "Agent layers into running systems — reviewable, with human-in-the-loop.",
-    body: "CV, LinkedIn, and GitHub are ready. Agencies place him through the three role packages. No freelancer retainer, no free slots.",
+    body: "CV, LinkedIn, and GitHub are ready.",
+    availability: "Open to permanent employment or projects.",
     email: "Email",
     linkedin: "LinkedIn",
     github: "GitHub",

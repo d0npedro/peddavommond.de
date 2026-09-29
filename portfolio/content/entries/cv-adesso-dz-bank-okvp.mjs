@@ -52,7 +52,11 @@ export default {
     "Consul",
     "Prometheus",
     "Grafana",
-    "Dynatrace"
+    "Dynatrace",
+    "Kubernetes",
+    "Docker",
+    "Jenkins",
+    "SonarQube"
   ],
   "compact": false,
   "relations": {

@@ -10,8 +10,12 @@ export default {
     "en": "Senior Backend Java Engineer · AI-assisted"
   },
   "summary": {
-    "de": "Ich habe Java-Backends über Jahre verstanden, indem ich Code gelesen habe: Architektur, Seiteneffekte und die Gründe, warum etwas so gebaut wurde. Heute arbeite ich KI-beschleunigt. Die langen Schleifen aus Fehler suchen und Fehler ausmerzen werden deutlich kürzer, und ich komme direkt vom Proposal zur Umsetzung. Jede Änderung bleibt dabei reviewbar.",
-    "en": "I spent years understanding Java backends by reading code: architecture, side effects, and why things were built the way they are. Today I work AI-accelerated. The long loops of hunting and fixing bugs get much shorter, and I go straight from the proposal to the implementation. Every change stays reviewable."
+    "de": "Seit 05/2018 entwickle ich Java-Backends in bezahlten Projekten, meist mit Spring Boot: Microservices, REST-Schnittstellen zu Bestandssystemen, Container auf Kubernetes und OpenShift, Pipelines bis in den Betrieb. Gewachsenen Code verstehe ich, indem ich ihn lese: Architektur, Seiteneffekte und die Gründe, warum etwas so gebaut wurde. Heute arbeite ich KI-gestützt. Fehlersuche und Korrekturschleifen werden kürzer, und jede Änderung bleibt reviewbar.",
+    "en": "Since 05/2018 I have built Java backends in paid projects, mostly with Spring Boot: microservices, REST interfaces to existing systems, containers on Kubernetes and OpenShift, pipelines through to operations. I understand legacy code by reading it: architecture, side effects, and why things were built the way they are. Today I work AI-assisted. Bug hunting and fix loops get shorter, and every change stays reviewable."
+  },
+  "metaDescription": {
+    "de": "Java seit 05/2018 in zehn von elf Stationen. Microservices, REST, Container auf Kubernetes und OpenShift, Pipelines und Monitoring. KI-gestützt, jede Änderung reviewbar.",
+    "en": "Java since 05/2018 in ten of eleven roles. Microservices, REST, containers on Kubernetes and OpenShift, pipelines and monitoring. AI-assisted, every change reviewable."
   },
   "topics": [
     "java",
@@ -32,14 +36,14 @@ export default {
   ],
   "fits": {
     "de": [
-      "laufendes Java-Backend (Spring Boot / Spring Cloud / Azure) weiterentwickeln/stabilisieren",
-      "Team braucht senioren Durchsatz ohne Abstriche bei Tests und Review",
+      "laufende Spring-Boot-Services weiterentwickeln oder stabilisieren: Microservices, REST, Messaging, Container",
+      "ein Team braucht erfahrene Verstärkung, ohne bei Tests und Review Abstriche zu machen",
       "gewachsener Code muss verstanden und sicher geändert werden"
     ],
     "en": [
-      "evolve/stabilize a running Java backend (Spring Boot / Spring Cloud / Azure)",
-      "team needs senior throughput without cutting corners on tests and review",
-      "grown code must be understood and changed safely"
+      "evolve or stabilize running Spring Boot services: microservices, REST, messaging, containers",
+      "a team needs senior capacity without cutting corners on tests and review",
+      "legacy code must be understood and changed safely"
     ]
   },
   "notFits": {
@@ -56,17 +60,37 @@ export default {
     "de": [
       "Pull Requests mit Tests",
       "kurzer Architektur-Schnitt zum betroffenen Code",
-      "reviewbare Diffs"
+      "reviewbare Diffs",
+      "Änderungen bis durch Pipeline und Deployment begleitet, mit Blick aufs Monitoring"
     ],
     "en": [
       "Pull requests with tests",
       "short architecture cut of the affected code",
-      "reviewable diffs"
+      "reviewable diffs",
+      "changes taken through pipeline and deployment, with an eye on monitoring"
+    ]
+  },
+  "proof": {
+    "de": [
+      "Spring Boot seit 2018 in bezahlten Projekten: Werkstatt-Services für ein E-Auto, E-Akte für die öffentliche Verwaltung, Online-Geschäftsstelle gesetzlicher Krankenkassen, APIs für Behörden-Apps, ein bundesweites Bonusprogramm.",
+      "Microservices: Redesign kleiner, unabhängig auslieferbarer Services bei der Migration einer Bank-Vertriebsplattform (Lead-Dev/DevOps, 2020), Java-Microservices für Werkstatt-Services (2018), wiederverwendbare Beispielanwendungen für eine Microservice-Plattform (2020).",
+      "Schnittstellen: REST zu Bestandssystemen bei Krankenkassen und Bank, REST und OpenAPI bei den Behörden-APIs, Kafka im Stack der Bankplattform.",
+      "Container und Betrieb: Docker in den meisten Stationen seit 2018, Kubernetes für die Werkstatt-Services und im Bonusprogramm auf Azure, OpenShift-Umgebungen verwaltet, Infrastruktur per Terraform, Monitoring mit Prometheus, Grafana und Dynatrace, dazu wiederkehrende Tagesend-Prozesse auf Apache Airflow, zum Beispiel Kassendaten von Partnerunternehmen.",
+      "Pipelines und Qualität: Jenkins mit Shared Libraries, mehrstufige Build-Pipelines auf OpenShift, SonarQube als Quality Gate.",
+      "Arbeitsweise: Scrum-Teams in vier Stationen, Rollen vom Entwickler bis zum Lead-Dev/DevOps."
+    ],
+    "en": [
+      "Spring Boot in paid projects since 2018: workshop services for an electric car, e-records for public administration, an online service office for statutory health insurers, APIs for government mobile apps, a nationwide loyalty program.",
+      "Microservices: redesign of small, independently shippable services while migrating a bank's sales platform (lead dev/DevOps, 2020), Java microservices for workshop services (2018), reusable sample applications for a microservice platform (2020).",
+      "Interfaces: REST to existing systems for health insurers and a bank, REST and OpenAPI for the government APIs, Kafka in the banking platform's stack.",
+      "Containers and operations: Docker in most engagements since 2018, Kubernetes for the workshop services and for the loyalty program on Azure, OpenShift environments managed, infrastructure via Terraform, monitoring with Prometheus, Grafana, and Dynatrace, plus recurring end-of-day processes on Apache Airflow, for example partner companies' cash-register data.",
+      "Pipelines and quality: Jenkins with shared libraries, multi-stage build pipelines on OpenShift, SonarQube as a quality gate.",
+      "Way of working: Scrum teams in four engagements, roles from developer to lead dev/DevOps."
     ]
   },
   "engagement": {
-    "de": "Engineering-Seat, direkt oder über eine Agentur.",
-    "en": "Engineering seat, direct or through an agency."
+    "de": "Offen für Festanstellung oder Projekte.",
+    "en": "Open to permanent employment or projects."
   },
   "relations": {
     "cases": [
@@ -81,6 +105,7 @@ export default {
     "cv": [
       "cv-direct-services-deutschlandcard",
       "cv-aleri",
+      "cv-nextgen-bwi-lzs",
       "cv-adesso-dz-bank-okvp",
       "cv-adesso-bitmarck-bitgo",
       "cv-binaris-domea",
@@ -88,17 +113,17 @@ export default {
     ]
   },
   "result": {
-    "de": "Enterprise-Java-Delivery über Jahre (siehe CV-Stationen und Cases).",
-    "en": "Years of enterprise Java delivery (see CV stations and cases).",
-    "source": "portfolio/shared.mjs EXPERIENCE + CASES (main)"
+    "de": "Java in zehn von elf Stationen seit 05/2018, Spring Boot in sieben davon.",
+    "en": "Java in ten of eleven roles since 05/2018, Spring Boot in seven of them.",
+    "source": "portfolio/shared.mjs EXPERIENCE (main)"
   },
   "links": [
     {
       "kind": "anchor",
       "href": "#angebot",
       "label": {
-        "de": "Direkt zum Angebot",
-        "en": "Straight to the offer"
+        "de": "Was ich mache",
+        "en": "What I do"
       }
     }
   ],

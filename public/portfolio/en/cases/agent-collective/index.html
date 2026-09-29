@@ -29,8 +29,8 @@
 <meta name="theme-color" content="#F4F0E8"/>
 <link rel="icon" href="/portfolio/en/icon.png" type="image/png" sizes="32x32"/>
 <link rel="stylesheet" href="/portfolio/de/_next/static/css/76323045a7107f6a.css"/>
-<link rel="stylesheet" href="/portfolio/portfolio.css?v=paper-20260924b"/>
-<link rel="stylesheet" href="/portfolio/stage1.css?v=paper-20260924b"/>
+<link rel="stylesheet" href="/portfolio/portfolio.css?v=paper-20260929a"/>
+<link rel="stylesheet" href="/portfolio/stage1.css?v=paper-20260929a"/>
 </head>
 <body class="min-h-screen bg-bg font-sans antialiased">
 <a class="skip" href="#main">Skip to content</a>
@@ -38,30 +38,30 @@
   <a class="brand" href="/portfolio/en/">Peter Henrichs</a>
   <nav class="top-links top-links-wide" aria-label="Portfolio"><a href="/portfolio/en/rollen/agentic-ai/">Agentic AI</a>
     <a href="/portfolio/en/rollen/java-backend/">Java Backend</a>
-    <a href="/portfolio/en/lebenslauf/">Career</a>
+    <a href="/portfolio/en/lebenslauf/">CV</a>
     <a href="/portfolio/en/kontakt/">Contact</a></nav>
   <details class="nav-fold">
     <summary>Menu</summary>
     <nav class="top-links" aria-label="Portfolio"><a href="/portfolio/en/rollen/agentic-ai/">Agentic AI</a>
     <a href="/portfolio/en/rollen/java-backend/">Java Backend</a>
-    <a href="/portfolio/en/lebenslauf/">Career</a>
+    <a href="/portfolio/en/lebenslauf/">CV</a>
     <a href="/portfolio/en/kontakt/">Contact</a></nav>
   </details>
   <div class="top-tools">
     <div class="lang" role="group" aria-label="Language"><a href="/portfolio/de/cases/agent-collective/" hreflang="de">DE</a><a href="/portfolio/en/cases/agent-collective/" hreflang="en" aria-current="true">EN</a></div>
-    <a class="pf-offer-chip" href="/portfolio/en/rollen/agentic-ai/#angebot">Straight to the offer</a>
+    <a class="pf-offer-chip" href="/portfolio/en/rollen/agentic-ai/#angebot">What I do</a>
   </div>
 </header>
 <main id="main" class="pf-case-page">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Agent Collective","headline":"Inspectable multi-agent orchestration for processes | Peter Henrichs","description":"Independent R&D: deterministic multi-agent simulator with no LLM backend. State machine, failure injection, recovery, Vitest. No invented automation KPIs.","inLanguage":"en","author":{"@type":"Person","name":"Peter Henrichs","email":"peter.henrichs@web.de","url":"https://peddavommond.de/portfolio/en","sameAs":["https://www.linkedin.com/in/peter-henrichs/","https://github.com/d0npedro"]},"url":"https://peddavommond.de/portfolio/en/cases/agent-collective/","sameAs":["https://github.com/d0npedro/multi-agent","https://multi-agent-six-murex.vercel.app"]}</script>
 <article class="container pb-16 pt-8 md:pb-20">
-  <p class="eyebrow">Case study</p>
+  <p class="eyebrow">Case</p>
   <p class="mt-4 font-mono text-xs text-faint"><a href="/portfolio/en" class="hover:text-accent">Back to portfolio</a> · 2026 · AI Automation · Testable multi-agent orchestration</p>
   <h1 class="pf-case-page-title mt-4 text-balance">Inspectable multi-agent orchestration</h1>
   <p class="mt-2 text-muted">Agent Collective · Public reference · d0npedro</p>
   <p class="pf-badge pf-badge--lab">Independent R&amp;D · Deterministic · no LLM backend</p>
   <p class="pf-honesty">Deterministic multi-agent simulator — no LLM backend, no tool-calling stack, no client operations.</p>
-  <dl class="pf-meta"><span class="pf-meta-chip"><span class="pf-meta-label">Status</span> Independent R&amp;D</span><span class="pf-meta-chip"><span class="pf-meta-label">Timeframe</span> 2026</span><span class="pf-meta-chip"><span class="pf-meta-label">Team</span> Solo</span><span class="pf-meta-chip"><span class="pf-meta-label">Data</span> synthetic / demo</span><span class="pf-meta-chip"><span class="pf-meta-label">Code</span> public</span><span class="pf-meta-chip"><span class="pf-meta-label">Result</span> observed</span></dl>
+  <dl class="pf-meta"><span class="pf-meta-chip"><span class="pf-meta-label">Status</span> Independent R&amp;D</span><span class="pf-meta-chip"><span class="pf-meta-label">Timeframe</span> 2026</span><span class="pf-meta-chip"><span class="pf-meta-label">Team</span> Solo</span><span class="pf-meta-chip"><span class="pf-meta-label">Data</span> synthetic / demo</span><span class="pf-meta-chip"><span class="pf-meta-label">Code</span> public</span><span class="pf-meta-chip"><span class="pf-meta-label">Outcomes</span> observed</span></dl>
   <section class="pf-case-block">
     <h2 class="eyebrow">Context</h2>
     <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">Independent Applied AI R&amp;D, 2026. Process automation needs visible state, validation, and a human off-ramp — not a chat UI that hides system behavior.</p>
@@ -80,13 +80,17 @@
   </section>
   <section class="pf-case-block">
     <h2 class="eyebrow">Decision / trade-off</h2>
-    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">TypeScript state machine with six roles, a workflow graph, failure injection, recovery, and a seeded RNG for reproducible runs. The simulation layer is separated from the UI. Deliberately no real LLM, so orchestration and failure modes stay testable.</p>
+    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">TypeScript state machine with six roles, a workflow graph, failure injection, recovery, and a seeded RNG for reproducible runs. The simulation layer is separated from the UI. Deliberately no real LLM, so orchestration and failure modes stay testable. The price: no real language model under test. In return, orchestration and failure modes are reproducible.</p>
   </section>
   <section class="pf-case-block">
     <h2 class="eyebrow">Architecture</h2>
     <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">Input / task → roles in the engine → structured state → validation / failure injection → automatic step or human review → audit / observability. A pure TypeScript engine owns world state; the UI only renders. No LLM, no invented extraction rates.</p>
     <ol class="pf-arch-flow"><li><span>Input / task</span><span class="pf-arch-arrow" aria-hidden="true">→</span></li><li><span>Roles / engine</span><span class="pf-arch-arrow" aria-hidden="true">→</span></li><li><span>Structured state</span><span class="pf-arch-arrow" aria-hidden="true">→</span></li><li><span>Validation</span><span class="pf-arch-arrow" aria-hidden="true">→</span></li><li><span>Action or human</span></li></ol>
     <div class="mt-5 flex flex-wrap gap-1.5"><span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">TypeScript</span><span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">Deterministic State Machine</span><span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">React Flow</span><span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">Vitest</span><span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">React 19</span></div>
+  </section>
+  <section class="pf-case-block">
+    <h2 class="eyebrow">How it ran</h2>
+    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">The engine runs deterministically with a seeded RNG, so every run is reproducible. Vitest runs in CI. Failures are injected on purpose, and recovery is visible step by step in the live dashboard. No LLM, no client operations.</p>
   </section>
   <section class="pf-case-block">
     <h2 class="eyebrow">Evaluation, guardrails, failure handling</h2>
@@ -97,7 +101,7 @@
       <tbody><tr><th scope="row">Reproducible runs</th><td>seeded RNG, Vitest without a browser — present, not claimed as a client KPI</td></tr><tr><th scope="row">Failure-recovery visibility</th><td>whether an injected failure is observable and treatable</td></tr><tr><th scope="row">Human-escalation path</th><td>when control stays with the human</td></tr><tr><th scope="row">Automation share</th><td>to measure once a productive process is attached</td></tr></tbody>
     </table></section>
   <section class="pf-case-block">
-    <h2 class="eyebrow">Outcome</h2>
+    <h2 class="eyebrow">Outcomes</h2>
     <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">Live dashboard, Vitest/CI, step-wise system states. Qualitatively observed: failure recovery and observability are inspectable, not just claimed. No invented throughput or document KPIs.</p>
   </section>
   <ul class="mt-2 space-y-2"><li class="flex gap-2.5 text-sm text-fg/85"><span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent"></span><span>Deterministic engine, reproducible seeded runs</span></li><li class="flex gap-2.5 text-sm text-fg/85"><span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent"></span><span>Failure injection and recovery</span></li><li class="flex gap-2.5 text-sm text-fg/85"><span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent"></span><span>Embedded on this site at /multi-agent/</span></li></ul>
@@ -142,6 +146,7 @@
       </div>
       <p class="pf-location">Cologne · Germany-wide / remote</p>
       <p class="pf-contact-echo">Agent layers into running systems — reviewable, with human-in-the-loop.</p>
+      
       <div class="mt-10 pf-contact-row pf-contact-row--checkout">
         <a class="pf-cta pf-cta--primary" href="mailto:peter.henrichs@web.de">peter.henrichs@web.de</a>
         <a class="secondary" href="https://www.linkedin.com/in/peter-henrichs/" target="_blank" rel="noopener noreferrer">LinkedIn</a>

@@ -54,12 +54,12 @@ export function assertPortfolioContent() {
   const result = validate();
   if (!result.ok) errors.push(...result.errors);
 
-  if (entries.length !== 26) errors.push(`expected 26 entries, got ${entries.length}`);
+  if (entries.length !== 27) errors.push(`expected 27 entries, got ${entries.length}`);
   if (byType("role").length !== 2) errors.push("expected 2 roles");
-  if (byType("cv").length !== 12) errors.push("expected 12 cv entries");
+  if (byType("cv").length !== 13) errors.push("expected 13 cv entries");
   if (byType("case").length !== 9) errors.push("expected 9 cases");
   if (byType("experiment").length !== 3) errors.push("expected 3 experiments");
-  if (timelineEntries().length !== 24) errors.push("expected 24 timeline entries");
+  if (timelineEntries().length !== 25) errors.push("expected 25 timeline entries");
 
   if (SITE.name !== "Peter Henrichs" || SHARED.name !== "Peter Henrichs") {
     errors.push("name lock drifted");
