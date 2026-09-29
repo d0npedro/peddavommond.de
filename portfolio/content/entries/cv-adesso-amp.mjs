@@ -44,7 +44,9 @@ export default {
     "Spring Cloud",
     "Docker Swarm",
     "Java",
-    "Jenkins"
+    "Jenkins",
+    "REST",
+    "Scrum"
   ],
   "compact": false,
   "relations": {

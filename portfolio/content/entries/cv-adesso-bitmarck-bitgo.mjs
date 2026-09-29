@@ -25,7 +25,7 @@ export default {
   },
   "project": {
     "de": "BITMARCK / BMT_bitGo — Online-Geschäftsstelle der GKV",
-    "en": "BITMARCK / BMT_bitGo — GKV online service office"
+    "en": "BITMARCK / BMT_bitGo — online service office for statutory health insurers"
   },
   "mission": {
     "de": "Digitale Kanäle gesetzlicher Krankenkassen als Online-Geschäftsstelle im Zusammenspiel mit BITMARCK_21c|ng; bitGo_Web vereint Geschäftsstelle und KV über einen technischen Redesign.",
@@ -52,7 +52,9 @@ export default {
     "FirstSpirit",
     "Thymeleaf",
     "REST",
-    "Java"
+    "Java",
+    "Jenkins",
+    "Scrum"
   ],
   "compact": false,
   "relations": {

@@ -46,7 +46,9 @@ export default {
     "Java",
     "Kubernetes",
     "Docker",
-    "Gradle"
+    "Gradle",
+    "Jenkins",
+    "SonarQube"
   ],
   "compact": false,
   "relations": {

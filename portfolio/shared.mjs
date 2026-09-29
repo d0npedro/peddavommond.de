@@ -85,7 +85,7 @@ export const TRACK = [
   {
     id: "consulting",
     period: "2026",
-    company: "KI-Manager · AI Automation",
+    company: { de: "KI-Manager · AI Automation", en: "AI Manager · AI Automation" },
     era: "consulting",
   },
 ];

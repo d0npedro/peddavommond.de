@@ -2,7 +2,7 @@ export const en = {
   meta: {
     title: "Peter Henrichs | Senior AI Consultant & Agentic Software Engineer",
     description:
-      "Senior AI Consultant and software engineer with 10+ years of enterprise experience. Focus on LLMs, AI agents, automation, and enterprise integration.",
+      "Peter Henrichs, Cologne: assesses AI-agent use cases and builds them into running enterprise systems, reviewable and with human-in-the-loop. Backed by 10+ years of software development and Java/Spring Boot since 2018.",
     ogAlt: "Peter Henrichs | Senior AI Consultant & Agentic Software Engineer · Cologne",
     keywords:
       "Peter Henrichs,Cologne,Senior AI Consultant,Agentic Software Engineer,Agentic AI,LLMs,AI Agents,Automation,Enterprise Engineering,Java,Spring,Cloud",
@@ -232,10 +232,10 @@ export const en = {
       {
         name: "Senior AI Consultant",
         scope:
-          "Cut use cases against systems that already run, before anyone builds. Written boundary — not a tool pitch.",
+          "Assess use cases and cut them against the systems that already run, before anyone builds. A written boundary, not a tool pitch.",
         deliverables: [
+          "Assessed use-case list: value, feasibility, data and access situation, risk — in order, with reasons",
           "Use-case cut: where an agent may act vs where the existing system already carries the process",
-          "Architecture sketch with acceptance, Human-in-the-Loop, and explicit limits",
           "A written list of what will not be built",
         ],
         ideal: "Organizations with running IT that need AI framed before implementation.",
@@ -247,8 +247,8 @@ export const en = {
         scope:
           "Agent workflows with a contract, tool limits, tests, and visible state. Wired to existing APIs.",
         deliverables: [
+          "Target architecture with integration points (APIs, identity, pipelines), acceptance, and human-in-the-loop",
           "Agent contract (task, artifact, acceptance) in the form of the public packages",
-          "Integration cut against existing APIs, identity, and pipelines",
           "Inspectable state or a checklist — a chat transcript is not acceptance",
         ],
         ideal: "Teams turning a prototype into a maintainable layer.",
@@ -260,8 +260,8 @@ export const en = {
         scope:
           "Translate between business, delivery, and governance. Ground first (systems, rights, data), then the agent layer.",
         deliverables: [
-          "Prioritized use-case list judged against the landscape that exists",
-          "Operating model: contract, acceptance, human-in-the-loop — not an autonomous organization",
+          "Operating model: who approves, who steps in, when a human takes over — not an autonomous organization",
+          "Success criteria before building: measures such as acceptance rate, review effort, and regressions — numbers only once measured",
           "Governance frame from regulated delivery (permissions, GDPR) plus EU AI Act orientation",
         ],
         ideal: "Programs that treat modernization and AI as one sequence.",
@@ -322,11 +322,11 @@ export const en = {
       },
       enterprise: {
         title: "Enterprise engineering",
-        body: "Regulated landscapes at adesso, NextGen, and binaris: banking migration, statutory-health security, government APIs, healthcare interoperability.",
+        body: "Java/Spring Boot backends and microservices in regulated landscapes at adesso, NextGen, and binaris: banking migration as lead dev/DevOps, security for statutory health insurers, government APIs, healthcare interoperability.",
       },
       deutschlandcard: {
         title: "Complex systems in production",
-        body: "Cloud, identity, and integration on the nationwide loyalty program. The enterprise ground agents later have to land on.",
+        body: "Spring Boot services, identity, and cloud on the nationwide loyalty program: Kubernetes in Azure, infrastructure via Terraform. The ground agents later have to land on.",
       },
       agentic: {
         title: "Agentic AI — Independent R&D",
@@ -334,7 +334,7 @@ export const en = {
       },
       consulting: {
         title: "Consulting and leadership path",
-        body: "AI Manager and AI Automation support the specialization. They do not replace enterprise seniority or paid AI client delivery.",
+        body: "Continuing education in 2026: introducing and steering AI in an organization, the legal frame (GDPR, EU AI Act), change management. It supports the specialization and does not replace paid AI client delivery.",
       },
     },
   },
@@ -387,7 +387,7 @@ export const en = {
         title: "Cloud, identity, integration",
         chip: "Client work · no AI component in the published case",
         idea: "Enterprise ground for later AI integration.",
-        body: "Paid cloudification of a nationwide loyalty program: Azure AD B2C, Terraform, Kubernetes. The case itself is not an AI project — identity, API, and cloud are the moat.",
+        body: "Paid cloudification of a nationwide loyalty program: Spring Boot services on Kubernetes in Azure, sign-in via Azure AD B2C, infrastructure via Terraform. Not an AI project, but exactly the ground agents later have to run on.",
       },
     },
     title: "Three cases — lab and enterprise labeled separately.",
@@ -435,7 +435,7 @@ export const en = {
     items: {
       evaluation: {
         title: "Evaluation",
-        line: "Acceptance via tests, CI, and inspectable state. Numbers only with a reproducible harness.",
+        line: "Measures fixed before building; acceptance via tests, CI, and inspectable state. Numbers only once measured.",
         body: "Acceptance via tests, CI, checklists, and inspectable state. No model call without a verifiable artifact. Quantitative numbers only once a reproducible harness exists.",
       },
       hitl: {
@@ -489,6 +489,7 @@ export const en = {
     contribution: "My contribution",
     transfer: "Enterprise transferability",
     architecture: "Architecture",
+    operations: "How it ran",
     evaluation: "Evaluation, guardrails, failure handling",
     repo: "Repository",
     demo: "Live demo",
@@ -563,9 +564,11 @@ export const en = {
       contribution:
         "Workflow architecture, agent roles, tool integration, model/context strategy, evaluation loops, and the technical implementation — solo, conceived and delivered independently.",
       decision:
-        "Reusable agent package: a coding agent receives an explicit work and acceptance contract via AGENT.md, SPEC.md, and CHECKLIST.md. It inspects the target repository, derives components and relationships, and produces an interactive architecture view. Contract, data model, visualization runtime, and UI stay separate. No specific LLM is required.",
+        "Reusable agent package: a coding agent receives an explicit work and acceptance contract via AGENT.md, SPEC.md, and CHECKLIST.md. It inspects the target repository, derives components and relationships, and produces an interactive architecture view. Contract, data model, visualization runtime, and UI stay separate. No specific LLM is required. The price: the agent does not write to the repository on its own. In return, every change stays reviewable.",
       architecture:
         "Task / issue → planner contract (AGENT.md / SPEC.md / CHECKLIST.md) → repository context and tools → artifact (graph / architecture view) → tests and checklist → human review. No backend, no prescribed LLM, no autonomous writes.",
+      operations:
+        "No backend, no autonomous writes. Every change to the package goes through typecheck, tests, and CI, and the production build is reproducible. A human accepts the artifact.",
       architectureSteps: [
         "Task / issue",
         "Planner / contract",
@@ -619,9 +622,11 @@ export const en = {
       contribution:
         "Workflow architecture, role model, failure injection, quality gates in the engine, observability via snapshots, and the technical implementation — solo, conceived and delivered independently.",
       decision:
-        "TypeScript state machine with six roles, a workflow graph, failure injection, recovery, and a seeded RNG for reproducible runs. The simulation layer is separated from the UI. Deliberately no real LLM, so orchestration and failure modes stay testable.",
+        "TypeScript state machine with six roles, a workflow graph, failure injection, recovery, and a seeded RNG for reproducible runs. The simulation layer is separated from the UI. Deliberately no real LLM, so orchestration and failure modes stay testable. The price: no real language model under test. In return, orchestration and failure modes are reproducible.",
       architecture:
         "Input / task → roles in the engine → structured state → validation / failure injection → automatic step or human review → audit / observability. A pure TypeScript engine owns world state; the UI only renders. No LLM, no invented extraction rates.",
+      operations:
+        "The engine runs deterministically with a seeded RNG, so every run is reproducible. Vitest runs in CI. Failures are injected on purpose, and recovery is visible step by step in the live dashboard. No LLM, no client operations.",
       architectureSteps: [
         "Input / task",
         "Roles / engine",
@@ -675,6 +680,8 @@ export const en = {
         "Cloudify onto Azure; custom Azure AD B2C login journey; infrastructure via Terraform so identity, delivery, and existing partner APIs stay controllable — not a big-bang cutover.",
       architecture:
         "Spring Boot / Cloud services, Azure AD B2C as the identity layer, Terraform for reproducible infrastructure, Kubernetes/Azure as the runtime. Partner APIs stay attachable — cloudification instead of a big-bang cut.",
+      operations:
+        "The services run on Kubernetes in Azure. Infrastructure is reproducible from Terraform, and sign-in runs through Azure AD B2C. Critical access stays in the existing permission and operations paths.",
       architectureSteps: [
         "Partner APIs",
         "Spring Cloud services",
@@ -710,6 +717,8 @@ export const en = {
         "Decouple into independently shippable “Features”; multi-stage pipelines on OpenShift; observability with Prometheus, Grafana, and Dynatrace. Lead-dev/DevOps ownership rather than feature delivery only.",
       architecture:
         "OKVP splits grown sales platforms into independently shippable features. Delivery via multi-stage OpenShift pipelines; service discovery via Consul; observability with Prometheus, Grafana, and Dynatrace.",
+      operations:
+        "The OpenShift environments and the multi-stage build pipelines were part of my lead-dev/DevOps responsibility. Runtime behavior was visible through Prometheus, Grafana, and Dynatrace; service discovery ran via Consul.",
       architectureSteps: [
         "Fiducia & GAD platforms",
         "OKVP features",
@@ -734,7 +743,7 @@ export const en = {
       honesty: "No AI/LLM component in the published case.",
       contribution:
         "Consultant/developer on a team: backend, REST to existing systems, legacy decoupling, 2FA for especially protected data. Paid delivery.",
-      pageTitle: "BITMARCK bitGo_Web — GKV modernization, security, 2FA | Peter Henrichs",
+      pageTitle: "BITMARCK bitGo_Web — statutory health insurance modernization, security, 2FA | Peter Henrichs",
       pageDescription:
         "Regulated statutory-health online service office: legacy decoupling, REST to existing systems, 2FA for especially protected data. No AI component.",
       context:
@@ -948,7 +957,7 @@ export const en = {
       "nextgen-itzbund-push": {
         role: "Berater / Entwickler Fullstack",
         project: "ITZBund — Mobile Push App",
-        mission: "APIs between mobile devices and government specialist procedures (Fachverfahren).",
+        mission: "APIs between mobile devices and government case-handling systems.",
         tasks: ["Jenkins Shared Libraries", "OAuth2 authentication workflow"],
       },
       "nextgen-bwi-lzs": {
@@ -995,7 +1004,7 @@ export const en = {
       },
       "adesso-bitmarck-bitgo": {
         role: "Berater / Entwickler",
-        project: "BITMARCK / BMT_bitGo — GKV online service office",
+        project: "BITMARCK / BMT_bitGo — online service office for statutory health insurers",
         mission:
           "Digital channels of statutory health insurers as an online service office interacting with BITMARCK_21c|ng; bitGo_Web unifies the service office and KV via a technical redesign.",
         tasks: [
@@ -1013,13 +1022,13 @@ export const en = {
       },
       "binaris-domea": {
         role: "Berater / Entwickler",
-        project: "Electronic Fachverfahren for public administration (paper → e-records / DOMEA)",
+        project: "Electronic case-handling system for public administration (paper → e-records / DOMEA)",
         mission:
-          "Move public administration from paper to electronic records on JEE-based Fachanwendungen.",
+          "Move public administration from paper to electronic records in JEE-based specialist applications.",
         tasks: [
-          "Advise existing clients on JEE-based Fachanwendungen in public administration",
+          "Advise existing clients on JEE-based specialist applications in public administration",
           "Design and implement Java applications",
-          "Interfaces to existing systems (e.g. the Registratur of a federal office)",
+          "Interfaces to existing systems (e.g. the records registry of a federal office)",
         ],
       },
       "binaris-ego": {

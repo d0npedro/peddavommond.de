@@ -18,8 +18,8 @@ import { offerChip, stageEntryNav, stageTopbar } from "./render-stage1.mjs";
 
 /** Next export = layout/utilities. Token + component layer is portfolio.css (copied to public/). */
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=paper-20260924b";
-const STAGE_CSS = "/portfolio/stage1.css?v=paper-20260924b";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=paper-20260929a";
+const STAGE_CSS = "/portfolio/stage1.css?v=paper-20260929a";
 
 function stylesheets() {
   return `<link rel="stylesheet" href="${NEXT_LAYOUT_CSS}"/>
@@ -348,7 +348,7 @@ function renderTrack(locale) {
       })
       .join("");
     return `<li class="pf-archive-item">
-      <p class="pf-archive-meta">${esc(item.period)} · ${esc(item.company)}</p>
+      <p class="pf-archive-meta">${esc(item.period)} · ${esc(item.company[locale] ?? item.company)}</p>
       <h3>${esc(copyItem.title)}</h3>
       <p>${esc(copyItem.body)}</p>
       ${related ? `<p class="pf-track-links">${related}</p>` : ""}
@@ -676,6 +676,7 @@ ${stageTopbar(locale, siblingPath)}
   ${renderCaseSection(t.caseFields.contribution, c.contribution)}
   ${renderCaseSection(t.caseFields.decision, c.decision)}
   ${renderArchitecture(c, t, item.tech)}
+  ${renderCaseSection(t.caseFields.operations, c.operations)}
   ${renderCaseSection(t.caseFields.evaluation, c.evaluation)}
   ${renderEvalMetrics(c, t)}
   ${renderCaseSection(t.caseFields.outcome, c.outcome)}
@@ -717,9 +718,6 @@ function renderCollectiveSample(locale) {
           <h2 class="pf-stage-title">${esc(s.title)}</h2>
         </div>
         <p class="pf-stage-lede">${esc(s.body)}</p>
-        <p class="pf-honesty-chips">
-          <span class="pf-chip pf-chip--signal">${esc(s.badge)}</span>
-        </p>
         <p class="pf-stage-lede">${esc(s.shown)}</p>
       </div>
       <div class="pf-touch" data-touch="collective">
@@ -841,7 +839,7 @@ function renderRecord(locale) {
       .filter(Boolean)
       .join("");
     return `<li class="pf-station">
-      <p class="pf-archive-meta">${esc(item.period)} · ${esc(item.company)}</p>
+      <p class="pf-archive-meta">${esc(item.period)} · ${esc(item.company[locale] ?? item.company)}</p>
       <h3>${esc(copyItem.title)}</h3>
       <p>${esc(copyItem.body)}</p>
       ${related ? `<p class="pf-track-links">${related}</p>` : ""}

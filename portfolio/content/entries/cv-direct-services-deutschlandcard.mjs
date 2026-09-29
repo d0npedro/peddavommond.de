@@ -51,7 +51,11 @@ export default {
     "Terraform",
     "Oracle OCI",
     "Airflow",
-    "Java"
+    "Java",
+    "Docker",
+    "REST",
+    "CI/CD",
+    "Scrum"
   ],
   "compact": false,
   "relations": {

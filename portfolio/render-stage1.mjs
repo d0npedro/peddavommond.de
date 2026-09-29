@@ -10,8 +10,8 @@ import { offerHref, offerLabel } from "./offer-link.mjs";
 import { SITE, caseById, caseHref } from "./shared.mjs";
 
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=paper-20260924b";
-const STAGE_CSS = "/portfolio/stage1.css?v=paper-20260924b";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=paper-20260929a";
+const STAGE_CSS = "/portfolio/stage1.css?v=paper-20260929a";
 
 const CHAPTER_KEYS = ["ausgangslage", "schnitt", "umsetzung", "nachweis", "ergebnis"];
 
@@ -64,7 +64,9 @@ const UI = {
     tasks: "Aufgaben",
     casePage: "Zur Case-Seite",
     contactTitle: "Kontakt",
-    contactLede: "Peter Henrichs · Köln. E-Mail, LinkedIn und GitHub.",
+    contactLede: "Peter Henrichs · Köln, deutschlandweit und remote. Deutsch Muttersprache, Englisch fließend. E-Mail, LinkedIn und GitHub.",
+    approach: "Vorgehen",
+    proof: "Nachweise aus Projekten",
     email: "E-Mail",
     fits: "Passt",
     notFits: "Passt nicht",
@@ -112,7 +114,9 @@ const UI = {
     tasks: "Tasks",
     casePage: "Full case page",
     contactTitle: "Contact",
-    contactLede: "Peter Henrichs · Cologne. Email, LinkedIn and GitHub.",
+    contactLede: "Peter Henrichs · Cologne, Germany-wide and remote. German native, English fluent. Email, LinkedIn and GitHub.",
+    approach: "How I work",
+    proof: "Evidence from projects",
     email: "Email",
     fits: "Fits",
     notFits: "Does not fit",
@@ -413,14 +417,17 @@ export function renderRolePage(locale, slug) {
   ${slug === "agentic-ai" && entry.engagement ? `<p class="engagement">${mark(entry.engagement[locale])}</p>` : ""}
   ${slug === "agentic-ai" ? listBlock(locale, entry.fits?.[locale], ui.fits) : ""}
   ${javaEngagement}
+  ${slug === "java-backend" ? listBlock(locale, entry.proof?.[locale], ui.proof) : ""}
   ${listBlock(locale, entry.notFits?.[locale], ui.notFits)}
-  ${listBlock(locale, entry.deliverables?.[locale], offer.deliverables)}
+  ${slug === "agentic-ai"
+    ? listBlock(locale, entry.approach?.[locale], ui.approach)
+    : listBlock(locale, entry.deliverables?.[locale], offer.deliverables)}
   ${slug === "agentic-ai" ? packagesBlock(locale) : ""}
   ${resultBlock(locale, entry)}
   ${slug === "agentic-ai" ? `<p class="contact-line"><a href="mailto:${esc(SITE.email)}">${esc(SITE.email)}</a></p>` : ""}
   ${relatedBlock(locale, entry)}
 </main>`;
-  const description = entry.summary[locale];
+  const description = entry.metaDescription?.[locale] ?? entry.summary[locale];
   return pageShell({
     locale,
     title: `${entry.title[locale]} — ${SITE.name}`,

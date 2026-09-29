@@ -19,8 +19,8 @@
 <meta name="theme-color" content="#F4F0E8"/>
 <link rel="icon" href="/portfolio/en/icon.png" type="image/png" sizes="32x32"/>
 <link rel="stylesheet" href="/portfolio/de/_next/static/css/76323045a7107f6a.css"/>
-<link rel="stylesheet" href="/portfolio/portfolio.css?v=paper-20260924b"/>
-<link rel="stylesheet" href="/portfolio/stage1.css?v=paper-20260924b"/>
+<link rel="stylesheet" href="/portfolio/portfolio.css?v=paper-20260929a"/>
+<link rel="stylesheet" href="/portfolio/stage1.css?v=paper-20260929a"/>
 </head>
 <body class="stage1-body">
 <script>document.documentElement.classList.add("js")</script>
@@ -43,7 +43,7 @@
     <ul class="stack"><li>TypeScript</li><li>Deterministic State Machine</li><li>React Flow</li><li>Vitest</li><li>React 19</li></ul>
     <div class="result">Live dashboard, Vitest/CI, step-executable system states. Qualitatively observed: failure recovery and observability are inspectable. No invented throughput or document KPIs. No LLM.</div>
     
-    <section class="chapter"><h2>Starting point</h2><p>Independent Applied AI R&amp;D, 2026. Process automation needs visible states, validation and a human escape hatch — not a chat UI that hides system behaviour.</p></section><section class="chapter"><h2>Cut</h2><p>TypeScript state machine with six roles, workflow graph, failure injection, recovery and seeded RNG. Deliberately no real LLM.</p></section><section class="chapter"><h2>Implementation</h2><p>Input / task → roles in the engine → structured state → validation / failure injection → automatic step or human review → audit. Pure TypeScript engine owns world state.</p></section><section class="chapter"><h2>Evidence</h2><p>Evaluation via Vitest and reproducible seeded runs. Failure injection and recovery live in the engine. Data is synthetic. Business metrics are not invented.</p></section><section class="chapter"><h2>Result</h2><p>Live dashboard and inspectable orchestration. No LLM backend, no client operations.</p></section>
+    <section class="chapter"><h2>Starting point</h2><p>Independent Applied AI R&amp;D, 2026. Process automation needs visible states, validation and a human escape hatch — not a chat UI that hides system behaviour.</p></section><section class="chapter"><h2>Cut</h2><p>TypeScript state machine with six roles, workflow graph, failure injection, recovery and seeded RNG. Deliberately no real LLM. The price: no real language model under test. In return, orchestration and failure modes are reproducible.</p></section><section class="chapter"><h2>Implementation</h2><p>Input / task → roles in the engine → structured state → validation / failure injection → automatic step or human review → audit. Pure TypeScript engine owns world state.</p></section><section class="chapter"><h2>Evidence</h2><p>Evaluation via Vitest and reproducible seeded runs. Failure injection and recovery live in the engine. Data is synthetic. Business metrics are not invented.</p></section><section class="chapter"><h2>Result</h2><p>Live dashboard and inspectable orchestration. No LLM backend, no client operations.</p></section>
     <p class="link-row"><a href="/portfolio/en/cases/agent-collective/">Full case page</a><a href="https://github.com/d0npedro/multi-agent" target="_blank" rel="noopener noreferrer">Repository</a><a href="https://multi-agent-six-murex.vercel.app" target="_blank" rel="noopener noreferrer">Live demo</a></p>
     <p class="back-row"><a href="/portfolio/en/lebenslauf/#case-agent-collective">Back to the career timeline</a></p>
     <footer class="s1-footer"><p><code>timeline.js</code> · <a href="/portfolio/en/kontakt/">Contact</a></p></footer>

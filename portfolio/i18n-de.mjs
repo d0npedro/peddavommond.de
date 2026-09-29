@@ -2,7 +2,7 @@ export const de = {
   meta: {
     title: "Peter Henrichs | Senior AI Consultant & Agentic Software Engineer",
     description:
-      "Senior AI Consultant und Software Engineer mit 10+ Jahren Enterprise-Erfahrung. Fokus auf LLMs, AI Agents, Automation und Enterprise Integration.",
+      "Peter Henrichs, Köln: bewertet Anwendungsfälle für KI-Agenten und baut sie prüfbar in laufende Enterprise-Systeme ein, mit Human-in-the-Loop. Dahinter 10+ Jahre Softwareentwicklung und Java/Spring Boot seit 2018.",
     ogAlt: "Peter Henrichs | Senior AI Consultant & Agentic Software Engineer · Köln",
     keywords:
       "Peter Henrichs,Köln,Senior AI Consultant,Agentic Software Engineer,Agentic AI,LLMs,AI Agents,Automation,Enterprise Engineering,Java,Spring,Cloud",
@@ -232,10 +232,10 @@ export const de = {
       {
         name: "Senior AI Consultant",
         scope:
-          "Use Cases gegen bestehende Systeme schneiden, bevor gebaut wird. Schriftliche Grenze — kein Tool-Pitch.",
+          "Anwendungsfälle bewerten und gegen die Systeme schneiden, die schon laufen, bevor gebaut wird. Schriftliche Grenze statt Tool-Pitch.",
         deliverables: [
+          "Bewertete Use-Case-Liste: Nutzen, Machbarkeit, Daten- und Rechtelage, Risiko — mit Reihenfolge und Begründung",
           "Use-Case-Schnitt: wo ein Agent handeln darf und wo das bestehende System den Prozess schon trägt",
-          "Architekturskizze mit Abnahme, Human-in-the-Loop und expliziten Grenzen",
           "Schriftliche Liste dessen, was nicht gebaut wird",
         ],
         ideal: "Organisationen mit laufender IT, die AI einordnen müssen, bevor sie implementieren.",
@@ -247,8 +247,8 @@ export const de = {
         scope:
           "Agent-Workflows mit Vertrag, Tool-Grenzen, Tests und sichtbarem Zustand. Anbindung an vorhandene APIs.",
         deliverables: [
+          "Zielarchitektur mit Integrationspunkten (APIs, Identität, Pipelines), Abnahme und Human-in-the-Loop",
           "Agent-Vertrag (Aufgabe, Artefakt, Abnahme) in der Form der öffentlichen Pakete",
-          "Integrationsschnitt an vorhandene APIs, Identität und Pipelines",
           "Prüfbarer Zustand oder Checkliste — ein Chatprotokoll ist keine Abnahme",
         ],
         ideal: "Teams, die einen Prototyp in eine wartbare Schicht überführen.",
@@ -260,8 +260,8 @@ export const de = {
         scope:
           "Fach, Delivery und Governance übersetzen. Zuerst Boden (Systeme, Rechte, Daten), dann die Agentenschicht.",
         deliverables: [
-          "Priorisierte Use-Case-Liste gegen die Landschaft, die existiert",
-          "Betriebsmodell: Vertrag, Abnahme, Human-in-the-Loop — keine autonome Organisation",
+          "Betriebsmodell: wer freigibt, wer eingreift, wann ein Mensch übernimmt — keine autonome Organisation",
+          "Erfolgskriterien vor dem Bau: Messgrößen wie Abnahmequote, Review-Aufwand und Regressionen — Zahlen erst, wenn gemessen",
           "Governance-Rahmen aus regulierter Delivery (Berechtigungen, DSGVO) plus EU-AI-Act-Orientierung",
         ],
         ideal: "Programme, die Modernisierung und AI zusammen denken.",
@@ -322,11 +322,11 @@ export const de = {
       },
       enterprise: {
         title: "Enterprise Engineering",
-        body: "Regulierte Landschaften bei adesso, NextGen und binaris: Banking-Migration, GKV-Security, Behörden-APIs, Healthcare-Interoperabilität.",
+        body: "Java/Spring-Boot-Backends und Microservices in regulierten Landschaften bei adesso, NextGen und binaris: Bankmigration als Lead-Dev/DevOps, Sicherheit für Krankenkassen, Behörden-APIs, Interoperabilität im Gesundheitswesen.",
       },
       deutschlandcard: {
         title: "Komplexe Systeme in Produktion",
-        body: "Cloud, Identity und Integration im bundesweiten Loyalty-Programm. Der Enterprise-Boden, auf den Agents später landen müssen.",
+        body: "Spring-Boot-Services, Identity und Cloud im bundesweiten Loyalty-Programm: Kubernetes in Azure, Infrastruktur per Terraform. Der Boden, auf dem Agents später landen müssen.",
       },
       agentic: {
         title: "Agentic AI — Independent R&D",
@@ -334,7 +334,7 @@ export const de = {
       },
       consulting: {
         title: "Consulting- und Leadership-Pfad",
-        body: "KI-Manager und AI Automation stützen die Spezialisierung. Sie ersetzen keine Enterprise-Seniorität und keine bezahlte AI-Kundenlieferung.",
+        body: "Weiterbildung 2026: KI im Unternehmen einführen und steuern, rechtlicher Rahmen (DSGVO, EU AI Act), Change-Management. Sie stützt die Spezialisierung und ersetzt keine bezahlte AI-Kundenlieferung.",
       },
     },
   },
@@ -388,7 +388,7 @@ export const de = {
         title: "Cloud, Identität, Integration",
         chip: "Kundenarbeit · kein AI-Bestandteil im veröffentlichten Case",
         idea: "Enterprise-Boden für spätere AI-Integration.",
-        body: "Bezahlte Cloudifizierung eines bundesweiten Loyalty-Programms: Azure AD B2C, Terraform, Kubernetes. Der Case selbst ist kein AI-Projekt — Identity, API und Cloud sind der Burggraben.",
+        body: "Bezahlte Cloudifizierung eines bundesweiten Loyalty-Programms: Spring-Boot-Services auf Kubernetes in Azure, Anmeldung über Azure AD B2C, Infrastruktur per Terraform. Kein AI-Projekt, aber genau der Boden, auf dem Agents später laufen müssen.",
       },
     },
     title: "Drei Cases — Lab und Enterprise getrennt gekennzeichnet.",
@@ -436,7 +436,7 @@ export const de = {
     items: {
       evaluation: {
         title: "Evaluation",
-        line: "Abnahme über Tests, CI und prüfbaren Zustand. Zahlen erst mit reproduzierbarem Harness.",
+        line: "Messgrößen vor dem Bau festlegen, Abnahme über Tests, CI und prüfbaren Zustand. Zahlen erst, wenn gemessen.",
         body: "Abnahme über Tests, CI, Checklisten und beobachtbare Zustände. Kein Modellaufruf ohne prüfbares Artefakt. Quantitative Kennzahlen erst, wenn ein reproduzierbarer Harness steht.",
       },
       hitl: {
@@ -490,6 +490,7 @@ export const de = {
     contribution: "Mein Anteil",
     transfer: "Enterprise-Übertragbarkeit",
     architecture: "Architektur",
+    operations: "Betrieb",
     evaluation: "Evaluation, Guardrails, Failure Handling",
     repo: "Repository",
     demo: "Live-Demo",
@@ -564,9 +565,11 @@ export const de = {
       contribution:
         "Architektur des Workflows, Agentenrollen, Tool-Integration, Modell-/Kontextstrategie, Evaluationsschleifen und technische Implementierung — Solo, eigenständig konzipiert und umgesetzt.",
       decision:
-        "Wiederverwendbares Agent-Paket: ein Coding Agent erhält über AGENT.md, SPEC.md und CHECKLIST.md einen expliziten Arbeits- und Abnahmevertrag. Er untersucht das Zielrepository, leitet Komponenten und Beziehungen ab und erzeugt eine interaktive Architekturansicht. Vertrag, Datenmodell, Visualisierungsruntime und UI bleiben getrennt. Ein bestimmtes LLM wird bewusst nicht vorausgesetzt.",
+        "Wiederverwendbares Agent-Paket: ein Coding Agent erhält über AGENT.md, SPEC.md und CHECKLIST.md einen expliziten Arbeits- und Abnahmevertrag. Er untersucht das Zielrepository, leitet Komponenten und Beziehungen ab und erzeugt eine interaktive Architekturansicht. Vertrag, Datenmodell, Visualisierungsruntime und UI bleiben getrennt. Ein bestimmtes LLM wird bewusst nicht vorausgesetzt. Der Preis: Der Agent schreibt nicht selbst ins Repository. Dafür bleibt jede Änderung prüfbar.",
       architecture:
         "Aufgabe / Issue → Planner-Vertrag (AGENT.md / SPEC.md / CHECKLIST.md) → Repository-Kontext und Tools → Artefakt (Graph / Architekturansicht) → Tests und Checkliste → menschliche Bewertung. Kein Backend, kein vorgeschriebenes LLM, keine autonomen Schreibzugriffe.",
+      operations:
+        "Kein Backend, keine autonomen Schreibzugriffe. Jede Änderung am Paket läuft durch Typecheck, Tests und CI, der Production-Build ist reproduzierbar. Das Artefakt nimmt ein Mensch ab.",
       architectureSteps: [
         "Aufgabe / Issue",
         "Planner / Vertrag",
@@ -620,9 +623,11 @@ export const de = {
       contribution:
         "Workflow-Architektur, Rollenmodell, Failure Injection, Quality Gates in der Engine, Observability über Snapshots und die technische Implementierung — Solo, eigenständig konzipiert und umgesetzt.",
       decision:
-        "TypeScript-State-Machine mit sechs Rollen, Workflow-Graph, Failure Injection, Recovery und seeded RNG für reproduzierbare Runs. Die Simulationsschicht ist von der UI getrennt. Bewusst kein reales LLM, damit Orchestrierung und Fehlermodi testbar bleiben.",
+        "TypeScript-State-Machine mit sechs Rollen, Workflow-Graph, Failure Injection, Recovery und seeded RNG für reproduzierbare Runs. Die Simulationsschicht ist von der UI getrennt. Bewusst kein reales LLM, damit Orchestrierung und Fehlermodi testbar bleiben. Der Preis: kein echtes Sprachmodell im Test. Dafür sind Orchestrierung und Fehlermodi reproduzierbar.",
       architecture:
         "Input / Aufgabe → Rollen in der Engine → Structured State → Validation / Failure Injection → automatischer Schritt oder Human Review → Audit / Observability. Reine TypeScript-Engine besitzt den Weltzustand; die UI rendert nur. Kein LLM, keine erfundenen Extraktionsraten.",
+      operations:
+        "Die Engine läuft deterministisch mit seeded RNG, jeder Run ist reproduzierbar. Vitest läuft in CI. Fehler werden gezielt injiziert, und die Recovery ist im Live-Dashboard Schritt für Schritt sichtbar. Kein LLM, kein Kundenbetrieb.",
       architectureSteps: [
         "Input / Aufgabe",
         "Rollen / Engine",
@@ -676,6 +681,8 @@ export const de = {
         "Cloudifizierung nach Azure; individuelle Azure-AD-B2C-Login-Journey; Infrastruktur über Terraform, damit Identity, Delivery und bestehende Partner-Schnittstellen kontrollierbar bleiben — statt eines Big-Bang-Schnitts.",
       architecture:
         "Spring-Boot-/Cloud-Services, Azure AD B2C als Identity-Schicht, Terraform für reproduzierbare Infrastruktur, Kubernetes/Azure als Laufzeit. Partner-APIs bleiben anschlussfähig — Cloudifizierung statt Big-Bang-Schnitt.",
+      operations:
+        "Die Services laufen auf Kubernetes in Azure. Die Infrastruktur entsteht reproduzierbar aus Terraform, die Anmeldung läuft über Azure AD B2C. Kritische Zugänge bleiben in den bestehenden Berechtigungs- und Betriebswegen.",
       architectureSteps: [
         "Partner-APIs",
         "Spring Cloud Services",
@@ -711,6 +718,8 @@ export const de = {
         "Entkopplung in unabhängig auslieferbare „Features“; Multi-Stage-Pipelines auf OpenShift; Observability mit Prometheus, Grafana und Dynatrace. Lead-Dev-/DevOps-Verantwortung statt reiner Feature-Lieferung.",
       architecture:
         "OKVP zerlegt gewachsene Vertriebsplattformen in unabhängig auslieferbare Features. Delivery über mehrstufige OpenShift-Pipelines; Service Discovery über Consul; Observability mit Prometheus, Grafana und Dynatrace.",
+      operations:
+        "Die Umgebungen auf OpenShift und die mehrstufigen Build-Pipelines lagen in meiner Lead-Dev/DevOps-Verantwortung. Das Laufzeitverhalten war über Prometheus, Grafana und Dynatrace sichtbar, Service Discovery lief über Consul.",
       architectureSteps: [
         "Fiducia & GAD Plattformen",
         "OKVP Features",

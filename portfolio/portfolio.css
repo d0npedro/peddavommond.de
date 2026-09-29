@@ -60,26 +60,6 @@ html.light {
   --dur-med: 240ms;
 }
 
-html.dark,
-.dark {
-  /* Dark default: charcoal navy / ink — not pure #000 */
-  --bg: 16 21 30;               /* #10151E ink navy */
-  --bg-elevated: 23 30 42;      /* #171E2A raised sheet */
-  --bg-sunken: 12 16 23;        /* #0C1017 well */
-  --fg: 238 242 246;            /* #EEF2F6 near-white */
-  --muted: 180 188 200;         /* #B4BCC8 body ≥ 9.5:1 */
-  --faint: 142 152 166;         /* #8E98A6 meta ≥ 6.2:1 */
-  --line: 44 54 68;             /* #2C3644 hairline */
-  --accent: 74 168 184;         /* #4AA8B8 teal–azure, not electric cyan */
-  --accent-soft: 24 48 58;      /* #18303A wash */
-  --signal: 196 146 74;         /* #C4924A bronze */
-  --on-accent: 16 21 30;        /* ink on teal CTA */
-  --grid-rgb: 148 168 188;
-  --grid-opacity: 0.04;
-  --shadow-quiet: 0 1px 0 rgb(0 0 0 / 0.25), 0 10px 28px rgb(0 0 0 / 0.22);
-  --shadow-lift: 0 1px 0 rgb(0 0 0 / 0.3), 0 16px 36px rgb(0 0 0 / 0.32);
-}
-
 /* -------------------------------------------------------------------------- */
 /* Base                                                                        */
 /* -------------------------------------------------------------------------- */
@@ -90,10 +70,6 @@ html {
 
 html.light {
   color-scheme: light;
-}
-
-html.dark {
-  color-scheme: dark;
 }
 
 body {
@@ -1893,9 +1869,7 @@ html {
 
 :root,
 html,
-html.light,
-html.dark,
-.dark {
+html.light {
   --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-exit: cubic-bezier(0.4, 0, 1, 1);
   --ease-micro: cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -2889,6 +2863,12 @@ html.paper #sample-collective .pf-chip,
 html.paper .pf-contract .pf-chip {
   align-self: flex-start;
   width: fit-content;
+}
+
+@media (max-width: 767px) {
+  html.paper .pf-spots .pf-case-card > .pf-chip {
+    margin-top: 0.85rem;
+  }
 }
 
 html.paper #sample-collective .pf-chip,

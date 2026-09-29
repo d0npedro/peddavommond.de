@@ -63,8 +63,8 @@ export default {
       "en": "Independent Applied AI R&D, 2026. In large, historically grown software systems, substantial engineering time goes into understanding code, locating faults, and securing changes."
     },
     "schnitt": {
-      "de": "Wiederverwendbares Agent-Paket: ein Coding Agent erhält über AGENT.md, SPEC.md und CHECKLIST.md einen expliziten Arbeits- und Abnahmevertrag. Ein bestimmtes LLM wird bewusst nicht vorausgesetzt.",
-      "en": "Reusable agent package: a coding agent receives an explicit work and acceptance contract via AGENT.md, SPEC.md and CHECKLIST.md. A specific LLM is deliberately not prescribed."
+      "de": "Wiederverwendbares Agent-Paket: ein Coding Agent erhält über AGENT.md, SPEC.md und CHECKLIST.md einen expliziten Arbeits- und Abnahmevertrag. Ein bestimmtes LLM wird bewusst nicht vorausgesetzt. Der Preis: Der Agent schreibt nicht selbst ins Repository. Dafür bleibt jede Änderung prüfbar.",
+      "en": "Reusable agent package: a coding agent receives an explicit work and acceptance contract via AGENT.md, SPEC.md and CHECKLIST.md. A specific LLM is deliberately not prescribed. The price: the agent does not write to the repository on its own. In return, every change stays reviewable."
     },
     "umsetzung": {
       "de": "Aufgabe / Issue → Planner-Vertrag → Repository-Kontext und Tools → Artefakt (Graph / Architekturansicht) → Tests und Checkliste → menschliche Bewertung. Kein Backend, keine autonomen Schreibzugriffe.",

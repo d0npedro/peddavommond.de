@@ -29,8 +29,8 @@
 <meta name="theme-color" content="#F4F0E8"/>
 <link rel="icon" href="/portfolio/en/icon.png" type="image/png" sizes="32x32"/>
 <link rel="stylesheet" href="/portfolio/de/_next/static/css/76323045a7107f6a.css"/>
-<link rel="stylesheet" href="/portfolio/portfolio.css?v=paper-20260924b"/>
-<link rel="stylesheet" href="/portfolio/stage1.css?v=paper-20260924b"/>
+<link rel="stylesheet" href="/portfolio/portfolio.css?v=paper-20260929a"/>
+<link rel="stylesheet" href="/portfolio/stage1.css?v=paper-20260929a"/>
 </head>
 <body class="min-h-screen bg-bg font-sans antialiased">
 <a class="skip" href="#main">Skip to content</a>
@@ -80,13 +80,17 @@
   </section>
   <section class="pf-case-block">
     <h2 class="eyebrow">Decision / trade-off</h2>
-    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">TypeScript state machine with six roles, a workflow graph, failure injection, recovery, and a seeded RNG for reproducible runs. The simulation layer is separated from the UI. Deliberately no real LLM, so orchestration and failure modes stay testable.</p>
+    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">TypeScript state machine with six roles, a workflow graph, failure injection, recovery, and a seeded RNG for reproducible runs. The simulation layer is separated from the UI. Deliberately no real LLM, so orchestration and failure modes stay testable. The price: no real language model under test. In return, orchestration and failure modes are reproducible.</p>
   </section>
   <section class="pf-case-block">
     <h2 class="eyebrow">Architecture</h2>
     <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">Input / task → roles in the engine → structured state → validation / failure injection → automatic step or human review → audit / observability. A pure TypeScript engine owns world state; the UI only renders. No LLM, no invented extraction rates.</p>
     <ol class="pf-arch-flow"><li><span>Input / task</span><span class="pf-arch-arrow" aria-hidden="true">→</span></li><li><span>Roles / engine</span><span class="pf-arch-arrow" aria-hidden="true">→</span></li><li><span>Structured state</span><span class="pf-arch-arrow" aria-hidden="true">→</span></li><li><span>Validation</span><span class="pf-arch-arrow" aria-hidden="true">→</span></li><li><span>Action or human</span></li></ol>
     <div class="mt-5 flex flex-wrap gap-1.5"><span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">TypeScript</span><span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">Deterministic State Machine</span><span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">React Flow</span><span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">Vitest</span><span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">React 19</span></div>
+  </section>
+  <section class="pf-case-block">
+    <h2 class="eyebrow">How it ran</h2>
+    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">The engine runs deterministically with a seeded RNG, so every run is reproducible. Vitest runs in CI. Failures are injected on purpose, and recovery is visible step by step in the live dashboard. No LLM, no client operations.</p>
   </section>
   <section class="pf-case-block">
     <h2 class="eyebrow">Evaluation, guardrails, failure handling</h2>

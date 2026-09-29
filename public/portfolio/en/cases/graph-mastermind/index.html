@@ -29,8 +29,8 @@
 <meta name="theme-color" content="#F4F0E8"/>
 <link rel="icon" href="/portfolio/en/icon.png" type="image/png" sizes="32x32"/>
 <link rel="stylesheet" href="/portfolio/de/_next/static/css/76323045a7107f6a.css"/>
-<link rel="stylesheet" href="/portfolio/portfolio.css?v=paper-20260924b"/>
-<link rel="stylesheet" href="/portfolio/stage1.css?v=paper-20260924b"/>
+<link rel="stylesheet" href="/portfolio/portfolio.css?v=paper-20260929a"/>
+<link rel="stylesheet" href="/portfolio/stage1.css?v=paper-20260929a"/>
 </head>
 <body class="min-h-screen bg-bg font-sans antialiased">
 <a class="skip" href="#main">Skip to content</a>
@@ -80,13 +80,17 @@
   </section>
   <section class="pf-case-block">
     <h2 class="eyebrow">Decision / trade-off</h2>
-    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">Reusable agent package: a coding agent receives an explicit work and acceptance contract via AGENT.md, SPEC.md, and CHECKLIST.md. It inspects the target repository, derives components and relationships, and produces an interactive architecture view. Contract, data model, visualization runtime, and UI stay separate. No specific LLM is required.</p>
+    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">Reusable agent package: a coding agent receives an explicit work and acceptance contract via AGENT.md, SPEC.md, and CHECKLIST.md. It inspects the target repository, derives components and relationships, and produces an interactive architecture view. Contract, data model, visualization runtime, and UI stay separate. No specific LLM is required. The price: the agent does not write to the repository on its own. In return, every change stays reviewable.</p>
   </section>
   <section class="pf-case-block">
     <h2 class="eyebrow">Architecture</h2>
     <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">Task / issue → planner contract (AGENT.md / SPEC.md / CHECKLIST.md) → repository context and tools → artifact (graph / architecture view) → tests and checklist → human review. No backend, no prescribed LLM, no autonomous writes.</p>
     <ol class="pf-arch-flow"><li><span>Task / issue</span><span class="pf-arch-arrow" aria-hidden="true">→</span></li><li><span>Planner / contract</span><span class="pf-arch-arrow" aria-hidden="true">→</span></li><li><span>Repo context + tools</span><span class="pf-arch-arrow" aria-hidden="true">→</span></li><li><span>Artifact + checks</span><span class="pf-arch-arrow" aria-hidden="true">→</span></li><li><span>Human review</span></li></ol>
     <div class="mt-5 flex flex-wrap gap-1.5"><span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">Agent Contracts</span><span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">React</span><span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">TypeScript</span><span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">d3-force</span><span class="rounded-[3px] bg-bg-sunken px-2 py-1 font-mono text-[0.7rem] text-muted">CI / Typecheck</span></div>
+  </section>
+  <section class="pf-case-block">
+    <h2 class="eyebrow">How it ran</h2>
+    <p class="mt-3 max-w-prose text-base leading-relaxed text-fg/90">No backend, no autonomous writes. Every change to the package goes through typecheck, tests, and CI, and the production build is reproducible. A human accepts the artifact.</p>
   </section>
   <section class="pf-case-block">
     <h2 class="eyebrow">Evaluation, guardrails, failure handling</h2>
