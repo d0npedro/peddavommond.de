@@ -223,7 +223,7 @@ export const en = {
   offer: {
     eyebrow: "Work",
     title: "What I do",
-    intro: "Three packages. What is included is listed below.",
+    intro: "Three packages. What is included is listed below. Open to permanent employment or projects.",
     deliverables: "Deliverables",
     ideal: "Fits",
     engagement: "Engagement",
@@ -238,7 +238,7 @@ export const en = {
           "A written list of what will not be built",
         ],
         ideal: "Organizations with running IT that need AI framed before implementation.",
-        engagement: "Open to permanent employment or projects.",
+        engagement: "",
       },
       {
         name: "Agentic Engineer",
@@ -249,9 +249,9 @@ export const en = {
           "Agent contract (task, artifact, acceptance) in the form of the public packages",
           "Inspectable state or a checklist — a chat transcript is not acceptance",
         ],
-        ideal: "Teams turning a prototype into a maintainable layer.",
-        engagement:
-          "Open to permanent employment or projects. Graph-Mastermind and Agent Collective are Independent R&D — not a bundled client product.",
+        ideal:
+          "Teams turning a prototype into a maintainable layer. Graph-Mastermind and Agent Collective are Independent R&D — not a bundled client product.",
+        engagement: "",
       },
       {
         name: "Transformation Lead",
@@ -263,7 +263,7 @@ export const en = {
           "Governance frame from regulated delivery (permissions, GDPR) plus EU AI Act orientation",
         ],
         ideal: "Programs that treat modernization and AI as one sequence.",
-        engagement: "Open to permanent employment or projects.",
+        engagement: "",
       },
     ],
   },
@@ -384,8 +384,8 @@ export const en = {
       deutschlandcard: {
         title: "Cloud, identity, integration",
         chip: "Client work · no AI component in the published case",
-        idea: "Paid cloud migration. Not an AI project.",
-        body: "Paid cloudification of a nationwide loyalty program: Spring Boot services on Kubernetes in Azure, sign-in via Azure AD B2C, infrastructure via Terraform. Not an AI project.",
+        idea: "Paid cloud migration.",
+        body: "Paid cloudification of a nationwide loyalty program: Spring Boot services on Kubernetes in Azure, sign-in via Azure AD B2C, infrastructure via Terraform.",
       },
     },
     title: "Three cases — lab and enterprise labeled separately.",
@@ -663,13 +663,13 @@ export const en = {
       landingTitle: "Cloud, identity, integration",
       landingCta: "View the enterprise case",
       oneLiner:
-        "Paid cloudification of the nationwide loyalty program: Azure AD B2C, Terraform, Kubernetes. The case itself is not an AI project.",
+        "Paid cloudification of the nationwide loyalty program: Azure AD B2C, Terraform, Kubernetes.",
       honesty: "No AI/LLM component in the published case. No volume or latency figures (NDA).",
       contribution:
-        "Login journey on Azure AD B2C, Terraform automation, and service cloudification — developer on a team, paid delivery.",
+        "Developer on a team: login journey on Azure AD B2C, Terraform automation, and service cloudification. Paid enterprise delivery.",
       pageTitle: "DeutschlandCard — cloud, identity, Terraform | Peter Henrichs",
       pageDescription:
-        "Enterprise cloudification of the nationwide loyalty program: Azure AD B2C, Terraform, Kubernetes. No AI component, no invented volume metrics.",
+        "Enterprise cloudification of the nationwide loyalty program: Azure AD B2C, Terraform, Kubernetes. No invented volume metrics.",
       context:
         "Nationwide loyalty program (direct services Gütersloh, 2023–2026). Partner onboarding, realtime points, and campaigns had to move into a controllable cloud without cutting existing partner APIs.",
       problem:
@@ -688,11 +688,10 @@ export const en = {
       ],
       outcome:
         "Services in a scalable Azure environment; existing interfaces remain usable. Observed in delivery, not publicly measured. No volume or latency figures (NDA).",
-      role: "Developer on a team — login journey, Terraform automation, service cloudification. Paid enterprise delivery.",
+      role: "",
       evaluation:
-        "No public AI evaluation metrics — the case has no AI/LLM component. Assessment via identity (Azure AD B2C), reproducible infrastructure (Terraform), and partner APIs that stay usable. Critical access stays in existing permission and operations paths.",
-      transfer:
-        "Transferable: identity, APIs, cloud, and governance. The case itself is not an AI project.",
+        "No public AI evaluation metrics. Assessment via identity (Azure AD B2C), reproducible infrastructure (Terraform), and partner APIs that stay usable.",
+      transfer: "Transferable: identity, APIs, cloud, and governance.",
       highlights: [
         "Custom login journey on Azure AD B2C",
         "Terraform-automated cloud infrastructure",
@@ -1082,7 +1081,7 @@ export const en = {
     title: "Talk",
     lead: "Cologne · Germany-wide / remote",
     echo: "Agent layers into running systems — reviewable, with human-in-the-loop.",
-    body: "CV, LinkedIn, and GitHub are ready. I am open to permanent employment or projects.",
+    body: "CV, LinkedIn, and GitHub are ready.",
     email: "Email",
     linkedin: "LinkedIn",
     github: "GitHub",

@@ -9,8 +9,8 @@ export default {
     "en": "DeutschlandCard — Cloud, Identity, Integration"
   },
   "summary": {
-    "de": "Bezahlte Cloudifizierung des bundesweiten Loyalty-Programms: Azure AD B2C, Terraform, Kubernetes. Der Case selbst ist kein AI-Projekt.",
-    "en": "Paid cloudification of the nationwide loyalty program: Azure AD B2C, Terraform, Kubernetes. The case itself is not an AI project."
+    "de": "Bezahlte Cloudifizierung des bundesweiten Loyalty-Programms: Azure AD B2C, Terraform, Kubernetes.",
+    "en": "Paid cloudification of the nationwide loyalty program: Azure AD B2C, Terraform, Kubernetes."
   },
   "period": {
     "from": "2023",

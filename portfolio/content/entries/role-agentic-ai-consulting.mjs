@@ -128,8 +128,8 @@ export default {
         "en": "Organizations with running IT that need AI framed before implementation."
       },
       "engagement": {
-        "de": "Offen für Festanstellung oder Projekte.",
-        "en": "Open to permanent employment or projects."
+        "de": "",
+        "en": ""
       }
     },
     {
@@ -155,12 +155,12 @@ export default {
         ]
       },
       "ideal": {
-        "de": "Teams, die einen Prototyp in eine wartbare Schicht überführen.",
-        "en": "Teams turning a prototype into a maintainable layer."
+        "de": "Teams, die einen Prototyp in eine wartbare Schicht überführen. Graph-Mastermind und Agent Collective sind Independent R&D — kein mitgeliefertes Kundenprodukt.",
+        "en": "Teams turning a prototype into a maintainable layer. Graph-Mastermind and Agent Collective are Independent R&D — not a bundled client product."
       },
       "engagement": {
-        "de": "Offen für Festanstellung oder Projekte. Graph-Mastermind und Agent Collective sind Independent R&D — kein mitgeliefertes Kundenprodukt.",
-        "en": "Open to permanent employment or projects. Graph-Mastermind and Agent Collective are Independent R&D — not a bundled client product."
+        "de": "",
+        "en": ""
       }
     },
     {
@@ -190,8 +190,8 @@ export default {
         "en": "Programs that treat modernization and AI as one sequence."
       },
       "engagement": {
-        "de": "Offen für Festanstellung oder Projekte.",
-        "en": "Open to permanent employment or projects."
+        "de": "",
+        "en": ""
       }
     }
   ],

@@ -796,7 +796,6 @@ function renderOffer(locale) {
           <dl class="pf-offer-dl">
             <div><dt>${esc(o.deliverables)}</dt><dd><ul>${items}</ul></dd></div>
             <div><dt>${esc(o.ideal)}</dt><dd>${esc(pkg.ideal)}</dd></div>
-            <div><dt>${esc(o.engagement)}</dt><dd>${esc(pkg.engagement)}</dd></div>
           </dl>
         </div>
       </article>`;

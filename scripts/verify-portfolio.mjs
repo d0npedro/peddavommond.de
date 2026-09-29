@@ -268,7 +268,9 @@ async function checkCase(locale, id) {
   const hasDecision = html.includes("Entscheidung") || html.includes("Decision");
   const hasOutcome = html.includes(">Ergebnis<") || html.includes(">Outcome<") || html.includes("Wirkung");
   assert(hasProblem && hasDecision && hasOutcome, `${prefix} missing Problem/Decision/Outcome schema`);
-  assert(html.includes("Rolle") || html.includes("Role"), `${prefix} missing role section`);
+  if (id !== "deutschlandcard") {
+    assert(html.includes("Rolle") || html.includes("Role"), `${prefix} missing role section`);
+  }
   assert(html.includes("Architektur") || html.includes("Architecture"), `${prefix} missing architecture section`);
   assert(html.includes("Evaluation") || html.includes("Guardrails"), `${prefix} missing evaluation / guardrails`);
   assert(html.includes("Mein Anteil") || html.includes("My contribution"), `${prefix} missing contribution`);

@@ -190,9 +190,7 @@ function roleEyebrow(locale, entry) {
   if (entry.packages?.length) {
     return locale === "de" ? "Consultant · Pakete" : "Consulting · Packages";
   }
-  const line = entry.engagement?.[locale] ?? "";
-  const head = line.split(/[,.]/)[0].trim();
-  return head || (locale === "de" ? "Rolle" : "Role");
+  return "Java";
 }
 
 function yearOf(entry) {
@@ -383,7 +381,6 @@ function packagesBlock(locale) {
     <dl>
       <div><dt>${esc(offer.deliverables)}</dt><dd><ul>${items}</ul></dd></div>
       <div><dt>${esc(offer.ideal)}</dt><dd>${mark(pkg.ideal)}</dd></div>
-      <div><dt>${esc(offer.engagement)}</dt><dd>${mark(pkg.engagement)}</dd></div>
     </dl>
   </div>
 </article>`;
@@ -416,7 +413,6 @@ export function renderRolePage(locale, slug) {
   <p class="kicker">${esc(roleEyebrow(locale, entry))}</p>
   <h1>${mark(entry.title[locale])}</h1>
   <p class="lede">${mark(entry.summary[locale])}</p>
-  ${slug === "agentic-ai" && entry.engagement ? `<p class="engagement">${mark(entry.engagement[locale])}</p>` : ""}
   ${slug === "agentic-ai" ? listBlock(locale, entry.fits?.[locale], ui.fits) : ""}
   ${javaEngagement}
   ${slug === "java-backend" ? listBlock(locale, entry.proof?.[locale], ui.proof) : ""}
