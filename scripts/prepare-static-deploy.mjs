@@ -60,6 +60,10 @@ async function main() {
   }
   console.log("kept public/index.html as streaming hub landing");
 
+  // Portfolio (content-driven DE/EN + CV) — generated from portfolio/
+  runNode(join(root, "scripts", "build-portfolio.mjs"));
+  runNode(join(root, "scripts", "verify-portfolio.mjs"));
+
   // Agent Collective → public/multi-agent/ (embed)
   runNode(join(root, "scripts", "embed-multi-agent.mjs"));
 
