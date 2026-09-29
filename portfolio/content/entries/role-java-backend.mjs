@@ -10,8 +10,8 @@ export default {
     "en": "Senior Backend Java Engineer · AI-assisted"
   },
   "summary": {
-    "de": "Durchgehend seit 05/2018 entwickle ich Java-Backends mit Spring Boot in bezahlten Projekten: Microservices, REST-Schnittstellen zu Bestandssystemen, Container auf Kubernetes und OpenShift, Pipelines bis in den Betrieb. Gewachsenen Code verstehe ich, indem ich ihn lese: Architektur, Seiteneffekte und die Gründe, warum etwas so gebaut wurde. Heute arbeite ich KI-gestützt. Fehlersuche und Korrekturschleifen werden deutlich kürzer, und jede Änderung bleibt reviewbar.",
-    "en": "Continuously since 05/2018 I have built Java backends with Spring Boot in paid projects: microservices, REST interfaces to existing systems, containers on Kubernetes and OpenShift, pipelines through to operations. I understand grown code by reading it: architecture, side effects, and why things were built the way they are. Today I work AI-assisted. Bug hunting and fix loops get much shorter, and every change stays reviewable."
+    "de": "Durchgehend seit 05/2018 entwickle ich Java-Backends mit Spring Boot in bezahlten Projekten: Microservices, REST-Schnittstellen zu Bestandssystemen, Container auf Kubernetes und OpenShift, Pipelines bis in den Betrieb. Gewachsenen Code verstehe ich, indem ich ihn lese: Architektur, Seiteneffekte und die Gründe, warum etwas so gebaut wurde. Heute arbeite ich KI-gestützt. Fehlersuche und Korrekturschleifen werden kürzer, und jede Änderung bleibt reviewbar.",
+    "en": "Continuously since 05/2018 I have built Java backends with Spring Boot in paid projects: microservices, REST interfaces to existing systems, containers on Kubernetes and OpenShift, pipelines through to operations. I understand grown code by reading it: architecture, side effects, and why things were built the way they are. Today I work AI-assisted. Bug hunting and fix loops get shorter, and every change stays reviewable."
   },
   "metaDescription": {
     "de": "Java-Backends mit Spring Boot, Java durchgehend seit 05/2018: Microservices, REST, Container auf Kubernetes und OpenShift, Pipelines und Monitoring. KI-gestützt, jede Änderung reviewbar.",
@@ -91,8 +91,8 @@ export default {
     ]
   },
   "engagement": {
-    "de": "Engineering-Seat, direkt oder über eine Agentur.",
-    "en": "Engineering seat, direct or through an agency."
+    "de": "Offen für Festanstellung oder Projekte.",
+    "en": "Open to permanent employment or projects."
   },
   "relations": {
     "cases": [
@@ -124,8 +124,8 @@ export default {
       "kind": "anchor",
       "href": "#angebot",
       "label": {
-        "de": "Direkt zum Angebot",
-        "en": "Straight to the offer"
+        "de": "Was ich mache",
+        "en": "What I do"
       }
     }
   ],

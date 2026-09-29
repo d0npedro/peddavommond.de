@@ -97,8 +97,8 @@ export default {
     "source": "portfolio/shared.mjs EXPERIENCE + EDUCATION (main)"
   },
   "engagement": {
-    "de": "Über die Agentur — Architektur-Begleitung auf Zeit, Engineering-Einsatz im Team der Agentur oder des Kunden, oder Programm-Begleitung. Kein Freelancer-Retainer, keine freien Slots.",
-    "en": "Through the agency — time-boxed architecture support, engineering seat on the agency or client team, or program accompaniment. No freelancer retainer, no open slots."
+    "de": "Offen für Festanstellung oder Projekte.",
+    "en": "Open to permanent employment or projects."
   },
   "packages": [
     {
@@ -128,8 +128,8 @@ export default {
         "en": "Organizations with running IT that need AI framed before implementation."
       },
       "engagement": {
-        "de": "Über die Agentur — Architektur-Begleitung auf Zeit oder Vermittlung in ein Kundenteam.",
-        "en": "Through the agency — time-boxed architecture support or placement into a client team."
+        "de": "Offen für Festanstellung oder Projekte.",
+        "en": "Open to permanent employment or projects."
       }
     },
     {
@@ -159,8 +159,8 @@ export default {
         "en": "Teams turning a prototype into a maintainable layer."
       },
       "engagement": {
-        "de": "Engineering-Einsatz im Team der Agentur oder des Kunden. Graph-Mastermind und Agent Collective sind Independent R&D — kein mitgeliefertes Kundenprodukt.",
-        "en": "Engineering seat on the agency or client team. Graph-Mastermind and Agent Collective are Independent R&D — not a bundled client product."
+        "de": "Offen für Festanstellung oder Projekte. Graph-Mastermind und Agent Collective sind Independent R&D — kein mitgeliefertes Kundenprodukt.",
+        "en": "Open to permanent employment or projects. Graph-Mastermind and Agent Collective are Independent R&D — not a bundled client product."
       }
     },
     {
@@ -190,8 +190,8 @@ export default {
         "en": "Programs that treat modernization and AI as one sequence."
       },
       "engagement": {
-        "de": "Programm-Begleitung über die Agentur.",
-        "en": "Program accompaniment through the agency."
+        "de": "Offen für Festanstellung oder Projekte.",
+        "en": "Open to permanent employment or projects."
       }
     }
   ],
@@ -216,8 +216,8 @@ export default {
       "kind": "anchor",
       "href": "#angebot",
       "label": {
-        "de": "Direkt zum Angebot",
-        "en": "Straight to the offer"
+        "de": "Was ich mache",
+        "en": "What I do"
       }
     }
   ],
