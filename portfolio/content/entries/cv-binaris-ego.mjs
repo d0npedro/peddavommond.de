@@ -6,7 +6,7 @@ export default {
   "order": 200,
   "priority": 50,
   "title": {
-    "de": "Entwickler / Berater · binaris Informatik GmbH (for Valtech Mobility GmbH)",
+    "de": "Entwickler / Berater · binaris Informatik GmbH (für Valtech Mobility GmbH)",
     "en": "Developer / Consultant · binaris Informatik GmbH (for Valtech Mobility GmbH)"
   },
   "summary": {
@@ -18,7 +18,10 @@ export default {
     "to": "2018-08"
   },
   "periodLabel": "05/2018 – 08/2018",
-  "company": "binaris Informatik GmbH (for Valtech Mobility GmbH)",
+  "company": {
+    "de": "binaris Informatik GmbH (für Valtech Mobility GmbH)",
+    "en": "binaris Informatik GmbH (for Valtech Mobility GmbH)"
+  },
   "role": {
     "de": "Entwickler / Berater",
     "en": "Developer / Consultant"

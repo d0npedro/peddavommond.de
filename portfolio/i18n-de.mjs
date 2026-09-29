@@ -222,8 +222,8 @@ export const de = {
   },
   offer: {
     eyebrow: "Arbeit",
-    title: "Was ich mache",
-    intro: "Drei Pakete. Was dazugehört, steht darunter. Offen für Festanstellung oder Projekte.",
+    title: "Drei Schwerpunkte",
+    intro: "Was dazugehört, steht darunter.",
     deliverables: "Liefergegenstände",
     ideal: "Passt zu",
     engagement: "Einsatz",
@@ -480,7 +480,7 @@ export const de = {
     problem: "Problem / Geschäftskontext",
     context: "Kontext",
     decision: "Entscheidung / Trade-off",
-    outcome: "Ergebnis",
+    outcome: "Ergebnisse",
     role: "Rolle & Verantwortung",
     evidence: "Belege",
     ownWork: "Eigener Anteil",
@@ -500,7 +500,7 @@ export const de = {
     team: "Team",
     data: "Daten",
     code: "Code",
-    result: "Ergebnis",
+    result: "Ergebnisse",
     statusValues: {
       production: "Produktion",
       prototype: "Prototyp",
@@ -510,7 +510,7 @@ export const de = {
     },
     teamValues: {
       solo: "Solo",
-      team: "Team",
+      team: "Entwickler im Team",
     },
     dataValues: {
       real: "echte Daten (nicht öffentlich)",
@@ -1084,6 +1084,7 @@ export const de = {
     lead: "Köln · deutschlandweit / Remote",
     echo: "Agenten-Schichten in laufende Systeme — prüfbar, mit Human-in-the-Loop.",
     body: "Lebenslauf, LinkedIn und GitHub liegen bereit.",
+    availability: "Offen für Festanstellung oder Projekte.",
     email: "E-Mail",
     linkedin: "LinkedIn",
     github: "GitHub",

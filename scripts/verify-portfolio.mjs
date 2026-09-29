@@ -266,7 +266,7 @@ async function checkCase(locale, id) {
   assert(html.includes("Senior AI Consultant"), `${prefix} missing positioning`);
   const hasProblem = html.includes(">Problem<") || html.includes("Problem");
   const hasDecision = html.includes("Entscheidung") || html.includes("Decision");
-  const hasOutcome = html.includes(">Ergebnis<") || html.includes(">Outcome<") || html.includes("Wirkung");
+  const hasOutcome = html.includes(">Ergebnisse<") || html.includes(">Outcomes<") || html.includes("Wirkung");
   assert(hasProblem && hasDecision && hasOutcome, `${prefix} missing Problem/Decision/Outcome schema`);
   if (id !== "deutschlandcard") {
     assert(html.includes("Rolle") || html.includes("Role"), `${prefix} missing role section`);
@@ -363,7 +363,8 @@ async function checkStage1() {
       if (slug === "agentic-ai") {
         assert(html.includes("peter.henrichs@web.de"), `${rel} missing email`);
         assert(html.includes("Senior AI Consultant") && html.includes("Agentic Engineer") && html.includes("Transformation Lead"), `${rel} missing the three packages`);
-        assert(html.includes(locale === "de" ? "Consultant · Pakete" : "Consulting · Packages"), `${rel} eyebrow must describe consulting packages`);
+        assert(html.includes(locale === "de" ? "Offen für Festanstellung oder Projekte" : "Open to permanent employment or projects"), `${rel} eyebrow states the engagement once`);
+        assert(!html.includes(locale === "de" ? "Consultant · Pakete" : "Consulting · Packages"), `${rel} eyebrow still says packages`);
         assert(!html.includes("z. B. adesso") && !html.includes("e.g. adesso"), `${rel} still names adesso in the offer intro`);
         const honesty = locale === "de" ? "Keine erfundenen Kundenergebnisse" : "No invented client outcomes";
         assert(!html.includes(honesty), `${rel} still has the meta-honesty line`);
@@ -372,7 +373,7 @@ async function checkStage1() {
         assert(html.includes('id="einsatz"'), `${rel} missing engagement anchor`);
         assert(html.includes(`/portfolio/${locale}/kontakt/`), `${rel} engagement must link to kontakt`);
         assert(html.includes(locale === "de" ? "Offen für Festanstellung oder Projekte" : "Open to permanent employment or projects"), `${rel} eyebrow must use the entry engagement form`);
-        assert(html.includes(locale === "de" ? "Lebenslauf · Stationen" : "Career · stations"), `${rel} proof source must be a human link`);
+        assert(html.includes(locale === "de" ? "Lebenslauf · Stationen" : "CV · stations"), `${rel} proof source must be a human link`);
         assert(html.includes(`href="/portfolio/${locale}/lebenslauf/"`), `${rel} proof source must link to the timeline`);
         assert(!/Rolle · Anstellung|Role · Employment/.test(html), `${rel} still labels the role as employment`);
       }

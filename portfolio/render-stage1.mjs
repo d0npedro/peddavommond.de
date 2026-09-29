@@ -68,7 +68,8 @@ const UI = {
     approach: "Vorgehen",
     proof: "Nachweise aus Projekten",
     email: "E-Mail",
-    fits: "Passt",
+    fits: "Passt zu",
+    outcomes: "Ergebnisse",
     notFits: "Passt nicht",
     related: "Verknüpft",
     roleKicker: "Rolle",
@@ -84,7 +85,7 @@ const UI = {
       schnitt: "Schnitt",
       umsetzung: "Umsetzung",
       nachweis: "Nachweis",
-      ergebnis: "Ergebnis",
+      ergebnis: "Ergebnisse",
     },
     linkKind: { repo: "Repository", demo: "Live-Demo", anchor: "Link" },
   },
@@ -92,24 +93,24 @@ const UI = {
     navLabel: "Portfolio",
     roleShort: "Agentic AI",
     javaShort: "Java Backend",
-    timelineNav: "Career",
+    timelineNav: "CV",
     contactNav: "Contact",
     lang: "Language",
     skip: "Skip to content",
-    timelineTitle: "Career",
+    timelineTitle: "CV",
     timelineLede:
       "Stations, cases and experiments — scrubbable by year. Independent R&D and client work are labeled separately.",
     menu: "Menu",
     engagementTitle: "Engagement",
     contactCta: "Contact",
-    stations: "Career · stations",
+    stations: "CV · stations",
     placeholderNote:
       "Square brackets are open placeholders. They stay until a real figure with a source exists.",
     yearRail: "Year rail",
     chooseYear: "Choose year",
     openDive: "Open deep dive",
     close: "Close",
-    backTimeline: "Back to the career timeline",
+    backTimeline: "Back to the CV",
     source: "Source",
     placeholder: "Placeholder",
     tasks: "Tasks",
@@ -119,7 +120,8 @@ const UI = {
     approach: "How I work",
     proof: "Evidence from projects",
     email: "Email",
-    fits: "Fits",
+    fits: "Good fit",
+    outcomes: "Outcomes",
     notFits: "Does not fit",
     related: "Related",
     roleKicker: "Role",
@@ -135,7 +137,7 @@ const UI = {
       schnitt: "Cut",
       umsetzung: "Implementation",
       nachweis: "Evidence",
-      ergebnis: "Result",
+      ergebnis: "Outcomes",
     },
     linkKind: { repo: "Repository", demo: "Live demo", anchor: "Link" },
   },
@@ -186,11 +188,13 @@ function isInternalSource(source) {
   return /\.mjs|\(main\)|\bportfolio\//.test(String(source ?? ""));
 }
 
+function companyText(company, locale) {
+  if (company && typeof company === "object") return company[locale] ?? company.de ?? "";
+  return company ?? "";
+}
+
 function roleEyebrow(locale, entry) {
-  if (entry.packages?.length) {
-    return locale === "de" ? "Consultant · Pakete" : "Consulting · Packages";
-  }
-  return "Java";
+  return entry.engagement?.[locale] ?? "";
 }
 
 function yearOf(entry) {
@@ -343,7 +347,7 @@ function resultBlock(locale, entry) {
   } else if (result.source && !isInternalSource(result.source)) {
     source = `<span class="src">${esc(ui.source)}: ${esc(result.source)}</span>`;
   }
-  return `<div class="result">${mark(result[locale])}${source}</div>`;
+  return `<div class="result"><p class="kicker">${esc(ui.outcomes)}</p>${mark(result[locale])}${source}</div>`;
 }
 
 function relatedBlock(locale, entry) {
@@ -403,7 +407,6 @@ export function renderRolePage(locale, slug) {
   const javaEngagement = slug === "java-backend"
     ? `<section id="einsatz" class="block" tabindex="-1">
   <h2>${esc(ui.engagementTitle)}</h2>
-  <p>${mark(entry.engagement[locale])}</p>
   ${listBlock(locale, entry.fits?.[locale], ui.fits)}
   <p class="contact-line"><a class="btn" href="${esc(contactHref(locale))}">${esc(ui.contactCta)}</a></p>
 </section>`
@@ -441,7 +444,8 @@ function entryCard(locale, entry, { current = false } = {}) {
   const ui = UI[locale];
   const year = yearOf(entry);
   const flag = entry.placeholder ? `<span class="placeholder-flag">${esc(ui.placeholder)}</span>` : "";
-  const company = entry.company ? `<p class="company">${mark(entry.company)}</p>` : "";
+  const companyName = companyText(entry.company, locale);
+  const company = companyName ? `<p class="company">${mark(companyName)}</p>` : "";
   const here = current ? ' aria-current="true"' : "";
   return `<a class="entry-card" id="${esc(entry.id)}" href="${esc(diveHref(locale, entry.id))}" data-id="${esc(entry.id)}" data-year="${esc(year)}"${here}>
   <p class="meta"><span>${esc(ui.type[entry.type] ?? entry.type)}</span><span class="honesty-${esc(entry.honesty)}">${esc(ui.honesty[entry.honesty] ?? entry.honesty)}</span><span>${mark(periodLabel(entry, locale))}</span>${flag}</p>
@@ -475,7 +479,7 @@ function publicEntry(locale, entry) {
     summary: entry.summary[locale],
     periodLabel: periodLabel(entry, locale),
     year: yearOf(entry),
-    company: entry.company ?? "",
+    company: companyText(entry.company, locale),
     stack: entry.stack ?? [],
     tasks: entry.tasks?.[locale]?.filter(Boolean) ?? [],
     result: entry.result
@@ -598,7 +602,8 @@ export function renderDeepDivePage(locale, id) {
     ? `<img class="preview-media" src="${esc(entry.media.preview)}" alt="${esc(entry.media.alt?.[locale] ?? "")}" loading="lazy" decoding="async"/>`
     : "";
   const flag = entry.placeholder ? `<p class="placeholder-flag">${esc(ui.placeholder)}</p>` : "";
-  const company = entry.company ? ` · ${mark(entry.company)}` : "";
+  const companyName = companyText(entry.company, locale);
+  const company = companyName ? ` · ${mark(companyName)}` : "";
   const body = `<div id="deep-dive" class="deep-dive is-static" role="dialog" aria-modal="true" aria-labelledby="dd-title" open>
   <a class="skip" href="#dd-title">${esc(ui.skip)}</a>
   <div class="dd-bar">
@@ -642,6 +647,7 @@ export function renderContactPage(locale) {
   <p class="kicker">${esc(ui.contactNav)}</p>
   <h1>${esc(ui.contactTitle)}</h1>
   <p class="lede">${esc(ui.contactLede)}</p>
+  <p>${esc(copy(locale).footer.availability)}</p>
   <ul class="contact-list">
     <li><span>${esc(ui.email)}</span><a href="mailto:${esc(SITE.email)}">${esc(SITE.email)}</a></li>
     <li><span>LinkedIn</span><a href="${esc(SITE.linkedin)}" target="_blank" rel="noopener noreferrer">${esc(SITE.linkedin)}</a></li>

@@ -222,10 +222,10 @@ export const en = {
   },
   offer: {
     eyebrow: "Work",
-    title: "What I do",
-    intro: "Three packages. What is included is listed below. Open to permanent employment or projects.",
+    title: "Three focus areas",
+    intro: "What is included is listed below.",
     deliverables: "Deliverables",
-    ideal: "Fits",
+    ideal: "Good fit",
     engagement: "Engagement",
     packages: [
       {
@@ -315,7 +315,7 @@ export const en = {
     more: "All stations in the CV",
     items: {
       builder: {
-        title: "Engineer & ownership",
+        title: "Development & ownership",
         body: "Six live portals end to end: build, operations, intranet. The base for later system ownership.",
       },
       enterprise: {
@@ -480,7 +480,7 @@ export const en = {
     problem: "Problem / business context",
     context: "Context",
     decision: "Decision / trade-off",
-    outcome: "Outcome",
+    outcome: "Outcomes",
     role: "Role & ownership",
     evidence: "Evidence",
     ownWork: "Own work",
@@ -500,7 +500,7 @@ export const en = {
     team: "Team",
     data: "Data",
     code: "Code",
-    result: "Result",
+    result: "Outcomes",
     statusValues: {
       production: "Production",
       prototype: "Prototype",
@@ -510,7 +510,7 @@ export const en = {
     },
     teamValues: {
       solo: "Solo",
-      team: "Team",
+      team: "Developer in a team",
     },
     dataValues: {
       real: "real data (not public)",
@@ -1082,6 +1082,7 @@ export const en = {
     lead: "Cologne · Germany-wide / remote",
     echo: "Agent layers into running systems — reviewable, with human-in-the-loop.",
     body: "CV, LinkedIn, and GitHub are ready.",
+    availability: "Open to permanent employment or projects.",
     email: "Email",
     linkedin: "LinkedIn",
     github: "GitHub",

@@ -541,7 +541,10 @@ export const EXPERIENCE = [
     id: "binaris-ego",
     period: "05/2018 – 08/2018",
     start: "2018-05",
-    company: "binaris Informatik GmbH (for Valtech Mobility GmbH)",
+    company: {
+      de: "binaris Informatik GmbH (für Valtech Mobility GmbH)",
+      en: "binaris Informatik GmbH (for Valtech Mobility GmbH)",
+    },
     tech: [
       "Spring Boot",
       "Java",

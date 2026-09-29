@@ -408,8 +408,9 @@ function renderEducation(locale) {
   </section>`;
 }
 
-function renderFooter(locale) {
+function renderFooter(locale, { availability = false } = {}) {
   const t = copy(locale);
+  const availabilityLine = availability ? `<p>${esc(t.footer.availability)}</p>` : "";
   return `<section id="contact" class="pf-footer relative scroll-mt-24">
     <div class="container relative py-20 md:py-28">
       <div class="pf-enter" data-reveal>
@@ -418,6 +419,7 @@ function renderFooter(locale) {
       </div>
       <p class="pf-location">${esc(t.footer.lead)}</p>
       <p class="pf-contact-echo">${esc(t.footer.echo)}</p>
+      ${availabilityLine}
       <div class="mt-10 pf-contact-row pf-contact-row--checkout">
         <a class="pf-cta pf-cta--primary" href="mailto:${attr(SITE.email)}">${esc(SITE.email)}</a>
         <a class="secondary" href="${attr(SITE.linkedin)}" target="_blank" rel="noopener noreferrer">${esc(t.footer.linkedin)}</a>
@@ -907,7 +909,7 @@ ${renderSelectedCases(locale)}
 ${renderCollectiveSample(locale)}
 ${renderRecord(locale)}
 </main>
-${renderFooter(locale)}
+${renderFooter(locale, { availability: true })}
 ${renderCraftCredit(locale)}
 ${pageScripts()}
 </body>
@@ -929,7 +931,8 @@ export function renderCv(locale) {
     .join("");
   const jobs = EXPERIENCE.map((item) => {
     const entry = t.experience.entries[item.id];
-    return `<article class="mb-4"><p class="font-mono text-xs text-faint">${esc(item.period)}</p><h3 class="font-semibold text-fg">${esc(entry.role)} — ${esc(item.company)}</h3>${entry.project ? `<p class="text-sm text-muted">${esc(entry.project)}</p>` : ""}<p class="mt-1 text-sm">${esc(entry.mission)}</p></article>`;
+    const company = item.company && typeof item.company === "object" ? item.company[locale] ?? item.company.de ?? "" : item.company;
+    return `<article class="mb-4"><p class="font-mono text-xs text-faint">${esc(item.period)}</p><h3 class="font-semibold text-fg">${esc(entry.role)} — ${esc(company)}</h3>${entry.project ? `<p class="text-sm text-muted">${esc(entry.project)}</p>` : ""}<p class="mt-1 text-sm">${esc(entry.mission)}</p></article>`;
   }).join("");
   return `<!DOCTYPE html>
 <html lang="${locale}" class="__variable_3f18cd __variable_f3e80d light">

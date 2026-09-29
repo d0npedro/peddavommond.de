@@ -75,19 +75,17 @@ export default {
       "Spring Boot seit 2018 in bezahlten Projekten: Werkstatt-Services für ein E-Auto, E-Akte für die öffentliche Verwaltung, Online-Geschäftsstelle gesetzlicher Krankenkassen, APIs für Behörden-Apps, ein bundesweites Bonusprogramm.",
       "Microservices: Redesign kleiner, unabhängig auslieferbarer Services bei der Migration einer Bank-Vertriebsplattform (Lead-Dev/DevOps, 2020), Java-Microservices für Werkstatt-Services (2018), wiederverwendbare Beispielanwendungen für eine Microservice-Plattform (2020).",
       "Schnittstellen: REST zu Bestandssystemen bei Krankenkassen und Bank, REST und OpenAPI bei den Behörden-APIs, Kafka im Stack der Bankplattform.",
-      "Container und Betrieb: Docker in den meisten Stationen seit 2018, Kubernetes für die Werkstatt-Services und im Bonusprogramm auf Azure, OpenShift-Umgebungen verwaltet, Infrastruktur per Terraform, Monitoring mit Prometheus, Grafana und Dynatrace.",
+      "Container und Betrieb: Docker in den meisten Stationen seit 2018, Kubernetes für die Werkstatt-Services und im Bonusprogramm auf Azure, OpenShift-Umgebungen verwaltet, Infrastruktur per Terraform, Monitoring mit Prometheus, Grafana und Dynatrace, dazu wiederkehrende Tagesend-Prozesse auf Apache Airflow, zum Beispiel Kassendaten von Partnerunternehmen.",
       "Pipelines und Qualität: Jenkins mit Shared Libraries, mehrstufige Build-Pipelines auf OpenShift, SonarQube als Quality Gate.",
-      "Arbeitsweise: Scrum-Teams in vier Stationen, Rollen vom Entwickler bis zum Lead-Dev/DevOps.",
-      "Batch-Verarbeitung: wiederkehrende Tagesend-Prozesse auf Apache Airflow, zum Beispiel Kassendaten von Partnerunternehmen."
+      "Arbeitsweise: Scrum-Teams in vier Stationen, Rollen vom Entwickler bis zum Lead-Dev/DevOps."
     ],
     "en": [
       "Spring Boot in paid projects since 2018: workshop services for an electric car, e-records for public administration, an online service office for statutory health insurers, APIs for government mobile apps, a nationwide loyalty program.",
       "Microservices: redesign of small, independently shippable services while migrating a bank's sales platform (lead dev/DevOps, 2020), Java microservices for workshop services (2018), reusable sample applications for a microservice platform (2020).",
       "Interfaces: REST to existing systems for health insurers and a bank, REST and OpenAPI for the government APIs, Kafka in the banking platform's stack.",
-      "Containers and operations: Docker in most engagements since 2018, Kubernetes for the workshop services and for the loyalty program on Azure, OpenShift environments managed, infrastructure via Terraform, monitoring with Prometheus, Grafana, and Dynatrace.",
+      "Containers and operations: Docker in most engagements since 2018, Kubernetes for the workshop services and for the loyalty program on Azure, OpenShift environments managed, infrastructure via Terraform, monitoring with Prometheus, Grafana, and Dynatrace, plus recurring end-of-day processes on Apache Airflow, for example partner companies' cash-register data.",
       "Pipelines and quality: Jenkins with shared libraries, multi-stage build pipelines on OpenShift, SonarQube as a quality gate.",
-      "Way of working: Scrum teams in four engagements, roles from developer to lead dev/DevOps.",
-      "Batch processing: recurring end-of-day processes on Apache Airflow, for example partner companies' cash-register data."
+      "Way of working: Scrum teams in four engagements, roles from developer to lead dev/DevOps."
     ]
   },
   "engagement": {
