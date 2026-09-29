@@ -373,7 +373,7 @@ async function checkStage1() {
         assert(html.includes('id="einsatz"'), `${rel} missing engagement anchor`);
         assert(html.includes(`/portfolio/${locale}/kontakt/`), `${rel} engagement must link to kontakt`);
         assert(html.includes(locale === "de" ? "Offen für Festanstellung oder Projekte" : "Open to permanent employment or projects"), `${rel} eyebrow must use the entry engagement form`);
-        assert(html.includes(locale === "de" ? "Lebenslauf · Stationen" : "CV · stations"), `${rel} proof source must be a human link`);
+        assert(html.includes(locale === "de" ? "Lebenslauf · Stationen" : "CV · roles"), `${rel} proof source must be a human link`);
         assert(html.includes(`href="/portfolio/${locale}/lebenslauf/"`), `${rel} proof source must link to the timeline`);
         assert(!/Rolle · Anstellung|Role · Employment/.test(html), `${rel} still labels the role as employment`);
       }

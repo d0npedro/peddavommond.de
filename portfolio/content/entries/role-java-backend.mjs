@@ -11,11 +11,11 @@ export default {
   },
   "summary": {
     "de": "Seit 05/2018 entwickle ich Java-Backends in bezahlten Projekten, meist mit Spring Boot: Microservices, REST-Schnittstellen zu Bestandssystemen, Container auf Kubernetes und OpenShift, Pipelines bis in den Betrieb. Gewachsenen Code verstehe ich, indem ich ihn lese: Architektur, Seiteneffekte und die Gründe, warum etwas so gebaut wurde. Heute arbeite ich KI-gestützt. Fehlersuche und Korrekturschleifen werden kürzer, und jede Änderung bleibt reviewbar.",
-    "en": "Since 05/2018 I have built Java backends in paid projects, mostly with Spring Boot: microservices, REST interfaces to existing systems, containers on Kubernetes and OpenShift, pipelines through to operations. I understand grown code by reading it: architecture, side effects, and why things were built the way they are. Today I work AI-assisted. Bug hunting and fix loops get shorter, and every change stays reviewable."
+    "en": "Since 05/2018 I have built Java backends in paid projects, mostly with Spring Boot: microservices, REST interfaces to existing systems, containers on Kubernetes and OpenShift, pipelines through to operations. I understand legacy code by reading it: architecture, side effects, and why things were built the way they are. Today I work AI-assisted. Bug hunting and fix loops get shorter, and every change stays reviewable."
   },
   "metaDescription": {
     "de": "Java seit 05/2018 in zehn von elf Stationen. Microservices, REST, Container auf Kubernetes und OpenShift, Pipelines und Monitoring. KI-gestützt, jede Änderung reviewbar.",
-    "en": "Java since 05/2018 in ten of eleven engagements. Microservices, REST, containers on Kubernetes and OpenShift, pipelines and monitoring. AI-assisted, every change reviewable."
+    "en": "Java since 05/2018 in ten of eleven roles. Microservices, REST, containers on Kubernetes and OpenShift, pipelines and monitoring. AI-assisted, every change reviewable."
   },
   "topics": [
     "java",
@@ -43,7 +43,7 @@ export default {
     "en": [
       "evolve or stabilize running Spring Boot services: microservices, REST, messaging, containers",
       "a team needs senior capacity without cutting corners on tests and review",
-      "grown code must be understood and changed safely"
+      "legacy code must be understood and changed safely"
     ]
   },
   "notFits": {
@@ -114,7 +114,7 @@ export default {
   },
   "result": {
     "de": "Java in zehn von elf Stationen seit 05/2018, Spring Boot in sieben davon.",
-    "en": "Java in ten of eleven engagements since 05/2018, Spring Boot in seven of them.",
+    "en": "Java in ten of eleven roles since 05/2018, Spring Boot in seven of them.",
     "source": "portfolio/shared.mjs EXPERIENCE (main)"
   },
   "links": [

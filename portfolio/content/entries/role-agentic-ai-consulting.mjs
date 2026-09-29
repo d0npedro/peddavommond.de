@@ -31,22 +31,22 @@ export default {
     "de": [
       "Organisationen mit laufender IT, die AI einordnen müssen, bevor sie implementieren.",
       "Teams, die einen Prototyp in eine wartbare Schicht überführen.",
-      "Programme, die Modernisierung und AI zusammen denken."
+      "Projekte, in denen alte Systeme modernisiert werden und AI dazukommt."
     ],
     "en": [
       "Organizations with running IT that need AI framed before implementation.",
       "Teams turning a prototype into a maintainable layer.",
-      "Programs that treat modernization and AI as one sequence."
+      "Projects where old systems are modernized and AI is added."
     ]
   },
   "notFits": {
     "de": [
-      "Tool-Pitch ohne schriftliche Grenze zum bestehenden System.",
+      "Wenn nur ein Tool vorgeführt werden soll und keiner festlegt, was es darf.",
       "Autonome Agents ohne Abnahme und Human-in-the-Loop.",
       "Zahlen versprechen, bevor es eine Messbasis gibt."
     ],
     "en": [
-      "Tool pitches without a written boundary against the existing system.",
+      "When someone just wants a tool demo and nobody defines what it may do.",
       "Autonomous agents without acceptance and Human-in-the-Loop.",
       "Promising numbers before there is a way to measure them."
     ]
@@ -58,8 +58,8 @@ export default {
       "Schriftliche Liste dessen, was nicht gebaut wird",
       "Zielarchitektur mit Integrationspunkten (APIs, Identität, Pipelines), Abnahme und Human-in-the-Loop",
       "Agent-Vertrag (Aufgabe, Artefakt, Abnahme) in der Form der öffentlichen Pakete",
-      "Prüfbarer Zustand oder Checkliste — ein Chatprotokoll ist keine Abnahme",
-      "Betriebsmodell: wer freigibt, wer eingreift, wann ein Mensch übernimmt — keine autonome Organisation",
+      "Prüfbarer Zustand oder Checkliste — Abgenommen wird über Tests und Logs, nicht über einen Chatverlauf.",
+      "Betriebsmodell: wer freigibt, wer eingreift, wann ein Mensch übernimmt.",
       "Erfolgskriterien vor dem Bau: Messgrößen wie Abnahmequote, Review-Aufwand und Regressionen — Zahlen erst, wenn gemessen",
       "Governance-Rahmen aus regulierter Delivery (Berechtigungen, DSGVO) plus EU-AI-Act-Orientierung"
     ],
@@ -69,8 +69,8 @@ export default {
       "A written list of what will not be built",
       "Target architecture with integration points (APIs, identity, pipelines), acceptance, and human-in-the-loop",
       "Agent contract (task, artifact, acceptance) in the form of the public packages",
-      "Inspectable state or a checklist — a chat transcript is not acceptance",
-      "Operating model: who approves, who steps in, when a human takes over — not an autonomous organization",
+      "Inspectable state or a checklist — Acceptance is based on tests and logs, not on a chat history.",
+      "Operating model: who approves, who steps in, when a human takes over.",
       "Success criteria before building: measures such as acceptance rate, review effort, and regressions — numbers only once measured",
       "Governance frame from regulated delivery (permissions, GDPR) plus EU AI Act orientation"
     ]
@@ -81,14 +81,14 @@ export default {
       "Schneiden: festlegen, wo ein Agent handelt, wo das bestehende System den Prozess schon trägt und was bewusst nicht gebaut wird.",
       "Zielarchitektur: Anbindung an vorhandene APIs, Identität und Pipelines. Abnahme und Human-in-the-Loop gehören in die Architektur, nicht in einen späteren Nachtrag. Die Arbeitsverträge (AGENT.md, SPEC.md, CHECKLIST.md) sind wiederverwendbar, siehe Graph-Mastermind.",
       "Betrieb und Verantwortung: wer freigibt, wer eingreift, wann ein Mensch übernimmt. Berechtigungen und DSGVO aus regulierter Delivery, EU AI Act als Rahmen.",
-      "Erfolg messbar machen: Messgrößen vor dem Bau festlegen, etwa Abnahmequote, Review-Aufwand, Regressionen und Kosten pro akzeptierter Änderung. Zahlen gibt es erst, wenn sie gemessen sind."
+      "Erfolg messbar machen: Messgrößen vor dem Bau festlegen, etwa Abnahmequote, Review-Aufwand, Regressionen und Kosten pro akzeptierter Änderung."
     ],
     "en": [
       "Assess: collect use cases and rank them by value, feasibility against the systems in place, data and access situation, and risk. The result is an order with reasons.",
       "Cut: decide where an agent acts, where the existing system already carries the process, and what will deliberately not be built.",
       "Target architecture: connect to existing APIs, identity, and pipelines. Acceptance and human-in-the-loop belong in the architecture, not in a later add-on. The work contracts (AGENT.md, SPEC.md, CHECKLIST.md) are reusable; see Graph-Mastermind.",
       "Operations and ownership: who approves, who steps in, when a human takes over. Permissions and GDPR from regulated delivery, the EU AI Act as the frame.",
-      "Make success measurable: fix the measures before building, such as acceptance rate, review effort, regressions, and cost per accepted change. Numbers only once they are measured."
+      "Make success measurable: fix the measures before building, such as acceptance rate, review effort, regressions, and cost per accepted change."
     ]
   },
   "result": {
@@ -108,8 +108,8 @@ export default {
         "en": "Senior AI Consultant"
       },
       "scope": {
-        "de": "Anwendungsfälle bewerten und gegen die Systeme schneiden, die schon laufen, bevor gebaut wird. Schriftliche Grenze statt Tool-Pitch.",
-        "en": "Assess use cases and cut them against the systems that already run, before anyone builds. A written boundary, not a tool pitch."
+        "de": "Anwendungsfälle bewerten und gegen die Systeme schneiden, die schon laufen, bevor gebaut wird. Vorher schriftlich festlegen, was der Agent darf und was nicht.",
+        "en": "Assess use cases and cut them against the systems that already run, before anyone builds. Agree in writing beforehand what the agent may and may not do."
       },
       "deliverables": {
         "de": [
@@ -146,12 +146,12 @@ export default {
         "de": [
           "Zielarchitektur mit Integrationspunkten (APIs, Identität, Pipelines), Abnahme und Human-in-the-Loop",
           "Agent-Vertrag (Aufgabe, Artefakt, Abnahme) in der Form der öffentlichen Pakete",
-          "Prüfbarer Zustand oder Checkliste — ein Chatprotokoll ist keine Abnahme"
+          "Prüfbarer Zustand oder Checkliste — Abgenommen wird über Tests und Logs, nicht über einen Chatverlauf."
         ],
         "en": [
           "Target architecture with integration points (APIs, identity, pipelines), acceptance, and human-in-the-loop",
           "Agent contract (task, artifact, acceptance) in the form of the public packages",
-          "Inspectable state or a checklist — a chat transcript is not acceptance"
+          "Inspectable state or a checklist — Acceptance is based on tests and logs, not on a chat history."
         ]
       },
       "ideal": {
@@ -170,24 +170,24 @@ export default {
         "en": "Transformation Lead"
       },
       "scope": {
-        "de": "Fach, Delivery und Governance übersetzen. Zuerst Boden (Systeme, Rechte, Daten), dann die Agentenschicht.",
-        "en": "Translate between business, delivery, and governance. Ground first (systems, rights, data), then the agent layer."
+        "de": "Fach, Delivery und Governance übersetzen. Erst schaue ich mir Systeme, Rechte und Daten an, dann kommt der Agent dazu.",
+        "en": "Translate between business, delivery, and governance. First I look at systems, permissions and data, then the agent comes in."
       },
       "deliverables": {
         "de": [
-          "Betriebsmodell: wer freigibt, wer eingreift, wann ein Mensch übernimmt — keine autonome Organisation",
+          "Betriebsmodell: wer freigibt, wer eingreift, wann ein Mensch übernimmt.",
           "Erfolgskriterien vor dem Bau: Messgrößen wie Abnahmequote, Review-Aufwand und Regressionen — Zahlen erst, wenn gemessen",
           "Governance-Rahmen aus regulierter Delivery (Berechtigungen, DSGVO) plus EU-AI-Act-Orientierung"
         ],
         "en": [
-          "Operating model: who approves, who steps in, when a human takes over — not an autonomous organization",
+          "Operating model: who approves, who steps in, when a human takes over.",
           "Success criteria before building: measures such as acceptance rate, review effort, and regressions — numbers only once measured",
           "Governance frame from regulated delivery (permissions, GDPR) plus EU AI Act orientation"
         ]
       },
       "ideal": {
-        "de": "Programme, die Modernisierung und AI zusammen denken.",
-        "en": "Programs that treat modernization and AI as one sequence."
+        "de": "Projekte, in denen alte Systeme modernisiert werden und AI dazukommt.",
+        "en": "Projects where old systems are modernized and AI is added."
       },
       "engagement": {
         "de": "",

@@ -99,11 +99,11 @@ const UI = {
     skip: "Skip to content",
     timelineTitle: "CV",
     timelineLede:
-      "Stations, cases and experiments — scrubbable by year. Independent R&D and client work are labeled separately.",
+      "Roles, cases and experiments — scrubbable by year. Independent R&D and client work are labeled separately.",
     menu: "Menu",
     engagementTitle: "Engagement",
     contactCta: "Contact",
-    stations: "CV · stations",
+    stations: "CV · roles",
     placeholderNote:
       "Square brackets are open placeholders. They stay until a real figure with a source exists.",
     yearRail: "Year rail",
@@ -347,7 +347,13 @@ function resultBlock(locale, entry) {
   } else if (result.source && !isInternalSource(result.source)) {
     source = `<span class="src">${esc(ui.source)}: ${esc(result.source)}</span>`;
   }
-  return `<div class="result"><p class="kicker">${esc(ui.outcomes)}</p>${mark(result[locale])}${source}</div>`;
+  const resultLabel =
+    entry.id === "role-agentic-ai-consulting"
+      ? locale === "de"
+        ? "Erfahrung"
+        : "Background"
+      : ui.outcomes;
+  return `<div class="result"><p class="kicker">${esc(resultLabel)}</p>${mark(result[locale])}${source}</div>`;
 }
 
 function relatedBlock(locale, entry) {
@@ -372,11 +378,24 @@ function relatedBlock(locale, entry) {
   return `<section class="block"><h2>${esc(ui.related)}</h2><ul class="related">${links.join("")}</ul></section>`;
 }
 
+function focusIdeal(locale, ideal) {
+  const fits = byId("role-agentic-ai-consulting")?.fits?.[locale] ?? [];
+  if (!ideal || fits.includes(ideal)) return "";
+  for (const line of fits) {
+    if (ideal.startsWith(line)) return ideal.slice(line.length).replace(/^[\s.]+/, "").trim();
+  }
+  return ideal;
+}
+
 function packagesBlock(locale) {
   const offer = copy(locale).offer;
   const packages = livePackages(locale)
     .map((pkg, index) => {
       const items = pkg.deliverables.map((line) => `<li>${mark(line)}</li>`).join("");
+      const ideal = focusIdeal(locale, pkg.ideal);
+      const idealRow = ideal
+        ? `<div><dt>${esc(offer.ideal)}</dt><dd>${mark(ideal)}</dd></div>`
+        : "";
       return `<article class="package">
   <p class="pkg-index">${String(index + 1).padStart(2, "0")}</p>
   <div>
@@ -384,7 +403,7 @@ function packagesBlock(locale) {
     <p>${mark(pkg.scope)}</p>
     <dl>
       <div><dt>${esc(offer.deliverables)}</dt><dd><ul>${items}</ul></dd></div>
-      <div><dt>${esc(offer.ideal)}</dt><dd>${mark(pkg.ideal)}</dd></div>
+      ${idealRow}
     </dl>
   </div>
 </article>`;
@@ -406,7 +425,6 @@ export function renderRolePage(locale, slug) {
   const offer = copy(locale).offer;
   const javaEngagement = slug === "java-backend"
     ? `<section id="einsatz" class="block" tabindex="-1">
-  <h2>${esc(ui.engagementTitle)}</h2>
   ${listBlock(locale, entry.fits?.[locale], ui.fits)}
   <p class="contact-line"><a class="btn" href="${esc(contactHref(locale))}">${esc(ui.contactCta)}</a></p>
 </section>`

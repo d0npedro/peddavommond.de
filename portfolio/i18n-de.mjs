@@ -224,14 +224,14 @@ export const de = {
     eyebrow: "Arbeit",
     title: "Drei Schwerpunkte",
     intro: "Was dazugehört, steht darunter.",
-    deliverables: "Liefergegenstände",
+    deliverables: "Was rauskommt",
     ideal: "Passt zu",
     engagement: "Einsatz",
     packages: [
       {
         name: "Senior AI Consultant",
         scope:
-          "Anwendungsfälle bewerten und gegen die Systeme schneiden, die schon laufen, bevor gebaut wird. Schriftliche Grenze statt Tool-Pitch.",
+          "Anwendungsfälle bewerten und gegen die Systeme schneiden, die schon laufen, bevor gebaut wird. Vorher schriftlich festlegen, was der Agent darf und was nicht.",
         deliverables: [
           "Bewertete Use-Case-Liste: Nutzen, Machbarkeit, Daten- und Rechtelage, Risiko — mit Reihenfolge und Begründung",
           "Use-Case-Schnitt: wo ein Agent handeln darf und wo das bestehende System den Prozess schon trägt",
@@ -247,7 +247,7 @@ export const de = {
         deliverables: [
           "Zielarchitektur mit Integrationspunkten (APIs, Identität, Pipelines), Abnahme und Human-in-the-Loop",
           "Agent-Vertrag (Aufgabe, Artefakt, Abnahme) in der Form der öffentlichen Pakete",
-          "Prüfbarer Zustand oder Checkliste — ein Chatprotokoll ist keine Abnahme",
+          "Prüfbarer Zustand oder Checkliste — Abgenommen wird über Tests und Logs, nicht über einen Chatverlauf.",
         ],
         ideal:
           "Teams, die einen Prototyp in eine wartbare Schicht überführen. Graph-Mastermind und Agent Collective sind Independent R&D — kein mitgeliefertes Kundenprodukt.",
@@ -256,13 +256,13 @@ export const de = {
       {
         name: "Transformation Lead",
         scope:
-          "Fach, Delivery und Governance übersetzen. Zuerst Boden (Systeme, Rechte, Daten), dann die Agentenschicht.",
+          "Fach, Delivery und Governance übersetzen. Erst schaue ich mir Systeme, Rechte und Daten an, dann kommt der Agent dazu.",
         deliverables: [
-          "Betriebsmodell: wer freigibt, wer eingreift, wann ein Mensch übernimmt — keine autonome Organisation",
+          "Betriebsmodell: wer freigibt, wer eingreift, wann ein Mensch übernimmt.",
           "Erfolgskriterien vor dem Bau: Messgrößen wie Abnahmequote, Review-Aufwand und Regressionen — Zahlen erst, wenn gemessen",
           "Governance-Rahmen aus regulierter Delivery (Berechtigungen, DSGVO) plus EU-AI-Act-Orientierung",
         ],
-        ideal: "Programme, die Modernisierung und AI zusammen denken.",
+        ideal: "Projekte, in denen alte Systeme modernisiert werden und AI dazukommt.",
         engagement: "",
       },
     ],
@@ -433,7 +433,7 @@ export const de = {
     items: {
       evaluation: {
         title: "Evaluation",
-        line: "Messgrößen vor dem Bau festlegen, Abnahme über Tests, CI und prüfbaren Zustand. Zahlen erst, wenn gemessen.",
+        line: "Messgrößen vor dem Bau festlegen, Abnahme über Tests, CI und prüfbaren Zustand.",
         body: "Abnahme über Tests, CI, Checklisten und beobachtbare Zustände. Kein Modellaufruf ohne prüfbares Artefakt. Quantitative Kennzahlen erst, wenn ein reproduzierbarer Harness steht.",
       },
       hitl: {
@@ -456,7 +456,7 @@ export const de = {
   consulting: {
     eyebrow: "Beratung & Governance",
     title: "Was sich aus der Delivery übertragen lässt.",
-    body: "Use Cases dort priorisieren, wo Systeme, Identität und Datenqualität schon tragen. Betriebsmodell: Agents mit Vertrag und Abnahme, nicht als autonome Organisation. Governance aus regulierter Delivery (Berechtigungen, sensible Daten, DSGVO) plus EU-AI-Act-Rahmen aus der Spezialisierung — keine erfundenen Vorstandsmandate, keine erfundenen AI-KPIs.",
+    body: "Use Cases dort priorisieren, wo Systeme, Identität und Datenqualität schon tragen. Betriebsmodell: Agents mit Vertrag und Abnahme. Governance aus regulierter Delivery (Berechtigungen, sensible Daten, DSGVO) plus EU-AI-Act-Rahmen aus der Spezialisierung — keine erfundenen Vorstandsmandate, keine erfundenen AI-KPIs.",
   },
   credentials: {
     index: "05",
@@ -670,14 +670,13 @@ export const de = {
       pageTitle: "DeutschlandCard — Cloud, Identity, Terraform | Peter Henrichs",
       pageDescription:
         "Enterprise-Cloudifizierung des bundesweiten Bonusprogramms: Azure AD B2C, Terraform, Kubernetes. Keine erfundenen Volumenkennzahlen.",
-      context:
-        "Bundesweites Loyalty-Programm (direct services Gütersloh, 2023–2026). Partner-Onboarding, Echtzeit-Punkte und Kampagnen mussten in eine kontrollierbare Cloud, ohne bestehende Partner-Schnittstellen abzuschneiden.",
+      context: "",
       problem:
-        "Backend- und Schnittstellenarchitektur für Partner-Onboarding, Echtzeit-Punktetransaktionen und personalisierte Kampagnen musste in eine skalierbare Cloud-Umgebung.",
+        "Bundesweites Loyalty-Programm (direct services Gütersloh, 2023–2026). Partner-Onboarding, Echtzeit-Punkte und personalisierte Kampagnen brauchten eine Backend- und Schnittstellenarchitektur in einer skalierbaren Cloud, ohne bestehende Partner-Schnittstellen abzuschneiden.",
       decision:
         "Cloudifizierung nach Azure; individuelle Azure-AD-B2C-Login-Journey; Infrastruktur über Terraform, damit Identity, Delivery und bestehende Partner-Schnittstellen kontrollierbar bleiben — statt eines Big-Bang-Schnitts.",
       architecture:
-        "Spring-Boot-/Cloud-Services, Azure AD B2C als Identity-Schicht, Terraform für reproduzierbare Infrastruktur, Kubernetes/Azure als Laufzeit. Partner-APIs bleiben anschlussfähig — Cloudifizierung statt Big-Bang-Schnitt.",
+        "Spring-Boot-/Cloud-Services, Azure AD B2C als Identity-Schicht, Terraform für reproduzierbare Infrastruktur, Kubernetes/Azure als Laufzeit. Partner-APIs bleiben anschlussfähig.",
       operations:
         "Die Services laufen auf Kubernetes in Azure. Die Infrastruktur entsteht reproduzierbar aus Terraform, die Anmeldung läuft über Azure AD B2C. Kritische Zugänge bleiben in den bestehenden Berechtigungs- und Betriebswegen.",
       architectureSteps: [
@@ -696,7 +695,7 @@ export const de = {
       highlights: [
         "Individuelle Login-Journey auf Azure AD B2C",
         "Terraform-automatisierte Cloud-Infrastruktur",
-        "Cloudifizierung ohne Big-Bang-Ablösung der Partner-APIs",
+        "Cloudifizierung ohne Ablösung der Partner-APIs",
       ],
     },
     "dz-bank-okvp": {
