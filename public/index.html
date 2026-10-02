@@ -42,7 +42,8 @@
       height: 100dvh;
       box-sizing: border-box;
       padding: 8px;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
       background: linear-gradient(180deg, #05060c 0%, #0a0a16 40%, #0d0918 72%, #070509 100%);
     }
 
@@ -79,11 +80,12 @@
         "spotify spotify ytmusic apple"
         "spotify spotify youtube amazon"
         "soundcloud suno windows11 github"
-        "facebook tiktok linkedin linkedin";
+        "facebook tiktok linkedin linkedin"
+        "x instagram twitch podcast";
       grid-template-columns: 1fr 1fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
       gap: 8px;
-      height: 100%;
+      height: 125%;
       width: 100%;
     }
 
@@ -134,6 +136,10 @@
     .tile--facebook { --tint: rgba(24, 119, 242, 0.16); grid-area: facebook; }
     .tile--tiktok { --tint: rgba(37, 244, 238, 0.14); grid-area: tiktok; }
     .tile--linkedin { --tint: rgba(10, 102, 194, 0.16); grid-area: linkedin; }
+    .tile--x { --tint: rgba(230, 230, 235, 0.14); grid-area: x; }
+    .tile--instagram { --tint: rgba(255, 0, 105, 0.16); grid-area: instagram; }
+    .tile--twitch { --tint: rgba(145, 70, 255, 0.16); grid-area: twitch; }
+    .tile--podcast { --tint: rgba(200, 200, 210, 0.14); grid-area: podcast; }
 
     .logo {
       width: clamp(64px, 9vw, 112px);
@@ -168,6 +174,11 @@
       font-size: clamp(22px, 3.2vw, 36px);
     }
 
+    .tile--podcast .logo {
+      width: clamp(56px, 7.5vw, 84px);
+      height: clamp(56px, 7.5vw, 84px);
+    }
+
     @media (max-width: 767px) {
       .stage { overflow: hidden; }
       .grid {
@@ -178,9 +189,12 @@
           "soundcloud suno"
           "windows11 github"
           "facebook tiktok"
-          "linkedin linkedin";
+          "linkedin linkedin"
+          "x instagram"
+          "twitch podcast";
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: minmax(170px, 1.2fr) repeat(6, minmax(100px, 1fr));
+        grid-template-rows: minmax(170px, 1.2fr) repeat(7, minmax(128px, 1fr)) minmax(160px, 1.2fr);
+        height: 100%;
         overflow-y: auto;
       }
     }
@@ -260,6 +274,26 @@
       <a class="tile tile--linkedin" href="https://www.linkedin.com/in/peter-henrichs/" target="_blank" rel="noopener noreferrer">
         <div class="logo"><img src="/hub/linkedin.png" alt="" width="112" height="112" /></div>
         <div class="label">LinkedIn</div>
+      </a>
+
+      <a class="tile tile--x" href="https://x.com/Peemakass" target="_blank" rel="noopener noreferrer">
+        <div class="logo"><img src="/hub/x.png" alt="" width="112" height="112" /></div>
+        <div class="label">X</div>
+      </a>
+
+      <a class="tile tile--instagram" href="https://www.instagram.com/peddavommond" target="_blank" rel="noopener noreferrer">
+        <div class="logo"><img src="/hub/instagram.png" alt="" width="112" height="112" /></div>
+        <div class="label">Instagram</div>
+      </a>
+
+      <a class="tile tile--twitch" href="https://www.twitch.tv/peddavommond" target="_blank" rel="noopener noreferrer">
+        <div class="logo"><img src="/hub/twitch.png" alt="" width="112" height="112" /></div>
+        <div class="label">Twitch</div>
+      </a>
+
+      <a class="tile tile--podcast" href="https://open.spotify.com/show/2bTF3dVZQ2vlcHpgPzUYii" target="_blank" rel="noopener noreferrer">
+        <div class="logo"><img src="/hub/podcast.png" alt="" width="112" height="112" /></div>
+        <div class="label">Vom Mond gefunkt (Podcast)</div>
       </a>
     </nav>
   </main>
