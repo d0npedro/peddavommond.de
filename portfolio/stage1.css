@@ -29,6 +29,11 @@ html.stage1 h3 {
   color: var(--s1-ink);
 }
 
+html.stage1 h1 {
+  font-family: var(--s1-display);
+  font-weight: 400;
+}
+
 html.stage1 a {
   color: var(--s1-accent-ink);
   text-decoration-thickness: 1px;

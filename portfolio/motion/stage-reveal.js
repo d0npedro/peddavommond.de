@@ -1,10 +1,11 @@
 /**
- * Stage enter — once. Custom vanilla. No animation library.
- * Titles and hairlines reveal on intersection; nav never moves.
+ * Fallback stage enter when GSAP is not running.
+ * scroll-craft.js owns the masked line reveals. Nav never moves.
  */
 (() => {
   const nodes = [...document.querySelectorAll("[data-reveal]")];
   if (!nodes.length) return;
+  if (document.documentElement.classList.contains("pf-motion") && window.gsap) return;
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduce || !("IntersectionObserver" in window)) {
     nodes.forEach((node) => node.classList.add("is-visible"));

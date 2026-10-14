@@ -182,9 +182,10 @@ async function check(locale) {
   assert(!visibleText(contactSlice).includes(lockedH1), `${prefix} contact must not repeat the hero H1`);
   const craft = html.slice(craftAt);
   const craftCopy = locale === "de"
-    ? "Interaktion und Scroll-Story auf dieser Site: eigene Skripte (Vanilla JS/CSS). Kein Three.js, kein zugekauftes Animation-Framework."
-    : "Interaction and scroll story on this site: custom scripts (vanilla JS/CSS). No Three.js, no off-the-shelf animation framework.";
+    ? "Interaktion und Scroll-Story auf dieser Site: GSAP 3 mit ScrollTrigger und Lenis, lokal eingebunden (Standard-Lizenz). Kein Three.js."
+    : "Interaction and scroll story on this site: GSAP 3 with ScrollTrigger and Lenis, vendored locally (standard license). No Three.js.";
   assert(craft.includes(craftCopy), `${prefix} craft-credit copy drifted`);
+  assert(!craft.includes("kein zugekauftes Animation-Framework") && !craft.includes("no off-the-shelf animation framework"), `${prefix} craft-credit still claims there is no animation framework`);
   assert(craft.includes("Custom-built · not a library demo"), `${prefix} craft chip missing`);
   assert(!recordSlice.includes("pf-section-band"), `${prefix} record must not use full-bleed stage bands`);
   assert(html.indexOf('id="offer"') < recordAt, `${prefix} offer packages stay before the record`);
@@ -316,12 +317,55 @@ for (const locale of ["de", "en"]) {
     await checkCase(locale, id);
   }
 }
+const ALLOWED_VENDOR = [
+  "/portfolio/vendor/gsap-3.12.7.min.js",
+  "/portfolio/vendor/ScrollTrigger-3.12.7.min.js",
+  "/portfolio/vendor/lenis-1.1.20.min.js",
+];
+
 async function checkLibs() {
   const pkg = await readFile(join(root, "package.json"), "utf8");
-  assert(!/"three"|"gsap"|"framer-motion"|"animejs"|"lottie-web"/.test(pkg), "package.json must not add a motion framework");
-  for (const rel of ["portfolio/app.js", "portfolio/motion/stage-reveal.js", "portfolio/motion/craft-mark.js", "portfolio/motion/timeline.js", "portfolio/render.mjs", "portfolio/render-stage1.mjs"]) {
+  assert(
+    !/"three"|"gsap"|"framer-motion"|"animejs"|"lottie-web"|"lenis"|"@studio-freight\/lenis"/.test(pkg),
+    "package.json must not depend on a motion framework; GSAP and Lenis stay vendored",
+  );
+  for (const src of ALLOWED_VENDOR) {
+    const file = src.split("/").pop();
+    assert(await exists(join(root, "portfolio/vendor", file)), `missing source vendor ${file}`);
+    assert(await exists(join(root, "public/portfolio/vendor", file)), `missing published vendor ${file}`);
+    const body = await readFile(join(root, "portfolio/vendor", file), "utf8");
+    assert(!/cdn\.jsdelivr|unpkg\.com|cdnjs/.test(body), `${file} must not reference a CDN`);
+  }
+  for (const font of ["instrument-sans-400.woff2", "instrument-sans-500.woff2", "instrument-serif-400.woff2"]) {
+    assert(await exists(join(root, "public/portfolio/fonts", font)), `missing font ${font}`);
+  }
+  const gsap = await readFile(join(root, "portfolio/vendor/gsap-3.12.7.min.js"), "utf8");
+  const lenis = await readFile(join(root, "portfolio/vendor/lenis-1.1.20.min.js"), "utf8");
+  const scrollTrigger = await readFile(join(root, "portfolio/vendor/ScrollTrigger-3.12.7.min.js"), "utf8");
+  assert(gsap.includes("GSAP 3.12.7"), "GSAP vendor is not 3.12.7");
+  assert(lenis.includes("1.1.20"), "Lenis vendor is not 1.1.20");
+  assert(scrollTrigger.includes("ScrollTrigger"), "ScrollTrigger vendor missing");
+  for (const rel of [
+    "portfolio/app.js",
+    "portfolio/motion/stage-reveal.js",
+    "portfolio/motion/craft-mark.js",
+    "portfolio/motion/timeline.js",
+    "portfolio/motion/scroll-craft.js",
+    "portfolio/render.mjs",
+    "portfolio/render-stage1.mjs",
+  ]) {
     const src = await readFile(join(root, rel), "utf8");
-    assert(!/from ["'](?:three|gsap|framer-motion|animejs|lottie)/.test(src), `${rel} imports a forbidden motion library`);
+    assert(!/from ["'](?:three|gsap|framer-motion|animejs|lottie|lenis)/.test(src), `${rel} imports a forbidden motion library`);
+    assert(!/https?:\/\/(?:cdn\.jsdelivr|unpkg\.com|cdnjs\.cloudflare)/.test(src), `${rel} loads motion from a CDN`);
+  }
+  for (const html of [de, en]) {
+    assert(!/cdn\.jsdelivr|unpkg\.com|cdnjs\.cloudflare/.test(html), "portfolio HTML must not load libraries from a CDN");
+    for (const src of ALLOWED_VENDOR) assert(html.includes(src), `missing vendored script ${src}`);
+    const scripts = [...html.matchAll(/<script[^>]*\ssrc="([^"]+)"/g)].map((match) => match[1].split("?")[0]);
+    for (const src of scripts) {
+      if (!/gsap|lenis|scrolltrigger|three|anime|lottie|framer/i.test(src)) continue;
+      assert(ALLOWED_VENDOR.includes(src), `unexpected motion script ${src}`);
+    }
   }
 }
 

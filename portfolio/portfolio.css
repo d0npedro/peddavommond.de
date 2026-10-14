@@ -12,33 +12,35 @@
 :root,
 html,
 html.light {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Instrument Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Instrument Serif", "Iowan Old Style", Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
 
-  /* Light paper — shared with Stage 1. Measured on #F4F0E8. */
-  --bg: 244 240 232;            /* #F4F0E8 paper */
-  --bg-elevated: 250 247 241;   /* #FAF7F1 sheet */
-  --bg-sunken: 232 226 216;     /* #E8E2D8 stone well */
-  --fg: 20 23 30;               /* #14171E ink, 15.78:1 */
-  --muted: 90 86 80;            /* #5A5650 body, 6.41:1 */
-  --faint: 90 98 112;           /* #5A6270 meta, 5.41:1 */
-  --line: 212 207 196;          /* #D4CFC4 hairline, decorative */
-  --accent: 47 110 121;         /* #2F6E79 accent-ink, 5.09:1 small text and UI */
-  --accent-rule: 74 168 184;    /* #4AA8B8 rules only, 2.44:1 — not for text or controls */
-  --accent-soft: 214 232 232;   /* #D6E8E8 wash */
-  --signal: 138 85 30;          /* #8A551E bronze, 5.44:1 fail/honesty text */
-  --on-accent: 255 255 255;     /* #FFFFFF, 5.79:1 on accent-ink */
+  /* Warm paper. Measured for text on #E9E4DC. */
+  --bg: 233 228 220;            /* #E9E4DC paper */
+  --bg-elevated: 243 239 232;   /* #F3EFE8 sheet */
+  --bg-sunken: 220 214 204;     /* #DCD6CC stone */
+  --fg: 20 20 20;               /* #141414 ink */
+  --muted: 74 69 62;            /* #4A453E body */
+  --faint: 84 78 70;            /* #544E46 meta */
+  --line: 196 188 176;          /* #C4BCB0 hairline */
+  --accent: 20 20 20;           /* ink controls */
+  --accent-rule: 138 128 112;   /* decorative rule, not for small text */
+  --accent-soft: 226 220 210;
+  --signal: 110 63 20;          /* #6E3F14 bronze, honesty and failure */
+  --on-accent: 243 239 232;     /* #F3EFE8 on ink controls */
   --grid-rgb: 36 32 26;
   --grid-opacity: 0.035;
-  --s1-bg: #f4f0e8;
-  --s1-ink: #14171e;
-  --s1-muted: #5a5650;
-  --s1-line: #d4cfc4;
-  --s1-accent: #4aa8b8;
-  --s1-accent-ink: #2f6e79;
-  --s1-paper: #faf7f1;
+  --s1-bg: #e9e4dc;
+  --s1-ink: #141414;
+  --s1-muted: #4a453e;
+  --s1-line: #c4bcb0;
+  --s1-accent: #8a8175;
+  --s1-accent-ink: #141414;
+  --s1-paper: #f3efe8;
   --s1-rust: #8a3e24;
-  --s1-sans: var(--font-sans), "Inter", ui-sans-serif, system-ui, sans-serif;
+  --s1-sans: var(--font-sans), "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --s1-display: var(--font-display), "Instrument Serif", Georgia, serif;
   --s1-mono: var(--font-mono), "JetBrains Mono", ui-monospace, monospace;
 
   --radius-sm: 4px;
@@ -64,8 +66,36 @@ html.light {
 /* Base                                                                        */
 /* -------------------------------------------------------------------------- */
 
+@font-face {
+  font-family: "Instrument Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/portfolio/fonts/instrument-sans-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Instrument Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/portfolio/fonts/instrument-sans-500.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/portfolio/fonts/instrument-serif-400.woff2") format("woff2");
+}
+
 html {
   scroll-behavior: smooth;
+}
+
+html.pf-motion {
+  scroll-behavior: auto;
 }
 
 html.light {
@@ -2889,5 +2919,435 @@ html.paper .hairline {
   html.paper .pf-sample,
   html.paper .pf-offer {
     grid-template-columns: 1fr;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Award craft — Lenis / GSAP. Transform and opacity only.                   */
+/* -------------------------------------------------------------------------- */
+
+.pf-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+
+.pf-mask-in,
+.pf-word {
+  display: inline;
+}
+
+.pf-mask-in {
+  display: block;
+}
+
+html.pf-motion .pf-mask-in {
+  transform: translate3d(0, 110%, 0);
+}
+
+html.pf-motion .pf-enter .pf-stage-title,
+html.pf-motion .pf-enter .pf-case-title,
+html.pf-motion .pf-enter .pf-hairline,
+html.pf-motion .pf-shell {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+html.paper {
+  overflow-x: clip;
+}
+
+html.paper body {
+  overflow-x: clip;
+  text-rendering: optimizeLegibility;
+}
+
+html.paper .container,
+html.paper .pf-stage-center,
+html.paper .pf-stage-narrow {
+  width: min(100% - 2.5rem, 72rem);
+}
+
+html.paper .topbar {
+  z-index: 40;
+  background: rgb(243 239 232 / 0.92);
+  backdrop-filter: blur(14px);
+}
+
+html.paper main {
+  position: relative;
+  z-index: 2;
+  background: var(--s1-bg);
+}
+
+html.paper h1,
+html.paper .pf-stage-title,
+html.paper .pf-footer-title,
+html.paper .pf-case-title,
+html.paper .pf-record-title,
+html.paper .pf-offer h3 {
+  font-family: var(--s1-display);
+  font-weight: 400;
+}
+
+html.paper .pf-stage--hero {
+  display: flex;
+  align-items: center;
+  min-height: calc(100svh - var(--topbar));
+  padding: 2.5rem 0 3rem;
+}
+
+html.paper .pf-hero-chip {
+  font-family: var(--s1-sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: var(--s1-muted);
+}
+
+html.paper .pf-hero .pf-hero-title,
+html.paper h1.pf-hero-title {
+  max-width: 14em;
+  font-size: clamp(2.55rem, 5.5vw, 5.35rem);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+}
+
+html.paper .pf-hero .pf-cta--primary,
+html.paper .pf-cta--primary {
+  border-radius: 999px;
+  padding: 0.85rem 1.35rem;
+  font-family: var(--s1-sans);
+  font-size: 0.95rem;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease, color 0.3s ease;
+}
+
+html.paper .pf-entry-link {
+  border-bottom-color: rgb(20 20 20 / 0.28);
+  transition: opacity 0.35s ease;
+}
+
+html.paper .pf-entry-link:hover {
+  color: var(--s1-ink);
+  opacity: 0.55;
+}
+
+html.paper .pf-stage {
+  padding-block: clamp(4.5rem, 10vh, 7rem);
+}
+
+html.paper .pf-stage-title,
+html.paper .pf-record-title {
+  max-width: 12ch;
+  font-size: clamp(2.6rem, 5vw, 4.6rem);
+  line-height: 0.96;
+  letter-spacing: -0.035em;
+}
+
+html.paper .pf-offer-pin,
+html.paper .pf-cases-pin {
+  align-items: start;
+}
+
+@media (min-width: 960px) {
+  html.paper .pf-offer-pin,
+  html.paper .pf-cases-pin {
+    display: grid;
+    grid-template-columns: minmax(14rem, 0.78fr) minmax(0, 1.22fr);
+    column-gap: clamp(2rem, 4vw, 4rem);
+  }
+
+  html.paper .pf-offer-pin .pf-offer {
+    grid-template-columns: minmax(8.5rem, 11rem) minmax(0, 1fr);
+    column-gap: 1.25rem;
+  }
+
+  html.paper .pf-sample {
+    grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+    gap: 3rem;
+    align-items: center;
+  }
+}
+
+html.paper .pf-offer {
+  padding-block: clamp(1.75rem, 4vh, 2.75rem);
+  border-top-color: var(--s1-line);
+}
+
+html.paper .pf-offer h3 {
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  line-height: 1;
+}
+
+html.paper .pf-spots .pf-case-card {
+  position: relative;
+  display: grid;
+  gap: 1.25rem;
+  min-height: 0;
+  padding: 1.6rem 0 1.8rem;
+  border-top: 1px solid var(--s1-line);
+  background: transparent;
+}
+
+html.paper .pf-spots .pf-case-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 -0.75rem;
+  background: rgb(20 20 20 / 0.045);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+}
+
+html.paper .pf-spots .pf-case-card:hover::before,
+html.paper .pf-spots .pf-case-card:focus-within::before {
+  opacity: 1;
+}
+
+html.paper .pf-case-copy {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html.paper .pf-spots .pf-case-card:hover .pf-case-copy,
+html.paper .pf-spots .pf-case-card:focus-within .pf-case-copy {
+  transform: translate3d(0.8rem, 0, 0);
+}
+
+html.paper .pf-case-title {
+  max-width: 16ch;
+  font-size: clamp(2.15rem, 4vw, 3.6rem);
+  line-height: 0.98;
+}
+
+html.paper .pf-row-media,
+html.paper .pf-shot.pf-parallax {
+  margin: 0;
+  overflow: hidden;
+  background: var(--s1-paper);
+}
+
+html.paper .pf-row-media {
+  height: 13.5rem;
+}
+
+html.paper .pf-parallax-in {
+  display: block;
+  height: 100%;
+}
+
+html.paper .pf-row-media img,
+html.paper .pf-shot img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.18);
+}
+
+html.paper .pf-shot img {
+  height: auto;
+}
+
+@media (min-width: 800px) {
+  html.paper .pf-spot--shot {
+    grid-template-columns: minmax(0, 1.15fr) minmax(12rem, 0.85fr);
+    gap: 1.75rem;
+    align-items: center;
+  }
+
+  html.paper .pf-row-media {
+    height: 15.5rem;
+  }
+}
+
+html.paper #contact.pf-footer {
+  background: #141414;
+  color: #f4efe6;
+  border-radius: 1.6rem 1.6rem 0 0;
+  min-height: auto;
+}
+
+html.paper #contact.pf-footer.is-sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+}
+
+html.paper #contact .pf-footer-title {
+  max-width: none;
+  color: #f4efe6;
+  font-size: clamp(3.1rem, 9vw, 7.25rem);
+  line-height: 0.88;
+}
+
+html.paper #contact .pf-location,
+html.paper #contact .pf-contact-echo,
+html.paper #contact .text-faint,
+html.paper #contact p {
+  color: #d7d0c4;
+}
+
+html.paper #contact .container {
+  width: min(100% - 2.5rem, 72rem);
+  padding-block: clamp(3.5rem, 9vh, 6.5rem);
+}
+
+html.paper #contact .pf-cta--primary {
+  background: #f4efe6;
+  color: #141414;
+  border-color: #f4efe6;
+}
+
+html.paper #contact .pf-cta--primary:hover {
+  background: #ffffff;
+  color: #141414;
+  border-color: #ffffff;
+}
+
+html.paper #contact a.secondary {
+  color: #f4efe6;
+  border-color: rgb(244 239 230 / 0.4);
+  background: transparent;
+}
+
+html.paper #contact a.secondary:hover {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+html.paper #contact .hairline {
+  background: rgb(244 239 230 / 0.28);
+}
+
+html.paper #craft-credit {
+  position: relative;
+  z-index: 3;
+  background: var(--s1-bg);
+}
+
+html.paper:has(#contact.is-sheet) #craft-credit {
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+}
+
+.pf-contact-spacer {
+  position: relative;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.pf-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 60;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: difference;
+  transform: translate3d(-80px, -80px, 0);
+}
+
+.pf-cursor span {
+  display: block;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  background: #fff;
+  transform: scale(1);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pf-cursor span.is-hot {
+  transform: scale(3.4);
+}
+
+@media (hover: hover) and (pointer: fine) and (min-width: 960px) {
+  html.pf-cursor-on,
+  html.pf-cursor-on body,
+  html.pf-cursor-on a,
+  html.pf-cursor-on button,
+  html.pf-cursor-on summary {
+    cursor: none;
+  }
+
+  html.pf-cursor-on input,
+  html.pf-cursor-on textarea {
+    cursor: text;
+  }
+}
+
+@media (max-width: 959px) {
+  html.paper .pf-row-media img,
+  html.paper .pf-shot img {
+    transform: none;
+  }
+}
+
+@media (max-width: 720px) {
+  html.paper .pf-hero .pf-hero-title,
+  html.paper h1.pf-hero-title {
+    font-size: clamp(1.7rem, 7.6vw, 2.15rem);
+  }
+
+  html.paper .pf-stage-title,
+  html.paper .pf-record-title {
+    font-size: clamp(2.15rem, 10vw, 2.8rem);
+  }
+
+  html.paper #contact .pf-footer-title {
+    font-size: clamp(2.8rem, 14vw, 3.6rem);
+  }
+
+  html.paper .container,
+  html.paper .pf-stage-center,
+  html.paper #contact .container {
+    width: min(100% - 2rem, 72rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html,
+  html.pf-motion {
+    scroll-behavior: auto !important;
+  }
+
+  html.pf-motion .pf-mask-in,
+  .pf-mask-in,
+  .pf-case-copy,
+  .pf-cursor span,
+  .pf-parallax-in,
+  .pf-row-media img,
+  .pf-shot img {
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  html.pf-cursor-on,
+  html.pf-cursor-on body,
+  html.pf-cursor-on a,
+  html.pf-cursor-on button {
+    cursor: auto;
+  }
+
+  .pf-cursor {
+    display: none;
   }
 }

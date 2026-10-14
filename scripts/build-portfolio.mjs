@@ -59,6 +59,15 @@ async function main() {
   await copyFile(join(root, "portfolio", "portfolio.css"), join(pub, "portfolio.css"));
   await copyFile(join(root, "portfolio", "stage1.css"), join(pub, "stage1.css"));
   console.log("wrote public/portfolio/stage1.css");
+  for (const dir of ["vendor", "fonts"]) {
+    const src = join(root, "portfolio", dir);
+    const dest = join(pub, dir);
+    await mkdir(dest, { recursive: true });
+    for (const name of await readdir(src)) {
+      await copyFile(join(src, name), join(dest, name));
+      console.log("wrote", `public/portfolio/${dir}/${name}`);
+    }
+  }
   console.log("portfolio static pages ready");
 }
 

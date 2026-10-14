@@ -1,8 +1,12 @@
-# Motion Sheet v1.5.2 — craft proof + custom-only lock
+# Motion Sheet v1.5.2 — craft proof
 
 **Owner:** Motion Craft · **Consumer:** Design Implement
-**Status:** Canonical. Supersedes v1.4, v1.5, and v1.5.1.
-**Date:** 2026-09-23 (Europe/Berlin)
+**Status:** Spine still canonical. The custom-only library lock is retired.
+**Date:** 2026-09-23 (Europe/Berlin); library note 2026-10-14
+
+## Libraries
+
+Landing and case pages load vendored **GSAP 3.12.7** (standard license, with ScrollTrigger) and **Lenis 1.1.20**. Files live in `portfolio/vendor/` and are copied to `public/portfolio/vendor/`. No motion CDN at runtime. Three.js, Framer Motion, Anime.js, and Lottie stay out. `prefers-reduced-motion` is a static page: no Lenis, no pin, no custom cursor. Scroll motion animates transform and opacity. The craft mark remains one SVG stroke draw.
 
 Do not implement a second scroll sample. `#sample-graph` as its own beat is dead.
 
@@ -14,15 +18,16 @@ Do not implement a second scroll sample. `#sample-graph` as its own beat is dead
 - Collective = the only scroll sample
 - Nav never animates
 
-## Impl lock — custom-written only
+## Impl
 
-**Forbidden:** Three.js · GSAP · Framer Motion · Anime.js · Lottie-as-scroll · other black-box animation/3D frameworks.
+**Out:** Three.js · Framer Motion · Anime.js · Lottie-as-scroll.
 
-**Allowed:** Custom vanilla JS/CSS or own small in-repo modules.
+**In:** Vendored GSAP 3 + ScrollTrigger and Lenis, and the modules below.
 
 Modules on this page:
 
-- `portfolio/motion/stage-reveal.js` — stage title and hairline, once
+- `portfolio/motion/scroll-craft.js` — Lenis, line masks, pin, parallax, magnetic controls, desktop cursor, contact sheet
+- `portfolio/motion/stage-reveal.js` — fallback title reveal when GSAP does not run
 - `portfolio/motion/craft-mark.js` — one SVG stroke-dashoffset draw in `#craft-credit`
 
 ## Timing (carried from v1.5)

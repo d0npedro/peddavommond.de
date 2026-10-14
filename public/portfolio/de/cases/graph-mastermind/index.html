@@ -26,11 +26,11 @@
 <meta name="twitter:title" content="Agentic Engineering für gewachsene Codebasen | Peter Henrichs"/>
 <meta name="twitter:description" content="Independent R&amp;D: agentischer Workflow für gewachsene Repositories. AGENT.md, SPEC.md und CHECKLIST.md als Arbeitsvertrag. Kein vorgeschriebenes LLM, keine erfundenen KPIs."/>
 <meta name="twitter:image" content="https://peddavommond.de/portfolio/de/opengraph-image.png"/>
-<meta name="theme-color" content="#F4F0E8"/>
+<meta name="theme-color" content="#E9E4DC"/>
 <link rel="icon" href="/portfolio/de/icon.png" type="image/png" sizes="32x32"/>
 <link rel="stylesheet" href="/portfolio/de/_next/static/css/76323045a7107f6a.css"/>
-<link rel="stylesheet" href="/portfolio/portfolio.css?v=paper-20260929a"/>
-<link rel="stylesheet" href="/portfolio/stage1.css?v=paper-20260929a"/>
+<link rel="stylesheet" href="/portfolio/portfolio.css?v=craft-20261014a"/>
+<link rel="stylesheet" href="/portfolio/stage1.css?v=craft-20261014a"/>
 </head>
 <body class="min-h-screen bg-bg font-sans antialiased">
 <a class="skip" href="#main">Zum Inhalt springen</a>
@@ -108,7 +108,7 @@
   <section class="pf-case-block" id="evidence">
     <h2 class="eyebrow">Belege</h2>
     <div class="pf-links"><a href="https://github.com/d0npedro/graph-mastermind" target="_blank" rel="noopener noreferrer">Repository</a><a href="https://graph-mastermind.vercel.app" target="_blank" rel="noopener noreferrer">Live-Demo</a></div>
-    <div class="pf-shots"><figure class="pf-shot"><a href="https://raw.githubusercontent.com/d0npedro/graph-mastermind/main/docs/screenshots/overview.png" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/d0npedro/graph-mastermind/main/docs/screenshots/overview.png" alt="Force-Layout der Referenz-App: Kantenlabels und Toolbar" loading="lazy" width="1200" height="750"/></a><figcaption>Force-Layout der Referenz-App: Kantenlabels und Toolbar</figcaption></figure><figure class="pf-shot"><a href="https://raw.githubusercontent.com/d0npedro/graph-mastermind/main/docs/screenshots/detail.png" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/d0npedro/graph-mastermind/main/docs/screenshots/detail.png" alt="Detailpanel an einem ausgewählten Knoten" loading="lazy" width="1200" height="750"/></a><figcaption>Detailpanel an einem ausgewählten Knoten</figcaption></figure><figure class="pf-shot"><a href="https://raw.githubusercontent.com/d0npedro/graph-mastermind/main/docs/screenshots/search.png" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/d0npedro/graph-mastermind/main/docs/screenshots/search.png" alt="Suche dimmt Nicht-Treffer, Runtime-Schicht bleibt lesbar" loading="lazy" width="1200" height="750"/></a><figcaption>Suche dimmt Nicht-Treffer, Runtime-Schicht bleibt lesbar</figcaption></figure></div>
+    <div class="pf-shots"><figure class="pf-shot pf-parallax"><a href="https://raw.githubusercontent.com/d0npedro/graph-mastermind/main/docs/screenshots/overview.png" target="_blank" rel="noopener noreferrer"><span class="pf-parallax-in"><img src="https://raw.githubusercontent.com/d0npedro/graph-mastermind/main/docs/screenshots/overview.png" alt="Force-Layout der Referenz-App: Kantenlabels und Toolbar" loading="lazy" width="1200" height="750"/></span></a><figcaption>Force-Layout der Referenz-App: Kantenlabels und Toolbar</figcaption></figure><figure class="pf-shot pf-parallax"><a href="https://raw.githubusercontent.com/d0npedro/graph-mastermind/main/docs/screenshots/detail.png" target="_blank" rel="noopener noreferrer"><span class="pf-parallax-in"><img src="https://raw.githubusercontent.com/d0npedro/graph-mastermind/main/docs/screenshots/detail.png" alt="Detailpanel an einem ausgewählten Knoten" loading="lazy" width="1200" height="750"/></span></a><figcaption>Detailpanel an einem ausgewählten Knoten</figcaption></figure><figure class="pf-shot pf-parallax"><a href="https://raw.githubusercontent.com/d0npedro/graph-mastermind/main/docs/screenshots/search.png" target="_blank" rel="noopener noreferrer"><span class="pf-parallax-in"><img src="https://raw.githubusercontent.com/d0npedro/graph-mastermind/main/docs/screenshots/search.png" alt="Suche dimmt Nicht-Treffer, Runtime-Schicht bleibt lesbar" loading="lazy" width="1200" height="750"/></span></a><figcaption>Suche dimmt Nicht-Treffer, Runtime-Schicht bleibt lesbar</figcaption></figure></div>
   </section>
   
   <section class="pf-case-block">
@@ -142,7 +142,7 @@
     <div class="container relative py-20 md:py-28">
       <div class="pf-enter" data-reveal>
         <span class="pf-hairline" aria-hidden="true"></span>
-        <h2 class="pf-footer-title">Gespräch</h2>
+        <h2 class="pf-footer-title"><span class="pf-mask"><span class="pf-mask-in">Gespräch</span></span></h2>
       </div>
       <p class="pf-location">Köln · deutschlandweit / Remote</p>
       <p class="pf-contact-echo">Agenten-Schichten in laufende Systeme — prüfbar, mit Human-in-the-Loop.</p>
@@ -161,6 +161,13 @@
       </div>
     </div>
   </section>
+<script>
+document.documentElement.classList.toggle("pf-motion", !window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+</script>
+<script src="/portfolio/vendor/gsap-3.12.7.min.js" defer></script>
+<script src="/portfolio/vendor/ScrollTrigger-3.12.7.min.js" defer></script>
+<script src="/portfolio/vendor/lenis-1.1.20.min.js" defer></script>
+<script src="/portfolio/motion/scroll-craft.js" defer></script>
 <script src="/portfolio/motion/stage-reveal.js" defer></script>
 <script src="/portfolio/motion/craft-mark.js" defer></script>
 <script src="/portfolio/app.js" defer></script>

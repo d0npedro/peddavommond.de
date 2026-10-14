@@ -14,12 +14,12 @@ import {
   caseHref,
 } from "./shared.mjs";
 import { copy } from "./content.mjs";
-import { offerChip, splitFocusNote, stageEntryNav, stageTopbar } from "./render-stage1.mjs";
+import { motionScripts, offerChip, splitFocusNote, stageEntryNav, stageTopbar } from "./render-stage1.mjs";
 
 /** Next export = layout/utilities. Token + component layer is portfolio.css (copied to public/). */
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=paper-20260929a";
-const STAGE_CSS = "/portfolio/stage1.css?v=paper-20260929a";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=craft-20261014a";
+const STAGE_CSS = "/portfolio/stage1.css?v=craft-20261014a";
 
 function stylesheets() {
   return `<link rel="stylesheet" href="${NEXT_LAYOUT_CSS}"/>
@@ -28,9 +28,14 @@ function stylesheets() {
 }
 
 function pageScripts() {
-  return `<script src="/portfolio/motion/stage-reveal.js" defer></script>
+  return `${motionScripts()}
+<script src="/portfolio/motion/stage-reveal.js" defer></script>
 <script src="/portfolio/motion/craft-mark.js" defer></script>
 <script src="/portfolio/app.js" defer></script>`;
+}
+
+function mask(innerHtml) {
+  return `<span class="pf-mask"><span class="pf-mask-in">${innerHtml}</span></span>`;
 }
 
 export function esc(value) {
@@ -76,9 +81,9 @@ function renderPromise(text) {
         typeof line === "string"
           ? esc(line)
           : `${esc(line.before)}<span class="pf-keep">${esc(line.keep)}</span>`;
-      return `<span class="pf-hero-beat">${inner}</span>`;
+      return `<span class="pf-hero-beat pf-mask"><span class="pf-mask-in">${inner}</span></span>`;
     })
-    .join(" ");
+    .join("");
 }
 
 function label(value, name) {
@@ -229,15 +234,23 @@ function renderCaseCard(item, locale) {
   } else if (item.hasPage) {
     action = `<p class="pf-case-action"><a class="pf-case-open" href="${attr(caseHref(locale, item.id))}">${esc(c.landingCta || t.casePage.openCase)}</a></p>`;
   }
-  return `<article class="pf-case-card pf-case-card--${ownershipKind} pf-spot">
-    <div class="pf-enter" data-reveal>
-      <span class="pf-hairline" aria-hidden="true"></span>
-      <h3 class="pf-case-title">${esc(spot.title)}</h3>
+  const shot = item.screenshots?.[0];
+  const shotAlt = shot ? c.screenshotAlts?.[shot.altKey] || item.name : "";
+  const preview = shot
+    ? `<figure class="pf-row-media pf-parallax"><span class="pf-parallax-in"><img src="${attr(shot.src)}" alt="${attr(shotAlt)}" width="1200" height="750" loading="lazy"/></span></figure>`
+    : "";
+  return `<article class="pf-case-card pf-case-card--${ownershipKind} pf-spot${preview ? " pf-spot--shot" : ""}">
+    <div class="pf-case-copy">
+      <div class="pf-enter" data-reveal>
+        <span class="pf-hairline" aria-hidden="true"></span>
+        <h3 class="pf-case-title">${mask(esc(spot.title))}</h3>
+      </div>
+      <p class="pf-chip pf-chip--signal">${esc(spot.chip)}</p>
+      <p class="pf-spot-idea">${esc(spot.idea)}</p>
+      <p class="pf-spot-line">${esc(spot.body)}</p>
+      ${action}
     </div>
-    <p class="pf-chip pf-chip--signal">${esc(spot.chip)}</p>
-    <p class="pf-spot-idea">${esc(spot.idea)}</p>
-    <p class="pf-spot-line">${esc(spot.body)}</p>
-    ${action}
+    ${preview}
   </article>`;
 }
 
@@ -257,12 +270,14 @@ function renderSelectedCases(locale) {
   const leads = featuredCases();
   const leadHtml = leads.map((item) => renderCaseCard(item, locale)).join("");
   return `<section id="cases" class="pf-cases scroll-mt-24">
-    <div class="container">
-      <div class="pf-enter" data-reveal>
-        <span class="pf-hairline" aria-hidden="true"></span>
-        <h2 class="pf-stage-title">${esc(t.selectedCases.beatTitle)}</h2>
+    <div class="container pf-cases-pin">
+      <div class="pf-cases-sticky">
+        <div class="pf-enter" data-reveal>
+          <span class="pf-hairline" aria-hidden="true"></span>
+          <h2 class="pf-stage-title">${mask(esc(t.selectedCases.beatTitle))}</h2>
+        </div>
+        <p class="pf-stage-lede">${esc(t.selectedCases.lead)}</p>
       </div>
-      <p class="pf-stage-lede">${esc(t.selectedCases.lead)}</p>
       <div class="pf-spots">${leadHtml}</div>
     </div>
   </section>`;
@@ -415,7 +430,7 @@ function renderFooter(locale, { availability = false } = {}) {
     <div class="container relative py-20 md:py-28">
       <div class="pf-enter" data-reveal>
         <span class="pf-hairline" aria-hidden="true"></span>
-        <h2 class="pf-footer-title">${esc(t.footer.title)}</h2>
+        <h2 class="pf-footer-title">${mask(esc(t.footer.title))}</h2>
       </div>
       <p class="pf-location">${esc(t.footer.lead)}</p>
       <p class="pf-contact-echo">${esc(t.footer.echo)}</p>
@@ -582,7 +597,7 @@ function renderEvidence(item, copyCase, t) {
   const shots = (item.screenshots ?? [])
     .map((shot) => {
       const alt = copyCase.screenshotAlts?.[shot.altKey] ?? item.name;
-      return `<figure class="pf-shot"><a href="${attr(shot.src)}" target="_blank" rel="noopener noreferrer"><img src="${attr(shot.src)}" alt="${attr(alt)}" loading="lazy" width="1200" height="750"/></a><figcaption>${esc(alt)}</figcaption></figure>`;
+      return `<figure class="pf-shot pf-parallax"><a href="${attr(shot.src)}" target="_blank" rel="noopener noreferrer"><span class="pf-parallax-in"><img src="${attr(shot.src)}" alt="${attr(alt)}" loading="lazy" width="1200" height="750"/></span></a><figcaption>${esc(alt)}</figcaption></figure>`;
     })
     .join("");
   return `<section class="pf-case-block" id="evidence">
@@ -655,7 +670,7 @@ export function renderCasePage(locale, id) {
 <meta name="twitter:title" content="${attr(title)}"/>
 <meta name="twitter:description" content="${attr(description)}"/>
 <meta name="twitter:image" content="${attr(og)}"/>
-<meta name="theme-color" content="#F4F0E8"/>
+<meta name="theme-color" content="#E9E4DC"/>
 <link rel="icon" href="/portfolio/${locale}/icon.png" type="image/png" sizes="32x32"/>
 ${stylesheets()}
 </head>
@@ -717,7 +732,7 @@ function renderCollectiveSample(locale) {
       <div class="pf-sample-copy">
         <div class="pf-enter" data-reveal>
           <span class="pf-hairline" aria-hidden="true"></span>
-          <h2 class="pf-stage-title">${esc(s.title)}</h2>
+          <h2 class="pf-stage-title">${mask(esc(s.title))}</h2>
         </div>
         <p class="pf-stage-lede">${esc(s.body)}</p>
         <p class="pf-stage-lede">${esc(s.shown)}</p>
@@ -794,7 +809,7 @@ function renderOffer(locale) {
       return `<article class="pf-offer">
         <div class="pf-offer-name">
           <p class="pf-offer-index">${String(index + 1).padStart(2, "0")}</p>
-          <h3>${esc(pkg.name)}</h3>
+          <h3>${mask(esc(pkg.name))}</h3>
         </div>
         <div>
           <p class="pf-offer-scope">${esc(pkg.scope)}</p>
@@ -808,15 +823,17 @@ function renderOffer(locale) {
     })
     .join("");
   return `<section id="offer" class="pf-stage scroll-mt-24">
-    <div class="container">
-      <div class="pf-enter" data-reveal>
-        <span class="pf-hairline" aria-hidden="true"></span>
-        <h2 class="pf-stage-title">${esc(o.title)}</h2>
+    <div class="container pf-offer-pin">
+      <div class="pf-offer-sticky">
+        <div class="pf-enter" data-reveal>
+          <span class="pf-hairline" aria-hidden="true"></span>
+          <h2 class="pf-stage-title">${mask(esc(o.title))}</h2>
+        </div>
+        <p class="pf-stage-lede">${esc(o.intro)}</p>
       </div>
-      <p class="pf-stage-lede">${esc(o.intro)}</p>
       <div class="pf-offers">${packages}</div>
-      ${renderApproachFold(locale)}
     </div>
+    <div class="container">${renderApproachFold(locale)}</div>
   </section>`;
 }
 
@@ -853,7 +870,7 @@ function renderRecord(locale) {
   return `<section id="record" class="pf-record scroll-mt-24">
     <div class="container">
       <details data-record>
-        <summary class="pf-shell" data-reveal><h2 class="pf-record-title">${esc(t.record.summary)}</h2></summary>
+        <summary class="pf-shell" data-reveal><h2 class="pf-record-title">${mask(esc(t.record.summary))}</h2></summary>
         <div class="pf-record-body">
           <p class="pf-stage-lede">${esc(t.record.note)}</p>
           <ol class="pf-stations">${stations}</ol>
@@ -898,7 +915,7 @@ export function renderPage(locale) {
 <meta name="twitter:title" content="${attr(t.meta.title)}"/>
 <meta name="twitter:description" content="${attr(t.meta.description)}"/>
 <meta name="twitter:image" content="${attr(og)}"/>
-<meta name="theme-color" content="#F4F0E8"/>
+<meta name="theme-color" content="#E9E4DC"/>
 <link rel="icon" href="/portfolio/${locale}/icon.png" type="image/png" sizes="32x32"/>
 ${stylesheets()}
 </head>
@@ -946,7 +963,7 @@ export function renderCv(locale) {
 <title>${esc(t.cv.title)}</title>
 <meta name="description" content="${attr(t.cv.intro)}"/>
 <meta name="robots" content="noindex"/>
-<meta name="theme-color" content="#F4F0E8"/>
+<meta name="theme-color" content="#E9E4DC"/>
 ${stylesheets()}
 </head>
 <body class="min-h-screen bg-bg font-sans antialiased">

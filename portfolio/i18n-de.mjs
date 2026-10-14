@@ -1094,10 +1094,10 @@ export const de = {
     personalNote: "",
   },
   craft: {
-    body: "Interaktion und Scroll-Story auf dieser Site: eigene Skripte (Vanilla JS/CSS). Kein Three.js, kein zugekauftes Animation-Framework.",
+    body: "Interaktion und Scroll-Story auf dieser Site: GSAP 3 mit ScrollTrigger und Lenis, lokal eingebunden (Standard-Lizenz). Kein Three.js.",
     chip: "Custom-built · not a library demo",
     technique: "SVG stroke-dashoffset · einmal gezeichnet",
-    modules: ["stage-reveal.js", "craft-mark.js", "timeline.js"],
+    modules: ["stage-reveal.js", "craft-mark.js", "timeline.js", "scroll-craft.js"],
   },
   cv: {
     title: "Lebenslauf — Peter Henrichs",
