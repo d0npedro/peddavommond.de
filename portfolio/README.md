@@ -19,35 +19,37 @@ Keep the credibility split explicit: paid Professional Experience, Independent A
 
 Stage 1 pages (same slugs in DE and EN) are generated from `portfolio/content/`: `/rollen/agentic-ai/` (`#angebot`), `/rollen/java-backend/`, `/lebenslauf/`, `/lebenslauf/<id>/`, `/kontakt/`. `npm run portfolio:validate` fails the build when an entry breaks the schema, invents a KPI, or fills a placeholder.
 
-## Visual system — Enterprise AI decision surface
+## Visual system — dark stage
 
 Two stylesheets load on every generated page:
 
-1. The frozen Next export (`public/portfolio/de/_next/static/css/76323045a7107f6a.css`) — fonts, Tailwind utilities, leftover layout classes.
-2. `portfolio/portfolio.css` — **token + component source of truth**. `scripts/build-portfolio.mjs` copies it to `public/portfolio/portfolio.css` (this is what production serves). The HTML link is cache-busted (`?v=trust-…`) and loads second.
+1. The frozen Next export (`public/portfolio/de/_next/static/css/76323045a7107f6a.css`) — Tailwind utilities and leftover layout classes.
+2. `portfolio/portfolio.css` — **token + component source of truth**. `scripts/build-portfolio.mjs` copies it to `public/portfolio/portfolio.css` (this is what production serves). The HTML link is cache-busted (`?v=stage-…`) and loads second. `portfolio/stage1.css` loads third.
 
 Tokens are declared on `html` / `html.light` so they beat the export’s `:root` / `.dark`. Every surface, chip, and CTA should consume these — do not add one-off hex in markup.
 
-Light paper is the only theme. The start page and Stage 1 pages share `--s1-*` tokens from `portfolio.css`. Small text and controls use `#2F6E79`. `#4AA8B8` is limited to decorative rules. There is no dark-mode toggle and no `html.dark` palette. Bronze (`--signal`) is reserved for honesty / Independent R&D chips and failure states.
+The only theme is a dark stage in the rhythm of [anime.js](https://animejs.com/): near-black field, off-white display type, one red mark. The start page and Stage 1 pages share `--s1-*` tokens from `portfolio.css`. There is no theme toggle and no `html.dark` palette. Bronze (`--signal`) is reserved for honesty / Independent R&D chips and failure states.
+
+Motion stays custom vanilla (`portfolio/motion/`). The craft credit still says there is no off-the-shelf animation framework, so Anime.js is not loaded. `prefers-reduced-motion: reduce` shows a static page.
 
 Pages do not add `class="dark"`, and nothing reads a stored theme.
 
-### Light — warm paper / cool stone
+### Dark stage
 
 | Token | RGB | Hex | Contrast notes |
 | --- | --- | --- | --- |
-| `--bg` | `244 240 232` | `#F4F0E8` | paper |
-| `--bg-elevated` | `250 247 241` | `#FAF7F1` | sheet |
-| `--bg-sunken` | `232 226 216` | `#E8E2D8` | stone |
-| `--fg` | `20 23 30` | `#14171E` | 15.78:1 on paper |
-| `--muted` | `90 86 80` | `#5A5650` | 6.41:1 body |
-| `--faint` | `90 98 112` | `#5A6270` | 5.41:1 meta |
-| `--line` | `212 207 196` | `#D4CFC4` | decorative hairline |
-| `--accent` | `47 110 121` | `#2F6E79` | accent-ink; 5.09:1 text, 5.79:1 white on it |
-| `--accent-rule` | `74 168 184` | `#4AA8B8` | decorative rules only; 2.44:1 |
-| `--accent-soft` | `214 232 232` | `#D6E8E8` | wash |
-| `--signal` | `138 85 30` | `#8A551E` | bronze; 5.44:1 |
-| `--on-accent` | `255 255 255` | `#FFFFFF` | on ink or accent-ink controls |
-| `--grid-rgb` / `--grid-opacity` | `36 32 26` / `0.04` | | quiet blueprint |
+| `--bg` | `3 3 3` | `#030303` | stage |
+| `--bg-elevated` | `37 36 35` | `#252423` | sheet |
+| `--bg-sunken` | `26 25 24` | `#1A1918` | well |
+| `--fg` | `246 244 242` | `#F6F4F2` | display |
+| `--muted` | `181 178 176` | `#B5B2B0` | body |
+| `--faint` | `168 165 162` | `#A8A5A2` | meta |
+| `--line` | `58 56 54` | `#3A3836` | hairline |
+| `--accent` | `255 75 75` | `#FF4B4B` | mark; 6.36:1 on stage |
+| `--accent-rule` | `255 75 75` | `#FF4B4B` | playhead and short rules |
+| `--accent-soft` | `58 28 28` | `#3A1C1C` | wash |
+| `--signal` | `224 164 92` | `#E0A45C` | bronze; honesty / fail |
+| `--on-accent` | `26 25 24` | `#1A1918` | text on the red or light control |
+| `--grid-rgb` / `--grid-opacity` | `246 244 242` / `0.14` | | hero dot grid |
 
-Body type on paper pages is 18px. Inter for prose; JetBrains Mono only for labels, chips, and meta. Theme-color meta: `#F4F0E8`.
+Display type is Helvetica Neue / Arial at 700, tight leading. JetBrains Mono stays on labels, chips, and meta. Theme-color meta: `#030303`.

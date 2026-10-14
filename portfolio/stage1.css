@@ -1,11 +1,11 @@
-/* Stage 1 paper pages. Loads after portfolio.css on role, timeline, deep-dive and contact pages.
-   Light paper only. One accent. No gradients, no hover-lift. */
+/* Stage 1 pages. Loads after portfolio.css on role, timeline, deep-dive and contact pages.
+   Same dark stage as the start page. One accent. No gradients, no hover-lift. */
 
 html.stage1,
 html.paper {
   /* Tokens live once on :root in portfolio.css (--s1-*, --bg, --accent). */
   --topbar: 4.25rem;
-  color-scheme: light;
+  color-scheme: dark;
   background: var(--s1-bg);
 }
 
@@ -23,10 +23,11 @@ html.stage1 h1,
 html.stage1 h2,
 html.stage1 h3 {
   font-family: var(--s1-sans);
-  font-weight: 520;
-  letter-spacing: -0.03em;
-  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
   color: var(--s1-ink);
+  overflow-wrap: break-word;
 }
 
 html.stage1 a {
@@ -186,7 +187,8 @@ html.stage1 .kicker {
 
 html.stage1 h1 {
   margin: 0 0 1rem;
-  font-size: clamp(2.4rem, 6vw, 4.25rem);
+  max-width: 16em;
+  font-size: clamp(2.05rem, 6vw, 4.25rem);
 }
 
 html.stage1 .lede,
@@ -492,9 +494,9 @@ html.stage1 .btn {
 }
 
 html.stage1 .btn:hover {
-  background: var(--s1-accent-ink);
-  border-color: var(--s1-accent-ink);
-  color: #fff;
+  background: var(--s1-accent);
+  border-color: var(--s1-accent);
+  color: #1a1918;
 }
 
 html.stage1 .btn.ghost {
@@ -811,5 +813,57 @@ html.stage1 #einsatz {
   html.stage1 .sheet,
   html.stage1 .list-pane {
     padding-top: 1.35rem;
+  }
+}
+
+/* Dark stage chrome. Loads last, so it wins over the paper header rules. */
+:is(html.stage1, html.paper) .topbar,
+html.stage1 .dd-bar,
+html.stage1.js .mobile-scrub {
+  background: rgb(28 27 26 / 0.92);
+  border-bottom-color: var(--s1-line);
+  backdrop-filter: blur(16px);
+}
+
+:is(html.stage1, html.paper) .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+  color: var(--s1-ink);
+  font-family: var(--s1-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-transform: none;
+}
+
+:is(html.stage1, html.paper) .brand::before {
+  content: "";
+  width: 0.42rem;
+  height: 0.42rem;
+  flex: 0 0 auto;
+  background: var(--s1-accent);
+}
+
+:is(html.stage1, html.paper) .top-links a:hover,
+:is(html.stage1, html.paper) .top-links a[aria-current="page"] {
+  color: var(--s1-accent);
+}
+
+:is(html.stage1, html.paper) .nav-fold .top-links {
+  background: #1c1b1a;
+}
+
+html.stage1 .sheet,
+html.stage1 .dd-body,
+html.paper .container,
+html.paper .pf-stage-center {
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 720px) {
+  :is(html.stage1, html.paper) .brand {
+    font-size: 0.95rem;
   }
 }

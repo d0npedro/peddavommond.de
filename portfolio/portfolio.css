@@ -1,7 +1,8 @@
-/* Peter Henrichs recruiter portfolio — paper decision surface.
+/* Peter Henrichs recruiter portfolio — dark stage.
    Source of truth for color/type/elevation. Loads after the Tailwind export
    and overrides its :root RGB tokens so every utility inherits the system.
-   Light paper is the only theme. Stage-1 pages read the same --s1-* tokens.
+   One dark theme, measured against anime.js (near-black stage, off-white type,
+   red mark). Stage-1 pages read the same --s1-* tokens.
    Do not scatter one-off hex in components. */
 
 /* -------------------------------------------------------------------------- */
@@ -12,33 +13,34 @@
 :root,
 html,
 html.light {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
 
-  /* Light paper — shared with Stage 1. Measured on #F4F0E8. */
-  --bg: 244 240 232;            /* #F4F0E8 paper */
-  --bg-elevated: 250 247 241;   /* #FAF7F1 sheet */
-  --bg-sunken: 232 226 216;     /* #E8E2D8 stone well */
-  --fg: 20 23 30;               /* #14171E ink, 15.78:1 */
-  --muted: 90 86 80;            /* #5A5650 body, 6.41:1 */
-  --faint: 90 98 112;           /* #5A6270 meta, 5.41:1 */
-  --line: 212 207 196;          /* #D4CFC4 hairline, decorative */
-  --accent: 47 110 121;         /* #2F6E79 accent-ink, 5.09:1 small text and UI */
-  --accent-rule: 74 168 184;    /* #4AA8B8 rules only, 2.44:1 — not for text or controls */
-  --accent-soft: 214 232 232;   /* #D6E8E8 wash */
-  --signal: 138 85 30;          /* #8A551E bronze, 5.44:1 fail/honesty text */
-  --on-accent: 255 255 255;     /* #FFFFFF, 5.79:1 on accent-ink */
-  --grid-rgb: 36 32 26;
-  --grid-opacity: 0.035;
-  --s1-bg: #f4f0e8;
-  --s1-ink: #14171e;
-  --s1-muted: #5a5650;
-  --s1-line: #d4cfc4;
-  --s1-accent: #4aa8b8;
-  --s1-accent-ink: #2f6e79;
-  --s1-paper: #faf7f1;
-  --s1-rust: #8a3e24;
-  --s1-sans: var(--font-sans), "Inter", ui-sans-serif, system-ui, sans-serif;
+  /* Dark stage — shared with Stage 1. Measured on #030303.
+     Accent #ff4b4b is 6.36:1 on #030303. Bronze #e0a45c is for honesty only. */
+  --bg: 3 3 3;                  /* #030303 stage */
+  --bg-elevated: 37 36 35;      /* #252423 sheet */
+  --bg-sunken: 26 25 24;        /* #1A1918 well */
+  --fg: 246 244 242;            /* #F6F4F2 */
+  --muted: 181 178 176;         /* #B5B2B0 body */
+  --faint: 168 165 162;         /* #A8A5A2 meta */
+  --line: 58 56 54;             /* #3A3836 hairline */
+  --accent: 255 75 75;          /* #FF4B4B mark */
+  --accent-rule: 255 75 75;     /* rules and the playhead */
+  --accent-soft: 58 28 28;      /* wash */
+  --signal: 224 164 92;         /* #E0A45C bronze, honesty / fail */
+  --on-accent: 26 25 24;        /* #1A1918 on the red or light control */
+  --grid-rgb: 246 244 242;
+  --grid-opacity: 0.14;
+  --s1-bg: #030303;
+  --s1-ink: #f6f4f2;
+  --s1-muted: #b5b2b0;
+  --s1-line: #3a3836;
+  --s1-accent: #ff4b4b;
+  --s1-accent-ink: #ff4b4b;
+  --s1-paper: #1c1b1a;
+  --s1-rust: #ff8b6a;
+  --s1-sans: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
   --s1-mono: var(--font-mono), "JetBrains Mono", ui-monospace, monospace;
 
   --radius-sm: 4px;
@@ -68,8 +70,12 @@ html {
   scroll-behavior: smooth;
 }
 
-html.light {
-  color-scheme: light;
+html,
+html.light,
+html.paper,
+html.stage1 {
+  color-scheme: dark;
+  background: #030303;
 }
 
 body {
@@ -2889,5 +2895,450 @@ html.paper .hairline {
   html.paper .pf-sample,
   html.paper .pf-offer {
     grid-template-columns: 1fr;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Dark stage — anime.js rhythm: huge type, red mark, staggered enter         */
+/* -------------------------------------------------------------------------- */
+
+html.paper body {
+  background: #030303;
+  color: var(--s1-ink);
+  font-family: var(--s1-sans);
+}
+
+html.paper .container {
+  width: min(100% - 1.5rem, 68rem);
+}
+
+html.paper .pf-stage,
+html.paper #cases,
+html.paper .pf-record,
+html.paper #contact,
+html.paper #craft-credit {
+  background: transparent;
+}
+
+html.paper .pf-stage--hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  min-height: 0;
+  padding: 1.75rem 0 1.25rem;
+  overflow: hidden;
+  border-bottom: 0;
+}
+
+html.paper .pf-hero::before {
+  content: "";
+  z-index: 0;
+  background-image: radial-gradient(rgb(246 244 242 / 0.16) 1px, transparent 1px);
+  background-size: 18px 18px;
+  mask-image: linear-gradient(180deg, #000 0%, #000 72%, transparent 100%);
+}
+
+html.paper .pf-hero .container {
+  position: relative;
+  z-index: 1;
+  width: min(100% - 1.5rem, 68rem);
+}
+
+html.paper .pf-hero-chip {
+  margin-bottom: 0.85rem;
+  color: var(--s1-muted);
+  font-family: var(--s1-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+html.paper .pf-hero .pf-hero-title,
+html.paper h1.pf-hero-title {
+  max-width: 100%;
+  font-family: var(--s1-sans);
+  font-size: clamp(1.85rem, 4.7vw, 4.15rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: var(--s1-ink);
+  overflow-wrap: break-word;
+}
+
+html.paper .pf-keep {
+  white-space: normal;
+}
+
+html.paper .pf-hero-beat:last-child .pf-keep {
+  box-shadow: inset 0 -0.07em 0 var(--s1-accent);
+}
+
+html.paper .pf-stage-title,
+html.paper .pf-footer-title,
+html.paper .pf-record summary,
+html.paper .pf-case-title,
+html.paper h3.pf-case-title,
+html.paper .pf-record-title {
+  max-width: 16em;
+  font-family: var(--s1-sans);
+  font-size: clamp(1.85rem, 4vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  color: var(--s1-ink);
+  overflow-wrap: break-word;
+}
+
+html.paper .pf-offer h3 {
+  font-size: clamp(1.45rem, 2.4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+html.paper .pf-stage-lede,
+html.paper .pf-offer-scope,
+html.paper .pf-contact-echo,
+html.paper .pf-craft-copy,
+html.paper .pf-spot-idea,
+html.paper .pf-spot-line {
+  max-width: 40rem;
+  color: var(--s1-muted);
+  overflow-wrap: anywhere;
+}
+
+html.paper .pf-enter .pf-hairline {
+  width: 3.25rem;
+  height: 2px;
+  background: var(--s1-accent);
+}
+
+html.paper .hairline,
+html.paper .pf-offer,
+html.paper .pf-method,
+html.paper .pf-spots .pf-case-card,
+html.paper #contact.pf-footer,
+html.paper .pf-craft,
+html.paper .pf-station + .pf-station {
+  border-color: var(--s1-line);
+}
+
+html.paper .hairline {
+  background: var(--s1-line);
+}
+
+html.paper .pf-cta--primary,
+html.paper .pf-hero .pf-cta--primary,
+html.paper .pf-contact-row a.primary,
+html.paper .pf-contact-row--checkout a.primary {
+  border-radius: 0.6rem;
+  background: var(--s1-ink);
+  color: #1a1918;
+  border-color: var(--s1-ink);
+}
+
+html.paper .pf-cta--primary:hover,
+html.paper .pf-hero .pf-cta--primary:hover,
+html.paper .pf-contact-row a.primary:hover,
+html.paper .pf-contact-row--checkout a.primary:hover {
+  background: var(--s1-accent);
+  border-color: var(--s1-accent);
+  color: #1a1918;
+}
+
+html.paper .pf-contact-row a.secondary,
+html.paper .pf-contact-row a.secondary:hover {
+  border-radius: 0.6rem;
+  color: var(--s1-ink);
+}
+
+html.paper .pf-contact-row a.secondary:hover {
+  border-color: var(--s1-accent);
+  color: var(--s1-accent);
+}
+
+html.paper #cases {
+  padding-block: clamp(3rem, 8vh, 5.5rem);
+}
+
+html.paper .pf-spots .pf-case-card {
+  position: relative;
+  min-height: 0;
+  padding: 1.75rem 0 1.75rem 0.15rem;
+  border-top: 1px solid var(--s1-line);
+}
+
+html.paper .pf-spots .pf-case-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: var(--s1-accent);
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html.paper .pf-spots .pf-case-card:hover::after,
+html.paper .pf-spots .pf-case-card:focus-within::after {
+  transform: scaleY(1);
+}
+
+html.paper .pf-touch,
+html.paper .pf-snippet,
+html.paper .pf-contract-body {
+  background: #141312;
+  border-color: var(--s1-line);
+  color: var(--s1-ink);
+}
+
+html.paper .pf-snippet {
+  overflow-x: auto;
+  font-family: var(--s1-mono);
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+html.paper .pf-tab,
+html.paper .pf-touch-btn {
+  border-color: var(--s1-line);
+  border-radius: 0.45rem;
+  background: #0c0c0c;
+  color: var(--s1-ink);
+}
+
+html.paper .pf-tab[aria-selected="true"],
+html.paper .pf-touch-btn[aria-pressed="true"] {
+  border-color: var(--s1-accent);
+  color: var(--s1-ink);
+  box-shadow: inset 0 -2px 0 var(--s1-accent);
+  background: #0c0c0c;
+}
+
+html.paper .pf-links a,
+html.paper .pf-case-open,
+html.paper .pf-track-link,
+html.paper .pf-case-title-link {
+  color: var(--s1-accent);
+}
+
+html.paper .pf-links a:hover,
+html.paper .pf-case-open:hover,
+html.paper .pf-track-link:hover,
+html.paper .pf-case-title-link:hover {
+  color: var(--s1-ink);
+}
+
+html.paper :focus-visible {
+  outline: 2px solid var(--s1-accent);
+  outline-offset: 3px;
+}
+
+html.paper .pf-engine {
+  position: relative;
+  z-index: 0;
+  height: 8.5rem;
+  margin-top: 0.5rem;
+  overflow: hidden;
+  pointer-events: none;
+  --py: 0;
+}
+
+html.paper .pf-shape {
+  position: absolute;
+  display: block;
+  color: #f6f4f2;
+}
+
+html.paper .pf-shape i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 3px solid currentColor;
+  border-radius: inherit;
+}
+
+html.paper .pf-shape--a {
+  width: 38%;
+  aspect-ratio: 1;
+  left: 22%;
+  top: 18%;
+  transform: translate3d(0, calc(var(--py) * -18px), 0) rotate(calc(var(--py) * 18deg));
+}
+
+html.paper .pf-shape--b {
+  width: 18%;
+  aspect-ratio: 1;
+  right: 16%;
+  top: 10%;
+  border-radius: 8px;
+  color: #ff4b4b;
+  transform: translate3d(calc(var(--py) * 10px), calc(var(--py) * 14px), 0);
+}
+
+html.paper .pf-shape--c {
+  width: 24%;
+  aspect-ratio: 1;
+  left: 10%;
+  bottom: 8%;
+  border-radius: 50%;
+  transform: translate3d(calc(var(--py) * -12px), calc(var(--py) * 12px), 0);
+}
+
+html.paper .pf-shape--d {
+  width: 7%;
+  aspect-ratio: 1;
+  right: 30%;
+  bottom: 22%;
+  border-radius: 2px;
+  background: #ff4b4b;
+  transform: translate3d(0, calc(var(--py) * -22px), 0);
+}
+
+html.paper .pf-shape--d i {
+  border: 0;
+  background: #ff4b4b;
+}
+
+html.motion .pf-shape i {
+  animation: pf-spin 18s linear infinite;
+}
+
+html.motion .pf-shape--b i {
+  animation-duration: 11s;
+  animation-direction: reverse;
+}
+
+html.motion .pf-shape--c i {
+  animation-duration: 22s;
+}
+
+html.motion .pf-hero.is-visible .pf-hero-beat {
+  animation: pf-rise 0.78s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+html.motion .pf-hero.is-visible .pf-hero-beat:nth-child(1) { animation-delay: 0.04s; }
+html.motion .pf-hero.is-visible .pf-hero-beat:nth-child(2) { animation-delay: 0.14s; }
+html.motion .pf-hero.is-visible .pf-hero-beat:nth-child(3) { animation-delay: 0.24s; }
+
+html.motion .pf-enter.is-visible ~ .pf-offers .pf-offer,
+html.motion .pf-enter.is-visible ~ .pf-spots .pf-case-card,
+html.motion .pf-enter.is-visible ~ .pf-method .pf-principle {
+  animation: pf-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+html.motion .pf-offer:nth-child(2),
+html.motion .pf-case-card:nth-child(2),
+html.motion .pf-principle:nth-child(2) { animation-delay: 0.08s; }
+
+html.motion .pf-offer:nth-child(3),
+html.motion .pf-case-card:nth-child(3),
+html.motion .pf-principle:nth-child(3) { animation-delay: 0.16s; }
+
+html.motion .pf-principle:nth-child(4) { animation-delay: 0.24s; }
+
+.pf-scroll-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 70;
+  width: 100%;
+  height: 2px;
+  background: #ff4b4b;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+
+@keyframes pf-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.55em, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pf-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (min-width: 960px) {
+  html.paper .container {
+    width: min(100% - 6rem, 68rem);
+  }
+
+  html.paper .pf-sample {
+    grid-template-columns: minmax(0, 0.9fr) minmax(16rem, 1.05fr);
+    align-items: center;
+  }
+
+  html.paper .pf-offer {
+    grid-template-columns: minmax(11rem, 16rem) minmax(0, 1fr);
+    column-gap: 2rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  html.paper .pf-stage--hero {
+    min-height: calc(100dvh - var(--topbar, 4.25rem));
+    padding-block: 2rem;
+  }
+
+  html.paper .pf-hero .container {
+    width: min(40rem, 52%);
+    margin-left: max(3rem, calc((100% - 76rem) / 2));
+    margin-right: auto;
+  }
+
+  html.paper .pf-engine {
+    position: absolute;
+    top: 50%;
+    right: max(2.5rem, calc((100% - 76rem) / 2));
+    width: min(28rem, 34vw);
+    height: min(26rem, 58vh);
+    margin-top: 0;
+    transform: translateY(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.paper .pf-hero-beat,
+  html.paper .pf-offer,
+  html.paper .pf-case-card,
+  html.paper .pf-principle,
+  html.paper .pf-shape,
+  html.paper .pf-shape i,
+  .pf-scroll-cursor {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1;
+    transform: none;
+  }
+
+  .pf-scroll-cursor {
+    display: none;
+  }
+
+  html.paper .pf-spots .pf-case-card::after {
+    transition: none;
+  }
+}
+
+@media (scripting: none) {
+  html.paper .pf-hero-beat,
+  html.paper .pf-offer,
+  html.paper .pf-case-card,
+  html.paper .pf-principle {
+    opacity: 1;
+    transform: none;
+    animation: none;
   }
 }

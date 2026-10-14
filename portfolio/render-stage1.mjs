@@ -10,8 +10,8 @@ import { offerHref, offerLabel } from "./offer-link.mjs";
 import { SITE, caseById, caseHref } from "./shared.mjs";
 
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=paper-20260929a";
-const STAGE_CSS = "/portfolio/stage1.css?v=paper-20260929a";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=stage-20261014a";
+const STAGE_CSS = "/portfolio/stage1.css?v=stage-20261014a";
 
 const CHAPTER_KEYS = ["ausgangslage", "schnitt", "umsetzung", "nachweis", "ergebnis"];
 
@@ -313,7 +313,7 @@ function pageShell({ locale, title, description, canonicalPath, siblingPath, cur
 <meta property="og:url" content="${esc(url)}"/>
 <meta property="og:type" content="website"/>
 <meta property="og:locale" content="${locale === "de" ? "de_DE" : "en_US"}"/>
-<meta name="theme-color" content="#F4F0E8"/>
+<meta name="theme-color" content="#030303"/>
 <link rel="icon" href="/portfolio/${locale}/icon.png" type="image/png" sizes="32x32"/>
 <link rel="stylesheet" href="${NEXT_LAYOUT_CSS}"/>
 <link rel="stylesheet" href="${PORTFOLIO_CSS}"/>

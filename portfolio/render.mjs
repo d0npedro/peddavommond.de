@@ -18,8 +18,8 @@ import { offerChip, splitFocusNote, stageEntryNav, stageTopbar } from "./render-
 
 /** Next export = layout/utilities. Token + component layer is portfolio.css (copied to public/). */
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=paper-20260929a";
-const STAGE_CSS = "/portfolio/stage1.css?v=paper-20260929a";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=stage-20261014a";
+const STAGE_CSS = "/portfolio/stage1.css?v=stage-20261014a";
 
 function stylesheets() {
   return `<link rel="stylesheet" href="${NEXT_LAYOUT_CSS}"/>
@@ -162,6 +162,12 @@ function renderHero(locale) {
         <a href="#offer" class="pf-cta pf-cta--primary">${esc(t.hero.ctaPrimary)}</a>
       </div>
       ${stageEntryNav(locale)}
+    </div>
+    <div class="pf-engine" data-engine aria-hidden="true">
+      <span class="pf-shape pf-shape--a"><i></i></span>
+      <span class="pf-shape pf-shape--b"><i></i></span>
+      <span class="pf-shape pf-shape--c"><i></i></span>
+      <span class="pf-shape pf-shape--d"><i></i></span>
     </div>
   </section>`;
 }
@@ -655,7 +661,7 @@ export function renderCasePage(locale, id) {
 <meta name="twitter:title" content="${attr(title)}"/>
 <meta name="twitter:description" content="${attr(description)}"/>
 <meta name="twitter:image" content="${attr(og)}"/>
-<meta name="theme-color" content="#F4F0E8"/>
+<meta name="theme-color" content="#030303"/>
 <link rel="icon" href="/portfolio/${locale}/icon.png" type="image/png" sizes="32x32"/>
 ${stylesheets()}
 </head>
@@ -898,7 +904,7 @@ export function renderPage(locale) {
 <meta name="twitter:title" content="${attr(t.meta.title)}"/>
 <meta name="twitter:description" content="${attr(t.meta.description)}"/>
 <meta name="twitter:image" content="${attr(og)}"/>
-<meta name="theme-color" content="#F4F0E8"/>
+<meta name="theme-color" content="#030303"/>
 <link rel="icon" href="/portfolio/${locale}/icon.png" type="image/png" sizes="32x32"/>
 ${stylesheets()}
 </head>
@@ -946,7 +952,7 @@ export function renderCv(locale) {
 <title>${esc(t.cv.title)}</title>
 <meta name="description" content="${attr(t.cv.intro)}"/>
 <meta name="robots" content="noindex"/>
-<meta name="theme-color" content="#F4F0E8"/>
+<meta name="theme-color" content="#030303"/>
 ${stylesheets()}
 </head>
 <body class="min-h-screen bg-bg font-sans antialiased">
