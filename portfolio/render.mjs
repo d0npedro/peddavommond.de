@@ -18,8 +18,8 @@ import { offerChip, splitFocusNote, stageEntryNav, stageTopbar } from "./render-
 
 /** Next export = layout/utilities. Token + component layer is portfolio.css (copied to public/). */
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=stage-20261014a";
-const STAGE_CSS = "/portfolio/stage1.css?v=stage-20261014a";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=stage-20261014d";
+const STAGE_CSS = "/portfolio/stage1.css?v=stage-20261014d";
 
 function stylesheets() {
   return `<link rel="stylesheet" href="${NEXT_LAYOUT_CSS}"/>
@@ -28,9 +28,19 @@ function stylesheets() {
 }
 
 function pageScripts() {
-  return `<script src="/portfolio/motion/stage-reveal.js" defer></script>
+  return `<script type="module" src="/portfolio/motion/stage-reveal.js?v=stage-20261014d"></script>
 <script src="/portfolio/motion/craft-mark.js" defer></script>
 <script src="/portfolio/app.js" defer></script>`;
+}
+
+function renderEngine(name) {
+  return `<div class="pf-engine pf-engine--band" data-engine="${name}" aria-hidden="true">
+    <span class="pf-grid" data-grid></span>
+    <span class="pf-shape pf-shape--a"><i></i></span>
+    <span class="pf-shape pf-shape--b"><i></i></span>
+    <span class="pf-shape pf-shape--c"><i></i></span>
+    <span class="pf-shape pf-shape--d"><i></i></span>
+  </div>`;
 }
 
 export function esc(value) {
@@ -154,20 +164,24 @@ function renderProofStrip(t) {
 
 function renderHero(locale) {
   const t = copy(locale);
-  return `<section id="hero" class="pf-hero pf-stage pf-stage--hero">
-    <div class="container pf-stage-center">
-      <p class="pf-hero-chip">${esc(SITE.name)} · ${esc(t.hero.role)}</p>
-      <h1 class="pf-hero-title">${renderPromise(t.hero.h1)}</h1>
-      <div class="pf-cta-row">
-        <a href="#offer" class="pf-cta pf-cta--primary">${esc(t.hero.ctaPrimary)}</a>
+  return `<section id="hero" class="pf-hero pf-stage pf-stage--hero pf-pin pf-pin--hero">
+    <div class="pf-pin-sticky">
+      <div class="pf-wash" data-wash aria-hidden="true"></div>
+      <div class="container pf-stage-center">
+        <p class="pf-hero-chip">${esc(SITE.name)} · ${esc(t.hero.role)}</p>
+        <h1 class="pf-hero-title">${renderPromise(t.hero.h1)}</h1>
+        <div class="pf-cta-row">
+          <a href="#offer" class="pf-cta pf-cta--primary">${esc(t.hero.ctaPrimary)}</a>
+        </div>
+        ${stageEntryNav(locale)}
       </div>
-      ${stageEntryNav(locale)}
-    </div>
-    <div class="pf-engine" data-engine aria-hidden="true">
-      <span class="pf-shape pf-shape--a"><i></i></span>
-      <span class="pf-shape pf-shape--b"><i></i></span>
-      <span class="pf-shape pf-shape--c"><i></i></span>
-      <span class="pf-shape pf-shape--d"><i></i></span>
+      <div class="pf-engine" data-engine="hero" aria-hidden="true">
+        <span class="pf-grid" data-grid></span>
+        <span class="pf-shape pf-shape--a"><i></i></span>
+        <span class="pf-shape pf-shape--b"><i></i></span>
+        <span class="pf-shape pf-shape--c"><i></i></span>
+        <span class="pf-shape pf-shape--d"><i></i></span>
+      </div>
     </div>
   </section>`;
 }
@@ -236,6 +250,7 @@ function renderCaseCard(item, locale) {
     action = `<p class="pf-case-action"><a class="pf-case-open" href="${attr(caseHref(locale, item.id))}">${esc(c.landingCta || t.casePage.openCase)}</a></p>`;
   }
   return `<article class="pf-case-card pf-case-card--${ownershipKind} pf-spot">
+    <span class="pf-scrub-bar" data-scrub aria-hidden="true"></span>
     <div class="pf-enter" data-reveal>
       <span class="pf-hairline" aria-hidden="true"></span>
       <h3 class="pf-case-title">${esc(spot.title)}</h3>
@@ -262,14 +277,18 @@ function renderSelectedCases(locale) {
   const t = copy(locale);
   const leads = featuredCases();
   const leadHtml = leads.map((item) => renderCaseCard(item, locale)).join("");
-  return `<section id="cases" class="pf-cases scroll-mt-24">
-    <div class="container">
-      <div class="pf-enter" data-reveal>
-        <span class="pf-hairline" aria-hidden="true"></span>
-        <h2 class="pf-stage-title">${esc(t.selectedCases.beatTitle)}</h2>
+  return `<section id="cases" class="pf-cases pf-pin pf-pin--cases scroll-mt-24">
+    <div class="pf-pin-sticky">
+      <div class="pf-wash" data-wash aria-hidden="true"></div>
+      <div class="container">
+        <div class="pf-enter" data-reveal>
+          <span class="pf-hairline" aria-hidden="true"></span>
+          <h2 class="pf-stage-title">${esc(t.selectedCases.beatTitle)}</h2>
+        </div>
+        <p class="pf-stage-lede">${esc(t.selectedCases.lead)}</p>
+        ${renderEngine("cases")}
+        <div class="pf-spots">${leadHtml}</div>
       </div>
-      <p class="pf-stage-lede">${esc(t.selectedCases.lead)}</p>
-      <div class="pf-spots">${leadHtml}</div>
     </div>
   </section>`;
 }
@@ -451,9 +470,11 @@ function renderCraftCredit(locale) {
       <p class="pf-craft-modules">${modules}</p>
       <p class="pf-honesty-chips"><span class="pf-chip">${esc(craft.chip)}</span></p>
       <figure class="pf-craft-mark" data-craft-mark>
-        <svg viewBox="0 0 240 24" width="240" height="24" aria-hidden="true" focusable="false">
-          <path d="M4 12 H236" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"></path>
-        </svg>
+        <div class="pf-craft-rule" data-craft-rule>
+          <svg viewBox="0 0 240 24" width="240" height="24" aria-hidden="true" focusable="false">
+            <path d="M4 12 H236" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"></path>
+          </svg>
+        </div>
         <figcaption class="pf-craft-tech">${esc(craft.technique)}</figcaption>
       </figure>
     </div>
@@ -718,7 +739,9 @@ function renderAgentList(agents) {
 function renderCollectiveSample(locale) {
   const s = copy(locale).samples.collective;
   const first = s.review[0];
-  return `<section id="sample-collective" class="pf-stage scroll-mt-24">
+  return `<section id="sample-collective" class="pf-stage pf-pin pf-pin--sample scroll-mt-24">
+    <div class="pf-pin-sticky">
+    <div class="pf-wash" data-wash aria-hidden="true"></div>
     <div class="container pf-sample">
       <div class="pf-sample-copy">
         <div class="pf-enter" data-reveal>
@@ -727,6 +750,7 @@ function renderCollectiveSample(locale) {
         </div>
         <p class="pf-stage-lede">${esc(s.body)}</p>
         <p class="pf-stage-lede">${esc(s.shown)}</p>
+        ${renderEngine("sample")}
       </div>
       <div class="pf-touch" data-touch="collective">
         <div class="pf-touch-bar">
@@ -744,6 +768,7 @@ function renderCollectiveSample(locale) {
         <p class="pf-touch-note">${esc(s.note)}</p>
         ${jsonIsland("pf-collective-frames", { review: s.review, fail: s.fail })}
       </div>
+    </div>
     </div>
   </section>`;
 }
@@ -798,6 +823,7 @@ function renderOffer(locale) {
       const idealRow = fit ? `<div><dt>${esc(o.ideal)}</dt><dd>${esc(fit)}</dd></div>` : "";
       const noteRow = note ? `<p class="pf-offer-scope">${esc(note)}</p>` : "";
       return `<article class="pf-offer">
+        <span class="pf-scrub-bar" data-scrub aria-hidden="true"></span>
         <div class="pf-offer-name">
           <p class="pf-offer-index">${String(index + 1).padStart(2, "0")}</p>
           <h3>${esc(pkg.name)}</h3>
@@ -814,12 +840,14 @@ function renderOffer(locale) {
     })
     .join("");
   return `<section id="offer" class="pf-stage scroll-mt-24">
+    <div class="pf-wash" data-wash aria-hidden="true"></div>
     <div class="container">
       <div class="pf-enter" data-reveal>
         <span class="pf-hairline" aria-hidden="true"></span>
         <h2 class="pf-stage-title">${esc(o.title)}</h2>
       </div>
       <p class="pf-stage-lede">${esc(o.intro)}</p>
+      ${renderEngine("offer")}
       <div class="pf-offers">${packages}</div>
       ${renderApproachFold(locale)}
     </div>

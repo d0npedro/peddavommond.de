@@ -15,7 +15,7 @@ Do not invent AI experience. Graph-Mastermind is an agent package for coding age
 
 Public default positioning is Variant C: **Senior AI Consultant & Agentic Software Engineer** (Enterprise Engineering × Agentic AI × Transformation).
 
-Keep the credibility split explicit: paid Professional Experience, Independent Applied AI R&D / public systems, and AI Transformation Perspective (what transfers). Independent R&D is not client delivery and not a hobby disclaimer. Do not invent KPIs or an LLM backend for the deterministic Agent Collective simulator. The landing spine is Klar/direkt: `#hero` → `#offer` → `#cases` → `#sample-collective` (the only touchable sample) → `#record` → `#contact` → `#craft-credit`. The Graph contract expands inside the Graph case. Motion is custom vanilla JS in `portfolio/motion/` — see `MOTION-SHEET-v1.5.2.md`.
+Keep the credibility split explicit: paid Professional Experience, Independent Applied AI R&D / public systems, and AI Transformation Perspective (what transfers). Independent R&D is not client delivery and not a hobby disclaimer. Do not invent KPIs or an LLM backend for the deterministic Agent Collective simulator. The landing spine is Klar/direkt: `#hero` → `#offer` → `#cases` → `#sample-collective` (the only touchable sample) → `#record` → `#contact` → `#craft-credit`. The Graph contract expands inside the Graph case. Scroll motion is a local choreography on Anime.js v4.5.0 (MIT, vendored in `portfolio/vendor/`, not an npm dependency) — see `MOTION-SHEET-v1.5.2.md`.
 
 Stage 1 pages (same slugs in DE and EN) are generated from `portfolio/content/`: `/rollen/agentic-ai/` (`#angebot`), `/rollen/java-backend/`, `/lebenslauf/`, `/lebenslauf/<id>/`, `/kontakt/`. `npm run portfolio:validate` fails the build when an entry breaks the schema, invents a KPI, or fills a placeholder.
 
@@ -30,7 +30,7 @@ Tokens are declared on `html` / `html.light` so they beat the export’s `:root`
 
 The only theme is a dark stage in the rhythm of [anime.js](https://animejs.com/): near-black field, off-white display type, one red mark. The start page and Stage 1 pages share `--s1-*` tokens from `portfolio.css`. There is no theme toggle and no `html.dark` palette. Bronze (`--signal`) is reserved for honesty / Independent R&D chips and failure states.
 
-Motion stays custom vanilla (`portfolio/motion/`). The craft credit still says there is no off-the-shelf animation framework, so Anime.js is not loaded. `prefers-reduced-motion: reduce` shows a static page.
+Landing motion uses the vendored Anime.js v4.5.0 bundle through `portfolio/motion/stage-reveal.js` (`onScroll({ sync: true })`). The choreography is local. Three.js, GSAP, Framer Motion, and Lottie stay out. `prefers-reduced-motion: reduce` shows a static page and does not split text.
 
 Pages do not add `class="dark"`, and nothing reads a stored theme.
 

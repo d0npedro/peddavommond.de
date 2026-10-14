@@ -10,8 +10,8 @@ import { offerHref, offerLabel } from "./offer-link.mjs";
 import { SITE, caseById, caseHref } from "./shared.mjs";
 
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
-const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=stage-20261014a";
-const STAGE_CSS = "/portfolio/stage1.css?v=stage-20261014a";
+const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=stage-20261014d";
+const STAGE_CSS = "/portfolio/stage1.css?v=stage-20261014d";
 
 const CHAPTER_KEYS = ["ausgangslage", "schnitt", "umsetzung", "nachweis", "ergebnis"];
 

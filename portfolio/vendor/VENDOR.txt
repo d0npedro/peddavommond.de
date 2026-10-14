@@ -1,0 +1,5 @@
+Anime.js v4.5.0
+MIT License — Copyright (c) 2025 Julian Garnier
+Vendored from https://registry.npmjs.org/animejs/-/animejs-4.5.0.tgz
+Bundle: dist/bundles/anime.esm.min.js
+Not an npm dependency. Do not import the package name "animejs".

@@ -8,7 +8,8 @@
   if (!root || !path || typeof path.getTotalLength !== "function") return;
 
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduce || !("IntersectionObserver" in window)) {
+  const scrubbed = document.documentElement.classList.contains("motion");
+  if (reduce || scrubbed || !("IntersectionObserver" in window)) {
     path.style.strokeDashoffset = "0";
     return;
   }

@@ -14,16 +14,17 @@ Do not implement a second scroll sample. `#sample-graph` as its own beat is dead
 - Collective = the only scroll sample
 - Nav never animates
 
-## Impl lock — custom-written only
+## Impl lock
 
-**Forbidden:** Three.js · GSAP · Framer Motion · Anime.js · Lottie-as-scroll · other black-box animation/3D frameworks.
+**Forbidden:** Three.js · GSAP · Framer Motion · Lottie · importing the `animejs` package name.
 
-**Allowed:** Custom vanilla JS/CSS or own small in-repo modules.
+**Allowed:** Anime.js v4.5.0 MIT, vendored at `portfolio/vendor/anime.esm.min.js`, driven by local choreography in `portfolio/motion/stage-reveal.js`. ScrollObserver `sync: true` scrubs transform and opacity. Pins, split text, and shape travel reverse on scroll up.
 
 Modules on this page:
 
-- `portfolio/motion/stage-reveal.js` — stage title and hairline, once
-- `portfolio/motion/craft-mark.js` — one SVG stroke-dashoffset draw in `#craft-credit`
+- `portfolio/motion/stage-reveal.js` — scroll-scrubbed headlines, shapes, grids, pins
+- `portfolio/motion/craft-mark.js` — static SVG line when motion is off
+- `portfolio/vendor/anime.esm.min.js` — pinned Anime.js v4.5.0 bundle
 
 ## Timing (carried from v1.5)
 
@@ -34,8 +35,8 @@ Modules on this page:
 | Sample internal | 220–280ms |
 | Micro | 160–200ms |
 | Easing enter | `cubic-bezier(0.22, 1, 0.36, 1)` |
-| Scrub | OFF |
-| Reverse exit | OFF |
+| Scrub | ON — `onScroll({ sync: true })`, transform and opacity only |
+| Reverse exit | ON — scroll position seeks the animation |
 
 ## `#craft-credit`
 

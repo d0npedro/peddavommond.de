@@ -55,6 +55,14 @@ async function main() {
     await copyFile(join(motionSrc, name), join(motionDest, name));
     console.log("wrote", `public/portfolio/motion/${name}`);
   }
+  const vendorSrc = join(root, "portfolio", "vendor");
+  const vendorDest = join(pub, "vendor");
+  await mkdir(vendorDest, { recursive: true });
+  for (const name of await readdir(vendorSrc)) {
+    if (!name.endsWith(".js") && !name.endsWith(".txt")) continue;
+    await copyFile(join(vendorSrc, name), join(vendorDest, name));
+    console.log("wrote", `public/portfolio/vendor/${name}`);
+  }
   // Production token layer. HTML links /portfolio/portfolio.css after the Next export.
   await copyFile(join(root, "portfolio", "portfolio.css"), join(pub, "portfolio.css"));
   await copyFile(join(root, "portfolio", "stage1.css"), join(pub, "stage1.css"));

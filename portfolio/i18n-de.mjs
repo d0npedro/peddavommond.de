@@ -1094,9 +1094,9 @@ export const de = {
     personalNote: "",
   },
   craft: {
-    body: "Interaktion und Scroll-Story auf dieser Site: eigene Skripte (Vanilla JS/CSS). Kein Three.js, kein zugekauftes Animation-Framework.",
+    body: "Interaktion und Scroll-Story auf dieser Site: eigene Choreografie mit Anime.js v4 (MIT, lokal eingebunden). Kein Three.js.",
     chip: "Custom-built · not a library demo",
-    technique: "SVG stroke-dashoffset · einmal gezeichnet",
+    technique: "SVG-Linie · an die Scroll-Position gekoppelt",
     modules: ["stage-reveal.js", "craft-mark.js", "timeline.js"],
   },
   cv: {

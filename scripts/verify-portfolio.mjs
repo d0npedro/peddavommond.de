@@ -182,8 +182,8 @@ async function check(locale) {
   assert(!visibleText(contactSlice).includes(lockedH1), `${prefix} contact must not repeat the hero H1`);
   const craft = html.slice(craftAt);
   const craftCopy = locale === "de"
-    ? "Interaktion und Scroll-Story auf dieser Site: eigene Skripte (Vanilla JS/CSS). Kein Three.js, kein zugekauftes Animation-Framework."
-    : "Interaction and scroll story on this site: custom scripts (vanilla JS/CSS). No Three.js, no off-the-shelf animation framework.";
+    ? "Interaktion und Scroll-Story auf dieser Site: eigene Choreografie mit Anime.js v4 (MIT, lokal eingebunden). Kein Three.js."
+    : "Interaction and scroll story on this site: custom choreography with Anime.js v4 (MIT, vendored locally). No Three.js.";
   assert(craft.includes(craftCopy), `${prefix} craft-credit copy drifted`);
   assert(craft.includes("Custom-built · not a library demo"), `${prefix} craft chip missing`);
   assert(!recordSlice.includes("pf-section-band"), `${prefix} record must not use full-bleed stage bands`);
@@ -318,10 +318,21 @@ for (const locale of ["de", "en"]) {
 }
 async function checkLibs() {
   const pkg = await readFile(join(root, "package.json"), "utf8");
-  assert(!/"three"|"gsap"|"framer-motion"|"animejs"|"lottie-web"/.test(pkg), "package.json must not add a motion framework");
+  assert(!/"three"|"gsap"|"framer-motion"|"lottie-web"|"animejs"/.test(pkg), "package.json must not depend on a motion framework; Anime.js stays vendored");
+  const vendor = await readFile(join(root, "portfolio/vendor/anime.esm.min.js"), "utf8");
+  assert(vendor.includes("@version v4.5.0"), "vendored Anime.js must stay pinned at v4.5.0");
+  assert(vendor.includes("@license MIT"), "vendored Anime.js must stay MIT");
+  const built = await readFile(join(root, "public/portfolio/vendor/anime.esm.min.js"), "utf8");
+  assert(built.includes("@version v4.5.0"), "public vendor bundle missing Anime.js v4.5.0");
+  const stage = await readFile(join(root, "portfolio/motion/stage-reveal.js"), "utf8");
+  assert(/import\(["']\.\.\/vendor\/anime\.esm\.min\.js["']\)/.test(stage), "stage-reveal must import the vendored Anime.js bundle");
+  assert(!/from ["']animejs["']/.test(stage), "do not import the animejs package name");
   for (const rel of ["portfolio/app.js", "portfolio/motion/stage-reveal.js", "portfolio/motion/craft-mark.js", "portfolio/motion/timeline.js", "portfolio/render.mjs", "portfolio/render-stage1.mjs"]) {
     const src = await readFile(join(root, rel), "utf8");
-    assert(!/from ["'](?:three|gsap|framer-motion|animejs|lottie)/.test(src), `${rel} imports a forbidden motion library`);
+    assert(!/from ["'](?:three|gsap|framer-motion|lottie)/.test(src), `${rel} imports a forbidden motion library`);
+    if (rel !== "portfolio/motion/stage-reveal.js") {
+      assert(!/from ["'](?:\.\.\/vendor\/anime|animejs)/.test(src), `${rel} must not import Anime.js`);
+    }
   }
 }
 
