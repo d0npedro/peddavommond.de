@@ -20,17 +20,27 @@ import { offerChip, splitFocusNote, stageEntryNav, stageTopbar } from "./render-
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
 const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=paper-20260929a";
 const STAGE_CSS = "/portfolio/stage1.css?v=paper-20260929a";
+const FLIGHT_CSS = "/portfolio/flight.css?v=flight-20261014";
 
-function stylesheets() {
+function stylesheets({ flight = false } = {}) {
+  const flightLink = flight ? `\n<link rel="stylesheet" href="${FLIGHT_CSS}"/>` : "";
   return `<link rel="stylesheet" href="${NEXT_LAYOUT_CSS}"/>
 <link rel="stylesheet" href="${PORTFOLIO_CSS}"/>
-<link rel="stylesheet" href="${STAGE_CSS}"/>`;
+<link rel="stylesheet" href="${STAGE_CSS}"/>${flightLink}`;
 }
 
 function pageScripts() {
   return `<script src="/portfolio/motion/stage-reveal.js" defer></script>
 <script src="/portfolio/motion/craft-mark.js" defer></script>
 <script src="/portfolio/app.js" defer></script>`;
+}
+
+function flightScripts() {
+  return `<script src="/portfolio/vendor/gsap/gsap.min.js" defer></script>
+<script src="/portfolio/vendor/gsap/ScrollTrigger.min.js" defer></script>
+<script src="/portfolio/vendor/lenis/lenis.min.js" defer></script>
+${pageScripts()}
+<script type="module" src="/portfolio/motion/flight.js"></script>`;
 }
 
 export function esc(value) {
@@ -154,7 +164,7 @@ function renderProofStrip(t) {
 
 function renderHero(locale) {
   const t = copy(locale);
-  return `<section id="hero" class="pf-hero pf-stage pf-stage--hero">
+  return `<section id="hero" class="pf-hero pf-stage pf-stage--hero pf-flight-stage">
     <div class="container pf-stage-center">
       <p class="pf-hero-chip">${esc(SITE.name)} · ${esc(t.hero.role)}</p>
       <h1 class="pf-hero-title">${renderPromise(t.hero.h1)}</h1>
@@ -256,7 +266,7 @@ function renderSelectedCases(locale) {
   const t = copy(locale);
   const leads = featuredCases();
   const leadHtml = leads.map((item) => renderCaseCard(item, locale)).join("");
-  return `<section id="cases" class="pf-cases scroll-mt-24">
+  return `<section id="cases" class="pf-cases scroll-mt-24 pf-flight-stage">
     <div class="container">
       <div class="pf-enter" data-reveal>
         <span class="pf-hairline" aria-hidden="true"></span>
@@ -408,10 +418,11 @@ function renderEducation(locale) {
   </section>`;
 }
 
-function renderFooter(locale, { availability = false } = {}) {
+function renderFooter(locale, { availability = false, flight = false } = {}) {
   const t = copy(locale);
   const availabilityLine = availability ? `<p>${esc(t.footer.availability)}</p>` : "";
-  return `<section id="contact" class="pf-footer relative scroll-mt-24">
+  const flightClass = flight ? " pf-flight-stage" : "";
+  return `<section id="contact" class="pf-footer relative scroll-mt-24${flightClass}">
     <div class="container relative py-20 md:py-28">
       <div class="pf-enter" data-reveal>
         <span class="pf-hairline" aria-hidden="true"></span>
@@ -439,7 +450,7 @@ function renderFooter(locale, { availability = false } = {}) {
 function renderCraftCredit(locale) {
   const craft = copy(locale).craft;
   const modules = craft.modules.map((name) => `<code>${esc(name)}</code>`).join(" · ");
-  return `<section id="craft-credit" class="pf-craft scroll-mt-24">
+  return `<section id="craft-credit" class="pf-craft scroll-mt-24 pf-flight-stage">
     <div class="container pf-stage-narrow">
       <p class="pf-craft-copy">${esc(craft.body)}</p>
       <p class="pf-craft-modules">${modules}</p>
@@ -712,7 +723,7 @@ function renderAgentList(agents) {
 function renderCollectiveSample(locale) {
   const s = copy(locale).samples.collective;
   const first = s.review[0];
-  return `<section id="sample-collective" class="pf-stage scroll-mt-24">
+  return `<section id="sample-collective" class="pf-stage scroll-mt-24 pf-flight-stage">
     <div class="container pf-sample">
       <div class="pf-sample-copy">
         <div class="pf-enter" data-reveal>
@@ -807,7 +818,7 @@ function renderOffer(locale) {
       </article>`;
     })
     .join("");
-  return `<section id="offer" class="pf-stage scroll-mt-24">
+  return `<section id="offer" class="pf-stage scroll-mt-24 pf-flight-stage">
     <div class="container">
       <div class="pf-enter" data-reveal>
         <span class="pf-hairline" aria-hidden="true"></span>
@@ -850,7 +861,7 @@ function renderRecord(locale) {
       ${related ? `<p class="pf-track-links">${related}</p>` : ""}
     </li>`;
   }).join("");
-  return `<section id="record" class="pf-record scroll-mt-24">
+  return `<section id="record" class="pf-record scroll-mt-24 pf-flight-stage">
     <div class="container">
       <details data-record>
         <summary class="pf-shell" data-reveal><h2 class="pf-record-title">${esc(t.record.summary)}</h2></summary>
@@ -869,10 +880,11 @@ export function renderPage(locale) {
   const url = `${SITE.origin}/portfolio/${locale}`;
   const og = `${SITE.origin}/portfolio/${locale}/opengraph-image.png`;
   return `<!DOCTYPE html>
-<html lang="${locale}" class="__variable_3f18cd __variable_f3e80d light paper">
+<html lang="${locale}" class="__variable_3f18cd __variable_f3e80d light paper pf-flight">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<script>document.documentElement.classList.add("js");if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("pf-static");</script>
 <title>${esc(t.meta.title)}</title>
 <meta name="description" content="${attr(t.meta.description)}"/>
 <meta name="application-name" content="Peter Henrichs · Portfolio"/>
@@ -898,12 +910,17 @@ export function renderPage(locale) {
 <meta name="twitter:title" content="${attr(t.meta.title)}"/>
 <meta name="twitter:description" content="${attr(t.meta.description)}"/>
 <meta name="twitter:image" content="${attr(og)}"/>
-<meta name="theme-color" content="#F4F0E8"/>
+<meta name="theme-color" content="#070910"/>
 <link rel="icon" href="/portfolio/${locale}/icon.png" type="image/png" sizes="32x32"/>
-${stylesheets()}
+${stylesheets({ flight: true })}
 </head>
 <body class="min-h-screen bg-bg font-sans antialiased">
 <a class="skip" href="#main">${esc(t.common.skipToContent)}</a>
+<div class="pf-flight-back" aria-hidden="true">
+  <div class="pf-poster" id="pf-poster"></div>
+  <canvas id="pf-flight-canvas" class="pf-flight-canvas"></canvas>
+</div>
+<div class="pf-flight-progress" aria-hidden="true"></div>
 ${stageTopbar(locale, "/")}
 <main id="main">
 <script type="application/ld+json">${jsonLd(locale)}</script>
@@ -913,9 +930,9 @@ ${renderSelectedCases(locale)}
 ${renderCollectiveSample(locale)}
 ${renderRecord(locale)}
 </main>
-${renderFooter(locale, { availability: true })}
+${renderFooter(locale, { availability: true, flight: true })}
 ${renderCraftCredit(locale)}
-${pageScripts()}
+${flightScripts()}
 </body>
 </html>`;
 }
