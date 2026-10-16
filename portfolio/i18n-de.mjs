@@ -13,6 +13,7 @@ export const de = {
   common: {
     skipToContent: "Zum Inhalt springen",
     langSwitchAria: "Sprache wechseln",
+    more: "Mehr",
     localeName: { de: "Deutsch", en: "Englisch" },
   },
   nav: {
@@ -1094,10 +1095,10 @@ export const de = {
     personalNote: "",
   },
   craft: {
-    body: "Interaktion und Scroll-Story auf dieser Site: eigene Skripte (Vanilla JS/CSS). Kein Three.js, kein zugekauftes Animation-Framework.",
+    body: "Interaktion und Scroll-Story auf dieser Site: WebGL-Szene mit Three.js, GSAP ScrollTrigger und Lenis. Eigenes Scroll-Scrub, festes Canvas.",
     chip: "Custom-built · not a library demo",
-    technique: "SVG stroke-dashoffset · einmal gezeichnet",
-    modules: ["stage-reveal.js", "craft-mark.js", "timeline.js"],
+    technique: "WebGL-Szene · GSAP ScrollTrigger · Lenis",
+    modules: ["flight.js", "stage-reveal.js", "craft-mark.js", "timeline.js"],
   },
   cv: {
     title: "Lebenslauf — Peter Henrichs",

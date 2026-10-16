@@ -142,7 +142,12 @@ async function check(locale) {
   assert(html.includes('id="craft-credit"'), `${prefix} missing craft credit`);
   assert(html.includes("stage-reveal.js") && html.includes("craft-mark.js") && html.includes("timeline.js"), `${prefix} craft credit must name the motion modules`);
   assert(html.includes("/portfolio/motion/stage-reveal.js") && html.includes("/portfolio/motion/craft-mark.js"), `${prefix} motion scripts missing`);
-  assert(html.includes("Kein Three.js") || html.includes("No Three.js"), `${prefix} craft credit must state the Three.js refusal`);
+  assert(html.includes("/portfolio/motion/flight.js"), `${prefix} flight scene missing`);
+  assert(html.includes("/portfolio/vendor/three/three.module.min.js") === false, `${prefix} three stays a module import, not a script tag`);
+  assert(html.includes("/portfolio/vendor/gsap/gsap.min.js"), `${prefix} missing vendored GSAP`);
+  assert(html.includes("/portfolio/vendor/gsap/ScrollTrigger.min.js"), `${prefix} missing vendored ScrollTrigger`);
+  assert(html.includes("/portfolio/vendor/lenis/lenis.min.js"), `${prefix} missing vendored Lenis`);
+  assert(html.includes('id="pf-flight-canvas"') && html.includes('id="pf-poster"'), `${prefix} missing flight canvas or poster`);
   const heroAt = html.indexOf('id="hero"');
   const offerAt = html.indexOf('id="offer"');
   const casesAt = html.indexOf('id="cases"');
@@ -182,9 +187,11 @@ async function check(locale) {
   assert(!visibleText(contactSlice).includes(lockedH1), `${prefix} contact must not repeat the hero H1`);
   const craft = html.slice(craftAt);
   const craftCopy = locale === "de"
-    ? "Interaktion und Scroll-Story auf dieser Site: eigene Skripte (Vanilla JS/CSS). Kein Three.js, kein zugekauftes Animation-Framework."
-    : "Interaction and scroll story on this site: custom scripts (vanilla JS/CSS). No Three.js, no off-the-shelf animation framework.";
+    ? "Interaktion und Scroll-Story auf dieser Site: WebGL-Szene mit Three.js, GSAP ScrollTrigger und Lenis. Eigenes Scroll-Scrub, festes Canvas."
+    : "Interaction and scroll story on this site: a WebGL scene with Three.js, GSAP ScrollTrigger and Lenis. Custom scroll scrub, fixed canvas.";
   assert(craft.includes(craftCopy), `${prefix} craft-credit copy drifted`);
+  assert(craft.includes("Three.js") && craft.includes("GSAP") && craft.includes("Lenis"), `${prefix} craft credit must name the WebGL stack`);
+  assert(!craft.includes("Kein Three.js") && !craft.includes("No Three.js"), `${prefix} craft credit still refuses Three.js`);
   assert(craft.includes("Custom-built · not a library demo"), `${prefix} craft chip missing`);
   assert(!recordSlice.includes("pf-section-band"), `${prefix} record must not use full-bleed stage bands`);
   assert(html.indexOf('id="offer"') < recordAt, `${prefix} offer packages stay before the record`);
@@ -316,12 +323,52 @@ for (const locale of ["de", "en"]) {
     await checkCase(locale, id);
   }
 }
+const VENDOR_FILES = [
+  "portfolio/vendor/three/three.module.min.js",
+  "portfolio/vendor/gsap/gsap.min.js",
+  "portfolio/vendor/gsap/ScrollTrigger.min.js",
+  "portfolio/vendor/lenis/lenis.min.js",
+];
+
+async function listFiles(dir) {
+  const found = [];
+  const entries = await readdir(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) found.push(...await listFiles(path));
+    else found.push(path);
+  }
+  return found;
+}
+
 async function checkLibs() {
   const pkg = await readFile(join(root, "package.json"), "utf8");
-  assert(!/"three"|"gsap"|"framer-motion"|"animejs"|"lottie-web"/.test(pkg), "package.json must not add a motion framework");
+  assert(!/"three"|"gsap"|"framer-motion"|"animejs"|"lottie-web"|"lenis"|"@react-three/.test(pkg), "package.json must not add a motion framework");
+  const allowed = new Set(VENDOR_FILES.map((rel) => join(root, rel)));
+  const vendored = await listFiles(join(root, "portfolio/vendor"));
+  assert(vendored.length === VENDOR_FILES.length, "vendor directory must contain exactly the pinned Three.js, GSAP, ScrollTrigger and Lenis files");
+  for (const file of vendored) {
+    assert(allowed.has(file), `unexpected vendor file ${file}`);
+  }
+  for (const rel of VENDOR_FILES) {
+    assert(await exists(join(root, rel)), `missing vendored ${rel}`);
+    const published = rel.replace(/^portfolio\//, "public/portfolio/");
+    assert(await exists(join(root, published)), `missing published ${published}`);
+  }
+  const three = await readFile(join(root, "portfolio/vendor/three/three.module.min.js"), "utf8");
+  const gsap = await readFile(join(root, "portfolio/vendor/gsap/gsap.min.js"), "utf8");
+  const scroll = await readFile(join(root, "portfolio/vendor/gsap/ScrollTrigger.min.js"), "utf8");
+  const lenis = await readFile(join(root, "portfolio/vendor/lenis/lenis.min.js"), "utf8");
+  assert(three.includes("Three.js Authors") && three.includes('const t="170"'), "three pin must be 0.170.0");
+  assert(gsap.includes("GSAP 3.12.7"), "gsap pin must be 3.12.7");
+  assert(scroll.includes("ScrollTrigger"), "ScrollTrigger file missing");
+  assert(lenis.includes('lenisVersion="1.1.20"'), "lenis pin must be 1.1.20");
+  const flight = await readFile(join(root, "portfolio/motion/flight.js"), "utf8");
+  assert(flight.includes('import("/portfolio/vendor/three/three.module.min.js")'), "flight must import vendored three");
+  assert(!/from ["']three["']/.test(flight) && !/from ["']gsap/.test(flight) && !/from ["']lenis/.test(flight), "flight must not import npm motion packages");
   for (const rel of ["portfolio/app.js", "portfolio/motion/stage-reveal.js", "portfolio/motion/craft-mark.js", "portfolio/motion/timeline.js", "portfolio/render.mjs", "portfolio/render-stage1.mjs"]) {
     const src = await readFile(join(root, rel), "utf8");
-    assert(!/from ["'](?:three|gsap|framer-motion|animejs|lottie)/.test(src), `${rel} imports a forbidden motion library`);
+    assert(!/from ["'](?:three|gsap|framer-motion|animejs|lottie|lenis)/.test(src), `${rel} imports a forbidden motion library`);
   }
 }
 

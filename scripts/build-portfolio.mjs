@@ -3,7 +3,7 @@
  * Replaces the compiled Next.js index.html for DE/EN while keeping
  * the existing CSS, fonts, and Open Graph images.
  */
-import { mkdir, writeFile, copyFile, readdir } from "node:fs/promises";
+import { mkdir, writeFile, copyFile, readdir, cp } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { LOCALES, DEFAULT_LOCALE, pagedCases } from "../portfolio/shared.mjs";
@@ -58,7 +58,11 @@ async function main() {
   // Production token layer. HTML links /portfolio/portfolio.css after the Next export.
   await copyFile(join(root, "portfolio", "portfolio.css"), join(pub, "portfolio.css"));
   await copyFile(join(root, "portfolio", "stage1.css"), join(pub, "stage1.css"));
+  await copyFile(join(root, "portfolio", "flight.css"), join(pub, "flight.css"));
+  await cp(join(root, "portfolio", "vendor"), join(pub, "vendor"), { recursive: true });
   console.log("wrote public/portfolio/stage1.css");
+  console.log("wrote public/portfolio/flight.css");
+  console.log("wrote public/portfolio/vendor");
   console.log("portfolio static pages ready");
 }
 
