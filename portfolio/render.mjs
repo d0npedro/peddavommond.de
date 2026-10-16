@@ -20,7 +20,7 @@ import { offerChip, splitFocusNote, stageEntryNav, stageTopbar } from "./render-
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
 const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=paper-20260929a";
 const STAGE_CSS = "/portfolio/stage1.css?v=paper-20260929a";
-const FLIGHT_CSS = "/portfolio/flight.css?v=flight-20261016";
+const FLIGHT_CSS = "/portfolio/flight.css?v=flight-20261016b";
 
 function stylesheets({ flight = false } = {}) {
   const flightLink = flight ? `\n<link rel="stylesheet" href="${FLIGHT_CSS}"/>` : "";

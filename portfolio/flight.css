@@ -167,10 +167,13 @@ html.paper.pf-flight .nav-fold[open] .top-links {
 html.paper.pf-flight .pf-stage,
 html.paper.pf-flight .pf-cases,
 html.paper.pf-flight .pf-record,
+html.paper.pf-flight #offer,
+html.paper.pf-flight #cases,
 html.paper.pf-flight #contact,
 html.paper.pf-flight #craft-credit,
 html.paper.pf-flight main {
   background: transparent;
+  background-color: transparent;
 }
 
 html.paper.pf-flight .pf-flight-stage {
