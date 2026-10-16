@@ -17,8 +17,15 @@
   const reduce =
     root.classList.contains("pf-static") ||
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function showStaticCopy() {
+    document.querySelectorAll("main details, #contact details.pf-more, #craft-credit details.pf-more").forEach((node) => {
+      node.open = true;
+    });
+  }
+
   if (reduce) {
     root.classList.add("pf-static");
+    showStaticCopy();
     return;
   }
 
@@ -35,6 +42,7 @@
 
   if (!hasWebGL() || !window.gsap || !window.ScrollTrigger || !window.Lenis) {
     root.classList.add("pf-static", "pf-fallback");
+    showStaticCopy();
     return;
   }
 

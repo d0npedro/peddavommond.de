@@ -20,7 +20,7 @@ import { offerChip, splitFocusNote, stageEntryNav, stageTopbar } from "./render-
 const NEXT_LAYOUT_CSS = "/portfolio/de/_next/static/css/76323045a7107f6a.css";
 const PORTFOLIO_CSS = "/portfolio/portfolio.css?v=paper-20260929a";
 const STAGE_CSS = "/portfolio/stage1.css?v=paper-20260929a";
-const FLIGHT_CSS = "/portfolio/flight.css?v=flight-20261014";
+const FLIGHT_CSS = "/portfolio/flight.css?v=flight-20261016";
 
 function stylesheets({ flight = false } = {}) {
   const flightLink = flight ? `\n<link rel="stylesheet" href="${FLIGHT_CSS}"/>` : "";
@@ -162,16 +162,27 @@ function renderProofStrip(t) {
   return `<div class="pf-proof-strip reveal" data-reveal>${chips}</div>`;
 }
 
+function moreDisclosure(locale, inner) {
+  const label = copy(locale).common.more;
+  return `<details class="pf-more">
+    <summary class="pf-more-summary">${esc(label)}</summary>
+    <div class="pf-more-body">${inner}</div>
+  </details>`;
+}
+
 function renderHero(locale) {
   const t = copy(locale);
   return `<section id="hero" class="pf-hero pf-stage pf-stage--hero pf-flight-stage">
     <div class="container pf-stage-center">
-      <p class="pf-hero-chip">${esc(SITE.name)} · ${esc(t.hero.role)}</p>
       <h1 class="pf-hero-title">${renderPromise(t.hero.h1)}</h1>
+      ${moreDisclosure(
+        locale,
+        `<p class="pf-hero-chip">${esc(SITE.name)} · ${esc(t.hero.role)}</p>
       <div class="pf-cta-row">
         <a href="#offer" class="pf-cta pf-cta--primary">${esc(t.hero.ctaPrimary)}</a>
       </div>
-      ${stageEntryNav(locale)}
+      ${stageEntryNav(locale)}`,
+      )}
     </div>
   </section>`;
 }
@@ -268,12 +279,12 @@ function renderSelectedCases(locale) {
   const leadHtml = leads.map((item) => renderCaseCard(item, locale)).join("");
   return `<section id="cases" class="pf-cases scroll-mt-24 pf-flight-stage">
     <div class="container">
-      <div class="pf-enter" data-reveal>
-        <span class="pf-hairline" aria-hidden="true"></span>
-        <h2 class="pf-stage-title">${esc(t.selectedCases.beatTitle)}</h2>
-      </div>
-      <p class="pf-stage-lede">${esc(t.selectedCases.lead)}</p>
-      <div class="pf-spots">${leadHtml}</div>
+      <h2 class="pf-stage-title">${esc(t.selectedCases.beatTitle)}</h2>
+      ${moreDisclosure(
+        locale,
+        `<p class="pf-stage-lede">${esc(t.selectedCases.lead)}</p>
+      <div class="pf-spots">${leadHtml}</div>`,
+      )}
     </div>
   </section>`;
 }
@@ -422,13 +433,7 @@ function renderFooter(locale, { availability = false, flight = false } = {}) {
   const t = copy(locale);
   const availabilityLine = availability ? `<p>${esc(t.footer.availability)}</p>` : "";
   const flightClass = flight ? " pf-flight-stage" : "";
-  return `<section id="contact" class="pf-footer relative scroll-mt-24${flightClass}">
-    <div class="container relative py-20 md:py-28">
-      <div class="pf-enter" data-reveal>
-        <span class="pf-hairline" aria-hidden="true"></span>
-        <h2 class="pf-footer-title">${esc(t.footer.title)}</h2>
-      </div>
-      <p class="pf-location">${esc(t.footer.lead)}</p>
+  const rest = `<p class="pf-location">${esc(t.footer.lead)}</p>
       <p class="pf-contact-echo">${esc(t.footer.echo)}</p>
       ${availabilityLine}
       <div class="mt-10 pf-contact-row pf-contact-row--checkout">
@@ -442,7 +447,19 @@ function renderFooter(locale, { availability = false, flight = false } = {}) {
       <div class="flex flex-col items-start justify-between gap-4 font-mono text-xs text-faint sm:flex-row sm:items-center">
         <span>© ${SITE.year} ${esc(SITE.name)}</span>
         <span class="hidden sm:inline">${esc(t.footer.roleLine)}</span>
+      </div>`;
+  const body = flight
+    ? `<h2 class="pf-footer-title">${esc(t.footer.title)}</h2>
+      ${moreDisclosure(locale, rest)}`
+    : `<div class="pf-enter" data-reveal>
+        <span class="pf-hairline" aria-hidden="true"></span>
+        <h2 class="pf-footer-title">${esc(t.footer.title)}</h2>
       </div>
+      ${rest}`;
+  const containerClass = flight ? "container" : "container relative py-20 md:py-28";
+  return `<section id="contact" class="pf-footer relative scroll-mt-24${flightClass}">
+    <div class="${containerClass}">
+      ${body}
     </div>
   </section>`;
 }
@@ -452,7 +469,10 @@ function renderCraftCredit(locale) {
   const modules = craft.modules.map((name) => `<code>${esc(name)}</code>`).join(" · ");
   return `<section id="craft-credit" class="pf-craft scroll-mt-24 pf-flight-stage">
     <div class="container pf-stage-narrow">
-      <p class="pf-craft-copy">${esc(craft.body)}</p>
+      <p class="pf-craft-line">${esc(craft.technique)}</p>
+      ${moreDisclosure(
+        locale,
+        `<p class="pf-craft-copy">${esc(craft.body)}</p>
       <p class="pf-craft-modules">${modules}</p>
       <p class="pf-honesty-chips"><span class="pf-chip">${esc(craft.chip)}</span></p>
       <figure class="pf-craft-mark" data-craft-mark>
@@ -460,7 +480,8 @@ function renderCraftCredit(locale) {
           <path d="M4 12 H236" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"></path>
         </svg>
         <figcaption class="pf-craft-tech">${esc(craft.technique)}</figcaption>
-      </figure>
+      </figure>`,
+      )}
     </div>
   </section>`;
 }
@@ -723,13 +744,7 @@ function renderAgentList(agents) {
 function renderCollectiveSample(locale) {
   const s = copy(locale).samples.collective;
   const first = s.review[0];
-  return `<section id="sample-collective" class="pf-stage scroll-mt-24 pf-flight-stage">
-    <div class="container pf-sample">
-      <div class="pf-sample-copy">
-        <div class="pf-enter" data-reveal>
-          <span class="pf-hairline" aria-hidden="true"></span>
-          <h2 class="pf-stage-title">${esc(s.title)}</h2>
-        </div>
+  const panel = `<div class="pf-sample-copy">
         <p class="pf-stage-lede">${esc(s.body)}</p>
         <p class="pf-stage-lede">${esc(s.shown)}</p>
       </div>
@@ -748,7 +763,11 @@ function renderCollectiveSample(locale) {
         </div>
         <p class="pf-touch-note">${esc(s.note)}</p>
         ${jsonIsland("pf-collective-frames", { review: s.review, fail: s.fail })}
-      </div>
+      </div>`;
+  return `<section id="sample-collective" class="pf-stage scroll-mt-24 pf-flight-stage">
+    <div class="container pf-sample">
+      <h2 class="pf-stage-title">${esc(s.title)}</h2>
+      ${moreDisclosure(locale, panel)}
     </div>
   </section>`;
 }
@@ -820,13 +839,13 @@ function renderOffer(locale) {
     .join("");
   return `<section id="offer" class="pf-stage scroll-mt-24 pf-flight-stage">
     <div class="container">
-      <div class="pf-enter" data-reveal>
-        <span class="pf-hairline" aria-hidden="true"></span>
-        <h2 class="pf-stage-title">${esc(o.title)}</h2>
-      </div>
-      <p class="pf-stage-lede">${esc(o.intro)}</p>
+      <h2 class="pf-stage-title">${esc(o.title)}</h2>
+      ${moreDisclosure(
+        locale,
+        `<p class="pf-stage-lede">${esc(o.intro)}</p>
       <div class="pf-offers">${packages}</div>
-      ${renderApproachFold(locale)}
+      ${renderApproachFold(locale)}`,
+      )}
     </div>
   </section>`;
 }
@@ -864,7 +883,7 @@ function renderRecord(locale) {
   return `<section id="record" class="pf-record scroll-mt-24 pf-flight-stage">
     <div class="container">
       <details data-record>
-        <summary class="pf-shell" data-reveal><h2 class="pf-record-title">${esc(t.record.summary)}</h2></summary>
+        <summary><h2 class="pf-record-title">${esc(t.record.summary)}</h2></summary>
         <div class="pf-record-body">
           <p class="pf-stage-lede">${esc(t.record.note)}</p>
           <ol class="pf-stations">${stations}</ol>
@@ -933,6 +952,11 @@ ${renderRecord(locale)}
 ${renderFooter(locale, { availability: true, flight: true })}
 ${renderCraftCredit(locale)}
 ${flightScripts()}
+<script>
+if (document.documentElement.classList.contains("pf-static")) {
+  document.querySelectorAll("main details, #contact details.pf-more, #craft-credit details.pf-more").forEach(function (node) { node.open = true; });
+}
+</script>
 </body>
 </html>`;
 }

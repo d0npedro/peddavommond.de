@@ -13,6 +13,7 @@ export const en = {
   common: {
     skipToContent: "Skip to content",
     langSwitchAria: "Switch language",
+    more: "More",
     localeName: { de: "German", en: "English" },
   },
   nav: {

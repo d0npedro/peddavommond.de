@@ -117,8 +117,51 @@ html.paper.pf-flight #craft-credit {
 }
 
 html.paper.pf-flight .topbar {
-  background: rgba(7, 10, 18, 0.9);
-  border-bottom-color: rgba(160, 210, 255, 0.2);
+  background: rgba(7, 10, 18, 0.22);
+  border-bottom-color: transparent;
+  backdrop-filter: blur(10px);
+}
+
+html.paper.pf-flight .top-links-wide,
+html.paper.pf-flight .top-tools .pf-offer-chip {
+  display: none;
+}
+
+html.paper.pf-flight .nav-fold {
+  display: block;
+  position: relative;
+}
+
+html.paper.pf-flight .nav-fold > summary {
+  font-family: var(--s1-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--s1-accent-ink);
+  cursor: pointer;
+  list-style: none;
+}
+
+html.paper.pf-flight .nav-fold > summary::-webkit-details-marker {
+  display: none;
+}
+
+html.paper.pf-flight .nav-fold .top-links {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  left: 0;
+  z-index: 40;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: 12rem;
+  padding: 0.7rem 0.85rem;
+  background: rgba(12, 18, 28, 0.94);
+  border: 1px solid rgba(160, 210, 255, 0.22);
+}
+
+html.paper.pf-flight .nav-fold[open] .top-links {
+  display: flex;
 }
 
 html.paper.pf-flight .pf-stage,
@@ -136,19 +179,85 @@ html.paper.pf-flight .pf-flight-stage {
 
 html.paper.pf-flight .container {
   box-sizing: border-box;
-  width: min(100% - 1.25rem, 54rem);
+  width: min(100% - 2.5rem, 38rem);
   margin-inline: auto;
-  padding: 1.35rem 1.25rem 1.45rem;
-  background: rgba(6, 10, 18, 0.86);
-  border: 1px solid rgba(160, 214, 255, 0.18);
-  border-radius: 18px;
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
   overflow-wrap: break-word;
+}
+
+html.paper.pf-flight .pf-hero-title,
+html.paper.pf-flight .pf-stage-title,
+html.paper.pf-flight .pf-footer-title,
+html.paper.pf-flight .pf-record-title,
+html.paper.pf-flight .pf-craft-line {
+  margin: 0;
+  max-width: 16em;
+  color: #f4f8ff;
+  font-size: clamp(1.7rem, 3.3vw, 2.9rem);
+  font-weight: 520;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+  text-shadow: 0 10px 36px rgba(0, 0, 0, 0.82), 0 1px 0 rgba(0, 0, 0, 0.45);
+}
+
+html.paper.pf-flight .pf-craft-line {
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  letter-spacing: 0.01em;
+  line-height: 1.25;
+}
+
+html.paper.pf-flight .pf-more {
+  margin-top: 0.85rem;
+}
+
+html.paper.pf-flight .pf-more-summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.28rem 0.85rem;
+  list-style: none;
+  cursor: pointer;
+  color: #d7f7ff;
+  font-family: var(--s1-mono, ui-monospace, monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: rgba(7, 12, 22, 0.28);
+  border: 1px solid rgba(126, 231, 255, 0.38);
+  border-radius: 999px;
+}
+
+html.paper.pf-flight .pf-more-summary::-webkit-details-marker {
+  display: none;
+}
+
+html.paper.pf-flight .pf-more-body {
+  margin-top: 0.7rem;
+  max-height: min(46vh, 24rem);
+  overflow: auto;
+  padding: 0.95rem 1rem 1.05rem;
+  color: #e8eef8;
+  background: rgba(6, 10, 18, 0.55);
+  border: 1px solid rgba(160, 214, 255, 0.16);
+  border-radius: 14px;
+}
+
+html.paper.pf-flight .pf-record summary {
+  color: #f4f8ff;
+  text-shadow: 0 10px 36px rgba(0, 0, 0, 0.82);
+}
+
+html.paper.pf-flight .pf-record summary::after {
+  color: #9adff0;
 }
 
 html.paper.pf-flight.js:not(.pf-static) .pf-flight-stage > .container {
   position: sticky;
-  top: calc(var(--topbar) + 0.7rem);
+  top: calc(var(--topbar) + 1.4rem);
 }
 
 html.paper.pf-flight.js:not(.pf-static) #hero {
@@ -247,9 +356,15 @@ html.paper.pf-flight .nav-fold .top-links {
   }
 
   html.paper.pf-flight .container {
-    width: min(100% - 1rem, 54rem);
-    padding: 1rem 0.9rem 1.1rem;
-    border-radius: 14px;
+    width: min(100% - 1.25rem, 38rem);
+  }
+
+  html.paper.pf-flight .pf-keep {
+    white-space: normal;
+  }
+
+  html.paper.pf-flight .pf-more-body {
+    max-height: min(42vh, 20rem);
   }
 
   html.paper.pf-flight .brand {
@@ -277,5 +392,18 @@ html.paper.pf-flight .nav-fold .top-links {
   html.paper.pf-flight .pf-flight-stage > .container {
     position: relative;
     top: auto;
+    width: min(100% - 1.25rem, 46rem);
+    padding: 1.1rem 1.15rem 1.25rem;
+    background: rgba(7, 10, 18, 0.9);
+    border: 1px solid rgba(160, 214, 255, 0.16);
+    border-radius: 16px;
+  }
+
+  html.paper.pf-flight .pf-more-body {
+    max-height: none;
+    overflow: visible;
+    padding: 0.35rem 0 0;
+    background: transparent;
+    border: 0;
   }
 }
